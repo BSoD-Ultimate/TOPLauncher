@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2037
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TOPLauncher", "TOPLauncher\TOPLauncher.vcxproj", "{B12702AD-ABFB-343A-A199-8E24837244A3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1925F603-4F8B-423A-AE79-2F2CD3AE2DD0} = {1925F603-4F8B-423A-AE79-2F2CD3AE2DD0}
+		{E91D850A-8993-4B38-8AFD-3B64FD627BE6} = {E91D850A-8993-4B38-8AFD-3B64FD627BE6}
+		{95AE3278-0378-4279-B637-6507C75DA74B} = {95AE3278-0378-4279-B637-6507C75DA74B}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sqlite3", "sqlite3\sqlite3.vcxproj", "{1925F603-4F8B-423A-AE79-2F2CD3AE2DD0}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SqliteCpp", "SqliteCpp\SqliteCpp.vcxproj", "{E91D850A-8993-4B38-8AFD-3B64FD627BE6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1925F603-4F8B-423A-AE79-2F2CD3AE2DD0} = {1925F603-4F8B-423A-AE79-2F2CD3AE2DD0}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "fmt", "fmt\fmt.vcxproj", "{95AE3278-0378-4279-B637-6507C75DA74B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Debug|x86.ActiveCfg = Debug|Win32
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Debug|x86.Build.0 = Debug|Win32
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|x86.ActiveCfg = Release|Win32
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|x86.Build.0 = Release|Win32
+		{1925F603-4F8B-423A-AE79-2F2CD3AE2DD0}.Debug|x86.ActiveCfg = Debug|Win32
+		{1925F603-4F8B-423A-AE79-2F2CD3AE2DD0}.Debug|x86.Build.0 = Debug|Win32
+		{1925F603-4F8B-423A-AE79-2F2CD3AE2DD0}.Release|x86.ActiveCfg = Release|Win32
+		{1925F603-4F8B-423A-AE79-2F2CD3AE2DD0}.Release|x86.Build.0 = Release|Win32
+		{E91D850A-8993-4B38-8AFD-3B64FD627BE6}.Debug|x86.ActiveCfg = Debug|Win32
+		{E91D850A-8993-4B38-8AFD-3B64FD627BE6}.Debug|x86.Build.0 = Debug|Win32
+		{E91D850A-8993-4B38-8AFD-3B64FD627BE6}.Release|x86.ActiveCfg = Release|Win32
+		{E91D850A-8993-4B38-8AFD-3B64FD627BE6}.Release|x86.Build.0 = Release|Win32
+		{95AE3278-0378-4279-B637-6507C75DA74B}.Debug|x86.ActiveCfg = Debug|Win32
+		{95AE3278-0378-4279-B637-6507C75DA74B}.Debug|x86.Build.0 = Debug|Win32
+		{95AE3278-0378-4279-B637-6507C75DA74B}.Release|x86.ActiveCfg = Release|Win32
+		{95AE3278-0378-4279-B637-6507C75DA74B}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {09E3D853-2F69-4DD5-B3D8-69F1ABF10472}
+	EndGlobalSection
+EndGlobal
