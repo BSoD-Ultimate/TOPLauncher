@@ -1,0 +1,8 @@
+<RCC>
+  <qresource prefix="TOPLauncher">
+    <file>Resources/bg.png</file>
+    <file>Resources/del-user-button-hover.png</file>
+    <file>Resources/del-user-button-normal.png</file>
+    <file>Resources/del-user-button-pushed.png</file>
+  </qresource>
+</RCC>
