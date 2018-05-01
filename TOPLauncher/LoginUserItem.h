@@ -1,3 +1,6 @@
+/* 
+ * item widget used in main window's user-name combobox drop-down list
+*/
 #pragma once
 
 #include <QtWidgets/QWidget>

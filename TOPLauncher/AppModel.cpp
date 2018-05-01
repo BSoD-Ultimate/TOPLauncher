@@ -1,4 +1,4 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 #include "AppModel.h"
 
 #include "dbDef.h"
@@ -9,6 +9,7 @@
 
 #include <SQLiteCpp/Database.h>
 
+#include <set>
 
 
 namespace TOPLauncher
@@ -18,27 +19,28 @@ namespace TOPLauncher
     static const std::wstring userDBName = L"User.db";
     // config key
     static const std::wstring configKeyLanguage = L"display_language";
+    static const std::wstring configKeyGameExecutablePath = L"game_executable_path";
 
 
     // reserved server list
-    static const std::vector<db::DBServerData> reservedServerList 
+    static const std::vector<db::DBServerData> reservedServerList
     {
         { L"TOP Official Server", L"tetrisonline.pl" },
         { L"Chinese CNC Server", L"tetris.3322.org" },
         { L"Another Chinese Server", L"toc.tetriscn.tk" }
     };
 
-    enum class LanguageConfig
-    {
-        SimplifiedChinese,
-        TraditionalChinese,
-        English,
-        Japanese,
+
+    const std::set<std::wstring> availableLanguages{
+        L"zh-CN",
+        L"zh-TW",
+        L"en-US",
+        L"ja-JP",
     };
 
     struct AppConfig
     {
-        LanguageConfig displayLanguage;
+        std::wstring displayLanguage;
 
         filesystem::path gameExecutablePath;
         filesystem::path gameDirectory;
@@ -49,10 +51,10 @@ namespace TOPLauncher
         uint16_t softDropSpeed;
 
         // server list
-        std::unordered_map<std::wstring, std::shared_ptr<db::DBServerData>> serverMap;
+        std::vector<std::shared_ptr<db::DBServerData>> serverList;
 
         AppConfig()
-            : displayLanguage(LanguageConfig::SimplifiedChinese)
+            : displayLanguage(L"")
             , moveSensitivity(45)
             , moveSpeed(15)
             , softDropSpeed(10)
@@ -134,6 +136,9 @@ namespace TOPLauncher
     {
         m_pAppConfig->gameExecutablePath = exePath;
         m_pAppConfig->gameDirectory = filesystem::path(exePath).parent_path();
+
+        db::WriteDBConfig(*m_pUserDB, configKeyGameExecutablePath, m_pAppConfig->gameExecutablePath);
+        LoadSavedConfigFromGame();
     }
 
     filesystem::path AppModel::GetGameDirectory() const
@@ -148,14 +153,14 @@ namespace TOPLauncher
             return false;
         }
 
-        auto iter = m_pAppConfig->serverMap.find(serverData.serverName);
+        auto pData = GetServerData(serverData.serverName);
 
-        if (iter != m_pAppConfig->serverMap.cend())
+        if (pData)
         {
             return false;
         }
 
-        m_pAppConfig->serverMap[serverData.serverName] = std::make_shared<db::DBServerData>(serverData);
+        m_pAppConfig->serverList.push_back(std::make_shared<db::DBServerData>(serverData));
         db::SaveServerData(serverData);
 
         return true;
@@ -168,22 +173,76 @@ namespace TOPLauncher
             return false;
         }
 
-        return db::RemoveServerData(serverName) && m_pAppConfig->serverMap.erase(serverName) > 0;
+        auto iter = std::find_if(m_pAppConfig->serverList.cbegin(), m_pAppConfig->serverList.cend(),
+            [serverName](const std::shared_ptr<db::DBServerData>& data)
+        {
+            assert(data);
+            if (!data)
+            {
+                return false;
+            }
+            return data->serverName == serverName;
+        });
+
+        if (iter != m_pAppConfig->serverList.cend() && db::RemoveServerData(serverName))
+        {
+            iter = m_pAppConfig->serverList.erase(iter);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    bool AppModel::ModifyServer(const std::wstring & serverName, const db::DBServerData & newServerData)
+    {
+        auto iter = std::find_if(m_pAppConfig->serverList.begin(), m_pAppConfig->serverList.end(),
+            [serverName](const std::shared_ptr<db::DBServerData>& data)
+        {
+            assert(data);
+            if (!data)
+            {
+                return false;
+            }
+            return data->serverName == serverName;
+        });
+
+        if (iter == m_pAppConfig->serverList.cend())
+        {
+            return false;
+        }
+        else
+        {
+            *iter = std::make_shared<db::DBServerData>(newServerData);
+            db::RemoveServerData(serverName);
+            db::SaveServerData(newServerData);
+            return true;
+        }
     }
 
     std::shared_ptr<db::DBServerData> AppModel::GetServerData(const std::wstring & serverName)
     {
-        auto iter = m_pAppConfig->serverMap.find(serverName);
-        if (iter != m_pAppConfig->serverMap.cend())
+        auto iter = std::find_if(m_pAppConfig->serverList.cbegin(), m_pAppConfig->serverList.cend(),
+            [serverName](const std::shared_ptr<db::DBServerData>& data)
         {
-            return iter->second;
+            assert(data);
+            if (!data)
+            {
+                return false;
+            }
+            return data->serverName == serverName;
+        });
+        if (iter != m_pAppConfig->serverList.cend())
+        {
+            return *iter;
         }
         return nullptr;
     }
 
-    const std::unordered_map<std::wstring, std::shared_ptr<db::DBServerData>>& AppModel::GetServerData() const
+    const std::vector<std::shared_ptr<db::DBServerData>>& AppModel::GetServerData() const
     {
-        return m_pAppConfig->serverMap;
+        return m_pAppConfig->serverList;
     }
 
     bool AppModel::IsReservedServer(const std::wstring& serverName) const
@@ -201,6 +260,22 @@ namespace TOPLauncher
     bool AppModel::IsGameConfigAvailable() const
     {
         return !m_pAppConfig->gameExecutablePath.empty();
+    }
+
+    void AppModel::GetSensitivityValue(int & moveSensitivity, int & moveSpeed, int & dropSpeed)
+    {
+        moveSensitivity = m_pAppConfig->moveSensitivity;
+        moveSpeed = m_pAppConfig->moveSpeed;
+        dropSpeed = m_pAppConfig->softDropSpeed;
+    }
+
+    void AppModel::SetSensitivityValue(int moveSensitivity, int moveSpeed, int dropSpeed)
+    {
+        m_pAppConfig->moveSensitivity = moveSensitivity;
+        m_pAppConfig->moveSpeed = moveSpeed;
+        m_pAppConfig->softDropSpeed = dropSpeed;
+
+        // TODO: apply new settings in game
     }
 
     std::shared_ptr<SQLite::Database> AppModel::InitUserDB()
@@ -236,9 +311,11 @@ namespace TOPLauncher
 
         // language
         std::wstring langValue = db::ReadDBConfig(*m_pUserDB, configKeyLanguage);
-        m_pAppConfig->displayLanguage = LanguageConfig(_wtoi(langValue.c_str()));
+        m_pAppConfig->displayLanguage = langValue;
 
-
+        // executable path
+        std::wstring executablePath = db::ReadDBConfig(*m_pUserDB, configKeyGameExecutablePath);
+        SetGameExecutablePath(executablePath);
 
     }
     void AppModel::LoadSavedServers()
@@ -255,7 +332,7 @@ namespace TOPLauncher
         // reserved server list
         for (const db::DBServerData& serverData : reservedServerList)
         {
-            m_pAppConfig->serverMap[serverData.serverName] = std::make_shared<db::DBServerData>(serverData);
+            m_pAppConfig->serverList.push_back(std::make_shared<db::DBServerData>(serverData));
         }
 
         for (const std::shared_ptr<db::DBServerData>& pServerData : serverList)
@@ -263,25 +340,27 @@ namespace TOPLauncher
             assert(pServerData);
             if (pServerData && !IsReservedServer(pServerData->serverName))
             {
-                m_pAppConfig->serverMap[pServerData->serverName] = pServerData;
+                m_pAppConfig->serverList.push_back(pServerData);
             }
         }
     }
     void AppModel::FindGameExecutablePath()
     {
-
-        filesystem::path workDir = util::GetWorkDirectory();
-        filesystem::path gameExePath = workDir / gameExecutableName;
-
-        if (!filesystem::exists(gameExePath))
+        if (m_pAppConfig->gameExecutablePath.empty())
         {
-            //std::string errorMsg = util::string_format("Could not find game executable \"{}\" in current working directory!",
-            //    util::wstringToUTF8(gameExecutableName));
-            //throw std::runtime_error(errorMsg);
-        }
-        else
-        {
-            SetGameExecutablePath(gameExePath);
+            filesystem::path workDir = util::GetWorkDirectory();
+            filesystem::path gameExePath = workDir / gameExecutableName;
+
+            if (!filesystem::exists(gameExePath))
+            {
+                //std::string errorMsg = util::string_format("Could not find game executable \"{}\" in current working directory!",
+                //    util::wstringToUTF8(gameExecutableName));
+                //throw std::runtime_error(errorMsg);
+            }
+            else
+            {
+                SetGameExecutablePath(gameExePath);
+            }
         }
     }
     void AppModel::LoadSavedConfigFromGame()

@@ -17,20 +17,20 @@ namespace TOPLauncher
     Q_DECLARE_METATYPE(std::weak_ptr<db::DBServerData>);
     Q_DECLARE_METATYPE(std::shared_ptr<db::DBUserData>);
 
-    class ServerListModel : public QAbstractItemModel
+    class ServerDropListModel : public QAbstractItemModel
     {
     public:
-        ServerListModel(TOPLauncherMainWindow& parent)
+        ServerDropListModel(TOPLauncherMainWindow& parent)
             : m_parent(parent)
         {
             auto pAppModel = AppModel::GetInstance();
             auto& serverList = pAppModel->GetServerData();
 
-            for (const std::pair<std::wstring, std::shared_ptr<db::DBServerData>>& serverData : serverList)
+            for (const std::shared_ptr<db::DBServerData>& serverData : serverList)
             {
-                assert(serverData.second);
-                if (!serverData.second) continue;
-                m_serverList.emplace_back(serverData.second);
+                assert(serverData);
+                if (!serverData) continue;
+                m_serverList.emplace_back(serverData);
             }
         }
 
@@ -49,7 +49,6 @@ namespace TOPLauncher
         }
         int columnCount(const QModelIndex &parent = QModelIndex()) const override
         {
-            //return m_serverList.size();
             return 1;
         }
 
@@ -59,10 +58,6 @@ namespace TOPLauncher
             {
                 if (!m_serverList[index.row()].expired())
                 {
-                    if (index.row() == 2)
-                    {
-                        int i = 1;
-                    }
                     auto pServerData = m_serverList[index.row()].lock();
 
                     return QVariant(QString::fromStdWString(pServerData->serverName));
@@ -124,7 +119,7 @@ namespace TOPLauncher
         auto& serverList = pAppModel->GetServerData();
 
         // fill server list
-        m_pServerListModel.reset(new ServerListModel(*this));
+        m_pServerListModel.reset(new ServerDropListModel(*this));
         ui.comboServer->setModel(m_pServerListModel.get());
 
         // fill last login user info
@@ -152,6 +147,11 @@ namespace TOPLauncher
         pListWidget->addItem(pNewItem);
         pListWidget->setItemWidget(pNewItem, new LoginUserItem(pListWidget, *this, pUserData->username, pUserData->serverName));
 
+    }
+
+    void TOPLauncherMainWindow::on_serverSettingsChanged()
+    {
+        InitData();
     }
 
     void TOPLauncherMainWindow::LoadLastLoginUser(const std::wstring& serverName)
@@ -257,16 +257,14 @@ namespace TOPLauncher
 
     void TOPLauncherMainWindow::on_btnSettings_clicked()
     {
-        DlgSettings dlg;
+        DlgSettings dlg(this);
         dlg.setModal(true);
-        util::CenterWidgets(&dlg, this);
         dlg.exec();
     }
     void TOPLauncherMainWindow::on_btnLanguage_clicked()
     {
-        DlgLanguage dlg;
+        DlgLanguage dlg(this);
         dlg.setModal(true);
-        util::CenterWidgets(&dlg, this);
         dlg.exec();
     }
 

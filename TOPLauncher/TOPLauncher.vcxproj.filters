@@ -1,14 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
       <Extensions>qrc;*</Extensions>
@@ -45,6 +37,9 @@
     <Filter Include="main">
       <UniqueIdentifier>{98a8e0db-a27e-4e55-8dff-e85bf6e5a284}</UniqueIdentifier>
     </Filter>
+    <Filter Include="model">
+      <UniqueIdentifier>{e7a458df-687d-4e7d-8586-eb070306a60d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dbUser.cpp">
@@ -58,9 +53,6 @@
     </ClCompile>
     <ClCompile Include="utils.cpp">
       <Filter>util</Filter>
-    </ClCompile>
-    <ClCompile Include="AppModel.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="dbConfig.cpp">
       <Filter>db</Filter>
@@ -89,6 +81,9 @@
     <ClCompile Include="TOPLauncherMainWindow.cpp">
       <Filter>ui</Filter>
     </ClCompile>
+    <ClCompile Include="AppModel.cpp">
+      <Filter>model</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dbUser.h">
@@ -103,9 +98,6 @@
     <ClInclude Include="utils.h">
       <Filter>util</Filter>
     </ClInclude>
-    <ClInclude Include="AppModel.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="dbConfig.h">
       <Filter>db</Filter>
     </ClInclude>
@@ -117,6 +109,9 @@
     </ClInclude>
     <ClInclude Include="stdafx.h">
       <Filter>main</Filter>
+    </ClInclude>
+    <ClInclude Include="AppModel.h">
+      <Filter>model</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
