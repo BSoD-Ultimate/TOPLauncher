@@ -218,6 +218,8 @@ namespace TOPLauncher
 
     void TOPLauncherMainWindow::on_btnLogin_clicked()
     {
+        auto pAppModel = AppModel::GetInstance();
+
         if (ui.comboUsername->currentText().isEmpty() ||
             ui.editPassword->text().isEmpty())
         {
@@ -235,6 +237,13 @@ namespace TOPLauncher
 
         auto serverData = serverDataRef.lock();
 
+        // check game executable
+        if (pAppModel->GetGameExecutablePath().empty())
+        {
+            QMessageBox::critical(this, tr("Error"), tr("Could not find where the game executable locates."));
+            return;
+        }
+
         std::wstring password = ui.editPassword->text().toStdWString();
 
         db::DBUserData userData;
@@ -249,9 +258,11 @@ namespace TOPLauncher
 
         db::SaveLoginUser(userData);
 
+        ReloadServerData(serverData->serverName);
 
         // TODO: start the game
         std::wstring serverAddress = serverData->serverAddress;
+
 
     }
 

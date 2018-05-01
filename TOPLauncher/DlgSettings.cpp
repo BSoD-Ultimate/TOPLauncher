@@ -300,7 +300,8 @@ namespace TOPLauncher
             return;
         }
 
-        QString tipText = QObject::tr("Would you like to remove the server profile \"{}\" ?");
+        QString tipText = QObject::tr("Would you like to remove the server profile \"{}\" ?"
+            " This will remove all saved users who login to this server.");
 
         std::wstring tipTextFormatted = util::wstring_format(tipText.toStdWString().c_str(), serverName);
         if (QMessageBox::question(this, QObject::tr("Question"), QString::fromStdWString(tipTextFormatted), QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes)

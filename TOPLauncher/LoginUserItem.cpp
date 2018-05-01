@@ -30,7 +30,7 @@ namespace TOPLauncher
     }
     void LoginUserItem::on_btnRemoveUser_clicked()
     {
-        QString tipText = QObject::tr("Would you like to remove the user \"{}\" which logins to server \"{}\"? ");
+        QString tipText = QObject::tr("Would you like to remove the user \"{}\" who logins to server \"{}\"? ");
 
         std::wstring tipTextFormatted = util::wstring_format(tipText.toStdWString().c_str(), m_username, m_serverName);
 

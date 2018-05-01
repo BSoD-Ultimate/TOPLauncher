@@ -184,7 +184,7 @@ namespace TOPLauncher
             return data->serverName == serverName;
         });
 
-        if (iter != m_pAppConfig->serverList.cend() && db::RemoveServerData(serverName))
+        if (iter != m_pAppConfig->serverList.cend() && db::RemoveServerData(serverName) && db::RemoveAllUsersInServer(serverName))
         {
             iter = m_pAppConfig->serverList.erase(iter);
             return true;
