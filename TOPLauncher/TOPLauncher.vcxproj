@@ -137,6 +137,7 @@
     <ClCompile Include="dbUser.cpp" />
     <ClCompile Include="DlgLanguage.cpp" />
     <ClCompile Include="DlgSettings.cpp" />
+    <ClCompile Include="gameConfigUtil.cpp" />
     <ClCompile Include="guiUtil.cpp" />
     <ClCompile Include="LoginUserItem.cpp">
       <OutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\$(ConfigurationName)\%(Filename).moc</OutputFile>
@@ -178,6 +179,7 @@
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(SolutionDir)sqlite3;$(SolutionDir)SqliteCpp;$(SolutionDir)fmt\include</IncludePath>
       <Define Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">UNICODE;_UNICODE;WIN32;WIN64;QT_DLL;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB</Define>
     </QtMoc>
+    <ClInclude Include="gameConfigUtil.h" />
     <ClInclude Include="guiUtil.h">
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(SolutionDir)sqlite3;$(SolutionDir)SqliteCpp;$(SolutionDir)fmt\include</IncludePath>
       <Define Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">UNICODE;_UNICODE;WIN32;WIN64;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB</Define>
