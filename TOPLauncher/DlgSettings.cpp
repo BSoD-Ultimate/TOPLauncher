@@ -111,10 +111,17 @@ namespace TOPLauncher
                 {
                     return QVariant::fromValue(std::shared_ptr<db::DBServerData>());
                 }
-                auto& serverList = pAppModel->GetServerData();
-                auto serverData = serverList[dataIndex];
+                else if (index.row() < pAppModel->GetServerData().size() + 1)
+                {
+                    auto& serverList = pAppModel->GetServerData();
+                    auto serverData = serverList[dataIndex];
 
-                return QVariant::fromValue(std::shared_ptr<db::DBServerData>(serverData));
+                    return QVariant::fromValue(std::shared_ptr<db::DBServerData>(serverData));
+                }
+                else
+                {
+                    return QVariant();
+                }
             }
             return QVariant();
         }
@@ -140,6 +147,8 @@ namespace TOPLauncher
         std::shared_ptr<AppModel> pAppModel;
     };
 
+
+
     DlgSettings::DlgSettings(QWidget* parent)
         : QDialog(parent)
         , m_pLanguageComboboxModel(new SettingDlgLanguageModel(this))
@@ -148,6 +157,7 @@ namespace TOPLauncher
     {
         ui.setupUi(this);
         ui.serverList->setModel(m_pServerListModel.get());
+        ui.serverList->setCurrentIndex(m_pServerListModel->index(0, 0));
 
         assert(m_pMainWindow);
 
@@ -204,20 +214,20 @@ namespace TOPLauncher
     void DlgSettings::on_serverList_clicked(const QModelIndex &index)
     {
         auto pAppModel = AppModel::GetInstance();
-        auto serverData = pAppModel->GetServerData();
+        auto serverData = ui.serverList->currentIndex().data(Qt::UserRole).value<std::shared_ptr<db::DBServerData>>();
         
         // create new server
-        if (index.row() == 0)
+        if (!serverData)
         {
+            ui.btnRemoveServerProfile->setEnabled(false);
             ui.editServerName->setText("");
             ui.editServerHost->setText("");
         }
         else
         {
-            std::shared_ptr<db::DBServerData> pData = serverData[index.row() - 1];
-            assert(pData);
-            ui.editServerName->setText(QString::fromStdWString(pData->serverName));
-            ui.editServerHost->setText(QString::fromStdWString(pData->serverAddress));
+            ui.btnRemoveServerProfile->setEnabled(true);
+            ui.editServerName->setText(QString::fromStdWString(serverData->serverName));
+            ui.editServerHost->setText(QString::fromStdWString(serverData->serverAddress));
         }
 
     }
@@ -283,20 +293,28 @@ namespace TOPLauncher
     void DlgSettings::on_btnRemoveServerProfile_clicked()
     {
         auto pAppModel = AppModel::GetInstance();
-        std::wstring serverName = ui.editServerName->text().toStdWString();
+        std::wstring serverName = ui.serverList->currentIndex().data().toString().toStdWString();
 
         if (CheckReservedServerData(serverName))
         {
             return;
         }
 
-        m_pServerListModel->removeRow(m_pServerListModel->rowCount());
-        pAppModel->RemoveServer(serverName);
+        QString tipText = QObject::tr("Would you like to remove the server profile \"{}\" ?");
 
-        if (m_pMainWindow)
+        std::wstring tipTextFormatted = util::wstring_format(tipText.toStdWString().c_str(), serverName);
+        if (QMessageBox::question(this, QObject::tr("Question"), QString::fromStdWString(tipTextFormatted), QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes)
         {
-            m_pMainWindow->on_serverSettingsChanged();
+            m_pServerListModel->removeRow(m_pServerListModel->rowCount());
+            pAppModel->RemoveServer(serverName);
+
+            if (m_pMainWindow)
+            {
+                m_pMainWindow->on_serverSettingsChanged();
+            }
         }
+
+
     }
 
     void DlgSettings::on_btnApplySensitivitySettings_clicked()
