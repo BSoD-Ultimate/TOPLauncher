@@ -4,8 +4,6 @@
 #pragma once
 #include <filesystem>
 
-#include <unordered_map>
-
 namespace SQLite
 {
     class Database;
@@ -37,6 +35,9 @@ namespace TOPLauncher
 
         std::shared_ptr<SQLite::Database> GetUserDB();
 
+        size_t GetAvailableLanguages();
+
+        // game executable
         filesystem::path GetGameExecutablePath() const;
         void SetGameExecutablePath(const std::wstring& exePath);
         filesystem::path GetGameDirectory() const;
@@ -44,12 +45,16 @@ namespace TOPLauncher
         // server list
         bool AddServer(const db::DBServerData& serverData);
         bool RemoveServer(const std::wstring& serverName);
+        bool ModifyServer(const std::wstring& serverName, const db::DBServerData& newServerData);
         std::shared_ptr<db::DBServerData> GetServerData(const std::wstring& serverName);
-        const std::unordered_map<std::wstring, std::shared_ptr<db::DBServerData>>& GetServerData() const;
+        const std::vector<std::shared_ptr<db::DBServerData>>& GetServerData() const;
         bool IsReservedServer(const std::wstring& serverName) const;
 
         // game config
         bool IsGameConfigAvailable() const;
+
+        void GetSensitivityValue(int& moveSensitivity, int& moveSpeed, int& dropSpeed);
+        void SetSensitivityValue(int moveSensitivity, int moveSpeed, int dropSpeed);
 
     private:
         std::shared_ptr<SQLite::Database> InitUserDB();

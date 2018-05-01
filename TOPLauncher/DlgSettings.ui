@@ -87,7 +87,7 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>0</y>
+           <y>-24</y>
            <width>521</width>
            <height>600</height>
           </rect>
@@ -233,37 +233,6 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
                   </property>
                  </widget>
                 </item>
-                <item>
-                 <layout class="QHBoxLayout" name="horizontalLayout_10">
-                  <item>
-                   <widget class="QToolButton" name="btnAddServer">
-                    <property name="text">
-                     <string>Add</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QToolButton" name="btnRemoveServer">
-                    <property name="text">
-                     <string>Remove</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <spacer name="horizontalSpacer_3">
-                    <property name="orientation">
-                     <enum>Qt::Horizontal</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>40</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                   </spacer>
-                  </item>
-                 </layout>
-                </item>
                </layout>
               </widget>
              </item>
@@ -351,6 +320,13 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
                    </widget>
                   </item>
                   <item>
+                   <widget class="QPushButton" name="btnRemoveServerProfile">
+                    <property name="text">
+                     <string>Remove</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
                    <spacer name="horizontalSpacer_2">
                     <property name="orientation">
                      <enum>Qt::Horizontal</enum>
@@ -432,7 +408,7 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
                      </size>
                     </property>
                     <property name="text">
-                     <string>Slow</string>
+                     <string>Obtuse</string>
                     </property>
                     <property name="alignment">
                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>

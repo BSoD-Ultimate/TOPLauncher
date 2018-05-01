@@ -1,3 +1,6 @@
+/*
+ * Main window
+*/
 #pragma once
 
 #include <QtWidgets/QMainWindow>
@@ -11,7 +14,7 @@ namespace TOPLauncher
         struct DBServerData;
     }
 
-    class ServerListModel;
+    class ServerDropListModel;
     class UserListModel;
 
     class TOPLauncherMainWindow : public QMainWindow
@@ -32,7 +35,8 @@ namespace TOPLauncher
 
         void InsertLoginUserItem(QListWidget* pListWidget, const std::shared_ptr<db::DBUserData> pUserData);
 
-
+    public slots:
+        void on_serverSettingsChanged();
 
     private slots:
 
@@ -51,7 +55,7 @@ namespace TOPLauncher
         Ui::TOPLauncherClass ui;
 
         QListWidget* m_pComboUserPopupList;
-        std::unique_ptr<ServerListModel> m_pServerListModel;
+        std::unique_ptr<ServerDropListModel> m_pServerListModel;
     };
 }
 
