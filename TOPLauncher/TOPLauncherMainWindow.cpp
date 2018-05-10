@@ -244,10 +244,11 @@ namespace TOPLauncher
             return;
         }
 
+        std::wstring username = ui.comboUsername->currentText().toStdWString();
         std::wstring password = ui.editPassword->text().toStdWString();
 
         db::DBUserData userData;
-        userData.username = ui.comboUsername->currentText().toStdWString();
+        userData.username = username;
         userData.serverName = serverData->serverName;
         userData.savePassword = ui.chkRememberPasswd->isChecked();
         if (userData.savePassword)
@@ -263,7 +264,37 @@ namespace TOPLauncher
         // TODO: start the game
         std::wstring serverAddress = serverData->serverAddress;
 
+        std::wstring gamePath = pAppModel->GetGameExecutablePath();
 
+        std::wstring startupArgs = util::GetGameStartupArgs(serverAddress, username, password);
+
+        std::wstring startupArgFullString = util::wstring_format(L"\"{}\" {}", gamePath, startupArgs);
+        std::unique_ptr<wchar_t[]> startupArgBuf(new wchar_t[startupArgFullString.length() + 1]());
+        wcscpy_s(startupArgBuf.get(), startupArgFullString.length() + 1, startupArgFullString.c_str());
+
+        STARTUPINFOW si = { 0 };
+
+        PROCESS_INFORMATION pi = { 0 };
+
+        BOOL startupSuccess = CreateProcessW(
+            gamePath.c_str(),
+            startupArgBuf.get(),
+            NULL,
+            NULL,
+            FALSE,
+            CREATE_SUSPENDED,
+            NULL,
+            pAppModel->GetGameDirectory().c_str(),
+            &si,
+            &pi);
+
+        ResumeThread(pi.hThread);
+
+        CloseHandle(pi.hProcess);
+        CloseHandle(pi.hThread);
+
+            
+        QApplication::exit();
     }
 
     void TOPLauncherMainWindow::on_btnSettings_clicked()
@@ -281,10 +312,27 @@ namespace TOPLauncher
 
     void TOPLauncherMainWindow::on_btnRegister_clicked()
     {
-        // Open registration 
-        // http://tetrisonline.pl/top/register.php
-        HWND windowHandle = HWND(this->window()->winId());
-        ShellExecuteW(windowHandle, L"open", L"http://tetrisonline.pl/top/register.php", NULL, NULL, SW_SHOWNORMAL);
+        // Open registration URL
+        auto pServerDataValue = ui.comboServer->currentData();
+
+        auto pServerDataRef = pServerDataValue.value<std::weak_ptr<db::DBServerData>>();
+        assert(!pServerDataRef.expired());
+        if (!pServerDataRef.expired())
+        {
+            auto pServerData = pServerDataRef.lock();
+            auto& registerURL = pServerData->registerURL;
+            if (!registerURL.empty())
+            {
+                HWND windowHandle = HWND(this->window()->winId());
+                ShellExecuteW(windowHandle, L"open", registerURL.c_str(), NULL, NULL, SW_SHOWNORMAL);
+            }
+        }
+        else
+        {
+            assert(false);
+        }
+
+
     }
 
     void TOPLauncherMainWindow::on_btnOpenForum_clicked()

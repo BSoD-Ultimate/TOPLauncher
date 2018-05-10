@@ -13,13 +13,14 @@ namespace TOPLauncher
         {
             using namespace table_user;
 
-            std::string sql = util::string_format("insert into {} ({}, {}) values (@serverName, @serverHost) ; ",
-                table_user::t_server, server::c_serverName, server::c_host);
+            std::string sql = util::string_format("insert into {} ({}, {}, {}) values (@serverName, @serverHost, @serverRegisterURL) ; ",
+                table_user::t_server, server::c_serverName, server::c_host, server::c_register_url);
 
             auto pStmt = std::make_unique<SQLite::Statement>(db, sql);
 
             pStmt->bind("@serverName", util::wstringToUTF8(serverName));
             pStmt->bind("@serverHost", util::wstringToUTF8(serverAddress));
+            pStmt->bind("@serverRegisterURL", util::wstringToUTF8(registerURL));
 
             return pStmt;
         }
@@ -27,13 +28,14 @@ namespace TOPLauncher
         {
             using namespace table_user;
 
-            std::string sql = util::string_format("update {} set {} = @serverHost where {} = @serverName ; ",
-                table_user::t_server, server::c_host, server::c_serverName);
+            std::string sql = util::string_format("update {} set {} = @serverHost, {} = @serverRegisterURL where {} = @serverName ; ",
+                table_user::t_server, server::c_host, server::c_register_url, server::c_serverName);
 
             auto pStmt = std::make_unique<SQLite::Statement>(db, sql);
 
             pStmt->bind("@serverName", util::wstringToUTF8(serverName));
             pStmt->bind("@serverHost", util::wstringToUTF8(serverAddress));
+            pStmt->bind("@serverRegisterURL", util::wstringToUTF8(registerURL));
 
             return pStmt;
         }
@@ -45,6 +47,7 @@ namespace TOPLauncher
             auto serverData = std::make_shared<DBServerData>();
             serverData->serverName = util::wstringFromUTF8(qr.getColumn(c_serverName.c_str()).getString());
             serverData->serverAddress = util::wstringFromUTF8(qr.getColumn(c_host.c_str()).getString());
+            serverData->registerURL = util::wstringFromUTF8(qr.getColumn(c_register_url.c_str()).getString());
 
             return serverData;
         }

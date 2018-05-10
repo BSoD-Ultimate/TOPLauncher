@@ -17,6 +17,7 @@ namespace TOPLauncher
             {
                 extern const std::string c_serverName;
                 extern const std::string c_host;
+                extern const std::string c_register_url;
 
                 std::string CreateTableSQL();
 
