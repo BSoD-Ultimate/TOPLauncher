@@ -25,9 +25,7 @@ namespace TOPLauncher
     // reserved server list
     static const std::vector<db::DBServerData> reservedServerList
     {
-        { L"TOP Official Server", L"tetrisonline.pl" },
-        { L"Chinese CNC Server", L"tetris.3322.org" },
-        { L"Another Chinese Server", L"toc.tetriscn.tk" }
+        { L"TOP Official Server", L"tetrisonline.pl", L"http://tetrisonline.pl/top/register.php" }
     };
 
 

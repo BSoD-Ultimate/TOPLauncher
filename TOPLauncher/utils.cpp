@@ -50,6 +50,11 @@ namespace TOPLauncher
             return appPath.parent_path();
         }
 
+        std::wstring GetGameStartupArgs(const std::wstring & serverAddress, const std::wstring & username, const std::wstring & password)
+        {
+            return wstring_format(L" enc ip={} id={} pw={}", serverAddress, username, password);
+        }
+
     }
 
 }

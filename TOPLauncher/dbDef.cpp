@@ -14,6 +14,7 @@ namespace TOPLauncher
             {
                 const std::string c_serverName = "c_server_name";
                 const std::string c_host = "c_host";
+                const std::string c_register_url = "c_register_url";
 
                 std::string CreateTableSQL()
                 {
@@ -21,6 +22,7 @@ namespace TOPLauncher
                         + t_server + " ( " 
                         + c_serverName + " nvarchar(200) not null, "
                         + c_host + " text not null, "
+                        + c_register_url + " text, "
                         + " primary key ( " + c_serverName + " ) "
                         + " ); "; 
                     return sql;

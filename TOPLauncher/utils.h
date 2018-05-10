@@ -28,6 +28,8 @@ namespace TOPLauncher
 
         std::wstring GetWorkDirectory();
         std::wstring GetAppDirectory();
+
+        std::wstring GetGameStartupArgs(const std::wstring& serverAddress, const std::wstring& username, const std::wstring& password);
     }
 
     namespace filesystem = std::experimental::filesystem;

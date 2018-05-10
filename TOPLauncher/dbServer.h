@@ -17,6 +17,7 @@ namespace TOPLauncher
         {
             std::wstring serverName;
             std::wstring serverAddress;
+            std::wstring registerURL;
 
             std::unique_ptr<SQLite::Statement> GetInsertStatement(SQLite::Database& db) const;
             std::unique_ptr<SQLite::Statement> GetUpdateStatement(SQLite::Database& db) const;
