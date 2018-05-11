@@ -5,12 +5,16 @@
   <PropertyGroup />
   <ItemDefinitionGroup>
     <Link>
-      <AdditionalDependencies>fmt.lib;sqlite3.lib;SQLiteCpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)$(Configuration)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>fmt.lib;sqlite3.lib;SQLiteCpp.lib;SjeJhhUtil.lib;inih.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)$(Configuration);$(SolutionDir)external\SjeJhhUtil</AdditionalLibraryDirectories>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)sqlite3;$(SolutionDir)SqliteCpp;$(SolutionDir)fmt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)external\sqlite3;$(SolutionDir)external\SqliteCpp;$(SolutionDir)external\fmt\include;$(SolutionDir)external\SjeJhhUtil;$(SolutionDir)external\inih;$(SolutionDir)external\inih\cpp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
+    <PostBuildEvent>
+      <Command>copy $(SolutionDir)external\SjeJhhUtil\SjeJhhUtil.dll $(SolutionDir)$(Configuration)\SjeJhhUtil.dll
+</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup />
 </Project>

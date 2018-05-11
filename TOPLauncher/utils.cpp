@@ -50,6 +50,28 @@ namespace TOPLauncher
             return appPath.parent_path();
         }
 
+        std::wstring GetTempDirectory()
+        {
+            static const int maxChar = 1000;
+            std::unique_ptr<wchar_t[]> tmpPathBuf(new wchar_t[maxChar]());
+            std::unique_ptr<wchar_t[]> longTmpPathBuf(new wchar_t[maxChar]());
+            GetEnvironmentVariableW(L"temp", tmpPathBuf.get(), maxChar);
+            GetLongPathNameW(tmpPathBuf.get(), longTmpPathBuf.get(), maxChar);
+
+            filesystem::path tmpPath = longTmpPathBuf.get();
+
+            DWORD pid = GetCurrentProcessId();
+
+            tmpPath /= wstring_format(L"TOPLauncher_pid{}", pid);
+            // 建立这个目录
+            if (!filesystem::exists(tmpPath))
+            {
+                filesystem::create_directories(tmpPath);
+            }
+
+            return tmpPath.wstring();
+        }
+
         std::wstring GetGameStartupArgs(const std::wstring & serverAddress, const std::wstring & username, const std::wstring & password)
         {
             return wstring_format(L" enc ip={} id={} pw={}", serverAddress, username, password);
