@@ -7,6 +7,8 @@
 #include "dbServer.h"
 #include "dbUser.h"
 
+#include "gameConfigUtil.h"
+
 #include <SQLiteCpp/Database.h>
 
 #include <set>
@@ -44,9 +46,9 @@ namespace TOPLauncher
         filesystem::path gameDirectory;
 
         // set tetrominos' handling characteristics
-        uint16_t moveSensitivity;
-        uint16_t moveSpeed;
-        uint16_t softDropSpeed;
+        int32_t moveSensitivity;
+        int32_t moveSpeed;
+        int32_t softDropSpeed;
 
         // server list
         std::vector<std::shared_ptr<db::DBServerData>> serverList;
@@ -365,14 +367,11 @@ namespace TOPLauncher
     {
         if (m_pAppConfig->gameExecutablePath.empty())
         {
-            int i = 1;
             return;
             //throw std::runtime_error("Game executable is not found!");
         }
 
-        int i = 1;
-
-        // TODO: load modifications set on game
+        util::ReadMoveSensitivityConfig(m_pAppConfig->moveSensitivity, m_pAppConfig->moveSpeed, m_pAppConfig->softDropSpeed);
     }
 }
 

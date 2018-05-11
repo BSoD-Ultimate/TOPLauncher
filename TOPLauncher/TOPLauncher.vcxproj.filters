@@ -85,7 +85,7 @@
       <Filter>model</Filter>
     </ClCompile>
     <ClCompile Include="gameConfigUtil.cpp">
-      <Filter>Generated Files</Filter>
+      <Filter>util</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -117,7 +117,7 @@
       <Filter>model</Filter>
     </ClInclude>
     <ClInclude Include="gameConfigUtil.h">
-      <Filter>Generated Files</Filter>
+      <Filter>util</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

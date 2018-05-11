@@ -273,7 +273,7 @@ namespace TOPLauncher
         wcscpy_s(startupArgBuf.get(), startupArgFullString.length() + 1, startupArgFullString.c_str());
 
         STARTUPINFOW si = { 0 };
-
+        
         PROCESS_INFORMATION pi = { 0 };
 
         BOOL startupSuccess = CreateProcessW(
