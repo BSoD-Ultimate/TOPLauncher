@@ -63,7 +63,8 @@ namespace TOPLauncher
             DWORD pid = GetCurrentProcessId();
 
             tmpPath /= wstring_format(L"TOPLauncher_pid{}", pid);
-            // 建立这个目录
+
+            // create the directory
             if (!filesystem::exists(tmpPath))
             {
                 filesystem::create_directories(tmpPath);
