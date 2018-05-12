@@ -244,6 +244,12 @@ namespace TOPLauncher
             return;
         }
 
+        if (newServerData.serverName.empty())
+        {
+            QMessageBox::critical(this, QObject::tr("Error"), QObject::tr("The field \"Server name\" should not empty."));
+            return;
+        }
+
         auto oldServerData = ui.serverList->currentIndex().data(Qt::UserRole).value<std::shared_ptr<db::DBServerData>>();
 
         if (pAppModel->GetServerData(newServerData.serverName) != oldServerData)
@@ -260,8 +266,10 @@ namespace TOPLauncher
         }
         else
         {
-            m_pServerListModel->insertRow(m_pServerListModel->rowCount());
-            pAppModel->AddServer(newServerData);
+            if (pAppModel->AddServer(newServerData))
+            {
+                m_pServerListModel->insertRow(m_pServerListModel->rowCount());
+            }
         }
 
         if (m_pMainWindow)
@@ -306,13 +314,16 @@ namespace TOPLauncher
         std::wstring tipTextFormatted = util::wstring_format(tipText.toStdWString().c_str(), serverName);
         if (QMessageBox::question(this, QObject::tr("Question"), QString::fromStdWString(tipTextFormatted), QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes)
         {
-            m_pServerListModel->removeRow(m_pServerListModel->rowCount());
-            pAppModel->RemoveServer(serverName);
-
-            if (m_pMainWindow)
+            if (pAppModel->RemoveServer(serverName))
             {
-                m_pMainWindow->on_serverSettingsChanged();
+                m_pServerListModel->removeRow(m_pServerListModel->rowCount());
+                if (m_pMainWindow)
+                {
+                    m_pMainWindow->on_serverSettingsChanged();
+                }
             }
+
+
         }
 
 
@@ -329,9 +340,17 @@ namespace TOPLauncher
             int moveSpeed = ui.sliderMoveSpeed->value();
             int softDropSpeed = ui.sliderSoftDropSpeed->value();
 
-            pAppModel->SetSensitivityValue(moveSensitivity, moveSpeed, softDropSpeed);
+            bool ret = pAppModel->SetSensitivityValue(moveSensitivity, moveSpeed, softDropSpeed);
 
-            QMessageBox::information(this, QObject::tr("info"), QObject::tr("Successfully applied new keypress sensitivity settings. "), QMessageBox::Ok);
+            if (ret)
+            {
+                QMessageBox::information(this, QObject::tr("Info"), QObject::tr("Successfully applied new keypress sensitivity settings. "), QMessageBox::Ok);
+            }
+            else
+            {
+                QMessageBox::critical(this, QObject::tr("Error"), QObject::tr("Unable to apply new sensitivity settings. "), QMessageBox::Ok);
+            }
+
         }
 
     }

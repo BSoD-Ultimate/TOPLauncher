@@ -54,7 +54,7 @@ namespace TOPLauncher
         bool IsGameConfigAvailable() const;
 
         void GetSensitivityValue(int& moveSensitivity, int& moveSpeed, int& dropSpeed);
-        void SetSensitivityValue(int moveSensitivity, int moveSpeed, int dropSpeed);
+        bool SetSensitivityValue(int moveSensitivity, int moveSpeed, int dropSpeed);
 
     private:
         std::shared_ptr<SQLite::Database> InitUserDB();
