@@ -190,8 +190,9 @@ namespace TOPLauncher
             return data->serverName == serverName;
         });
 
-        if (iter != m_pAppConfig->serverList.cend() && db::RemoveServerData(serverName) && db::RemoveAllUsersInServer(serverName))
+        if (iter != m_pAppConfig->serverList.cend() && db::RemoveServerData(serverName) )
         {
+            db::RemoveAllUsersInServer(serverName);
             iter = m_pAppConfig->serverList.erase(iter);
             return true;
         }
@@ -275,13 +276,17 @@ namespace TOPLauncher
         dropSpeed = m_pAppConfig->softDropSpeed;
     }
 
-    void AppModel::SetSensitivityValue(int moveSensitivity, int moveSpeed, int dropSpeed)
+    bool AppModel::SetSensitivityValue(int moveSensitivity, int moveSpeed, int dropSpeed)
     {
-        m_pAppConfig->moveSensitivity = moveSensitivity;
-        m_pAppConfig->moveSpeed = moveSpeed;
-        m_pAppConfig->softDropSpeed = dropSpeed;
+        bool ret = util::game::WriteMoveSensitivityConfig(moveSensitivity, moveSpeed, dropSpeed);
+        if (ret)
+        {
+            m_pAppConfig->moveSensitivity = moveSensitivity;
+            m_pAppConfig->moveSpeed = moveSpeed;
+            m_pAppConfig->softDropSpeed = dropSpeed;
+        }
 
-        util::game::WriteMoveSensitivityConfig(moveSensitivity, moveSpeed, dropSpeed);
+        return ret;
     }
 
     std::shared_ptr<SQLite::Database> AppModel::InitUserDB()
