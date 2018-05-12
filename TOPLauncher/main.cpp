@@ -24,7 +24,7 @@ namespace TOPLauncher
 
     static void CleanupResources()
     {
-        filesystem::remove_all(util::GetTempDirectory());
+
     }
 }
 
@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
 {
     using namespace TOPLauncher;
 
-	QApplication a(argc, argv);
+    QApplication a(argc, argv);
 
     auto pAppModel = AppModel::GetInstance();
 
@@ -41,16 +41,18 @@ int main(int argc, char *argv[])
         QMessageBox::critical(NULL, QObject::tr("Fatal Error"), QObject::tr("User profile open failed, the program will now exit."));
         return 1;
     };
-        
+
     if (!pAppModel->InitGameConfig())
     {
         QMessageBox::critical(NULL, QObject::tr("Fatal Error"), QObject::tr("Unable to locate game executable path, the program will now exit."));
         return 1;
     };
 
-	TOPLauncherMainWindow w;
-	w.show();
-	int retValue = a.exec();
+    util::SetDisplayLanguage(pAppModel->GetDisplayLanguage());
+
+    TOPLauncherMainWindow w;
+    w.show();
+    int retValue = a.exec();
 
     CleanupResources();
 

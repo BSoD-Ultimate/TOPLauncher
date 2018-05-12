@@ -30,7 +30,11 @@
   </property>
   <property name="font">
    <font>
+    <family>Tahoma</family>
     <pointsize>10</pointsize>
+    <weight>50</weight>
+    <italic>false</italic>
+    <bold>false</bold>
    </font>
   </property>
   <property name="windowTitle">
@@ -38,7 +42,7 @@
   </property>
   <property name="styleSheet">
    <string notr="true">* {
-  font: 10pt &quot;MS Shell Dlg 2&quot;;
+  font: 10pt &quot;Tahoma&quot;;
 }
 
 
@@ -157,7 +161,11 @@ QFrame#frameBottom {
                </property>
                <property name="font">
                 <font>
+                 <family>Tahoma</family>
                  <pointsize>10</pointsize>
+                 <weight>50</weight>
+                 <italic>false</italic>
+                 <bold>false</bold>
                 </font>
                </property>
                <property name="title">
@@ -365,7 +373,11 @@ QFrame#frameBottom {
       </property>
       <property name="font">
        <font>
+        <family>Tahoma</family>
         <pointsize>10</pointsize>
+        <weight>50</weight>
+        <italic>false</italic>
+        <bold>false</bold>
        </font>
       </property>
       <property name="frameShape">

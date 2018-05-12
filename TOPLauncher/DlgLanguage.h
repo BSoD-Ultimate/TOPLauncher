@@ -5,6 +5,8 @@
 
 namespace TOPLauncher
 {
+    class LanguageItemModel;
+
     class DlgLanguage : public QDialog
     {
         Q_OBJECT
@@ -14,7 +16,21 @@ namespace TOPLauncher
         ~DlgLanguage();
 
     private:
+        void changeEvent(QEvent* event) override;
+
+    private slots:
+
+        void accept() override;
+        void reject() override;
+
+        void on_listLanguages_clicked(const QModelIndex &index);
+        void on_btnUseSystemLang_clicked();
+        void on_okButton_clicked();
+        void on_cancelButton_clicked();
+
+    private:
         Ui::DlgLanguage ui;
+        std::unique_ptr<LanguageItemModel> m_pLanguageItemModel;
     };
 
 }

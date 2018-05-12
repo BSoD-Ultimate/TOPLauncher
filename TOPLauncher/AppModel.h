@@ -35,7 +35,10 @@ namespace TOPLauncher
 
         std::shared_ptr<SQLite::Database> GetUserDB();
 
-        size_t GetAvailableLanguages();
+        // language
+
+        std::wstring GetDisplayLanguage() const;
+        bool SetDisplayLanguage(const std::wstring& newLanguage);
 
         // game executable
         filesystem::path GetGameExecutablePath() const;

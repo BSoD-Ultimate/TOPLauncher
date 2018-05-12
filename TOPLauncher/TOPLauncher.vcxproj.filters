@@ -87,6 +87,9 @@
     <ClCompile Include="gameConfigUtil.cpp">
       <Filter>util</Filter>
     </ClCompile>
+    <ClCompile Include="LanguageItemModel.cpp">
+      <Filter>ui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dbUser.h">
@@ -136,6 +139,9 @@
     <QtMoc Include="TOPLauncherMainWindow.h">
       <Filter>ui</Filter>
     </QtMoc>
+    <QtMoc Include="LanguageItemModel.h">
+      <Filter>ui</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="TOPLauncher.ui">
@@ -157,6 +163,13 @@
     </QtRcc>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="TOPLauncher.rc" />
+    <ResourceCompile Include="TOPLauncher.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="toplauncher_zh.ts">
+      <Filter>Translation Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
