@@ -149,6 +149,15 @@ namespace TOPLauncher
 
     }
 
+    void TOPLauncherMainWindow::changeEvent(QEvent* event)
+    {
+        QMainWindow::changeEvent(event);
+        if (QEvent::LanguageChange == event->type())
+        {
+            ui.retranslateUi(this);
+        }
+    }
+
     void TOPLauncherMainWindow::on_serverSettingsChanged()
     {
         InitData();
@@ -372,7 +381,7 @@ namespace TOPLauncher
     {
         // clear user profile
         ui.editPassword->setText(QStringLiteral(""));
-        ui.chkRememberPasswd->setChecked(false);
+        ui.chkRememberPasswd->setChecked(false);   
     }
 }
 

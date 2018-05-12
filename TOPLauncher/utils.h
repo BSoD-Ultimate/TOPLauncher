@@ -32,6 +32,13 @@ namespace TOPLauncher
         std::wstring GetTempDirectory();
 
         std::wstring GetGameStartupArgs(const std::wstring& serverAddress, const std::wstring& username, const std::wstring& password);
+
+
+        const std::vector<std::pair<std::wstring, std::wstring>>& GetAvailableLanguages();
+        std::wstring GetSystemPreferredLanguage();
+        int GetLanguageIndex(const std::wstring& langId);
+        std::wstring GetLanguageShowString(const std::wstring& langId);
+
     }
 
     namespace filesystem = std::experimental::filesystem;

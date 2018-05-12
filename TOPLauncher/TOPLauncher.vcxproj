@@ -140,6 +140,7 @@
     <ClCompile Include="DlgSettings.cpp" />
     <ClCompile Include="gameConfigUtil.cpp" />
     <ClCompile Include="guiUtil.cpp" />
+    <ClCompile Include="LanguageItemModel.cpp" />
     <ClCompile Include="LoginUserItem.cpp">
       <OutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\$(ConfigurationName)\%(Filename).moc</OutputFile>
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">input</DynamicSource>
@@ -193,6 +194,12 @@
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(SolutionDir)sqlite3;$(SolutionDir)SqliteCpp;$(SolutionDir)fmt\include</IncludePath>
       <Define Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">UNICODE;_UNICODE;WIN32;WIN64;QT_DLL;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB</Define>
     </QtMoc>
+    <QtMoc Include="LanguageItemModel.h">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(SolutionDir)sqlite3;$(SolutionDir)SqliteCpp;$(SolutionDir)external\sqlite3;$(SolutionDir)external\SqliteCpp;$(SolutionDir)external\fmt\include;$(SolutionDir)external\SjeJhhUtil;$(SolutionDir)external\inih;$(SolutionDir)external\inih\cpp</IncludePath>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">UNICODE;_UNICODE;WIN32;WIN64;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;_USING_V110_SDK71_</Define>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(SolutionDir)sqlite3;$(SolutionDir)SqliteCpp;$(SolutionDir)external\sqlite3;$(SolutionDir)external\SqliteCpp;$(SolutionDir)external\fmt\include;$(SolutionDir)external\SjeJhhUtil;$(SolutionDir)external\inih;$(SolutionDir)external\inih\cpp</IncludePath>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">UNICODE;_UNICODE;WIN32;WIN64;QT_DLL;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;_USING_V110_SDK71_</Define>
+    </QtMoc>
     <ClInclude Include="resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="timeUtil.h" />
@@ -225,6 +232,9 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TOPLauncher.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="toplauncher_zh.ts" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

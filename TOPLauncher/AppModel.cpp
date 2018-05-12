@@ -7,6 +7,7 @@
 #include "dbServer.h"
 #include "dbUser.h"
 
+#include "guiUtil.h"
 #include "gameConfigUtil.h"
 
 #include <SQLiteCpp/Database.h>
@@ -31,12 +32,7 @@ namespace TOPLauncher
     };
 
 
-    const std::set<std::wstring> availableLanguages{
-        L"zh-CN",
-        L"zh-TW",
-        L"en-US",
-        L"ja-JP",
-    };
+
 
     struct AppConfig
     {
@@ -44,6 +40,8 @@ namespace TOPLauncher
 
         filesystem::path gameExecutablePath;
         filesystem::path gameDirectory;
+
+
 
         // set tetrominos' handling characteristics
         int32_t moveSensitivity;
@@ -54,13 +52,15 @@ namespace TOPLauncher
         std::vector<std::shared_ptr<db::DBServerData>> serverList;
 
         AppConfig()
-            : displayLanguage(L"")
-            , moveSensitivity(45)
+            : moveSensitivity(45)
             , moveSpeed(15)
             , softDropSpeed(10)
         {
-
+            displayLanguage = util::GetSystemPreferredLanguage();
         }
+
+    private:
+
     };
 
     AppModel::AppModel()
@@ -127,6 +127,40 @@ namespace TOPLauncher
         return m_pUserDB;
     }
 
+    std::wstring AppModel::GetDisplayLanguage() const
+    {
+        return m_pAppConfig->displayLanguage;
+    }
+
+    bool AppModel::SetDisplayLanguage(const std::wstring & newLanguage)
+    {
+        auto& availableLanguages = util::GetAvailableLanguages();
+
+        auto iter = std::find_if(availableLanguages.cbegin(), availableLanguages.cend(),
+            [&newLanguage](const std::pair<std::wstring, std::wstring>& lang)
+        {
+            return lang.first == newLanguage;
+        });
+
+        assert(iter != availableLanguages.cend());
+        if (iter == availableLanguages.cend())
+        {
+            return false;
+        }
+
+        if (db::WriteDBConfig(*m_pUserDB, configKeyLanguage, newLanguage))
+        {
+            m_pAppConfig->displayLanguage = newLanguage;
+            util::SetDisplayLanguage(m_pAppConfig->displayLanguage);
+
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     filesystem::path AppModel::GetGameExecutablePath() const
     {
         return m_pAppConfig->gameExecutablePath;
@@ -190,7 +224,7 @@ namespace TOPLauncher
             return data->serverName == serverName;
         });
 
-        if (iter != m_pAppConfig->serverList.cend() && db::RemoveServerData(serverName) )
+        if (iter != m_pAppConfig->serverList.cend() && db::RemoveServerData(serverName))
         {
             db::RemoveAllUsersInServer(serverName);
             iter = m_pAppConfig->serverList.erase(iter);
@@ -322,7 +356,11 @@ namespace TOPLauncher
 
         // language
         std::wstring langValue = db::ReadDBConfig(*m_pUserDB, configKeyLanguage);
-        m_pAppConfig->displayLanguage = langValue;
+        if (!langValue.empty())
+        {
+            m_pAppConfig->displayLanguage = langValue;
+        }
+
 
         // executable path
         std::wstring executablePath = db::ReadDBConfig(*m_pUserDB, configKeyGameExecutablePath);

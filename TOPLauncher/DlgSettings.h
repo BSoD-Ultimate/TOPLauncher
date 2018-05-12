@@ -10,7 +10,7 @@ namespace TOPLauncher
 {
     class TOPLauncherMainWindow;
 
-    class SettingDlgLanguageModel;
+    class LanguageItemModel;
     class SettingDlgServerListModel;
 
     class DlgSettings : public QDialog
@@ -31,11 +31,13 @@ namespace TOPLauncher
     private:
         void LoadSettingsFromModel();
         bool CheckReservedServerData(const std::wstring& serverName);
-
+        
+        void changeEvent(QEvent* event) override;
 
     private slots :
 
     void on_comboBoxLanguage_currentIndexChanged(int index);
+    void on_btnUseSystemLang_clicked();
     void on_btnBrowseGameExecutable_clicked();
 
     void on_serverList_clicked(const QModelIndex &index);
@@ -52,8 +54,10 @@ namespace TOPLauncher
 
         TOPLauncherMainWindow* m_pMainWindow;
 
-        std::unique_ptr<SettingDlgLanguageModel> m_pLanguageComboboxModel;
         std::unique_ptr<SettingDlgServerListModel> m_pServerListModel;
+        std::unique_ptr<LanguageItemModel> m_pLanguageItemModel;
+
+        bool m_bDlgInit;
     };
 
 }

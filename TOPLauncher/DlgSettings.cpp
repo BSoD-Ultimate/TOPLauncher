@@ -6,47 +6,11 @@
 #include "dbServer.h"
 
 #include "AppModel.h"
+#include "LanguageItemModel.h"
 
 namespace TOPLauncher
 {
     Q_DECLARE_METATYPE(std::shared_ptr<db::DBServerData>);
-
-    class SettingDlgLanguageModel : public QAbstractItemModel
-    {
-    public:
-        SettingDlgLanguageModel(DlgSettings* pParent)
-            : m_pParent(pParent)
-        {
-
-        }
-
-        QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const override
-        {
-            return createIndex(row, column, nullptr);
-        }
-        QModelIndex parent(const QModelIndex &child) const override
-        {
-            return QModelIndex();
-        }
-
-        int rowCount(const QModelIndex &parent = QModelIndex()) const override
-        {
-            return 0;
-        }
-        int columnCount(const QModelIndex &parent = QModelIndex()) const override
-        {
-            return 1;
-        }
-
-        QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override
-        {
-            return QVariant();
-        }
-
-
-    private:
-        DlgSettings* m_pParent;
-    };
 
     class SettingDlgServerListModel : public QAbstractItemModel
     {
@@ -151,17 +115,23 @@ namespace TOPLauncher
 
     DlgSettings::DlgSettings(QWidget* parent)
         : QDialog(parent)
-        , m_pLanguageComboboxModel(new SettingDlgLanguageModel(this))
         , m_pServerListModel(new SettingDlgServerListModel(this))
+        , m_pLanguageItemModel(new LanguageItemModel(this))
         , m_pMainWindow(dynamic_cast<TOPLauncherMainWindow*>(parent))
+        , m_bDlgInit(false)
     {
         ui.setupUi(this);
         ui.serverList->setModel(m_pServerListModel.get());
         ui.serverList->setCurrentIndex(m_pServerListModel->index(0, 0));
 
+        ui.comboBoxLanguage->setModel(m_pLanguageItemModel.get());
+        ui.comboBoxLanguage->setCurrentIndex(util::GetLanguageIndex(AppModel::GetInstance()->GetDisplayLanguage()));
+
         assert(m_pMainWindow);
 
         LoadSettingsFromModel();
+
+        m_bDlgInit = true;
     }
 
     DlgSettings::~DlgSettings()
@@ -193,8 +163,42 @@ namespace TOPLauncher
         return false;
     }
 
+    void DlgSettings::changeEvent(QEvent* event)
+    {
+        QDialog::changeEvent(event);
+        if (QEvent::LanguageChange == event->type())
+        {
+            ui.retranslateUi(this);
+        }
+    }
+
     void DlgSettings::on_comboBoxLanguage_currentIndexChanged(int index)
     {
+        auto langId = ui.comboBoxLanguage->currentData(Qt::UserRole).toString();
+        auto pAppModel = AppModel::GetInstance();
+        if (pAppModel->GetDisplayLanguage() != langId.toStdWString() && m_bDlgInit)
+        {
+            pAppModel->SetDisplayLanguage(langId.toStdWString());
+        }
+    }
+
+    void DlgSettings::on_btnUseSystemLang_clicked()
+    {
+        std::wstring langId = util::GetSystemPreferredLanguage();
+        QString displayFormat = QObject::tr("Would you like to use your system language \"{}\" as the display language?");
+
+        std::wstring langShow = util::GetLanguageShowString(langId);
+        std::wstring tipString = util::wstring_format(displayFormat.toStdWString().c_str(), langShow);
+
+        if (QMessageBox::question(this, QObject::tr("Question"), QString::fromStdWString(tipString), QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes)
+        {
+            auto pAppModel = AppModel::GetInstance();
+            if (pAppModel->SetDisplayLanguage(langId))
+            {
+                ui.comboBoxLanguage->setCurrentIndex(
+                    util::GetLanguageIndex(pAppModel->GetDisplayLanguage()));
+            }
+        }
     }
 
     void DlgSettings::on_btnBrowseGameExecutable_clicked()
