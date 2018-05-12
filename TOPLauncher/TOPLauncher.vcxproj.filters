@@ -119,6 +119,9 @@
     <ClInclude Include="gameConfigUtil.h">
       <Filter>util</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="DlgLanguage.h">
@@ -152,5 +155,8 @@
     <QtRcc Include="TOPLauncher.qrc">
       <Filter>Resource Files</Filter>
     </QtRcc>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="TOPLauncher.rc" />
   </ItemGroup>
 </Project>
