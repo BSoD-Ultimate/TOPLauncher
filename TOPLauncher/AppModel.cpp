@@ -134,11 +134,17 @@ namespace TOPLauncher
 
     void AppModel::SetGameExecutablePath(const std::wstring& exePath)
     {
+        auto oldPath = m_pAppConfig->gameExecutablePath;
         m_pAppConfig->gameExecutablePath = exePath;
         m_pAppConfig->gameDirectory = filesystem::path(exePath).parent_path();
 
         db::WriteDBConfig(*m_pUserDB, configKeyGameExecutablePath, m_pAppConfig->gameExecutablePath);
-        LoadSavedConfigFromGame();
+
+        if (exePath != oldPath || oldPath.empty())
+        {
+            LoadSavedConfigFromGame();
+        }
+
     }
 
     filesystem::path AppModel::GetGameDirectory() const
@@ -275,7 +281,7 @@ namespace TOPLauncher
         m_pAppConfig->moveSpeed = moveSpeed;
         m_pAppConfig->softDropSpeed = dropSpeed;
 
-        // TODO: apply new settings in game
+        util::game::WriteMoveSensitivityConfig(moveSensitivity, moveSpeed, dropSpeed);
     }
 
     std::shared_ptr<SQLite::Database> AppModel::InitUserDB()
@@ -371,7 +377,7 @@ namespace TOPLauncher
             //throw std::runtime_error("Game executable is not found!");
         }
 
-        util::ReadMoveSensitivityConfig(m_pAppConfig->moveSensitivity, m_pAppConfig->moveSpeed, m_pAppConfig->softDropSpeed);
+        util::game::ReadMoveSensitivityConfig(m_pAppConfig->moveSensitivity, m_pAppConfig->moveSpeed, m_pAppConfig->softDropSpeed);
     }
 }
 

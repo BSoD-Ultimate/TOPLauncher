@@ -21,6 +21,11 @@ namespace TOPLauncher
         }
 
     }
+
+    static void CleanupResources()
+    {
+        filesystem::remove_all(util::GetTempDirectory());
+    }
 }
 
 int main(int argc, char *argv[])
@@ -45,5 +50,9 @@ int main(int argc, char *argv[])
 
 	TOPLauncherMainWindow w;
 	w.show();
-	return a.exec();
+	int retValue = a.exec();
+
+    CleanupResources();
+
+    return retValue;
 }
