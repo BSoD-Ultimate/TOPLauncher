@@ -175,4 +175,9 @@
       <Filter>Translation Files</Filter>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="icon.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
 </Project>
