@@ -101,7 +101,6 @@ namespace TOPLauncher
 
             bool ReadMoveSensitivityConfig(int& moveSensitivity, int& moveSpeed, int& softDropSpeed)
             {
-                // 
                 // unpack SJE.JHH archive
                 auto pAppModel = AppModel::GetInstance();
                 filesystem::path archivePath = pAppModel->GetGameExecutablePath().parent_path() / filesystem::path(L"config") / L"SJE.JHH";
@@ -127,7 +126,6 @@ namespace TOPLauncher
 
             bool WriteMoveSensitivityConfig(int moveSensitivity, int moveSpeed, int softDropSpeed)
             {
-                // 
                 // unpack SJE.JHH archive
                 auto pAppModel = AppModel::GetInstance();
                 filesystem::path archivePath = pAppModel->GetGameExecutablePath().parent_path() / filesystem::path(L"config") / L"SJE.JHH";
@@ -187,7 +185,6 @@ namespace TOPLauncher
             }
             bool ReadLineClearDelayConfig(int & lineClearDelay)
             {
-                // 
                 // unpack SJE.JHH archive
                 auto pAppModel = AppModel::GetInstance();
                 filesystem::path archivePath = pAppModel->GetGameExecutablePath().parent_path() / filesystem::path(L"config") / L"SJE.JHH";
@@ -210,7 +207,6 @@ namespace TOPLauncher
             }
             bool WriteLineClearDelayConfig(int lineClearDelay)
             {
-                // 
                 // unpack SJE.JHH archive
                 auto pAppModel = AppModel::GetInstance();
                 filesystem::path archivePath = pAppModel->GetGameExecutablePath().parent_path() / filesystem::path(L"config") / L"SJE.JHH";

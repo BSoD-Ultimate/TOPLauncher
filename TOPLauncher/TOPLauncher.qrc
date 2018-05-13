@@ -5,7 +5,4 @@
         <file>Resources/del-user-button-normal.png</file>
         <file>Resources/del-user-button-pushed.png</file>
     </qresource>
-    <qresource prefix="/languages">
-        <file>toplauncher_zh.qm</file>
-    </qresource>
 </RCC>
