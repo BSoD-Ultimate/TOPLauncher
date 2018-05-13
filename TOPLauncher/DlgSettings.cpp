@@ -121,11 +121,9 @@ namespace TOPLauncher
         , m_bDlgInit(false)
     {
         ui.setupUi(this);
-        ui.serverList->setModel(m_pServerListModel.get());
-        ui.serverList->setCurrentIndex(m_pServerListModel->index(0, 0));
 
-        ui.comboBoxLanguage->setModel(m_pLanguageItemModel.get());
-        ui.comboBoxLanguage->setCurrentIndex(util::GetLanguageIndex(AppModel::GetInstance()->GetDisplayLanguage()));
+
+
 
         assert(m_pMainWindow);
 
@@ -140,15 +138,57 @@ namespace TOPLauncher
 
     void DlgSettings::LoadSettingsFromModel()
     {
+        LoadGeneralSettings();
+        LoadServerListSettings();
+        LoadGameControlSettings();
+    }
+
+    void DlgSettings::LoadGeneralSettings()
+    {
         auto pAppModel = AppModel::GetInstance();
+
+        ui.comboBoxLanguage->setModel(m_pLanguageItemModel.get());
+        ui.comboBoxLanguage->setCurrentIndex(util::GetLanguageIndex(AppModel::GetInstance()->GetDisplayLanguage()));
         ui.editGameExecutablePath->setText(QString::fromStdWString(pAppModel->GetGameExecutablePath()));
+    }
+
+    void DlgSettings::LoadServerListSettings()
+    {
+        ui.serverList->setModel(m_pServerListModel.get());
+        ui.serverList->setCurrentIndex(m_pServerListModel->index(0, 0));
+    }
+
+    void DlgSettings::LoadGameControlSettings()
+    {
+        auto pAppModel = AppModel::GetInstance();
 
         int moveSensitivity = 0, moveSpeed = 0, softDropSpeed = 0;
         pAppModel->GetSensitivityValue(moveSensitivity, moveSpeed, softDropSpeed);
 
+        int lineClearDelay = 0;
+        pAppModel->GetLineClearDelayValue(lineClearDelay);
+
         ui.sliderMoveSensitivity->setValue(moveSensitivity);
         ui.sliderMoveSpeed->setValue(moveSpeed);
         ui.sliderSoftDropSpeed->setValue(softDropSpeed);
+        ui.sliderLineClearDelay->setValue(lineClearDelay);
+    }
+
+    bool DlgSettings::ApplyGameControlSettings()
+    {
+        auto pAppModel = AppModel::GetInstance();
+
+        int moveSensitivity = ui.sliderMoveSensitivity->value();
+        int moveSpeed = ui.sliderMoveSpeed->value();
+        int softDropSpeed = ui.sliderSoftDropSpeed->value();
+
+        int lineClearDelay = ui.sliderLineClearDelay->value();
+
+        bool ret =
+            pAppModel->SetSensitivityValue(moveSensitivity, moveSpeed, softDropSpeed) && 
+            pAppModel->SetLineClearDelayValue(lineClearDelay);
+
+        return ret;
     }
 
     bool DlgSettings::CheckReservedServerData(const std::wstring& serverName)
@@ -212,6 +252,9 @@ namespace TOPLauncher
             pAppModel->SetGameExecutablePath(gameExecutablePath.toStdWString());
 
             ui.editGameExecutablePath->setText(gameExecutablePath);
+
+            // reload all settings related to the game client
+            LoadGameControlSettings();
         }
     }
 
@@ -333,41 +376,31 @@ namespace TOPLauncher
 
     }
 
-    void DlgSettings::on_btnApplySensitivitySettings_clicked()
+    void DlgSettings::on_btnApplyControlSettings_clicked()
     {
-        if (QMessageBox::question(this, QObject::tr("Caution"), QObject::tr("Would you like to apply the new keypress sensitivity settings? "),
+        if (QMessageBox::question(this, QObject::tr("Caution"), QObject::tr("Would you like to apply the new game control settings? "),
             QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes)
         {
-            auto pAppModel = AppModel::GetInstance();
 
-            int moveSensitivity = ui.sliderMoveSensitivity->value();
-            int moveSpeed = ui.sliderMoveSpeed->value();
-            int softDropSpeed = ui.sliderSoftDropSpeed->value();
+            bool ret = ApplyGameControlSettings();
 
-            bool ret = pAppModel->SetSensitivityValue(moveSensitivity, moveSpeed, softDropSpeed);
 
             if (ret)
             {
-                QMessageBox::information(this, QObject::tr("Info"), QObject::tr("Successfully applied new keypress sensitivity settings. "), QMessageBox::Ok);
+                QMessageBox::information(this, QObject::tr("Info"), QObject::tr("Successfully applied new game control settings. "), QMessageBox::Ok);
             }
             else
             {
-                QMessageBox::critical(this, QObject::tr("Error"), QObject::tr("Unable to apply new sensitivity settings. "), QMessageBox::Ok);
+                QMessageBox::critical(this, QObject::tr("Error"), QObject::tr("Unable to apply new game control settings. "), QMessageBox::Ok);
             }
 
         }
 
     }
-    void DlgSettings::on_btnResetSensitivitySettings_clicked()
+    void DlgSettings::on_btnResetControlSettings_clicked()
     {
-        auto pAppModel = AppModel::GetInstance();
+        LoadGameControlSettings();
 
-        int moveSensitivity = 0, moveSpeed = 0, softDropSpeed = 0;
-        pAppModel->GetSensitivityValue(moveSensitivity, moveSpeed, softDropSpeed);
-
-        ui.sliderMoveSensitivity->setValue(moveSensitivity);
-        ui.sliderMoveSpeed->setValue(moveSpeed);
-        ui.sliderSoftDropSpeed->setValue(softDropSpeed);
     }
 
 

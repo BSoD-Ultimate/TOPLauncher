@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>560</width>
+    <width>580</width>
     <height>450</height>
    </rect>
   </property>
@@ -18,13 +18,13 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>560</width>
+    <width>580</width>
     <height>450</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>560</width>
+    <width>580</width>
     <height>450</height>
    </size>
   </property>
@@ -84,6 +84,12 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
      <layout class="QVBoxLayout" name="verticalLayout_6">
       <item>
        <widget class="QScrollArea" name="settingsScrollArea">
+        <property name="horizontalScrollBarPolicy">
+         <enum>Qt::ScrollBarAlwaysOff</enum>
+        </property>
+        <property name="sizeAdjustPolicy">
+         <enum>QAbstractScrollArea::AdjustIgnored</enum>
+        </property>
         <property name="widgetResizable">
          <bool>true</bool>
         </property>
@@ -92,8 +98,8 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>521</width>
-           <height>604</height>
+           <width>542</width>
+           <height>660</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_9">
@@ -388,9 +394,9 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
            </widget>
           </item>
           <item>
-           <widget class="QGroupBox" name="groupSensitivitySettings">
+           <widget class="QGroupBox" name="groupControlSettings">
             <property name="title">
-             <string>Keypress Sensitivity Settings</string>
+             <string>Game Control Settings</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -712,16 +718,127 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
               </layout>
              </item>
              <item>
+              <widget class="QLabel" name="labelLineClearDelay">
+               <property name="text">
+                <string>Line clear delay (the less value, the quicker next piece appears after lines were cleared)</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_14">
+               <item>
+                <widget class="QFrame" name="frame_6">
+                 <property name="frameShape">
+                  <enum>QFrame::Box</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Raised</enum>
+                 </property>
+                 <layout class="QHBoxLayout" name="horizontalLayout_15">
+                  <property name="leftMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="topMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="rightMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="bottomMargin">
+                   <number>0</number>
+                  </property>
+                  <item>
+                   <widget class="QLabel" name="labelLineClearDelay_min">
+                    <property name="minimumSize">
+                     <size>
+                      <width>40</width>
+                      <height>0</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>Long</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QSlider" name="sliderLineClearDelay">
+                    <property name="minimumSize">
+                     <size>
+                      <width>200</width>
+                      <height>0</height>
+                     </size>
+                    </property>
+                    <property name="minimum">
+                     <number>0</number>
+                    </property>
+                    <property name="maximum">
+                     <number>200</number>
+                    </property>
+                    <property name="value">
+                     <number>0</number>
+                    </property>
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="invertedAppearance">
+                     <bool>true</bool>
+                    </property>
+                    <property name="invertedControls">
+                     <bool>false</bool>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="labelLineClearDelay_max">
+                    <property name="minimumSize">
+                     <size>
+                      <width>60</width>
+                      <height>0</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>Short</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="spinBoxLineClearDelay">
+                 <property name="minimumSize">
+                  <size>
+                   <width>50</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="minimum">
+                  <number>0</number>
+                 </property>
+                 <property name="maximum">
+                  <number>200</number>
+                 </property>
+                 <property name="value">
+                  <number>0</number>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
               <layout class="QHBoxLayout" name="horizontalLayout_7">
                <item>
-                <widget class="QPushButton" name="btnApplySensitivitySettings">
+                <widget class="QPushButton" name="btnApplyControlSettings">
                  <property name="text">
-                  <string>Apply New Sensitivity Settings</string>
+                  <string>Apply New Control Settings</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="btnResetSensitivitySettings">
+                <widget class="QPushButton" name="btnResetControlSettings">
                  <property name="maximumSize">
                   <size>
                    <width>120</width>
@@ -758,12 +875,12 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>226</x>
-     <y>296</y>
+     <x>295</x>
+     <y>195</y>
     </hint>
     <hint type="destinationlabel">
-     <x>427</x>
-     <y>299</y>
+     <x>532</x>
+     <y>196</y>
     </hint>
    </hints>
   </connection>
@@ -774,12 +891,12 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>409</x>
-     <y>297</y>
+     <x>532</x>
+     <y>196</y>
     </hint>
     <hint type="destinationlabel">
-     <x>185</x>
-     <y>297</y>
+     <x>254</x>
+     <y>195</y>
     </hint>
    </hints>
   </connection>
@@ -790,12 +907,12 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>179</x>
-     <y>343</y>
+     <x>248</x>
+     <y>251</y>
     </hint>
     <hint type="destinationlabel">
-     <x>410</x>
-     <y>343</y>
+     <x>532</x>
+     <y>252</y>
     </hint>
    </hints>
   </connection>
@@ -806,12 +923,12 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>412</x>
-     <y>340</y>
+     <x>532</x>
+     <y>252</y>
     </hint>
     <hint type="destinationlabel">
-     <x>197</x>
-     <y>340</y>
+     <x>266</x>
+     <y>251</y>
     </hint>
    </hints>
   </connection>
@@ -822,12 +939,12 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>243</x>
-     <y>390</y>
+     <x>312</x>
+     <y>328</y>
     </hint>
     <hint type="destinationlabel">
-     <x>421</x>
-     <y>388</y>
+     <x>532</x>
+     <y>327</y>
     </hint>
    </hints>
   </connection>
@@ -838,12 +955,44 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>430</x>
-     <y>387</y>
+     <x>532</x>
+     <y>327</y>
     </hint>
     <hint type="destinationlabel">
-     <x>244</x>
-     <y>389</y>
+     <x>313</x>
+     <y>328</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sliderLineClearDelay</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>spinBoxLineClearDelay</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>345</x>
+     <y>376</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>500</x>
+     <y>370</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBoxLineClearDelay</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>sliderLineClearDelay</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>502</x>
+     <y>381</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>374</x>
+     <y>381</y>
     </hint>
    </hints>
   </connection>

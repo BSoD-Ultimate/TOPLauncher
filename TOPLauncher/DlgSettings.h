@@ -30,6 +30,13 @@ namespace TOPLauncher
 
     private:
         void LoadSettingsFromModel();
+
+        void LoadGeneralSettings();
+        void LoadServerListSettings();
+        void LoadGameControlSettings();
+
+        bool ApplyGameControlSettings();
+
         bool CheckReservedServerData(const std::wstring& serverName);
         
         void changeEvent(QEvent* event) override;
@@ -45,8 +52,8 @@ namespace TOPLauncher
     void on_btnCancelServerProfile_clicked();
     void on_btnRemoveServerProfile_clicked();
 
-    void on_btnApplySensitivitySettings_clicked();
-    void on_btnResetSensitivitySettings_clicked();
+    void on_btnApplyControlSettings_clicked();
+    void on_btnResetControlSettings_clicked();
 
 
     private:
