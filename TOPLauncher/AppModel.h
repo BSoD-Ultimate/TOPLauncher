@@ -59,6 +59,9 @@ namespace TOPLauncher
         void GetSensitivityValue(int& moveSensitivity, int& moveSpeed, int& dropSpeed);
         bool SetSensitivityValue(int moveSensitivity, int moveSpeed, int dropSpeed);
 
+        void GetLineClearDelayValue(int& lineClearDelay);
+        bool SetLineClearDelayValue(int lineClearDelay);
+
     private:
         std::shared_ptr<SQLite::Database> InitUserDB();
 

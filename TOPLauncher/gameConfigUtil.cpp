@@ -185,6 +185,68 @@ namespace TOPLauncher
 
                 return true;
             }
+            bool ReadLineClearDelayConfig(int & lineClearDelay)
+            {
+                // 
+                // unpack SJE.JHH archive
+                auto pAppModel = AppModel::GetInstance();
+                filesystem::path archivePath = pAppModel->GetGameExecutablePath().parent_path() / filesystem::path(L"config") / L"SJE.JHH";
+
+                filesystem::path unpackPath = filesystem::path(GetTempDirectory()) / L"config";
+
+                std::string internalFolderName;
+                if (!UnpackSJEJHHArchive(archivePath, unpackPath, internalFolderName))
+                {
+                    return false;
+                }
+
+                filesystem::path configIniPath = unpackPath / L"config_jpn.ini";
+
+                INIReader reader(configIniPath.string());
+
+                lineClearDelay = reader.GetInteger("CHARACTER_A", "MinoGravity", 50);
+
+                return true;
+            }
+            bool WriteLineClearDelayConfig(int lineClearDelay)
+            {
+                // 
+                // unpack SJE.JHH archive
+                auto pAppModel = AppModel::GetInstance();
+                filesystem::path archivePath = pAppModel->GetGameExecutablePath().parent_path() / filesystem::path(L"config") / L"SJE.JHH";
+
+                filesystem::path unpackPath = filesystem::path(GetTempDirectory()) / L"config";
+
+                std::string internalFolderName;
+                if (!UnpackSJEJHHArchive(archivePath, unpackPath, internalFolderName))
+                {
+                    return false;
+                }
+
+                filesystem::path configIniPath = unpackPath / L"config_jpn.ini";
+
+                INIReader reader(configIniPath.string());
+
+                std::string strlineClearDelay = std::to_string(lineClearDelay);
+
+                reader.Set("CHARACTER_A", "MinoGravity", strlineClearDelay);
+
+                reader.Set("UPGRADE_LINECLEARSPEED_LV1", "MinoGravity", strlineClearDelay);
+                reader.Set("UPGRADE_LINECLEARSPEED_LV2", "MinoGravity", strlineClearDelay);
+                reader.Set("UPGRADE_LINECLEARSPEED_LV3", "MinoGravity", strlineClearDelay);
+                reader.Set("UPGRADE_LINECLEARSPEED_LV4", "MinoGravity", strlineClearDelay);
+                reader.Set("UPGRADE_LINECLEARSPEED_LV5", "MinoGravity", strlineClearDelay);
+
+                reader.WriteINIFile(configIniPath.string());
+
+                // pack the archive again
+                if (!PackSJEJHHArchive(unpackPath, archivePath, internalFolderName))
+                {
+                    return false;
+                }
+
+                return true;
+            }
         }
 
     }

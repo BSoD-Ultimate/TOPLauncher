@@ -41,12 +41,13 @@ namespace TOPLauncher
         filesystem::path gameExecutablePath;
         filesystem::path gameDirectory;
 
-
-
         // set tetrominos' handling characteristics
         int32_t moveSensitivity;
         int32_t moveSpeed;
         int32_t softDropSpeed;
+
+        // set line-clear delay time
+        int32_t lineClearDelay;
 
         // server list
         std::vector<std::shared_ptr<db::DBServerData>> serverList;
@@ -55,6 +56,7 @@ namespace TOPLauncher
             : moveSensitivity(45)
             , moveSpeed(15)
             , softDropSpeed(10)
+            , lineClearDelay(0)
         {
             displayLanguage = util::GetSystemPreferredLanguage();
         }
@@ -323,6 +325,22 @@ namespace TOPLauncher
         return ret;
     }
 
+    void AppModel::GetLineClearDelayValue(int & lineClearDelay)
+    {
+        lineClearDelay = m_pAppConfig->lineClearDelay;
+    }
+
+    bool AppModel::SetLineClearDelayValue(int lineClearDelay)
+    {
+        bool ret = util::game::WriteLineClearDelayConfig(lineClearDelay);
+        if (ret)
+        {
+            m_pAppConfig->lineClearDelay = lineClearDelay;
+        }
+
+        return ret;
+    }
+
     std::shared_ptr<SQLite::Database> AppModel::InitUserDB()
     {
         try
@@ -421,6 +439,7 @@ namespace TOPLauncher
         }
 
         util::game::ReadMoveSensitivityConfig(m_pAppConfig->moveSensitivity, m_pAppConfig->moveSpeed, m_pAppConfig->softDropSpeed);
+        util::game::ReadLineClearDelayConfig(m_pAppConfig->lineClearDelay);
     }
 }
 
