@@ -97,7 +97,7 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>0</y>
+           <y>-232</y>
            <width>542</width>
            <height>660</height>
           </rect>
@@ -276,7 +276,7 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
                  <property name="maximumSize">
                   <size>
                    <width>16777215</width>
-                   <height>80</height>
+                   <height>16777215</height>
                   </size>
                  </property>
                  <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -302,6 +302,16 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
                       </property>
                      </widget>
                     </item>
+                    <item>
+                     <widget class="QLabel" name="labelRegisterURL">
+                      <property name="text">
+                       <string>Registration URL:</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                      </property>
+                     </widget>
+                    </item>
                    </layout>
                   </item>
                   <item>
@@ -311,6 +321,9 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
                     </item>
                     <item>
                      <widget class="QLineEdit" name="editServerHost"/>
+                    </item>
+                    <item>
+                     <widget class="QLineEdit" name="editRegisterURL"/>
                     </item>
                    </layout>
                   </item>
