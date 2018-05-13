@@ -122,9 +122,6 @@ namespace TOPLauncher
     {
         ui.setupUi(this);
 
-
-
-
         assert(m_pMainWindow);
 
         LoadSettingsFromModel();
@@ -263,18 +260,22 @@ namespace TOPLauncher
         auto pAppModel = AppModel::GetInstance();
         auto serverData = ui.serverList->currentIndex().data(Qt::UserRole).value<std::shared_ptr<db::DBServerData>>();
         
-        // create new server
+
         if (!serverData)
         {
+            // item "new server"
             ui.btnRemoveServerProfile->setEnabled(false);
             ui.editServerName->setText("");
             ui.editServerHost->setText("");
+            ui.editRegisterURL->setText("");
         }
         else
         {
+            // normal server profile
             ui.btnRemoveServerProfile->setEnabled(true);
             ui.editServerName->setText(QString::fromStdWString(serverData->serverName));
             ui.editServerHost->setText(QString::fromStdWString(serverData->serverAddress));
+            ui.editRegisterURL->setText(QString::fromStdWString(serverData->registerURL));
         }
 
     }
@@ -282,9 +283,12 @@ namespace TOPLauncher
     {
         auto pAppModel = AppModel::GetInstance();
 
+        auto oldServerData = ui.serverList->currentIndex().data(Qt::UserRole).value<std::shared_ptr<db::DBServerData>>();
+
         db::DBServerData newServerData;
         newServerData.serverName = ui.editServerName->text().toStdWString();
         newServerData.serverAddress = ui.editServerHost->text().toStdWString();
+        newServerData.registerURL = ui.editRegisterURL->text().toStdWString();
 
         if (CheckReservedServerData(newServerData.serverName))
         {
@@ -297,22 +301,40 @@ namespace TOPLauncher
             return;
         }
 
-        auto oldServerData = ui.serverList->currentIndex().data(Qt::UserRole).value<std::shared_ptr<db::DBServerData>>();
-
-        if (pAppModel->GetServerData(newServerData.serverName) != oldServerData)
-        {
-            QMessageBox::critical(this, QObject::tr("Error"), QObject::tr("Server name must be unique."));
-            return;
-        }
-
-
-
         if (oldServerData)
         {
-            pAppModel->ModifyServer(oldServerData->serverName, newServerData);
+            // change server profile
+
+            // check if server data to change is reserved
+            if (oldServerData && CheckReservedServerData(oldServerData->serverName))
+            {
+                return;
+            }
+
+            auto pExistingData = pAppModel->GetServerData(newServerData.serverName);
+
+            // check name conflict
+            if (!pExistingData || pExistingData == oldServerData)
+            {
+                pAppModel->ModifyServer(oldServerData->serverName, newServerData);
+            }
+            else
+            {
+                QMessageBox::critical(this, QObject::tr("Error"), QObject::tr("Server name must be unique."));
+                return;
+            }
         }
         else
         {
+            // new server
+
+            // check name conflict
+            if (pAppModel->GetServerData(newServerData.serverName))
+            {
+                QMessageBox::critical(this, QObject::tr("Error"), QObject::tr("Server name must be unique."));
+                return;
+            }
+
             if (pAppModel->AddServer(newServerData))
             {
                 m_pServerListModel->insertRow(m_pServerListModel->rowCount());
@@ -325,6 +347,7 @@ namespace TOPLauncher
         }
         
     }
+
     void DlgSettings::on_btnCancelServerProfile_clicked()
     {
         auto pAppModel = AppModel::GetInstance();
@@ -336,6 +359,7 @@ namespace TOPLauncher
         {
             ui.editServerName->setText("");
             ui.editServerHost->setText("");
+            ui.editRegisterURL->setText("");
         }
         else
         {
@@ -343,8 +367,10 @@ namespace TOPLauncher
             assert(pData);
             ui.editServerName->setText(QString::fromStdWString(pData->serverName));
             ui.editServerHost->setText(QString::fromStdWString(pData->serverAddress));
+            ui.editRegisterURL->setText(QString::fromStdWString(pData->registerURL));
         }
     }
+
     void DlgSettings::on_btnRemoveServerProfile_clicked()
     {
         auto pAppModel = AppModel::GetInstance();
@@ -364,6 +390,7 @@ namespace TOPLauncher
             if (pAppModel->RemoveServer(serverName))
             {
                 m_pServerListModel->removeRow(m_pServerListModel->rowCount());
+                ui.serverList->setCurrentIndex(m_pServerListModel->index(0, 0));
                 if (m_pMainWindow)
                 {
                     m_pMainWindow->on_serverSettingsChanged();
@@ -397,6 +424,7 @@ namespace TOPLauncher
         }
 
     }
+
     void DlgSettings::on_btnResetControlSettings_clicked()
     {
         LoadGameControlSettings();
