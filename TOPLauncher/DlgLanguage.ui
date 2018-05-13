@@ -36,11 +36,20 @@
   </property>
   <property name="font">
    <font>
+    <family>Tahoma,9pt 宋体</family>
     <pointsize>10</pointsize>
+    <weight>50</weight>
+    <italic>false</italic>
+    <bold>false</bold>
    </font>
   </property>
   <property name="windowTitle">
    <string>Switch Language...</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">* {
+  font: 10pt &quot;Tahoma&quot;, 9pt &quot;宋体&quot;;
+}</string>
   </property>
   <property name="modal">
    <bool>true</bool>
