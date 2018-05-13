@@ -171,5 +171,8 @@
     <None Include="toplauncher_zh.ts">
       <Filter>Translation Files</Filter>
     </None>
+    <None Include="toplauncher_zh_tw.ts">
+      <Filter>Translation Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

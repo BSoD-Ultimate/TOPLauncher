@@ -13,7 +13,13 @@
     </ClCompile>
     <PostBuildEvent>
       <Command>copy $(SolutionDir)external\SjeJhhUtil\SjeJhhUtil.dll $(SolutionDir)$(Configuration)\SjeJhhUtil.dll
-copy $(SolutionDir)external\sqlite3\sqlite3.dll $(SolutionDir)$(Configuration)\sqlite3.dll</Command>
+copy $(SolutionDir)external\sqlite3\sqlite3.dll $(SolutionDir)$(Configuration)\sqlite3.dll
+
+md $(SolutionDir)$(Configuration)\languages
+copy $(ProjectDir)toplauncher_zh.qm $(SolutionDir)$(Configuration)\languages\toplauncher_zh.qm
+copy $(ProjectDir)toplauncher_zh_tw.qm $(SolutionDir)$(Configuration)\languages\toplauncher_zh_tw.qm
+
+</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup />

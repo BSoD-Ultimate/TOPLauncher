@@ -25,18 +25,25 @@ namespace TOPLauncher
 
         static QString GetLanguageFileName(const std::wstring& langId)
         {
+            filesystem::path langFilePath = util::GetAppDirectory();
             if (langId == L"en-US")
             {
                 return QStringLiteral("");
             }
             else if (langId == L"zh-CN")
             {
-                return QStringLiteral(":/languages/toplauncher_zh.qm");
+                langFilePath /= filesystem::path(L"languages") / L"toplauncher_zh.qm";
+            }
+            else if (langId == L"zh-TW")
+            {
+                langFilePath /= filesystem::path(L"languages") / L"toplauncher_zh_tw.qm";
             }
             else
             {
                 return QStringLiteral("");
             }
+
+            return QString::fromStdWString(langFilePath);
         }
 
         bool SetDisplayLanguage(const std::wstring& langId)
