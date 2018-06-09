@@ -4,6 +4,7 @@
 #pragma once
 
 #include <QtWidgets/QMainWindow>
+#include <QtWidgets/QListWidget>
 #include "ui_TOPLauncher.h"
 
 namespace TOPLauncher

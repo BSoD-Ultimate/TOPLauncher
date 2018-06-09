@@ -3,6 +3,8 @@
 #include <QWidget>
 #include "ui_DlgLanguage.h"
 
+#include <memory>
+
 namespace TOPLauncher
 {
     class LanguageItemModel;
