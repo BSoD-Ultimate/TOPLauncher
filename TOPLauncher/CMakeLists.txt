@@ -7,11 +7,13 @@ include(PrecompiledHeader)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTORCC ON)
 
 # find Qt5 
 find_package(Qt5Core CONFIG REQUIRED)
 find_package(Qt5Widgets CONFIG REQUIRED)
 find_package(Qt5Gui CONFIG REQUIRED)
+find_package(Qt5LinguistTools)
 
 #
 # source files
@@ -75,11 +77,21 @@ set(TOPLAUNCHER_FORM_FILES_SRC
 )
 source_group(Form_Files FILES ${TOPLAUNCHER_FORM_FILES_SRC})
 
+# language files
+qt5_create_translation(TOPLAUNCHER_TRANSLATION_QM_SRC
+  "${CMAKE_CURRENT_SOURCE_DIR}"
+  languages/toplauncher_zh.ts
+  languages/toplauncher_zh_tw.ts 
+)
+source_group(Compiled_Translation_Files FILES ${TOPLAUNCHER_TRANSLATION_QM_SRC})
+
 set(TOPLAUNCHER_TRANSLATION_SRC
-  toplauncher_zh.ts 
-  toplauncher_zh_tw.ts 
+  languages/toplauncher_zh.ts 
+  languages/toplauncher_zh_tw.ts 
 )
 source_group(Translation_Files FILES ${TOPLAUNCHER_TRANSLATION_SRC})
+
+qt5_add_resources(TOPLAUNCHER_COMPILED_RESOURCE_FILES TOPLauncher.qrc)
 
 set(TOPLAUNCHER_RESOURCE_SRC
   icon.ico 
@@ -87,6 +99,7 @@ set(TOPLAUNCHER_RESOURCE_SRC
   TOPLauncher.rc 
 )
 source_group(Resource_Files FILES ${TOPLAUNCHER_RESOURCE_SRC})
+
 
 #
 # target name 
@@ -99,6 +112,7 @@ add_executable(TOPLauncher WIN32
   ${TOPLAUNCHER_UTIL_SRC}
   ${TOPLAUNCHER_FORM_FILES_SRC}
   ${TOPLAUNCHER_TRANSLATION_SRC}
+  ${TOPLAUNCHER_TRANSLATION_QM_SRC}
   ${TOPLAUNCHER_RESOURCE_SRC}
 )
 
@@ -128,7 +142,7 @@ set(QT5_LINK_LIBRARIES
   Qt5::Core 
 )
 
-# third-party
+# third-party libraries link
 set(THIRD_PARTY_LINK_LIBRARIES
   fmt
   SQLiteCpp
@@ -145,7 +159,34 @@ target_link_libraries(TOPLauncher
 #
 # compile definitions & linker flags
 #
-# set_target_properties(TOPLauncher
-#   PROPERTIES 
-#   LINK_FLAGS "/SUBSYSTEM:WINDOWS"
+
+#
+# copy files after build
+#
+
+# copy Qt libraries to the executable folder
+# add_custom_command(
+#   TARGET TOPLauncher
+#   POST_BUILD
+#   COMMAND ${CMAKE_COMMAND} "-E" "copy" "${CMAKE_CURRENT_SOURCE_DIR}../external/sqlite3/sqlite3.dll" "$<TARGET_FILE_DIR:TOPLauncher>/sqlite3.dll"
+#   COMMAND ${CMAKE_COMMAND} "-E" "copy" "../external/sqlite3/SjeJhhUtil.dll" "$<TARGET_FILE_DIR:TOPLauncher>/SjeJhhUtil.dll"
 # )
+
+# copy compiled language files to the executable folder
+foreach( translation_file_i ${TOPLAUNCHER_TRANSLATION_QM_SRC})
+  get_filename_component(QM_FILENAME ${translation_file_i} NAME )
+  add_custom_command(
+    TARGET TOPLauncher
+    POST_BUILD
+    COMMAND ${CMAKE_COMMAND} "-E" "copy" ${translation_file_i} "$<TARGET_FILE_DIR:TOPLauncher>/languages/${QM_FILENAME}"
+  )
+endforeach( translation_file_i )
+
+
+# copy shared third-party libraries to the executable folder
+add_custom_command(
+  TARGET TOPLauncher
+  POST_BUILD
+  COMMAND ${CMAKE_COMMAND} "-E" "copy" "${CMAKE_CURRENT_SOURCE_DIR}/../external/sqlite3/sqlite3.dll" "$<TARGET_FILE_DIR:TOPLauncher>/sqlite3.dll"
+  COMMAND ${CMAKE_COMMAND} "-E" "copy" "${CMAKE_CURRENT_SOURCE_DIR}/../external/SjeJhhUtil/SjeJhhUtil.dll" "$<TARGET_FILE_DIR:TOPLauncher>/SjeJhhUtil.dll"
+)
