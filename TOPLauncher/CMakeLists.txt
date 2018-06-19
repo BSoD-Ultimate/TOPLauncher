@@ -10,10 +10,17 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
 
 # find Qt5 
-find_package(Qt5Core CONFIG REQUIRED)
-find_package(Qt5Widgets CONFIG REQUIRED)
-find_package(Qt5Gui CONFIG REQUIRED)
-find_package(Qt5LinguistTools)
+find_package(Qt5 
+  COMPONENTS 
+    Core Widgets Gui LinguistTools
+  REQUIRED
+)
+
+message("Qt5 library locates in ${Qt5_DIR}")
+
+set(QT5_ROOT_DIR "${Qt5_DIR}/../../../")
+set(QT5_BIN_DIR "${Qt5_DIR}/../../../bin")
+
 
 #
 # source files
@@ -164,13 +171,12 @@ target_link_libraries(TOPLauncher
 # copy files after build
 #
 
-# copy Qt libraries to the executable folder
-# add_custom_command(
-#   TARGET TOPLauncher
-#   POST_BUILD
-#   COMMAND ${CMAKE_COMMAND} "-E" "copy" "${CMAKE_CURRENT_SOURCE_DIR}../external/sqlite3/sqlite3.dll" "$<TARGET_FILE_DIR:TOPLauncher>/sqlite3.dll"
-#   COMMAND ${CMAKE_COMMAND} "-E" "copy" "../external/sqlite3/SjeJhhUtil.dll" "$<TARGET_FILE_DIR:TOPLauncher>/SjeJhhUtil.dll"
-# )
+# copy Qt libraries to the executable folder (windows only so use windeployqt.exe)
+add_custom_command(
+  TARGET TOPLauncher
+  POST_BUILD
+  COMMAND "${QT5_BIN_DIR}/windeployqt.exe" "$<TARGET_FILE_DIR:TOPLauncher>"
+)
 
 # copy compiled language files to the executable folder
 foreach( translation_file_i ${TOPLAUNCHER_TRANSLATION_QM_SRC})
