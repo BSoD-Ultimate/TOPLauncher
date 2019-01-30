@@ -346,7 +346,7 @@ namespace TOPLauncher
         try
         {
             filesystem::path userDBPath = filesystem::path(util::GetWorkDirectory()) / userDBName;
-            auto pDB = std::make_shared<SQLite::Database>(userDBPath.string(), SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE);
+            auto pDB = std::make_shared<SQLite::Database>(util::wstringToUTF8(userDBPath.wstring()), SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE);
             pDB->setBusyTimeout(5000);
 
             pDB->exec(db::table_public::config::CreateTableSQL());
