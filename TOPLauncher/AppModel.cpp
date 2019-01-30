@@ -31,9 +31,6 @@ namespace TOPLauncher
         { L"TOP Official Server", L"tetrisonline.pl", L"http://tetrisonline.pl/top/register.php" }
     };
 
-
-
-
     struct AppConfig
     {
         std::wstring displayLanguage;

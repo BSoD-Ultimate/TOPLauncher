@@ -88,13 +88,11 @@ source_group(Form_Files FILES ${TOPLAUNCHER_FORM_FILES_SRC})
 qt5_create_translation(TOPLAUNCHER_TRANSLATION_QM_SRC
   "${CMAKE_CURRENT_SOURCE_DIR}"
   languages/toplauncher_zh.ts
-  languages/toplauncher_zh_tw.ts 
 )
 source_group(Compiled_Translation_Files FILES ${TOPLAUNCHER_TRANSLATION_QM_SRC})
 
 set(TOPLAUNCHER_TRANSLATION_SRC
   languages/toplauncher_zh.ts 
-  languages/toplauncher_zh_tw.ts 
 )
 source_group(Translation_Files FILES ${TOPLAUNCHER_TRANSLATION_SRC})
 

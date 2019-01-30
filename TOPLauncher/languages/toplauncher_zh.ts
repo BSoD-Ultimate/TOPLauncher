@@ -7,25 +7,25 @@
         <location filename="../DlgLanguage.ui" line="47"/>
         <location filename="../TOPLauncher_autogen/include_Debug/ui_DlgLanguage.h" line="106"/>
         <source>Switch Language...</source>
-        <translation type="unfinished"></translation>
+        <translation>切换语言...</translation>
     </message>
     <message>
         <location filename="../DlgLanguage.ui" line="84"/>
         <location filename="../TOPLauncher_autogen/include_Debug/ui_DlgLanguage.h" line="107"/>
         <source>Use System language</source>
-        <translation type="unfinished"></translation>
+        <translation>使用系统语言</translation>
     </message>
     <message>
         <location filename="../DlgLanguage.ui" line="104"/>
         <location filename="../TOPLauncher_autogen/include_Debug/ui_DlgLanguage.h" line="108"/>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>确定</translation>
     </message>
     <message>
         <location filename="../DlgLanguage.ui" line="111"/>
         <location filename="../TOPLauncher_autogen/include_Debug/ui_DlgLanguage.h" line="109"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>取消</translation>
     </message>
 </context>
 <context>
@@ -34,109 +34,109 @@
         <location filename="../DlgSettings.ui" line="41"/>
         <location filename="../TOPLauncher_autogen/include_Debug/ui_DlgSettings.h" line="619"/>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>设置</translation>
     </message>
     <message>
         <location filename="../DlgSettings.ui" line="115"/>
         <location filename="../TOPLauncher_autogen/include_Debug/ui_DlgSettings.h" line="620"/>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation>通用</translation>
     </message>
     <message>
         <location filename="../DlgSettings.ui" line="135"/>
         <location filename="../TOPLauncher_autogen/include_Debug/ui_DlgSettings.h" line="621"/>
         <source>Language:</source>
-        <translation type="unfinished"></translation>
+        <translation>语言：</translation>
     </message>
     <message>
         <location filename="../DlgSettings.ui" line="145"/>
         <location filename="../TOPLauncher_autogen/include_Debug/ui_DlgSettings.h" line="622"/>
         <source>Game Executable:</source>
-        <translation type="unfinished"></translation>
+        <translation>游戏程序所在路径：</translation>
     </message>
     <message>
         <location filename="../DlgSettings.ui" line="180"/>
         <location filename="../TOPLauncher_autogen/include_Debug/ui_DlgSettings.h" line="623"/>
         <source>Use System language</source>
-        <translation type="unfinished"></translation>
+        <translation>使用系统语言</translation>
     </message>
     <message>
         <location filename="../DlgSettings.ui" line="194"/>
         <location filename="../TOPLauncher_autogen/include_Debug/ui_DlgSettings.h" line="624"/>
         <source>Browse...</source>
-        <translation type="unfinished"></translation>
+        <translation>浏览...</translation>
     </message>
     <message>
         <location filename="../DlgSettings.ui" line="220"/>
         <location filename="../TOPLauncher_autogen/include_Debug/ui_DlgSettings.h" line="625"/>
         <source>Server Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>服务器设置</translation>
     </message>
     <message>
         <location filename="../DlgSettings.ui" line="288"/>
         <location filename="../TOPLauncher_autogen/include_Debug/ui_DlgSettings.h" line="626"/>
         <source>Server name:</source>
-        <translation type="unfinished"></translation>
+        <translation>服务器名称：</translation>
     </message>
     <message>
         <location filename="../DlgSettings.ui" line="298"/>
         <location filename="../TOPLauncher_autogen/include_Debug/ui_DlgSettings.h" line="627"/>
         <source>Server host address:</source>
-        <translation type="unfinished"></translation>
+        <translation>服务器主机地址：</translation>
     </message>
     <message>
         <location filename="../DlgSettings.ui" line="308"/>
         <location filename="../TOPLauncher_autogen/include_Debug/ui_DlgSettings.h" line="628"/>
         <source>Registration URL:</source>
-        <translation type="unfinished"></translation>
+        <translation>账户注册URL：</translation>
     </message>
     <message>
         <location filename="../DlgSettings.ui" line="357"/>
         <location filename="../TOPLauncher_autogen/include_Debug/ui_DlgSettings.h" line="629"/>
         <source>Save changes</source>
-        <translation type="unfinished"></translation>
+        <translation>保存更改</translation>
     </message>
     <message>
         <location filename="../DlgSettings.ui" line="364"/>
         <location filename="../TOPLauncher_autogen/include_Debug/ui_DlgSettings.h" line="630"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>取消</translation>
     </message>
     <message>
         <location filename="../DlgSettings.ui" line="371"/>
         <location filename="../TOPLauncher_autogen/include_Debug/ui_DlgSettings.h" line="631"/>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>移除</translation>
     </message>
     <message>
         <location filename="../DlgSettings.ui" line="412"/>
         <location filename="../TOPLauncher_autogen/include_Debug/ui_DlgSettings.h" line="632"/>
         <source>Game Control Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>游戏控制设置</translation>
     </message>
     <message>
         <location filename="../DlgSettings.ui" line="421"/>
         <location filename="../TOPLauncher_autogen/include_Debug/ui_DlgSettings.h" line="633"/>
         <source>Move left/right sensitivity (the less value, the more sensitive a piece moves)</source>
-        <translation type="unfinished"></translation>
+        <translation>左右移动灵敏度（数值越小，方块移动越灵敏）</translation>
     </message>
     <message>
         <location filename="../DlgSettings.ui" line="457"/>
         <location filename="../TOPLauncher_autogen/include_Debug/ui_DlgSettings.h" line="634"/>
         <source>Obtuse</source>
-        <translation type="unfinished"></translation>
+        <translation>迟钝</translation>
     </message>
     <message>
         <location filename="../DlgSettings.ui" line="498"/>
         <location filename="../TOPLauncher_autogen/include_Debug/ui_DlgSettings.h" line="635"/>
         <source>Sensitive</source>
-        <translation type="unfinished"></translation>
+        <translation>灵敏</translation>
     </message>
     <message>
         <location filename="../DlgSettings.ui" line="526"/>
         <location filename="../TOPLauncher_autogen/include_Debug/ui_DlgSettings.h" line="636"/>
         <source>Move left/right speed (the less value, the faster when a piece moves)</source>
-        <translation type="unfinished"></translation>
+        <translation>左右移动速度（数值越小，方块左右连续移动的速度越快）</translation>
     </message>
     <message>
         <location filename="../DlgSettings.ui" line="562"/>
@@ -144,7 +144,7 @@
         <location filename="../TOPLauncher_autogen/include_Debug/ui_DlgSettings.h" line="637"/>
         <location filename="../TOPLauncher_autogen/include_Debug/ui_DlgSettings.h" line="640"/>
         <source>Slow</source>
-        <translation type="unfinished"></translation>
+        <translation>慢</translation>
     </message>
     <message>
         <location filename="../DlgSettings.ui" line="603"/>
@@ -152,43 +152,43 @@
         <location filename="../TOPLauncher_autogen/include_Debug/ui_DlgSettings.h" line="638"/>
         <location filename="../TOPLauncher_autogen/include_Debug/ui_DlgSettings.h" line="641"/>
         <source>Fast</source>
-        <translation type="unfinished"></translation>
+        <translation>快</translation>
     </message>
     <message>
         <location filename="../DlgSettings.ui" line="631"/>
         <location filename="../TOPLauncher_autogen/include_Debug/ui_DlgSettings.h" line="639"/>
         <source>Soft-drop speed (the less value, the quicker when a piece moves down by player)</source>
-        <translation type="unfinished"></translation>
+        <translation>软降速度（数值越小，手动软降方块的速度越快）</translation>
     </message>
     <message>
         <location filename="../DlgSettings.ui" line="736"/>
         <location filename="../TOPLauncher_autogen/include_Debug/ui_DlgSettings.h" line="642"/>
         <source>Line clear delay (the less value, the quicker next piece appears after lines were cleared)</source>
-        <translation type="unfinished"></translation>
+        <translation>消行延迟（数值越小，消行至下一个方块出现之间的时间间隔越短）</translation>
     </message>
     <message>
         <location filename="../DlgSettings.ui" line="772"/>
         <location filename="../TOPLauncher_autogen/include_Debug/ui_DlgSettings.h" line="643"/>
         <source>Long</source>
-        <translation type="unfinished"></translation>
+        <translation>长</translation>
     </message>
     <message>
         <location filename="../DlgSettings.ui" line="816"/>
         <location filename="../TOPLauncher_autogen/include_Debug/ui_DlgSettings.h" line="644"/>
         <source>Short</source>
-        <translation type="unfinished"></translation>
+        <translation>短</translation>
     </message>
     <message>
         <location filename="../DlgSettings.ui" line="849"/>
         <location filename="../TOPLauncher_autogen/include_Debug/ui_DlgSettings.h" line="645"/>
         <source>Apply New Control Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>应用新设置</translation>
     </message>
     <message>
         <location filename="../DlgSettings.ui" line="862"/>
         <location filename="../TOPLauncher_autogen/include_Debug/ui_DlgSettings.h" line="646"/>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>重置设置</translation>
     </message>
 </context>
 <context>
@@ -197,7 +197,7 @@
         <location filename="../LoginUserItem.ui" line="20"/>
         <location filename="../TOPLauncher_autogen/include_Debug/ui_LoginUserItem.h" line="88"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -206,19 +206,19 @@
         <location filename="../DlgLanguage.cpp" line="39"/>
         <location filename="../DlgSettings.cpp" line="225"/>
         <source>Would you like to use your system language &quot;{}&quot; as the display language?</source>
-        <translation type="unfinished"></translation>
+        <translation>要使用系统的显示语言 &quot;{}&quot; 作为显示语言吗？</translation>
     </message>
     <message>
         <location filename="../DlgLanguage.cpp" line="44"/>
         <location filename="../DlgSettings.cpp" line="230"/>
         <location filename="../DlgSettings.cpp" line="388"/>
         <source>Question</source>
-        <translation type="unfinished"></translation>
+        <translation>问题</translation>
     </message>
     <message>
         <location filename="../DlgSettings.cpp" line="50"/>
         <source>New server...</source>
-        <translation type="unfinished"></translation>
+        <translation>新建服务器设置...</translation>
     </message>
     <message>
         <location filename="../DlgSettings.cpp" line="196"/>
@@ -227,85 +227,85 @@
         <location filename="../DlgSettings.cpp" line="334"/>
         <location filename="../DlgSettings.cpp" line="421"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>错误</translation>
     </message>
     <message>
         <location filename="../DlgSettings.cpp" line="197"/>
         <source>Current server profile is reserved by application, which cannot be modified, removed or conflict with another server profile.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../DlgSettings.cpp" line="243"/>
         <source>Find where game executable locates...</source>
-        <translation type="unfinished"></translation>
+        <translation>寻找TOP客户端所在的位置...</translation>
     </message>
     <message>
         <location filename="../DlgSettings.cpp" line="245"/>
         <source>Game executable (tetris.exe)</source>
-        <translation type="unfinished"></translation>
+        <translation>TOP客户端程序(tetris.exe)</translation>
     </message>
     <message>
         <location filename="../DlgSettings.cpp" line="300"/>
         <source>The field &quot;Server name&quot; should not empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>“服务器名”不能为空。</translation>
     </message>
     <message>
         <location filename="../DlgSettings.cpp" line="323"/>
         <location filename="../DlgSettings.cpp" line="334"/>
         <source>Server name must be unique.</source>
-        <translation type="unfinished"></translation>
+        <translation>服务器名称不能与已有的重复。</translation>
     </message>
     <message>
         <location filename="../DlgSettings.cpp" line="384"/>
         <source>Would you like to remove the server profile &quot;{}&quot; ? This will remove all saved users who login to this server.</source>
-        <translation type="unfinished"></translation>
+        <translation>要移除服务器配置 &quot;{}&quot; 吗？所有属于该服务器的用户都将被删除。</translation>
     </message>
     <message>
         <location filename="../DlgSettings.cpp" line="408"/>
         <location filename="../LoginUserItem.cpp" line="37"/>
         <source>Caution</source>
-        <translation type="unfinished"></translation>
+        <translation>注意</translation>
     </message>
     <message>
         <location filename="../DlgSettings.cpp" line="408"/>
         <source>Would you like to apply the new game control settings? </source>
-        <translation type="unfinished"></translation>
+        <translation>要应用新的游戏控制设置吗？</translation>
     </message>
     <message>
         <location filename="../DlgSettings.cpp" line="417"/>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>信息</translation>
     </message>
     <message>
         <location filename="../DlgSettings.cpp" line="417"/>
         <source>Successfully applied new game control settings. </source>
-        <translation type="unfinished"></translation>
+        <translation>成功应用了新的游戏控制设置。 </translation>
     </message>
     <message>
         <location filename="../DlgSettings.cpp" line="421"/>
         <source>Unable to apply new game control settings. </source>
-        <translation type="unfinished"></translation>
+        <translation>无法应用新的游戏控制设置。 </translation>
     </message>
     <message>
         <location filename="../LoginUserItem.cpp" line="33"/>
         <source>Would you like to remove the user &quot;{}&quot; who logins to server &quot;{}&quot;? </source>
-        <translation type="unfinished"></translation>
+        <translation>要移除用户&quot;{}&quot;吗？该用户在服务器&quot;{}&quot;上登录。</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="41"/>
         <location filename="../main.cpp" line="47"/>
         <source>Fatal Error</source>
-        <translation type="unfinished"></translation>
+        <translation>严重错误</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="41"/>
         <source>User profile open failed, the program will now exit.</source>
-        <translation type="unfinished"></translation>
+        <translation>无法打开用户设置文件，程序即将退出。</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="47"/>
         <source>Unable to locate game executable path, the program will now exit.</source>
-        <translation type="unfinished"></translation>
+        <translation>找不到游戏程序所在的位置，程序即将退出。</translation>
     </message>
 </context>
 <context>
@@ -315,22 +315,22 @@
         <location filename="../TOPLauncherMainWindow.cpp" line="243"/>
         <location filename="../TOPLauncherMainWindow.cpp" line="252"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>错误</translation>
     </message>
     <message>
         <location filename="../TOPLauncherMainWindow.cpp" line="235"/>
         <source>Username &amp; password input box should not empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>用户名和密码不能为空。</translation>
     </message>
     <message>
         <location filename="../TOPLauncherMainWindow.cpp" line="243"/>
         <source>Invalid server.</source>
-        <translation type="unfinished"></translation>
+        <translation>错误的服务器数据。</translation>
     </message>
     <message>
         <location filename="../TOPLauncherMainWindow.cpp" line="252"/>
         <source>Could not find where the game executable locates.</source>
-        <translation type="unfinished"></translation>
+        <translation>找不到TOP客户端所在的路径。</translation>
     </message>
 </context>
 <context>
@@ -339,73 +339,73 @@
         <location filename="../TOPLauncher.ui" line="41"/>
         <location filename="../TOPLauncher_autogen/include_Debug/ui_TOPLauncher.h" line="359"/>
         <source>TOPLauncher</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../TOPLauncher.ui" line="175"/>
         <location filename="../TOPLauncher_autogen/include_Debug/ui_TOPLauncher.h" line="360"/>
         <source>Login</source>
-        <translation type="unfinished"></translation>
+        <translation>登录</translation>
     </message>
     <message>
         <location filename="../TOPLauncher.ui" line="211"/>
         <location filename="../TOPLauncher_autogen/include_Debug/ui_TOPLauncher.h" line="361"/>
         <source>Username:</source>
-        <translation type="unfinished"></translation>
+        <translation>用户名：</translation>
     </message>
     <message>
         <location filename="../TOPLauncher.ui" line="224"/>
         <location filename="../TOPLauncher_autogen/include_Debug/ui_TOPLauncher.h" line="362"/>
         <source>Password:</source>
-        <translation type="unfinished"></translation>
+        <translation>密码：</translation>
     </message>
     <message>
         <location filename="../TOPLauncher.ui" line="286"/>
         <location filename="../TOPLauncher_autogen/include_Debug/ui_TOPLauncher.h" line="363"/>
         <source>Remember Password</source>
-        <translation type="unfinished"></translation>
+        <translation>记住密码</translation>
     </message>
     <message>
         <location filename="../TOPLauncher.ui" line="312"/>
         <location filename="../TOPLauncher_autogen/include_Debug/ui_TOPLauncher.h" line="364"/>
         <source>Start</source>
-        <translation type="unfinished"></translation>
+        <translation>启动</translation>
     </message>
     <message>
         <location filename="../TOPLauncher.ui" line="324"/>
         <location filename="../TOPLauncher_autogen/include_Debug/ui_TOPLauncher.h" line="365"/>
         <source>Language...</source>
-        <translation type="unfinished"></translation>
+        <translation>语言...</translation>
     </message>
     <message>
         <location filename="../TOPLauncher.ui" line="334"/>
         <location filename="../TOPLauncher_autogen/include_Debug/ui_TOPLauncher.h" line="366"/>
         <source>Register</source>
-        <translation type="unfinished"></translation>
+        <translation>注册</translation>
     </message>
     <message>
         <location filename="../TOPLauncher.ui" line="344"/>
         <location filename="../TOPLauncher_autogen/include_Debug/ui_TOPLauncher.h" line="367"/>
         <source>Forum</source>
-        <translation type="unfinished"></translation>
+        <translation>社区</translation>
     </message>
     <message>
         <location filename="../TOPLauncher.ui" line="411"/>
         <location filename="../TOPLauncher_autogen/include_Debug/ui_TOPLauncher.h" line="368"/>
         <source>Settings...</source>
-        <translation type="unfinished"></translation>
+        <translation>设置...</translation>
     </message>
     <message>
         <location filename="../TOPLauncher.ui" line="418"/>
         <location filename="../TOPLauncher_autogen/include_Debug/ui_TOPLauncher.h" line="369"/>
         <source>Select a server:</source>
-        <translation type="unfinished"></translation>
+        <translation>选择一个服务器：</translation>
     </message>
     <message>
         <location filename="../TOPLauncher.ui" line="448"/>
         <location filename="../TOPLauncher_autogen/include_Debug/ui_TOPLauncher.h" line="370"/>
         <source>Quit</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 </TS>
