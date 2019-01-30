@@ -1,6 +1,13 @@
 .vs
+CMakeFiles
 Debug
 Release
+MinSizeRel
+RelWithDebInfo
 *.tlog
+*.sln
+CMakeFiles
+*.vcxproj
+*.vcxproj.filters
 *.vcxproj.user
 Win32
