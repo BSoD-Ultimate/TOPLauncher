@@ -104,6 +104,7 @@ set(TOPLAUNCHER_RESOURCE_SRC
   icon.ico 
   TOPLauncher.qrc 
   TOPLauncher.rc 
+  qrc_TOPLauncher.cpp
 )
 source_group(Resource_Files FILES ${TOPLAUNCHER_RESOURCE_SRC})
 
@@ -122,11 +123,6 @@ add_executable(TOPLauncher WIN32
   ${TOPLAUNCHER_TRANSLATION_QM_SRC}
   ${TOPLAUNCHER_RESOURCE_SRC}
 )
-
-#
-# precompiled header
-# 
-add_precompiled_header(TOPLauncher stdafx.h stdafx.cpp)
 
 #
 # include directories
