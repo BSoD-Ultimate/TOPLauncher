@@ -37,8 +37,6 @@ set(TOPLAUNCHER_DB_SRC
   dbDef.cpp 
   dbConfig.h 
   dbConfig.cpp 
-  dbServer.h 
-  dbServer.cpp 
   dbUser.h 
   dbUser.cpp 
 )

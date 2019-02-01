@@ -4,7 +4,6 @@
 #include "dbDef.h"
 
 #include "dbConfig.h"
-#include "dbServer.h"
 #include "dbUser.h"
 
 #include "guiUtil.h"
@@ -26,7 +25,7 @@ namespace TOPLauncher
 
 
     // reserved server list
-    static const std::vector<db::DBServerData> reservedServerList
+    static const std::vector<DBServerData> reservedServerList
     {
         { L"TOP Official Server", L"tetrisonline.pl", L"http://tetrisonline.pl/top/register.php" }
     };
@@ -47,13 +46,16 @@ namespace TOPLauncher
         int32_t lineClearDelay;
 
         // server list
-        std::vector<std::shared_ptr<db::DBServerData>> serverList;
+        std::vector<DBServerData> serverList;
 
         AppConfig()
             : moveSensitivity(45)
             , moveSpeed(15)
             , softDropSpeed(10)
             , lineClearDelay(0)
+            , serverList({
+                { L"TOP Official Server", L"tetrisonline.pl", L"http://tetrisonline.pl/top/register.php" }
+                })
         {
             displayLanguage = util::GetSystemPreferredLanguage();
         }
@@ -87,17 +89,7 @@ namespace TOPLauncher
             return false;
         }
 
-        try
-        {
-            LoadSavedConfigFromDB();
-            LoadSavedServers();
-
-            return true;
-        }
-        catch (const std::runtime_error& e)
-        {
-            return false;
-        }
+        // TODO: load saved config from json
 
     }
 
@@ -185,35 +177,19 @@ namespace TOPLauncher
         return m_pAppConfig->gameDirectory;
     }
 
-    bool AppModel::AddServer(const db::DBServerData& serverData)
+    bool AppModel::AddServer(const DBServerData& serverData)
     {
-        if (IsReservedServer(serverData.serverName))
-        {
-            return false;
-        }
-
         auto pData = GetServerData(serverData.serverName);
 
-        if (pData)
-        {
-            return false;
-        }
-
-        m_pAppConfig->serverList.push_back(std::make_shared<db::DBServerData>(serverData));
-        db::SaveServerData(serverData);
+        m_pAppConfig->serverList.push_back(serverData);
 
         return true;
     }
 
     bool AppModel::RemoveServer(const std::wstring& serverName)
     {
-        if (IsReservedServer(serverName))
-        {
-            return false;
-        }
-
         auto iter = std::find_if(m_pAppConfig->serverList.cbegin(), m_pAppConfig->serverList.cend(),
-            [serverName](const std::shared_ptr<db::DBServerData>& data)
+            [serverName](const std::shared_ptr<DBServerData>& data)
         {
             assert(data);
             if (!data)
@@ -223,7 +199,7 @@ namespace TOPLauncher
             return data->serverName == serverName;
         });
 
-        if (iter != m_pAppConfig->serverList.cend() && db::RemoveServerData(serverName))
+        if (iter != m_pAppConfig->serverList.cend())
         {
             db::RemoveAllUsersInServer(serverName);
             iter = m_pAppConfig->serverList.erase(iter);
@@ -235,17 +211,12 @@ namespace TOPLauncher
         }
     }
 
-    bool AppModel::ModifyServer(const std::wstring & serverName, const db::DBServerData & newServerData)
+    bool AppModel::ModifyServer(const std::wstring & serverName, const DBServerData & newServerData)
     {
         auto iter = std::find_if(m_pAppConfig->serverList.begin(), m_pAppConfig->serverList.end(),
-            [serverName](const std::shared_ptr<db::DBServerData>& data)
+            [serverName](const DBServerData& data)
         {
-            assert(data);
-            if (!data)
-            {
-                return false;
-            }
-            return data->serverName == serverName;
+            return data.serverName == serverName;
         });
 
         if (iter == m_pAppConfig->serverList.cend())
@@ -254,47 +225,28 @@ namespace TOPLauncher
         }
         else
         {
-            *iter = std::make_shared<db::DBServerData>(newServerData);
-            db::RemoveServerData(serverName);
-            db::SaveServerData(newServerData);
+            *iter = newServerData;
             return true;
         }
     }
 
-    std::shared_ptr<db::DBServerData> AppModel::GetServerData(const std::wstring & serverName)
+    DBServerData AppModel::GetServerData(const std::wstring & serverName)
     {
         auto iter = std::find_if(m_pAppConfig->serverList.cbegin(), m_pAppConfig->serverList.cend(),
-            [serverName](const std::shared_ptr<db::DBServerData>& data)
+            [serverName](const DBServerData& data)
         {
-            assert(data);
-            if (!data)
-            {
-                return false;
-            }
-            return data->serverName == serverName;
+            return data.serverName == serverName;
         });
         if (iter != m_pAppConfig->serverList.cend())
         {
             return *iter;
         }
-        return nullptr;
+        return DBServerData();
     }
 
-    const std::vector<std::shared_ptr<db::DBServerData>>& AppModel::GetServerData() const
+    const std::vector<DBServerData>& AppModel::GetServerData() const
     {
         return m_pAppConfig->serverList;
-    }
-
-    bool AppModel::IsReservedServer(const std::wstring& serverName) const
-    {
-        for (const db::DBServerData& serverData : reservedServerList)
-        {
-            if (serverData.serverName == serverName)
-            {
-                return true;
-            }
-        }
-        return false;
     }
 
     bool AppModel::IsGameConfigAvailable() const
@@ -346,8 +298,6 @@ namespace TOPLauncher
             auto pDB = std::make_shared<SQLite::Database>(util::wstringToUTF8(userDBPath.wstring()), SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE);
             pDB->setBusyTimeout(5000);
 
-            pDB->exec(db::table_public::config::CreateTableSQL());
-            pDB->exec(db::table_user::server::CreateTableSQL());
             pDB->exec(db::table_user::user::CreateTableSQL());
 
             return pDB;
@@ -360,54 +310,6 @@ namespace TOPLauncher
         return nullptr;
     }
 
-    void AppModel::LoadSavedConfigFromDB()
-    {
-        assert(m_pUserDB);
-
-        if (!m_pUserDB)
-        {
-            throw std::runtime_error("User database connection is not properly Opened!");
-        }
-
-        // language
-        std::wstring langValue = db::ReadDBConfig(*m_pUserDB, configKeyLanguage);
-        if (!langValue.empty())
-        {
-            m_pAppConfig->displayLanguage = langValue;
-        }
-
-
-        // executable path
-        std::wstring executablePath = db::ReadDBConfig(*m_pUserDB, configKeyGameExecutablePath);
-        SetGameExecutablePath(executablePath);
-
-    }
-    void AppModel::LoadSavedServers()
-    {
-        assert(m_pUserDB);
-        if (!m_pUserDB)
-        {
-            throw std::runtime_error("User database connection is not properly Opened!");
-        }
-
-        std::vector<std::shared_ptr<db::DBServerData>> serverList;
-        db::LoadAllServers(serverList);
-
-        // reserved server list
-        for (const db::DBServerData& serverData : reservedServerList)
-        {
-            m_pAppConfig->serverList.push_back(std::make_shared<db::DBServerData>(serverData));
-        }
-
-        for (const std::shared_ptr<db::DBServerData>& pServerData : serverList)
-        {
-            assert(pServerData);
-            if (pServerData && !IsReservedServer(pServerData->serverName))
-            {
-                m_pAppConfig->serverList.push_back(pServerData);
-            }
-        }
-    }
     void AppModel::FindGameExecutablePath()
     {
         if (m_pAppConfig->gameExecutablePath.empty())

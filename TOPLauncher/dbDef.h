@@ -10,18 +10,7 @@ namespace TOPLauncher
     {
         namespace table_user
         {
-            extern const std::string t_server;
             extern const std::string t_user;
-
-            namespace server
-            {
-                extern const std::string c_serverName;
-                extern const std::string c_host;
-                extern const std::string c_register_url;
-
-                std::string CreateTableSQL();
-
-            }
 
             namespace user
             {
@@ -34,19 +23,6 @@ namespace TOPLauncher
                 std::string CreateTableSQL();
             }
 
-        }
-
-        namespace table_public
-        {
-            extern const std::string t_config;
-
-            namespace config
-            {
-                extern const std::string c_key;
-                extern const std::string c_value;
-
-                std::string CreateTableSQL();
-            }
         }
     }
 }

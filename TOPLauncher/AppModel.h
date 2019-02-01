@@ -12,10 +12,13 @@ namespace SQLite
 
 namespace TOPLauncher
 {
-    namespace db
+
+    struct DBServerData
     {
-        struct DBServerData;
-    }
+        std::wstring serverName;
+        std::wstring serverAddress;
+        std::wstring registerURL;
+    };
 
     struct AppConfig;
 
@@ -46,12 +49,11 @@ namespace TOPLauncher
         filesystem::path GetGameDirectory() const;
 
         // server list
-        bool AddServer(const db::DBServerData& serverData);
+        bool AddServer(const DBServerData& serverData);
         bool RemoveServer(const std::wstring& serverName);
-        bool ModifyServer(const std::wstring& serverName, const db::DBServerData& newServerData);
-        std::shared_ptr<db::DBServerData> GetServerData(const std::wstring& serverName);
-        const std::vector<std::shared_ptr<db::DBServerData>>& GetServerData() const;
-        bool IsReservedServer(const std::wstring& serverName) const;
+        bool ModifyServer(const std::wstring& serverName, const DBServerData& newServerData);
+        DBServerData GetServerData(const std::wstring& serverName);
+        const std::vector<DBServerData>& GetServerData() const;
 
         // game config
         bool IsGameConfigAvailable() const;
@@ -66,10 +68,6 @@ namespace TOPLauncher
         std::shared_ptr<SQLite::Database> InitUserDB();
 
         // init functions
-        // load saved config stored in DB
-        void LoadSavedConfigFromDB();
-        // load saved servers stored in DB
-        void LoadSavedServers();
         // find game executable
         // assume game executable locates in current working directory
         void FindGameExecutablePath();
