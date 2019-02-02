@@ -204,85 +204,79 @@
     <name>QObject</name>
     <message>
         <location filename="../DlgLanguage.cpp" line="39"/>
-        <location filename="../DlgSettings.cpp" line="225"/>
+        <location filename="../DlgSettings.cpp" line="210"/>
         <source>Would you like to use your system language &quot;{}&quot; as the display language?</source>
         <translation>要使用系统的显示语言 &quot;{}&quot; 作为显示语言吗？</translation>
     </message>
     <message>
         <location filename="../DlgLanguage.cpp" line="44"/>
-        <location filename="../DlgSettings.cpp" line="230"/>
-        <location filename="../DlgSettings.cpp" line="388"/>
+        <location filename="../DlgSettings.cpp" line="215"/>
+        <location filename="../DlgSettings.cpp" line="357"/>
         <source>Question</source>
         <translation>问题</translation>
     </message>
     <message>
-        <location filename="../DlgSettings.cpp" line="50"/>
+        <location filename="../DlgSettings.cpp" line="47"/>
         <source>New server...</source>
         <translation>新建服务器设置...</translation>
     </message>
     <message>
-        <location filename="../DlgSettings.cpp" line="196"/>
-        <location filename="../DlgSettings.cpp" line="300"/>
-        <location filename="../DlgSettings.cpp" line="323"/>
-        <location filename="../DlgSettings.cpp" line="334"/>
-        <location filename="../DlgSettings.cpp" line="421"/>
+        <location filename="../DlgSettings.cpp" line="280"/>
+        <location filename="../DlgSettings.cpp" line="297"/>
+        <location filename="../DlgSettings.cpp" line="308"/>
+        <location filename="../DlgSettings.cpp" line="390"/>
         <source>Error</source>
         <translation>错误</translation>
     </message>
     <message>
-        <location filename="../DlgSettings.cpp" line="197"/>
-        <source>Current server profile is reserved by application, which cannot be modified, removed or conflict with another server profile.</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../DlgSettings.cpp" line="243"/>
+        <location filename="../DlgSettings.cpp" line="228"/>
         <source>Find where game executable locates...</source>
         <translation>寻找TOP客户端所在的位置...</translation>
     </message>
     <message>
-        <location filename="../DlgSettings.cpp" line="245"/>
+        <location filename="../DlgSettings.cpp" line="230"/>
         <source>Game executable (tetris.exe)</source>
         <translation>TOP客户端程序(tetris.exe)</translation>
     </message>
     <message>
-        <location filename="../DlgSettings.cpp" line="300"/>
+        <location filename="../DlgSettings.cpp" line="280"/>
         <source>The field &quot;Server name&quot; should not empty.</source>
         <translation>“服务器名”不能为空。</translation>
     </message>
     <message>
-        <location filename="../DlgSettings.cpp" line="323"/>
-        <location filename="../DlgSettings.cpp" line="334"/>
+        <location filename="../DlgSettings.cpp" line="297"/>
+        <location filename="../DlgSettings.cpp" line="308"/>
         <source>Server name must be unique.</source>
         <translation>服务器名称不能与已有的重复。</translation>
     </message>
     <message>
-        <location filename="../DlgSettings.cpp" line="384"/>
+        <location filename="../DlgSettings.cpp" line="353"/>
         <source>Would you like to remove the server profile &quot;{}&quot; ? This will remove all saved users who login to this server.</source>
         <translation>要移除服务器配置 &quot;{}&quot; 吗？所有属于该服务器的用户都将被删除。</translation>
     </message>
     <message>
-        <location filename="../DlgSettings.cpp" line="408"/>
+        <location filename="../DlgSettings.cpp" line="377"/>
         <location filename="../LoginUserItem.cpp" line="37"/>
         <source>Caution</source>
         <translation>注意</translation>
     </message>
     <message>
-        <location filename="../DlgSettings.cpp" line="408"/>
+        <location filename="../DlgSettings.cpp" line="377"/>
         <source>Would you like to apply the new game control settings? </source>
         <translation>要应用新的游戏控制设置吗？</translation>
     </message>
     <message>
-        <location filename="../DlgSettings.cpp" line="417"/>
+        <location filename="../DlgSettings.cpp" line="386"/>
         <source>Info</source>
         <translation>信息</translation>
     </message>
     <message>
-        <location filename="../DlgSettings.cpp" line="417"/>
+        <location filename="../DlgSettings.cpp" line="386"/>
         <source>Successfully applied new game control settings. </source>
         <translation>成功应用了新的游戏控制设置。 </translation>
     </message>
     <message>
-        <location filename="../DlgSettings.cpp" line="421"/>
+        <location filename="../DlgSettings.cpp" line="390"/>
         <source>Unable to apply new game control settings. </source>
         <translation>无法应用新的游戏控制设置。 </translation>
     </message>
@@ -311,24 +305,24 @@
 <context>
     <name>TOPLauncher::TOPLauncherMainWindow</name>
     <message>
-        <location filename="../TOPLauncherMainWindow.cpp" line="235"/>
-        <location filename="../TOPLauncherMainWindow.cpp" line="243"/>
-        <location filename="../TOPLauncherMainWindow.cpp" line="252"/>
+        <location filename="../TOPLauncherMainWindow.cpp" line="234"/>
+        <location filename="../TOPLauncherMainWindow.cpp" line="242"/>
+        <location filename="../TOPLauncherMainWindow.cpp" line="251"/>
         <source>Error</source>
         <translation>错误</translation>
     </message>
     <message>
-        <location filename="../TOPLauncherMainWindow.cpp" line="235"/>
+        <location filename="../TOPLauncherMainWindow.cpp" line="234"/>
         <source>Username &amp; password input box should not empty.</source>
         <translation>用户名和密码不能为空。</translation>
     </message>
     <message>
-        <location filename="../TOPLauncherMainWindow.cpp" line="243"/>
+        <location filename="../TOPLauncherMainWindow.cpp" line="242"/>
         <source>Invalid server.</source>
         <translation>错误的服务器数据。</translation>
     </message>
     <message>
-        <location filename="../TOPLauncherMainWindow.cpp" line="252"/>
+        <location filename="../TOPLauncherMainWindow.cpp" line="251"/>
         <source>Could not find where the game executable locates.</source>
         <translation>找不到TOP客户端所在的路径。</translation>
     </message>
@@ -405,7 +399,7 @@
         <location filename="../TOPLauncher.ui" line="448"/>
         <location filename="../TOPLauncher_autogen/include_Debug/ui_TOPLauncher.h" line="370"/>
         <source>Quit</source>
-        <translation></translation>
+        <translation>退出</translation>
     </message>
 </context>
 </TS>

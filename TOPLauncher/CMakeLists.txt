@@ -127,6 +127,7 @@ target_include_directories(TOPLauncher
   "../external/sqlite3"
   "../external/inih"
   "../external/inih/cpp"
+  "../external/rapidjson"
 )
 
 #

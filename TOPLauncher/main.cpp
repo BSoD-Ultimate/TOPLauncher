@@ -13,7 +13,7 @@ namespace TOPLauncher
     {
         auto pAppModel = AppModel::GetInstance();
 
-        bool ret = pAppModel->InitSavedData();
+        bool ret = pAppModel->InitAppConfig();
 
         if (!ret)
         {
@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
 
     auto pAppModel = AppModel::GetInstance();
 
-    if (!pAppModel->InitSavedData())
+    if (!pAppModel->InitAppConfig())
     {
         QMessageBox::critical(NULL, QObject::tr("Fatal Error"), QObject::tr("User profile open failed, the program will now exit."));
         return 1;

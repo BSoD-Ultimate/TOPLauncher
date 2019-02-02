@@ -13,7 +13,7 @@ namespace SQLite
 namespace TOPLauncher
 {
 
-    struct DBServerData
+    struct ServerData
     {
         std::wstring serverName;
         std::wstring serverAddress;
@@ -34,13 +34,18 @@ namespace TOPLauncher
         static std::shared_ptr<AppModel> GetInstance();
 
         // init mothods
-        bool InitSavedData();
+        bool InitAppConfig();
         bool InitGameConfig();
 
         std::shared_ptr<SQLite::Database> GetUserDB();
 
-        // language
+        /*
+         * app config
+        */
+        bool LoadAppConfig();
+        bool SaveAppConfig();
 
+        // language
         std::wstring GetDisplayLanguage() const;
         bool SetDisplayLanguage(const std::wstring& newLanguage);
 
@@ -50,13 +55,16 @@ namespace TOPLauncher
         filesystem::path GetGameDirectory() const;
 
         // server list
-        bool AddServer(const std::shared_ptr<DBServerData> serverData);
+        bool AddServer(const std::shared_ptr<ServerData> serverData);
         bool RemoveServer(const std::wstring& serverName);
-        bool ModifyServer(const std::wstring& serverName, const std::shared_ptr<DBServerData> newServerData);
-        std::shared_ptr<DBServerData> GetServerData(const std::wstring& serverName);
-        const std::vector<std::shared_ptr<DBServerData>>& GetServerData() const;
+        bool ModifyServer(const std::wstring& serverName, const std::shared_ptr<ServerData> newServerData);
+        std::shared_ptr<ServerData> GetServerData(const std::wstring& serverName);
+        const std::vector<std::shared_ptr<ServerData>>& GetServerData() const;
 
-        // game config
+
+        /*
+         * game config
+        */
         bool IsGameConfigAvailable() const;
 
         void GetSensitivityValue(int& moveSensitivity, int& moveSpeed, int& dropSpeed);

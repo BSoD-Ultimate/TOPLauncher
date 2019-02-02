@@ -7,7 +7,7 @@
 
 namespace TOPLauncher
 {
-    Q_DECLARE_METATYPE(std::shared_ptr<DBServerData>);
+    Q_DECLARE_METATYPE(std::shared_ptr<ServerData>);
 
     class SettingDlgServerListModel : public QAbstractItemModel
     {
@@ -70,14 +70,14 @@ namespace TOPLauncher
 
                 if (index.row() == 0)
                 {
-                    return QVariant::fromValue(std::shared_ptr<DBServerData>());
+                    return QVariant::fromValue(std::shared_ptr<ServerData>());
                 }
                 else if (index.row() < pAppModel->GetServerData().size() + 1)
                 {
                     auto& serverList = pAppModel->GetServerData();
                     auto serverData = serverList[dataIndex];
 
-                    return QVariant::fromValue(std::shared_ptr<DBServerData>(serverData));
+                    return QVariant::fromValue(std::shared_ptr<ServerData>(serverData));
                 }
                 else
                 {
@@ -243,7 +243,7 @@ namespace TOPLauncher
     void DlgSettings::on_serverList_clicked(const QModelIndex &index)
     {
         auto pAppModel = AppModel::GetInstance();
-        auto serverData = ui.serverList->currentIndex().data(Qt::UserRole).value<std::shared_ptr<DBServerData>>();
+        auto serverData = ui.serverList->currentIndex().data(Qt::UserRole).value<std::shared_ptr<ServerData>>();
         
 
         if (!serverData)
@@ -268,9 +268,9 @@ namespace TOPLauncher
     {
         auto pAppModel = AppModel::GetInstance();
 
-        auto oldServerData = ui.serverList->currentIndex().data(Qt::UserRole).value<std::shared_ptr<DBServerData>>();
+        auto oldServerData = ui.serverList->currentIndex().data(Qt::UserRole).value<std::shared_ptr<ServerData>>();
 
-        auto newServerData = std::make_shared<DBServerData>();
+        auto newServerData = std::make_shared<ServerData>();
         newServerData->serverName = ui.editServerName->text().toStdWString();
         newServerData->serverAddress = ui.editServerHost->text().toStdWString();
         newServerData->registerURL = ui.editRegisterURL->text().toStdWString();
@@ -337,7 +337,7 @@ namespace TOPLauncher
         }
         else
         {
-            std::shared_ptr<DBServerData> pData = serverData[index - 1];
+            std::shared_ptr<ServerData> pData = serverData[index - 1];
             assert(pData);
             ui.editServerName->setText(QString::fromStdWString(pData->serverName));
             ui.editServerHost->setText(QString::fromStdWString(pData->serverAddress));

@@ -10,44 +10,48 @@
 #include <SQLiteCpp/Database.h>
 
 #include <set>
+#include <fstream>
+
+#include <rapidjson/rapidjson.h>
+#include <rapidjson/document.h>
+#include <rapidjson/encodings.h>
+#include <rapidjson/prettywriter.h>
 
 
 namespace TOPLauncher
 {
     static const std::wstring gameExecutableName = L"tetris.exe";
+    // app config
+    static const std::wstring appConfigFileName = L"config.json";
     // db name 
     static const std::wstring userDBName = L"User.db";
-    // config key
-    static const std::wstring configKeyLanguage = L"display_language";
-    static const std::wstring configKeyGameExecutablePath = L"game_executable_path";
-
 
     // reserved server list
-    static const std::vector<DBServerData> reservedServerList
+    static const std::vector<ServerData> reservedServerList
     {
         { L"TOP Official Server", L"tetrisonline.pl", L"http://tetrisonline.pl/top/register.php" }
     };
 
     struct AppConfig
     {
+        // general
         std::wstring displayLanguage;
-
         filesystem::path gameExecutablePath;
         filesystem::path gameDirectory;
 
-
-
         // server list
-        std::vector<std::shared_ptr<DBServerData>> serverList;
+        std::vector<std::shared_ptr<ServerData>> serverList;
 
         AppConfig()
             : serverList({
-                std::make_shared<DBServerData>(DBServerData{ L"TOP Official Server", L"tetrisonline.pl", L"http://tetrisonline.pl/top/register.php" })
+                std::make_shared<ServerData>(ServerData{ L"TOP Official Server", L"tetrisonline.pl", L"http://tetrisonline.pl/top/register.php" })
                 })
         {
             displayLanguage = util::GetSystemPreferredLanguage();
         }
 
+        bool FromJSON(const std::string& json);
+        std::string ToJSON();
     private:
 
     };
@@ -68,9 +72,113 @@ namespace TOPLauncher
             , softDropSpeed(10)
             , lineClearDelay(0)
         {
-
         }
     };
+
+    bool AppConfig::FromJSON(const std::string & json)
+    {
+        using namespace rapidjson;
+        Document doc;
+        if (doc.Parse(json.c_str(), json.length()).HasParseError())
+        {
+            return false;
+        }
+
+        if (doc.HasMember("general") && doc["general"].IsObject())
+        {
+            auto generalSection = doc["general"].GetObject();
+            if (generalSection.HasMember("language") && generalSection["language"].IsString())
+            {
+                displayLanguage = util::wstringFromUTF8(generalSection["language"].GetString());
+            }
+            if (generalSection.HasMember("game_executable") && generalSection["game_executable"].IsString())
+            {
+                gameExecutablePath = util::wstringFromUTF8(generalSection["game_executable"].GetString());
+                gameDirectory = gameExecutablePath.parent_path();
+            }
+        }
+
+        if (doc.HasMember("servers") && doc["servers"].IsArray())
+        {
+            serverList.clear();
+            auto serverArray = doc["servers"].GetArray();
+            for (size_t i = 0; i < serverArray.Size(); i++)
+            {
+                if (serverArray[i].IsObject())
+                {
+                    auto newServerData = std::make_shared<ServerData>();
+
+                    auto serverObject = serverArray[i].GetObject();
+                    if (serverObject.HasMember("name") && serverObject["name"].IsString())
+                    {
+                        newServerData->serverName = util::wstringFromUTF8(serverObject["name"].GetString());
+                    }
+                    if (serverObject.HasMember("address") && serverObject["address"].IsString())
+                    {
+                        newServerData->serverAddress = util::wstringFromUTF8(serverObject["address"].GetString());
+                    }
+                    if (serverObject.HasMember("registerURL") && serverObject["registerURL"].IsString())
+                    {
+                        newServerData->registerURL = util::wstringFromUTF8(serverObject["registerURL"].GetString());
+                    }
+
+                    serverList.emplace_back(newServerData);
+                }
+            }
+        }
+
+        return true;
+    }
+    std::string AppConfig::ToJSON()
+    {
+        using namespace rapidjson;
+
+        Document doc;
+        doc.SetObject();
+
+        // "general"
+        {
+            rapidjson::Value generalSection;
+            generalSection.SetObject();
+
+            auto displayLangUTF8 = util::wstringToUTF8(displayLanguage);
+            generalSection.AddMember("language", Value(displayLangUTF8.c_str(), displayLangUTF8.length(), doc.GetAllocator()), doc.GetAllocator());
+
+            auto gameExePathUTF8 = util::wstringToUTF8(gameExecutablePath.wstring());
+            generalSection.AddMember("game_executable", Value(gameExePathUTF8.c_str(), gameExePathUTF8.length(), doc.GetAllocator()), doc.GetAllocator());
+
+            doc.AddMember("general", generalSection, doc.GetAllocator());
+        }
+
+        // "servers"
+        {
+            rapidjson::Value serverArray;
+            serverArray.SetArray();
+
+            for (const auto& serverData : serverList)
+            {
+                rapidjson::Value serverObj;
+                serverObj.SetObject();
+
+                auto serverNameUTF8 = util::wstringToUTF8(serverData->serverName);
+                serverObj.AddMember("name", Value(serverNameUTF8.c_str(), serverNameUTF8.length(), doc.GetAllocator()), doc.GetAllocator());
+                auto serverAddrUTF8 = util::wstringToUTF8(serverData->serverAddress);
+                serverObj.AddMember("address", Value(serverAddrUTF8.c_str(), serverAddrUTF8.length(), doc.GetAllocator()), doc.GetAllocator());
+                auto registerURLUTF8 = util::wstringToUTF8(serverData->registerURL);
+                serverObj.AddMember("registerURL", Value(registerURLUTF8.c_str(), registerURLUTF8.length(), doc.GetAllocator()), doc.GetAllocator());
+
+                serverArray.PushBack(serverObj, doc.GetAllocator());
+            }
+
+            doc.AddMember("servers", serverArray, doc.GetAllocator());
+        }
+
+        rapidjson::StringBuffer jsonBuf;
+        rapidjson::PrettyWriter<rapidjson::StringBuffer> writer(jsonBuf);
+        doc.Accept(writer);
+
+        return std::string(jsonBuf.GetString(), jsonBuf.GetLength());
+    }
 
     AppModel::AppModel()
         : m_pAppConfig(new AppConfig())
@@ -88,7 +196,7 @@ namespace TOPLauncher
         return instance;
     }
 
-    bool AppModel::InitSavedData()
+    bool AppModel::InitAppConfig()
     {
         m_pUserDB = InitUserDB();
 
@@ -98,7 +206,13 @@ namespace TOPLauncher
         }
 
         // TODO: load saved config from json
+        if (!LoadAppConfig())
+        {
+            // use defaults then save
+            SaveAppConfig();
+        }
 
+        return true;
     }
 
     bool AppModel::InitGameConfig()
@@ -124,6 +238,47 @@ namespace TOPLauncher
             throw SQLite::Exception("Attempt to open a invalid database handle");
         }
         return m_pUserDB;
+    }
+
+    bool AppModel::LoadAppConfig()
+    {
+        std::wstring configFilePath = appConfigFileName;
+        if (!filesystem::exists(configFilePath))
+        {
+            return false;
+        }
+
+        std::ifstream configFile(configFilePath, std::ios_base::in | std::ios_base::binary);
+        if (configFile.bad())
+        {
+            return false;
+        }
+
+        uint64_t configSize = filesystem::file_size(configFilePath);
+        std::unique_ptr<char[]> configBuf(new char[configSize]);
+        configFile.read(configBuf.get(), configSize);
+
+        configFile.close();
+
+        return m_pAppConfig->FromJSON(std::string(configBuf.get(), configSize));
+    }
+
+    bool AppModel::SaveAppConfig()
+    {
+        std::wstring configFilePath = appConfigFileName;
+
+        std::ofstream configFile(configFilePath, std::ios_base::out | std::ios_base::binary | std::ios_base::trunc);
+        if (configFile.bad())
+        {
+            return false;
+        }
+        std::string appConfigJSON = m_pAppConfig->ToJSON();
+
+        configFile.write(appConfigJSON.c_str(), appConfigJSON.length());
+
+        configFile.close();
+
+        return true;
     }
 
     std::wstring AppModel::GetDisplayLanguage() const
@@ -176,7 +331,7 @@ namespace TOPLauncher
         return m_pAppConfig->gameDirectory;
     }
 
-    bool AppModel::AddServer(const std::shared_ptr<DBServerData> serverData)
+    bool AppModel::AddServer(const std::shared_ptr<ServerData> serverData)
     {
         auto pData = GetServerData(serverData->serverName);
 
@@ -193,7 +348,7 @@ namespace TOPLauncher
     bool AppModel::RemoveServer(const std::wstring& serverName)
     {
         auto iter = std::find_if(m_pAppConfig->serverList.cbegin(), m_pAppConfig->serverList.cend(),
-            [serverName](const std::shared_ptr<DBServerData>& data)
+            [serverName](const std::shared_ptr<ServerData>& data)
         {
             return data->serverName == serverName;
         });
@@ -210,10 +365,10 @@ namespace TOPLauncher
         }
     }
 
-    bool AppModel::ModifyServer(const std::wstring & serverName, const std::shared_ptr<DBServerData> newServerData)
+    bool AppModel::ModifyServer(const std::wstring & serverName, const std::shared_ptr<ServerData> newServerData)
     {
         auto iter = std::find_if(m_pAppConfig->serverList.begin(), m_pAppConfig->serverList.end(),
-            [serverName](const std::shared_ptr<DBServerData>& data)
+            [serverName](const std::shared_ptr<ServerData>& data)
         {
             return data->serverName == serverName;
         });
@@ -229,10 +384,10 @@ namespace TOPLauncher
         }
     }
 
-    std::shared_ptr<DBServerData> AppModel::GetServerData(const std::wstring & serverName)
+    std::shared_ptr<ServerData> AppModel::GetServerData(const std::wstring & serverName)
     {
         auto iter = std::find_if(m_pAppConfig->serverList.cbegin(), m_pAppConfig->serverList.cend(),
-            [serverName](const std::shared_ptr<DBServerData>& data)
+            [serverName](const std::shared_ptr<ServerData>& data)
         {
             return data->serverName == serverName;
         });
@@ -243,7 +398,7 @@ namespace TOPLauncher
         return nullptr;
     }
 
-    const std::vector<std::shared_ptr<DBServerData>>& AppModel::GetServerData() const
+    const std::vector<std::shared_ptr<ServerData>>& AppModel::GetServerData() const
     {
         return m_pAppConfig->serverList;
     }
