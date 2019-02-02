@@ -12,7 +12,6 @@ namespace TOPLauncher
     namespace db
     {
         struct DBUserData;
-        struct DBServerData;
     }
 
     class ServerDropListModel;

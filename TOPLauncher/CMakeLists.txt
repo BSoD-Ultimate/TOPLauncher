@@ -35,8 +35,6 @@ source_group(main FILES ${TOPLAUNCHER_MAIN_SRC})
 set(TOPLAUNCHER_DB_SRC
   dbDef.h 
   dbDef.cpp 
-  dbConfig.h 
-  dbConfig.cpp 
   dbUser.h 
   dbUser.cpp 
 )

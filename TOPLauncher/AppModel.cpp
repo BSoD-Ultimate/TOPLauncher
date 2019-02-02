@@ -2,8 +2,6 @@
 #include "AppModel.h"
 
 #include "dbDef.h"
-
-#include "dbConfig.h"
 #include "dbUser.h"
 
 #include "guiUtil.h"
@@ -37,6 +35,25 @@ namespace TOPLauncher
         filesystem::path gameExecutablePath;
         filesystem::path gameDirectory;
 
+
+
+        // server list
+        std::vector<std::shared_ptr<DBServerData>> serverList;
+
+        AppConfig()
+            : serverList({
+                std::make_shared<DBServerData>(DBServerData{ L"TOP Official Server", L"tetrisonline.pl", L"http://tetrisonline.pl/top/register.php" })
+                })
+        {
+            displayLanguage = util::GetSystemPreferredLanguage();
+        }
+
+    private:
+
+    };
+
+    struct GameConfig
+    {
         // set tetrominos' handling characteristics
         int32_t moveSensitivity;
         int32_t moveSpeed;
@@ -45,23 +62,14 @@ namespace TOPLauncher
         // set line-clear delay time
         int32_t lineClearDelay;
 
-        // server list
-        std::vector<DBServerData> serverList;
-
-        AppConfig()
+        GameConfig()
             : moveSensitivity(45)
             , moveSpeed(15)
             , softDropSpeed(10)
             , lineClearDelay(0)
-            , serverList({
-                { L"TOP Official Server", L"tetrisonline.pl", L"http://tetrisonline.pl/top/register.php" }
-                })
         {
-            displayLanguage = util::GetSystemPreferredLanguage();
+
         }
-
-    private:
-
     };
 
     AppModel::AppModel()
@@ -139,17 +147,10 @@ namespace TOPLauncher
             return false;
         }
 
-        if (db::WriteDBConfig(*m_pUserDB, configKeyLanguage, newLanguage))
-        {
-            m_pAppConfig->displayLanguage = newLanguage;
-            util::SetDisplayLanguage(m_pAppConfig->displayLanguage);
+        m_pAppConfig->displayLanguage = newLanguage;
+        util::SetDisplayLanguage(m_pAppConfig->displayLanguage);
 
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return true;
     }
 
     filesystem::path AppModel::GetGameExecutablePath() const
@@ -163,8 +164,6 @@ namespace TOPLauncher
         m_pAppConfig->gameExecutablePath = exePath;
         m_pAppConfig->gameDirectory = filesystem::path(exePath).parent_path();
 
-        db::WriteDBConfig(*m_pUserDB, configKeyGameExecutablePath, m_pAppConfig->gameExecutablePath);
-
         if (exePath != oldPath || oldPath.empty())
         {
             LoadSavedConfigFromGame();
@@ -177,9 +176,14 @@ namespace TOPLauncher
         return m_pAppConfig->gameDirectory;
     }
 
-    bool AppModel::AddServer(const DBServerData& serverData)
+    bool AppModel::AddServer(const std::shared_ptr<DBServerData> serverData)
     {
-        auto pData = GetServerData(serverData.serverName);
+        auto pData = GetServerData(serverData->serverName);
+
+        if (pData)
+        {
+            return false;
+        }
 
         m_pAppConfig->serverList.push_back(serverData);
 
@@ -191,11 +195,6 @@ namespace TOPLauncher
         auto iter = std::find_if(m_pAppConfig->serverList.cbegin(), m_pAppConfig->serverList.cend(),
             [serverName](const std::shared_ptr<DBServerData>& data)
         {
-            assert(data);
-            if (!data)
-            {
-                return false;
-            }
             return data->serverName == serverName;
         });
 
@@ -211,12 +210,12 @@ namespace TOPLauncher
         }
     }
 
-    bool AppModel::ModifyServer(const std::wstring & serverName, const DBServerData & newServerData)
+    bool AppModel::ModifyServer(const std::wstring & serverName, const std::shared_ptr<DBServerData> newServerData)
     {
         auto iter = std::find_if(m_pAppConfig->serverList.begin(), m_pAppConfig->serverList.end(),
-            [serverName](const DBServerData& data)
+            [serverName](const std::shared_ptr<DBServerData>& data)
         {
-            return data.serverName == serverName;
+            return data->serverName == serverName;
         });
 
         if (iter == m_pAppConfig->serverList.cend())
@@ -230,35 +229,35 @@ namespace TOPLauncher
         }
     }
 
-    DBServerData AppModel::GetServerData(const std::wstring & serverName)
+    std::shared_ptr<DBServerData> AppModel::GetServerData(const std::wstring & serverName)
     {
         auto iter = std::find_if(m_pAppConfig->serverList.cbegin(), m_pAppConfig->serverList.cend(),
-            [serverName](const DBServerData& data)
+            [serverName](const std::shared_ptr<DBServerData>& data)
         {
-            return data.serverName == serverName;
+            return data->serverName == serverName;
         });
         if (iter != m_pAppConfig->serverList.cend())
         {
             return *iter;
         }
-        return DBServerData();
+        return nullptr;
     }
 
-    const std::vector<DBServerData>& AppModel::GetServerData() const
+    const std::vector<std::shared_ptr<DBServerData>>& AppModel::GetServerData() const
     {
         return m_pAppConfig->serverList;
     }
 
     bool AppModel::IsGameConfigAvailable() const
     {
-        return !m_pAppConfig->gameExecutablePath.empty();
+        return m_pGameConfig.operator bool();
     }
 
     void AppModel::GetSensitivityValue(int & moveSensitivity, int & moveSpeed, int & dropSpeed)
     {
-        moveSensitivity = m_pAppConfig->moveSensitivity;
-        moveSpeed = m_pAppConfig->moveSpeed;
-        dropSpeed = m_pAppConfig->softDropSpeed;
+        moveSensitivity = m_pGameConfig->moveSensitivity;
+        moveSpeed = m_pGameConfig->moveSpeed;
+        dropSpeed = m_pGameConfig->softDropSpeed;
     }
 
     bool AppModel::SetSensitivityValue(int moveSensitivity, int moveSpeed, int dropSpeed)
@@ -266,9 +265,9 @@ namespace TOPLauncher
         bool ret = util::game::WriteMoveSensitivityConfig(moveSensitivity, moveSpeed, dropSpeed);
         if (ret)
         {
-            m_pAppConfig->moveSensitivity = moveSensitivity;
-            m_pAppConfig->moveSpeed = moveSpeed;
-            m_pAppConfig->softDropSpeed = dropSpeed;
+            m_pGameConfig->moveSensitivity = moveSensitivity;
+            m_pGameConfig->moveSpeed = moveSpeed;
+            m_pGameConfig->softDropSpeed = dropSpeed;
         }
 
         return ret;
@@ -276,7 +275,7 @@ namespace TOPLauncher
 
     void AppModel::GetLineClearDelayValue(int & lineClearDelay)
     {
-        lineClearDelay = m_pAppConfig->lineClearDelay;
+        lineClearDelay = m_pGameConfig->lineClearDelay;
     }
 
     bool AppModel::SetLineClearDelayValue(int lineClearDelay)
@@ -284,7 +283,7 @@ namespace TOPLauncher
         bool ret = util::game::WriteLineClearDelayConfig(lineClearDelay);
         if (ret)
         {
-            m_pAppConfig->lineClearDelay = lineClearDelay;
+            m_pGameConfig->lineClearDelay = lineClearDelay;
         }
 
         return ret;
@@ -333,12 +332,14 @@ namespace TOPLauncher
     {
         if (m_pAppConfig->gameExecutablePath.empty())
         {
+            m_pGameConfig.reset();
             return;
-            //throw std::runtime_error("Game executable is not found!");
         }
 
-        util::game::ReadMoveSensitivityConfig(m_pAppConfig->moveSensitivity, m_pAppConfig->moveSpeed, m_pAppConfig->softDropSpeed);
-        util::game::ReadLineClearDelayConfig(m_pAppConfig->lineClearDelay);
+        m_pGameConfig.reset(new GameConfig());
+
+        util::game::ReadMoveSensitivityConfig(m_pGameConfig->moveSensitivity, m_pGameConfig->moveSpeed, m_pGameConfig->softDropSpeed);
+        util::game::ReadLineClearDelayConfig(m_pGameConfig->lineClearDelay);
     }
 }
 

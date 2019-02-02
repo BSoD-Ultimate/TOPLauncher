@@ -2,15 +2,12 @@
 #include "DlgSettings.h"
 #include "TOPLauncherMainWindow.h"
 
-
-#include "dbServer.h"
-
 #include "AppModel.h"
 #include "LanguageItemModel.h"
 
 namespace TOPLauncher
 {
-    Q_DECLARE_METATYPE(std::shared_ptr<db::DBServerData>);
+    Q_DECLARE_METATYPE(std::shared_ptr<DBServerData>);
 
     class SettingDlgServerListModel : public QAbstractItemModel
     {
@@ -73,14 +70,14 @@ namespace TOPLauncher
 
                 if (index.row() == 0)
                 {
-                    return QVariant::fromValue(std::shared_ptr<db::DBServerData>());
+                    return QVariant::fromValue(std::shared_ptr<DBServerData>());
                 }
                 else if (index.row() < pAppModel->GetServerData().size() + 1)
                 {
                     auto& serverList = pAppModel->GetServerData();
                     auto serverData = serverList[dataIndex];
 
-                    return QVariant::fromValue(std::shared_ptr<db::DBServerData>(serverData));
+                    return QVariant::fromValue(std::shared_ptr<DBServerData>(serverData));
                 }
                 else
                 {
@@ -188,18 +185,6 @@ namespace TOPLauncher
         return ret;
     }
 
-    bool DlgSettings::CheckReservedServerData(const std::wstring& serverName)
-    {
-        auto pAppModel = AppModel::GetInstance();
-        if (pAppModel->IsReservedServer(serverName))
-        {
-            QMessageBox::critical(this, QObject::tr("Error"),
-                QObject::tr("Current server profile is reserved by application, which cannot be modified, removed or conflict with another server profile."));
-            return true;
-        }
-        return false;
-    }
-
     void DlgSettings::changeEvent(QEvent* event)
     {
         QDialog::changeEvent(event);
@@ -258,7 +243,7 @@ namespace TOPLauncher
     void DlgSettings::on_serverList_clicked(const QModelIndex &index)
     {
         auto pAppModel = AppModel::GetInstance();
-        auto serverData = ui.serverList->currentIndex().data(Qt::UserRole).value<std::shared_ptr<db::DBServerData>>();
+        auto serverData = ui.serverList->currentIndex().data(Qt::UserRole).value<std::shared_ptr<DBServerData>>();
         
 
         if (!serverData)
@@ -283,19 +268,14 @@ namespace TOPLauncher
     {
         auto pAppModel = AppModel::GetInstance();
 
-        auto oldServerData = ui.serverList->currentIndex().data(Qt::UserRole).value<std::shared_ptr<db::DBServerData>>();
+        auto oldServerData = ui.serverList->currentIndex().data(Qt::UserRole).value<std::shared_ptr<DBServerData>>();
 
-        db::DBServerData newServerData;
-        newServerData.serverName = ui.editServerName->text().toStdWString();
-        newServerData.serverAddress = ui.editServerHost->text().toStdWString();
-        newServerData.registerURL = ui.editRegisterURL->text().toStdWString();
+        auto newServerData = std::make_shared<DBServerData>();
+        newServerData->serverName = ui.editServerName->text().toStdWString();
+        newServerData->serverAddress = ui.editServerHost->text().toStdWString();
+        newServerData->registerURL = ui.editRegisterURL->text().toStdWString();
 
-        if (CheckReservedServerData(newServerData.serverName))
-        {
-            return;
-        }
-
-        if (newServerData.serverName.empty())
+        if (newServerData->serverName.empty())
         {
             QMessageBox::critical(this, QObject::tr("Error"), QObject::tr("The field \"Server name\" should not empty."));
             return;
@@ -305,13 +285,7 @@ namespace TOPLauncher
         {
             // change server profile
 
-            // check if server data to change is reserved
-            if (oldServerData && CheckReservedServerData(oldServerData->serverName))
-            {
-                return;
-            }
-
-            auto pExistingData = pAppModel->GetServerData(newServerData.serverName);
+            auto pExistingData = pAppModel->GetServerData(newServerData->serverName);
 
             // check name conflict
             if (!pExistingData || pExistingData == oldServerData)
@@ -329,7 +303,7 @@ namespace TOPLauncher
             // new server
 
             // check name conflict
-            if (pAppModel->GetServerData(newServerData.serverName))
+            if (pAppModel->GetServerData(newServerData->serverName))
             {
                 QMessageBox::critical(this, QObject::tr("Error"), QObject::tr("Server name must be unique."));
                 return;
@@ -363,7 +337,7 @@ namespace TOPLauncher
         }
         else
         {
-            std::shared_ptr<db::DBServerData> pData = serverData[index - 1];
+            std::shared_ptr<DBServerData> pData = serverData[index - 1];
             assert(pData);
             ui.editServerName->setText(QString::fromStdWString(pData->serverName));
             ui.editServerHost->setText(QString::fromStdWString(pData->serverAddress));
@@ -375,11 +349,6 @@ namespace TOPLauncher
     {
         auto pAppModel = AppModel::GetInstance();
         std::wstring serverName = ui.serverList->currentIndex().data().toString().toStdWString();
-
-        if (CheckReservedServerData(serverName))
-        {
-            return;
-        }
 
         QString tipText = QObject::tr("Would you like to remove the server profile \"{}\" ?"
             " This will remove all saved users who login to this server.");

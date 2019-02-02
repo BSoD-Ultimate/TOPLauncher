@@ -21,6 +21,7 @@ namespace TOPLauncher
     };
 
     struct AppConfig;
+    struct GameConfig;
 
     class AppModel
     {
@@ -49,11 +50,11 @@ namespace TOPLauncher
         filesystem::path GetGameDirectory() const;
 
         // server list
-        bool AddServer(const DBServerData& serverData);
+        bool AddServer(const std::shared_ptr<DBServerData> serverData);
         bool RemoveServer(const std::wstring& serverName);
-        bool ModifyServer(const std::wstring& serverName, const DBServerData& newServerData);
-        DBServerData GetServerData(const std::wstring& serverName);
-        const std::vector<DBServerData>& GetServerData() const;
+        bool ModifyServer(const std::wstring& serverName, const std::shared_ptr<DBServerData> newServerData);
+        std::shared_ptr<DBServerData> GetServerData(const std::wstring& serverName);
+        const std::vector<std::shared_ptr<DBServerData>>& GetServerData() const;
 
         // game config
         bool IsGameConfigAvailable() const;
@@ -79,6 +80,7 @@ namespace TOPLauncher
         std::shared_ptr<SQLite::Database> m_pUserDB;
 
         std::unique_ptr<AppConfig> m_pAppConfig;
+        std::unique_ptr<GameConfig> m_pGameConfig;
     };
 
 }

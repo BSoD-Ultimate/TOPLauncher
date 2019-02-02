@@ -8,13 +8,12 @@
 #include "AppModel.h"
 
 #include "dbUser.h"
-#include "dbServer.h"
 
 
 
 namespace TOPLauncher
 {
-    Q_DECLARE_METATYPE(std::weak_ptr<db::DBServerData>);
+    Q_DECLARE_METATYPE(std::weak_ptr<DBServerData>);
     Q_DECLARE_METATYPE(std::shared_ptr<db::DBUserData>);
 
     class ServerDropListModel : public QAbstractItemModel
@@ -26,7 +25,7 @@ namespace TOPLauncher
             auto pAppModel = AppModel::GetInstance();
             auto& serverList = pAppModel->GetServerData();
 
-            for (const std::shared_ptr<db::DBServerData>& serverData : serverList)
+            for (const std::shared_ptr<DBServerData>& serverData : serverList)
             {
                 assert(serverData);
                 if (!serverData) continue;
@@ -89,7 +88,7 @@ namespace TOPLauncher
 
     private:
         TOPLauncherMainWindow & m_parent;
-        std::vector<std::weak_ptr<db::DBServerData>> m_serverList;
+        std::vector<std::weak_ptr<DBServerData>> m_serverList;
     };
 
 
@@ -236,7 +235,7 @@ namespace TOPLauncher
             return;
         }
 
-        auto serverDataRef = ui.comboServer->currentData().value<std::weak_ptr<db::DBServerData>>();
+        auto serverDataRef = ui.comboServer->currentData().value<std::weak_ptr<DBServerData>>();
         assert(!serverDataRef.expired());
         if (serverDataRef.expired())
         {
@@ -324,7 +323,7 @@ namespace TOPLauncher
         // Open registration URL
         auto pServerDataValue = ui.comboServer->currentData();
 
-        auto pServerDataRef = pServerDataValue.value<std::weak_ptr<db::DBServerData>>();
+        auto pServerDataRef = pServerDataValue.value<std::weak_ptr<DBServerData>>();
         assert(!pServerDataRef.expired());
         if (!pServerDataRef.expired())
         {
@@ -357,7 +356,7 @@ namespace TOPLauncher
         // refill user list
         auto pServerDataValue = ui.comboServer->currentData();
         
-        auto pServerDataRef = pServerDataValue.value<std::weak_ptr<db::DBServerData>>();
+        auto pServerDataRef = pServerDataValue.value<std::weak_ptr<DBServerData>>();
         assert(!pServerDataRef.expired());
         if (!pServerDataRef.expired())
         {

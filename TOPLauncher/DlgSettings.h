@@ -36,8 +36,6 @@ namespace TOPLauncher
         void LoadGameControlSettings();
 
         bool ApplyGameControlSettings();
-
-        bool CheckReservedServerData(const std::wstring& serverName);
         
         void changeEvent(QEvent* event) override;
 
