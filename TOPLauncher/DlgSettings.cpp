@@ -149,6 +149,8 @@ namespace TOPLauncher
     void DlgSettings::LoadServerListSettings()
     {
         ui.serverList->setModel(m_pServerListModel.get());
+        QObject::connect(ui.serverList->selectionModel(), SIGNAL(selectionChanged(QItemSelection, QItemSelection)),
+            this, SLOT(on_serverList_selectionchanged(QItemSelection, QItemSelection)));
         ui.serverList->setCurrentIndex(m_pServerListModel->index(0, 0));
     }
 
@@ -156,33 +158,46 @@ namespace TOPLauncher
     {
         auto pAppModel = AppModel::GetInstance();
 
-        int moveSensitivity = 0, moveSpeed = 0, softDropSpeed = 0;
-        pAppModel->GetSensitivityValue(moveSensitivity, moveSpeed, softDropSpeed);
+        if (pAppModel->IsGameConfigAvailable())
+        {
+            int moveSensitivity = 0, moveSpeed = 0, softDropSpeed = 0;
+            pAppModel->GetSensitivityValue(moveSensitivity, moveSpeed, softDropSpeed);
 
-        int lineClearDelay = 0;
-        pAppModel->GetLineClearDelayValue(lineClearDelay);
+            int lineClearDelay = 0;
+            pAppModel->GetLineClearDelayValue(lineClearDelay);
 
-        ui.sliderMoveSensitivity->setValue(moveSensitivity);
-        ui.sliderMoveSpeed->setValue(moveSpeed);
-        ui.sliderSoftDropSpeed->setValue(softDropSpeed);
-        ui.sliderLineClearDelay->setValue(lineClearDelay);
+            ui.sliderMoveSensitivity->setValue(moveSensitivity);
+            ui.sliderMoveSpeed->setValue(moveSpeed);
+            ui.sliderSoftDropSpeed->setValue(softDropSpeed);
+            ui.sliderLineClearDelay->setValue(lineClearDelay);
+        }
+
     }
 
     bool DlgSettings::ApplyGameControlSettings()
     {
         auto pAppModel = AppModel::GetInstance();
 
-        int moveSensitivity = ui.sliderMoveSensitivity->value();
-        int moveSpeed = ui.sliderMoveSpeed->value();
-        int softDropSpeed = ui.sliderSoftDropSpeed->value();
+        if (pAppModel->IsGameConfigAvailable())
+        {
+            int moveSensitivity = ui.sliderMoveSensitivity->value();
+            int moveSpeed = ui.sliderMoveSpeed->value();
+            int softDropSpeed = ui.sliderSoftDropSpeed->value();
 
-        int lineClearDelay = ui.sliderLineClearDelay->value();
+            int lineClearDelay = ui.sliderLineClearDelay->value();
 
-        bool ret =
-            pAppModel->SetSensitivityValue(moveSensitivity, moveSpeed, softDropSpeed) && 
-            pAppModel->SetLineClearDelayValue(lineClearDelay);
 
-        return ret;
+            bool ret =
+                pAppModel->SetSensitivityValue(moveSensitivity, moveSpeed, softDropSpeed) &&
+                pAppModel->SetLineClearDelayValue(lineClearDelay);
+
+            return ret;
+        }
+        else
+        {
+            return false;
+        }
+
     }
 
     void DlgSettings::changeEvent(QEvent* event)
@@ -192,6 +207,15 @@ namespace TOPLauncher
         {
             ui.retranslateUi(this);
         }
+    }
+
+    void DlgSettings::done(int retCode)
+    {
+        auto pAppModel = AppModel::GetInstance();
+
+        pAppModel->SaveAppConfig();
+
+        return QDialog::done(retCode);
     }
 
     void DlgSettings::on_comboBoxLanguage_currentIndexChanged(int index)
@@ -240,7 +264,7 @@ namespace TOPLauncher
         }
     }
 
-    void DlgSettings::on_serverList_clicked(const QModelIndex &index)
+    void DlgSettings::on_serverList_selectionchanged(const QItemSelection& selected, const QItemSelection& deselected)
     {
         auto pAppModel = AppModel::GetInstance();
         auto serverData = ui.serverList->currentIndex().data(Qt::UserRole).value<std::shared_ptr<ServerData>>();
@@ -379,7 +403,6 @@ namespace TOPLauncher
         {
 
             bool ret = ApplyGameControlSettings();
-
 
             if (ret)
             {

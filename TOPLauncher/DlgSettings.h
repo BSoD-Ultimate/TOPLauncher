@@ -37,7 +37,11 @@ namespace TOPLauncher
 
         bool ApplyGameControlSettings();
         
+        // QWidget
         void changeEvent(QEvent* event) override;
+
+        // QDialog
+        void done(int retCode) override;
 
     private slots :
 
@@ -45,7 +49,7 @@ namespace TOPLauncher
     void on_btnUseSystemLang_clicked();
     void on_btnBrowseGameExecutable_clicked();
 
-    void on_serverList_clicked(const QModelIndex &index);
+    void on_serverList_selectionchanged(const QItemSelection& selected, const QItemSelection& deselected);
     void on_btnSaveServerProfile_clicked();
     void on_btnCancelServerProfile_clicked();
     void on_btnRemoveServerProfile_clicked();

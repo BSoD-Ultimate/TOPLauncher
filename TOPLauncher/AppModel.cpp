@@ -205,7 +205,6 @@ namespace TOPLauncher
             return false;
         }
 
-        // TODO: load saved config from json
         if (!LoadAppConfig())
         {
             // use defaults then save
