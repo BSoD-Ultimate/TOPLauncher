@@ -511,10 +511,10 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
                   </size>
                  </property>
                  <property name="minimum">
-                  <number>45</number>
+                  <number>0</number>
                  </property>
                  <property name="maximum">
-                  <number>250</number>
+                  <number>1000</number>
                  </property>
                 </widget>
                </item>
@@ -616,10 +616,10 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
                   </size>
                  </property>
                  <property name="minimum">
-                  <number>15</number>
+                  <number>0</number>
                  </property>
                  <property name="maximum">
-                  <number>100</number>
+                  <number>1000</number>
                  </property>
                 </widget>
                </item>
@@ -721,10 +721,10 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
                   </size>
                  </property>
                  <property name="minimum">
-                  <number>10</number>
+                  <number>0</number>
                  </property>
                  <property name="maximum">
-                  <number>50</number>
+                  <number>1000</number>
                  </property>
                 </widget>
                </item>
@@ -832,7 +832,7 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
                   <number>0</number>
                  </property>
                  <property name="maximum">
-                  <number>200</number>
+                  <number>1000</number>
                  </property>
                  <property name="value">
                   <number>0</number>
@@ -882,104 +882,8 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
  </resources>
  <connections>
   <connection>
-   <sender>sliderMoveSensitivity</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>spinBoxMoveSensitivity</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>295</x>
-     <y>195</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>532</x>
-     <y>196</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>spinBoxMoveSensitivity</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>sliderMoveSensitivity</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>532</x>
-     <y>196</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>254</x>
-     <y>195</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>sliderMoveSpeed</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>spinBoxMoveSpeed</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>248</x>
-     <y>251</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>532</x>
-     <y>252</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>spinBoxMoveSpeed</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>sliderMoveSpeed</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>532</x>
-     <y>252</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>266</x>
-     <y>251</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>sliderSoftDropSpeed</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>spinBoxSoftDropSpeed</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>312</x>
-     <y>328</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>532</x>
-     <y>327</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>spinBoxSoftDropSpeed</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>sliderSoftDropSpeed</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>532</x>
-     <y>327</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>313</x>
-     <y>328</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>sliderLineClearDelay</sender>
-   <signal>valueChanged(int)</signal>
+   <signal>sliderMoved(int)</signal>
    <receiver>spinBoxLineClearDelay</receiver>
    <slot>setValue(int)</slot>
    <hints>
@@ -994,18 +898,114 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
    </hints>
   </connection>
   <connection>
+   <sender>sliderMoveSensitivity</sender>
+   <signal>sliderMoved(int)</signal>
+   <receiver>spinBoxMoveSensitivity</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>295</x>
+     <y>195</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>532</x>
+     <y>196</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sliderMoveSpeed</sender>
+   <signal>sliderMoved(int)</signal>
+   <receiver>spinBoxMoveSpeed</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>248</x>
+     <y>251</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>532</x>
+     <y>252</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sliderSoftDropSpeed</sender>
+   <signal>sliderMoved(int)</signal>
+   <receiver>spinBoxSoftDropSpeed</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>312</x>
+     <y>328</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>532</x>
+     <y>327</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBoxMoveSensitivity</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>sliderMoveSensitivity</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>505</x>
+     <y>201</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>336</x>
+     <y>214</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBoxMoveSpeed</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>sliderMoveSpeed</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>492</x>
+     <y>262</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>355</x>
+     <y>271</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBoxSoftDropSpeed</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>sliderSoftDropSpeed</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>500</x>
+     <y>320</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>348</x>
+     <y>314</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
    <sender>spinBoxLineClearDelay</sender>
    <signal>valueChanged(int)</signal>
    <receiver>sliderLineClearDelay</receiver>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>502</x>
-     <y>381</y>
+     <x>492</x>
+     <y>378</y>
     </hint>
     <hint type="destinationlabel">
-     <x>374</x>
-     <y>381</y>
+     <x>309</x>
+     <y>376</y>
     </hint>
    </hints>
   </connection>
