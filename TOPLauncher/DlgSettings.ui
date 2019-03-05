@@ -50,7 +50,7 @@ QDialog#DlgSettings {
 }
 
 QScrollArea#settingsScrollArea { 
-  background-color: rgba(255, 255, 255, 192);
+  background-color: rgba(211, 211, 211, 128);
 }
 QScrollArea#settingsScrollArea &gt; QWidget &gt; QWidget { 
   background: transparent;
@@ -97,7 +97,7 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>-232</y>
+           <y>-108</y>
            <width>542</width>
            <height>660</height>
           </rect>

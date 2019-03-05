@@ -54,11 +54,11 @@ QWidget#centralWidget {
 }
 
 QFrame#frameLogin {
-  background-color: rgba(255, 255, 255, 192);
+  background-color: rgba(211, 211, 211, 128);
 }
 
 QFrame#frameBottom {
-  background-color: rgba(255, 255, 255, 192);
+  background-color: rgba(211, 211, 211, 128);
 }</string>
   </property>
   <property name="locale">
