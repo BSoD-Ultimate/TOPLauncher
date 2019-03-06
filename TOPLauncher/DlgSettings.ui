@@ -97,7 +97,7 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>-108</y>
+           <y>-215</y>
            <width>542</width>
            <height>660</height>
           </rect>
@@ -882,82 +882,18 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
  </resources>
  <connections>
   <connection>
-   <sender>sliderLineClearDelay</sender>
-   <signal>sliderMoved(int)</signal>
-   <receiver>spinBoxLineClearDelay</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>345</x>
-     <y>376</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>500</x>
-     <y>370</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>sliderMoveSensitivity</sender>
-   <signal>sliderMoved(int)</signal>
-   <receiver>spinBoxMoveSensitivity</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>295</x>
-     <y>195</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>532</x>
-     <y>196</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>sliderMoveSpeed</sender>
-   <signal>sliderMoved(int)</signal>
-   <receiver>spinBoxMoveSpeed</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>248</x>
-     <y>251</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>532</x>
-     <y>252</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>sliderSoftDropSpeed</sender>
-   <signal>sliderMoved(int)</signal>
-   <receiver>spinBoxSoftDropSpeed</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>312</x>
-     <y>328</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>532</x>
-     <y>327</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>spinBoxMoveSensitivity</sender>
    <signal>valueChanged(int)</signal>
    <receiver>sliderMoveSensitivity</receiver>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>505</x>
-     <y>201</y>
+     <x>488</x>
+     <y>224</y>
     </hint>
     <hint type="destinationlabel">
-     <x>336</x>
-     <y>214</y>
+     <x>389</x>
+     <y>225</y>
     </hint>
    </hints>
   </connection>
@@ -968,12 +904,12 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>492</x>
-     <y>262</y>
+     <x>502</x>
+     <y>282</y>
     </hint>
     <hint type="destinationlabel">
-     <x>355</x>
-     <y>271</y>
+     <x>378</x>
+     <y>277</y>
     </hint>
    </hints>
   </connection>
@@ -985,11 +921,11 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
    <hints>
     <hint type="sourcelabel">
      <x>500</x>
-     <y>320</y>
+     <y>333</y>
     </hint>
     <hint type="destinationlabel">
-     <x>348</x>
-     <y>314</y>
+     <x>388</x>
+     <y>335</y>
     </hint>
    </hints>
   </connection>
@@ -1000,12 +936,12 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>492</x>
-     <y>378</y>
+     <x>495</x>
+     <y>391</y>
     </hint>
     <hint type="destinationlabel">
-     <x>309</x>
-     <y>376</y>
+     <x>356</x>
+     <y>392</y>
     </hint>
    </hints>
   </connection>

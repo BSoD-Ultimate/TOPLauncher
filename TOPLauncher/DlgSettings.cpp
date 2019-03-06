@@ -118,11 +118,9 @@ namespace TOPLauncher
         , m_bDlgInit(false)
     {
         ui.setupUi(this);
-
         assert(m_pMainWindow);
 
         LoadSettingsFromModel();
-
         m_bDlgInit = true;
     }
 
@@ -170,6 +168,11 @@ namespace TOPLauncher
             ui.sliderMoveSpeed->setValue(moveSpeed);
             ui.sliderSoftDropSpeed->setValue(softDropSpeed);
             ui.sliderLineClearDelay->setValue(lineClearDelay);
+
+            ui.spinBoxMoveSensitivity->setValue(moveSensitivity);
+            ui.spinBoxMoveSpeed->setValue(moveSpeed);
+            ui.spinBoxSoftDropSpeed->setValue(softDropSpeed);
+            ui.spinBoxLineClearDelay->setValue(lineClearDelay);
         }
 
     }
@@ -421,6 +424,50 @@ namespace TOPLauncher
     {
         LoadGameControlSettings();
 
+    }
+
+    void DlgSettings::on_sliderMoveSensitivity_valueChanged(int value)
+    {
+        int minimum = ui.sliderMoveSensitivity->minimum();
+        int maximum = ui.sliderMoveSensitivity->maximum();
+        if (!((value == minimum && value > ui.spinBoxMoveSensitivity->value())
+            || value == maximum && value < ui.spinBoxMoveSensitivity->value()))
+        {
+            ui.spinBoxMoveSensitivity->setValue(value);
+        }
+    }
+
+    void DlgSettings::on_sliderMoveSpeed_valueChanged(int value)
+    {
+        int minimum = ui.sliderMoveSpeed->minimum();
+        int maximum = ui.sliderMoveSpeed->maximum();
+        if (!((value == minimum && value > ui.spinBoxMoveSpeed->value())
+            || value == maximum && value < ui.spinBoxMoveSpeed->value()))
+        {
+            ui.spinBoxMoveSpeed->setValue(value);
+        }
+    }
+
+    void DlgSettings::on_sliderSoftDropSpeed_valueChanged(int value)
+    {
+        int minimum = ui.sliderSoftDropSpeed->minimum();
+        int maximum = ui.sliderSoftDropSpeed->maximum();
+        if (!((value == minimum && value > ui.spinBoxSoftDropSpeed->value())
+            || value == maximum && value < ui.spinBoxSoftDropSpeed->value()))
+        {
+            ui.spinBoxSoftDropSpeed->setValue(value);
+        }
+    }
+
+    void DlgSettings::on_sliderLineClearDelay_valueChanged(int value)
+    {
+        int minimum = ui.sliderLineClearDelay->minimum();
+        int maximum = ui.sliderLineClearDelay->maximum();
+        if (!((value == minimum && value > ui.spinBoxLineClearDelay->value())
+            || value == maximum && value < ui.spinBoxLineClearDelay->value()))
+        {
+            ui.spinBoxLineClearDelay->setValue(value);
+        }
     }
 
 

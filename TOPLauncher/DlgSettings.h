@@ -57,6 +57,11 @@ namespace TOPLauncher
     void on_btnApplyControlSettings_clicked();
     void on_btnResetControlSettings_clicked();
 
+    // spinbox changed
+    void on_sliderMoveSensitivity_valueChanged(int value);
+    void on_sliderMoveSpeed_valueChanged(int value);
+    void on_sliderSoftDropSpeed_valueChanged(int value);
+    void on_sliderLineClearDelay_valueChanged(int value);
 
     private:
         Ui::DlgSettings ui;

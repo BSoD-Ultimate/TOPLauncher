@@ -357,7 +357,7 @@ namespace TOPLauncher
         auto pServerDataValue = ui.comboServer->currentData();
         
         auto pServerDataRef = pServerDataValue.value<std::weak_ptr<ServerData>>();
-        assert(!pServerDataRef.expired());
+
         if (!pServerDataRef.expired())
         {
             ReloadServerData(pServerDataRef.lock()->serverName);
