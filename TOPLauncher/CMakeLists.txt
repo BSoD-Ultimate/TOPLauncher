@@ -145,7 +145,7 @@ set(THIRD_PARTY_LINK_LIBRARIES
   fmt
   SQLiteCpp
   inih 
-  "../external/sqlite3/sqlite3"
+  sqlite3
   "../external/SjeJhhUtil/SjeJhhUtil"
 )
 
@@ -162,28 +162,13 @@ target_link_libraries(TOPLauncher
 # copy files after build
 #
 
-# copy Qt libraries to the executable folder (windows only so use windeployqt.exe)
-add_custom_command(
-  TARGET TOPLauncher
-  POST_BUILD
-  COMMAND "${QT5_BIN_DIR}/windeployqt.exe" "$<TARGET_FILE_DIR:TOPLauncher>"
-)
+# # copy compiled language files to the executable folder
+# foreach( translation_file_i ${TOPLAUNCHER_TRANSLATION_QM_SRC})
+#   get_filename_component(QM_FILENAME ${translation_file_i} NAME )
+#   add_custom_command(
+#     TARGET TOPLauncher
+#     POST_BUILD
+#     COMMAND ${CMAKE_COMMAND} "-E" "copy" ${translation_file_i} "$<TARGET_FILE_DIR:TOPLauncher>/languages/${QM_FILENAME}"
+#   )
+# endforeach( translation_file_i )
 
-# copy compiled language files to the executable folder
-foreach( translation_file_i ${TOPLAUNCHER_TRANSLATION_QM_SRC})
-  get_filename_component(QM_FILENAME ${translation_file_i} NAME )
-  add_custom_command(
-    TARGET TOPLauncher
-    POST_BUILD
-    COMMAND ${CMAKE_COMMAND} "-E" "copy" ${translation_file_i} "$<TARGET_FILE_DIR:TOPLauncher>/languages/${QM_FILENAME}"
-  )
-endforeach( translation_file_i )
-
-
-# copy shared third-party libraries to the executable folder
-add_custom_command(
-  TARGET TOPLauncher
-  POST_BUILD
-  COMMAND ${CMAKE_COMMAND} "-E" "copy" "${CMAKE_CURRENT_SOURCE_DIR}/../external/sqlite3/sqlite3.dll" "$<TARGET_FILE_DIR:TOPLauncher>/sqlite3.dll"
-  COMMAND ${CMAKE_COMMAND} "-E" "copy" "${CMAKE_CURRENT_SOURCE_DIR}/../external/SjeJhhUtil/SjeJhhUtil.dll" "$<TARGET_FILE_DIR:TOPLauncher>/SjeJhhUtil.dll"
-)
