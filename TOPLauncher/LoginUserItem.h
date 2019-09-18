@@ -8,14 +8,14 @@
 
 namespace TOPLauncher
 {
-    class TOPLauncherMainWindow;
+    class MainWidget;
 
     class LoginUserItem : public QWidget
     {
         Q_OBJECT
 
     public:
-        LoginUserItem(QWidget *parent, TOPLauncherMainWindow& pOwnerWindow, const std::wstring& username, const std::wstring& serverName);
+        LoginUserItem(QWidget *parent, MainWidget& pOwnerWindow, const std::wstring& username, const std::wstring& serverName);
         ~LoginUserItem();
 
         std::wstring username() const;
@@ -27,7 +27,7 @@ namespace TOPLauncher
     private:
         Ui::LoginUserItem ui;
 
-        TOPLauncherMainWindow& m_ownerWindow;
+        MainWidget& m_ownerWindow;
 
         std::wstring m_username;
         std::wstring m_serverName;

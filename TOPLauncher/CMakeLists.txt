@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 3.8.1)
 
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMake;${CMAKE_MODULE_PATH}")
-include(PrecompiledHeader)
 
 # Qt5 properties
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -47,14 +46,16 @@ set(TOPLAUNCHER_MODEL_SRC
 source_group(model FILES ${TOPLAUNCHER_MODEL_SRC})
 
 set(TOPLAUNCHER_UI_SRC
-  TOPLauncherMainWindow.h 
-  TOPLauncherMainWindow.cpp 
+  MainWindow.h 
+  MainWindow.cpp 
   LoginUserItem.h 
   LoginUserItem.cpp 
   DlgLanguage.h 
   DlgLanguage.cpp 
-  DlgSettings.h 
-  DlgSettings.cpp 
+  MainWidget.h 
+  MainWidget.cpp
+  SettingsWidget.h 
+  SettingsWidget.cpp 
   LanguageItemModel.h 
   LanguageItemModel.cpp 
 )
@@ -73,24 +74,13 @@ set(TOPLAUNCHER_UTIL_SRC
 source_group(util FILES ${TOPLAUNCHER_UTIL_SRC})
 
 set(TOPLAUNCHER_FORM_FILES_SRC
-  DlgLanguage.ui 
-  DlgSettings.ui 
+  MainWindow.ui
+  MainWidget.ui 
+  SettingsWidget.ui 
   LoginUserItem.ui 
-  TOPLauncher.ui 
+  DlgLanguage.ui 
 )
 source_group(Form_Files FILES ${TOPLAUNCHER_FORM_FILES_SRC})
-
-# language files
-qt5_create_translation(TOPLAUNCHER_TRANSLATION_QM_SRC
-  "${CMAKE_CURRENT_SOURCE_DIR}"
-  languages/toplauncher_zh.ts
-)
-source_group(Compiled_Translation_Files FILES ${TOPLAUNCHER_TRANSLATION_QM_SRC})
-
-set(TOPLAUNCHER_TRANSLATION_SRC
-  languages/toplauncher_zh.ts 
-)
-source_group(Translation_Files FILES ${TOPLAUNCHER_TRANSLATION_SRC})
 
 qt5_add_resources(TOPLAUNCHER_COMPILED_RESOURCE_FILES TOPLauncher.qrc)
 
@@ -113,8 +103,6 @@ add_executable(TOPLauncher WIN32
   ${TOPLAUNCHER_UI_SRC}
   ${TOPLAUNCHER_UTIL_SRC}
   ${TOPLAUNCHER_FORM_FILES_SRC}
-  ${TOPLAUNCHER_TRANSLATION_SRC}
-  ${TOPLAUNCHER_TRANSLATION_QM_SRC}
   ${TOPLAUNCHER_RESOURCE_SRC}
 )
 
@@ -122,7 +110,7 @@ add_executable(TOPLauncher WIN32
 # include directories
 #
 target_include_directories(TOPLauncher 
-  PUBLIC 
+  PRIVATE 
   "../external/SjeJhhUtil"
   "../external/sqlite3"
   "../external/inih"
@@ -157,18 +145,4 @@ target_link_libraries(TOPLauncher
 #
 # compile definitions & linker flags
 #
-
-#
-# copy files after build
-#
-
-# # copy compiled language files to the executable folder
-# foreach( translation_file_i ${TOPLAUNCHER_TRANSLATION_QM_SRC})
-#   get_filename_component(QM_FILENAME ${translation_file_i} NAME )
-#   add_custom_command(
-#     TARGET TOPLauncher
-#     POST_BUILD
-#     COMMAND ${CMAKE_COMMAND} "-E" "copy" ${translation_file_i} "$<TARGET_FILE_DIR:TOPLauncher>/languages/${QM_FILENAME}"
-#   )
-# endforeach( translation_file_i )
 

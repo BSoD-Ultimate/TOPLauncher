@@ -1,4 +1,6 @@
-cmake_minimum_required(VERSION 3.8.1)
+cmake_minimum_required(VERSION 3.14.0)
+
+cmake_policy(SET CMP0087 NEW)
 
 project(TOPLauncher)
 
@@ -30,7 +32,7 @@ add_subdirectory(external/sqlite3 EXCLUDE_FROM_ALL)
 set(SQLITECPP_RUN_CPPCHECK OFF CACHE BOOL "")
 set(SQLITECPP_RUN_CPPLINT OFF CACHE BOOL "")
 set(SQLITECPP_INTERNAL_SQLITE OFF CACHE BOOL "")
-set(SQLITE_ENABLE_COLUMN_METADATA OFF CACHE BOOL "")
+set(SQLITE_ENABLE_COLUMN_METADATA ON CACHE BOOL "")
 set(SQLITECPP_SQLITE_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/external/sqlite3" CACHE STRING "")
 add_subdirectory(external/SQLiteCpp EXCLUDE_FROM_ALL)
 
@@ -57,6 +59,6 @@ install(
 # deploy Qt library
 install(
   CODE 
-    "execute_process(COMMAND \"${QT5_BIN_DIR}/windeployqt.exe\" \"${CMAKE_INSTALL_PREFIX}\")"
+    "execute_process(COMMAND \"${QT5_BIN_DIR}/windeployqt.exe\" \"${CMAKE_INSTALL_PREFIX}/$<TARGET_FILE_NAME:TOPLauncher>\")"
   COMPONENT publish
 )

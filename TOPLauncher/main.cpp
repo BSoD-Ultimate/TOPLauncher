@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "TOPLauncherMainWindow.h"
+#include "MainWindow.h"
 #include <QtWidgets/QApplication>
 #include <QtWidgets>
 #include <QMessageBox>

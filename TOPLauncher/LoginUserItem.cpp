@@ -1,14 +1,14 @@
 #include "stdafx.h"
 #include "LoginUserItem.h"
 
-#include "TOPLauncherMainWindow.h"
+#include "MainWidget.h"
 
 #include "dbUser.h"
 
 namespace TOPLauncher
 {
 
-    LoginUserItem::LoginUserItem(QWidget *parent, TOPLauncherMainWindow& ownerWindow, const std::wstring& username, const std::wstring& serverName)
+    LoginUserItem::LoginUserItem(QWidget *parent, MainWidget& ownerWindow, const std::wstring& username, const std::wstring& serverName)
         : QWidget(parent)
         , m_ownerWindow(ownerWindow)
         , m_username(username)
