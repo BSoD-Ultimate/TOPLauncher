@@ -8,6 +8,9 @@
 
 namespace TOPLauncher
 {
+    class MainWidget;
+    class SettingsWidget;
+
     class TOPLauncherMainWindow : public QMainWindow
     {
         Q_OBJECT
@@ -16,7 +19,17 @@ namespace TOPLauncher
         TOPLauncherMainWindow(QWidget *parent = Q_NULLPTR);
         ~TOPLauncherMainWindow();
 
+        MainWidget* GetMainWidget() const;
+        SettingsWidget* GetSettingsWidget() const;
+
     private:
+        void InitUI();
+
+
+    private:
+        // QWidget 
+        void resizeEvent(QResizeEvent *event) override;
+
 
     public slots:
 
@@ -24,6 +37,7 @@ namespace TOPLauncher
 
     private:
         Ui::TOPLauncherClass ui;
+        SettingsWidget* m_pSettingsWidget;
     };
 }
 

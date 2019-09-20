@@ -111,15 +111,18 @@ namespace TOPLauncher
 
 
 
-    SettingsWidget::SettingsWidget(QWidget* parent)
+    SettingsWidget::SettingsWidget(TOPLauncherMainWindow* pMainWindow, QWidget* parent)
         : QWidget(parent)
         , m_pServerListModel(new SettingDlgServerListModel(this))
         , m_pLanguageItemModel(new LanguageItemModel(this))
-        , m_pMainWindow(dynamic_cast<TOPLauncherMainWindow*>(parent))
+        , m_pMainWindow(pMainWindow)
         , m_bDlgInit(false)
     {
         ui.setupUi(this);
         assert(m_pMainWindow);
+
+        //ui.btnSetting->setAttribute(Qt::WA_TransparentForMouseEvents, false);
+        //ui.settingsScrollArea->setAttribute(Qt::WA_TransparentForMouseEvents, false);
 
         LoadSettingsFromModel();
         m_bDlgInit = true;
@@ -213,11 +216,24 @@ namespace TOPLauncher
         }
     }
 
+    void SettingsWidget::resizeEvent(QResizeEvent * e)
+    {
+        QWidget::resizeEvent(e);
+        QRegion reg(frameGeometry());
+        reg -= QRegion(geometry());
+        reg += childrenRegion();
+        setMask(reg);
+    }
+
     void SettingsWidget::done()
     {
         auto pAppModel = AppModel::GetInstance();
 
         pAppModel->SaveAppConfig();
+    }
+
+    void SettingsWidget::on_btnSetting_clicked()
+    {
     }
 
     void SettingsWidget::on_comboBoxLanguage_currentIndexChanged(int index)

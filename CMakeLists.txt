@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.14.0)
 
+# CMP0087: install(SCRIPT | CODE) supports generator expressions.
 cmake_policy(SET CMP0087 NEW)
 
 project(TOPLauncher)

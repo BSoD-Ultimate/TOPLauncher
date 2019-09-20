@@ -17,7 +17,7 @@ namespace TOPLauncher
     {
         Q_OBJECT
     public:
-        SettingsWidget(QWidget *parent = Q_NULLPTR);
+        SettingsWidget(TOPLauncherMainWindow* pMainWindow, QWidget *parent = Q_NULLPTR);
         ~SettingsWidget();
 
     public:
@@ -36,12 +36,15 @@ namespace TOPLauncher
         bool ApplyGameControlSettings();
         
         // QWidget
-        void changeEvent(QEvent* event) override;
-
+        void changeEvent(QEvent* e) override;
+        void resizeEvent(QResizeEvent* e) override;
         // QDialog
         void done();
 
     private slots :
+
+
+    void on_btnSetting_clicked();
 
     void on_comboBoxLanguage_currentIndexChanged(int index);
     void on_btnUseSystemLang_clicked();
