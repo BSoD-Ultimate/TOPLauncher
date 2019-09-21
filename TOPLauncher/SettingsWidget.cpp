@@ -131,8 +131,8 @@ namespace TOPLauncher
 
     int SettingsWidget::GetScrollAreaLocationX() const
     {
-        auto btnSettingGeometry = ui.btnSetting->geometry();
-        return btnSettingGeometry.width();
+        auto btnSettingGeometry = ui.btnSetting->minimumWidth();
+        return btnSettingGeometry;
     }
 
     void SettingsWidget::SetSettingButtonState(bool showClosePrompt)
@@ -367,7 +367,7 @@ namespace TOPLauncher
 
         if (m_pMainWindow)
         {
-            //m_pMainWindow->on_serverSettingsChanged();
+            m_pMainWindow->GetMainWidget()->on_serverSettingsChanged();
         }
         
     }
@@ -412,13 +412,10 @@ namespace TOPLauncher
                 ui.serverList->setCurrentIndex(m_pServerListModel->index(0, 0));
                 if (m_pMainWindow)
                 {
-                    //m_pMainWindow->on_serverSettingsChanged();
+                    m_pMainWindow->GetMainWidget()->on_serverSettingsChanged();
                 }
             }
-
-
         }
-
 
     }
 

@@ -9,16 +9,22 @@
 
 namespace TOPLauncher
 {
-    static bool InitApp()
+    static void InitApp()
     {
         auto pAppModel = AppModel::GetInstance();
 
         bool ret = pAppModel->InitAppConfig();
-
         if (!ret)
         {
-            return false;
+            QMessageBox::critical(NULL, QObject::tr("Fatal Error"), QObject::tr("User profile open failed, the program will now exit."));
+            throw 1;
         }
+
+        if (!pAppModel->InitGameConfig())
+        {
+            QMessageBox::critical(NULL, QObject::tr("Fatal Error"), QObject::tr("Unable to locate game executable path, the program will now exit."));
+            throw 1;
+        };
 
     }
 
@@ -36,20 +42,26 @@ int main(int argc, char *argv[])
 
     auto pAppModel = AppModel::GetInstance();
 
-    if (!pAppModel->InitAppConfig())
-    {
-        QMessageBox::critical(NULL, QObject::tr("Fatal Error"), QObject::tr("User profile open failed, the program will now exit."));
-        return 1;
-    };
-
-    if (!pAppModel->InitGameConfig())
-    {
-        QMessageBox::critical(NULL, QObject::tr("Fatal Error"), QObject::tr("Unable to locate game executable path, the program will now exit."));
-        return 1;
-    };
+    // set style & translations
+    a.setStyle(QStyleFactory::create("fusion"));
+    QFont uiFont(QString("Calibri"), 10, QFont::Normal);
+    a.setFont(uiFont);
+    QFont::insertSubstitution(QString("Calibri"), QString("Microsoft YaHei"));
+    QFont::insertSubstitution(QString("Calibri"), QString("SimSun"));
 
     util::SetDisplayLanguage(pAppModel->GetDisplayLanguage());
 
+    // init application model
+    try
+    {
+        InitApp();
+    }
+    catch (const int retValue)
+    {
+        return retValue;
+    }
+
+    // show Main window
     TOPLauncherMainWindow w;
     w.show();
     int retValue = a.exec();

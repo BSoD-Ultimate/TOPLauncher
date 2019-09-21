@@ -1,9 +1,13 @@
 <RCC>
-  <qresource prefix="/TOPLauncher">
-    <file>icon.ico</file>
-    <file>Resources/bg.png</file>
-    <file>Resources/del-user-button-hover.png</file>
-    <file>Resources/del-user-button-normal.png</file>
-    <file>Resources/del-user-button-pushed.png</file>
-  </qresource>
+    <qresource prefix="/TOPLauncher">
+        <file>icon.ico</file>
+        <file>Resources/bg.png</file>
+        <file>Resources/del-user-button-hover.png</file>
+        <file>Resources/del-user-button-normal.png</file>
+        <file>Resources/del-user-button-pushed.png</file>
+        <file>Resources/setting-icon-hover.png</file>
+        <file>Resources/setting-icon-normal.png</file>
+        <file>Resources/setting-icon-pushed.png</file>
+        <file>Resources/forward-icon.png</file>
+    </qresource>
 </RCC>

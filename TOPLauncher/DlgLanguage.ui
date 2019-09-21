@@ -47,9 +47,7 @@
    <string>Switch Language...</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">* {
-  font: 10pt &quot;Tahoma&quot;, 9pt &quot;SimSun&quot;, 9pt &quot;宋体&quot;;
-}</string>
+   <string notr="true"/>
   </property>
   <property name="modal">
    <bool>true</bool>

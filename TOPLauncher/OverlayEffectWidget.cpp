@@ -6,7 +6,7 @@ namespace TOPLauncher
 
     OverlayEffectWidget::OverlayEffectWidget(QWidget* parent)
         : QWidget(parent)
-        , m_darkOpacity(0.7)
+        , m_darkOpacity(0)
     {
     }
     OverlayEffectWidget::~OverlayEffectWidget()
