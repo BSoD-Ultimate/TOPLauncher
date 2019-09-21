@@ -267,38 +267,39 @@ namespace TOPLauncher
 
         ReloadServerData(serverData->serverName);
 
-        // TODO: start the game
-        std::wstring serverAddress = serverData->serverAddress;
+        // start the game
+        {
+            std::wstring serverAddress = serverData->serverAddress;
 
-        std::wstring gamePath = pAppModel->GetGameExecutablePath();
+            std::wstring gamePath = pAppModel->GetGameExecutablePath();
 
-        std::wstring startupArgs = util::GetGameStartupArgs(serverAddress, username, password);
+            std::wstring startupArgs = util::GetGameStartupArgs(serverAddress, username, password);
 
-        std::wstring startupArgFullString = util::wstring_format(L"\"{}\" {}", gamePath, startupArgs);
-        std::unique_ptr<wchar_t[]> startupArgBuf(new wchar_t[startupArgFullString.length() + 1]());
-        wcscpy_s(startupArgBuf.get(), startupArgFullString.length() + 1, startupArgFullString.c_str());
+            std::wstring startupArgFullString = util::wstring_format(L"\"{}\" {}", gamePath, startupArgs);
+            std::unique_ptr<wchar_t[]> startupArgBuf(new wchar_t[startupArgFullString.length() + 1]());
+            wcscpy_s(startupArgBuf.get(), startupArgFullString.length() + 1, startupArgFullString.c_str());
 
-        STARTUPINFOW si = { 0 };
+            STARTUPINFOW si = { 0 };
 
-        PROCESS_INFORMATION pi = { 0 };
+            PROCESS_INFORMATION pi = { 0 };
 
-        BOOL startupSuccess = CreateProcessW(
-            gamePath.c_str(),
-            startupArgBuf.get(),
-            NULL,
-            NULL,
-            FALSE,
-            CREATE_SUSPENDED,
-            NULL,
-            pAppModel->GetGameDirectory().c_str(),
-            &si,
-            &pi);
+            BOOL startupSuccess = CreateProcessW(
+                gamePath.c_str(),
+                startupArgBuf.get(),
+                NULL,
+                NULL,
+                FALSE,
+                CREATE_SUSPENDED,
+                NULL,
+                pAppModel->GetGameDirectory().c_str(),
+                &si,
+                &pi);
 
-        ResumeThread(pi.hThread);
+            ResumeThread(pi.hThread);
 
-        CloseHandle(pi.hProcess);
-        CloseHandle(pi.hThread);
-
+            CloseHandle(pi.hProcess);
+            CloseHandle(pi.hThread);
+        }
 
         QApplication::exit();
     }

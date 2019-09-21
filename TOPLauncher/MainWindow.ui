@@ -34,36 +34,11 @@
   <property name="styleSheet">
    <string notr="true">QWidget#centralwidget
 {
- /* background: url(:/TOPLauncher/Resources/bg.png);*/
+    background: url(:/TOPLauncher/Resources/bg.png);
 }</string>
   </property>
-  <widget class="QWidget" name="centralwidget">
-   <widget class="TOPLauncher::MainWidget" name="mainWidget" native="true">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>401</width>
-      <height>291</height>
-     </rect>
-    </property>
-    <property name="sizePolicy">
-     <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-      <horstretch>0</horstretch>
-      <verstretch>0</verstretch>
-     </sizepolicy>
-    </property>
-   </widget>
-  </widget>
+  <widget class="QWidget" name="centralwidget"/>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>TOPLauncher::MainWidget</class>
-   <extends>QWidget</extends>
-   <header>MainWidget.h</header>
-   <container>1</container>
-  </customwidget>
- </customwidgets>
  <resources>
   <include location="TOPLauncher.qrc"/>
  </resources>

@@ -49,6 +49,7 @@ set(UI_HEADERS
   MainWidget.h 
   SettingsWidget.h 
   LanguageItemModel.h 
+  OverlayEffectWidget.h
 )
 set(UI_SRC
   MainWindow.cpp 
@@ -57,6 +58,7 @@ set(UI_SRC
   MainWidget.cpp
   SettingsWidget.cpp 
   LanguageItemModel.cpp 
+  OverlayEffectWidget.cpp
 )
 source_group(ui FILES ${UI_HEADERS} ${UI_SRC})
 

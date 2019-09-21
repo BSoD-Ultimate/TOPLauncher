@@ -44,10 +44,7 @@
    <string notr="true">* {
   font: 10pt &quot;Calibri&quot;;
 }
-QPushButton#btnSetting {
-    background-color: rgba(255,255,255,255);
-   border:0px;
-}
+
 QScrollArea#settingsScrollArea { 
   background-color: rgba(255,255,255,255);
 }
@@ -108,17 +105,20 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
        <property name="minimumSize">
         <size>
          <width>50</width>
-         <height>60</height>
+         <height>50</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
          <width>50</width>
-         <height>60</height>
+         <height>50</height>
         </size>
        </property>
        <property name="text">
         <string>Settings</string>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
@@ -158,7 +158,7 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>-11</y>
+        <y>0</y>
         <width>541</width>
         <height>649</height>
        </rect>

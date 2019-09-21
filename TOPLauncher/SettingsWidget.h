@@ -21,10 +21,12 @@ namespace TOPLauncher
         ~SettingsWidget();
 
     public:
-
+        int GetScrollAreaLocationX() const;
+        void SetSettingButtonState(bool showClosePrompt);
 
     signals:
         void ServerSettingsChanged();
+        void SettingButtonToggled(bool showClosePrompt);
 
     private:
         void LoadSettingsFromModel();
@@ -44,7 +46,7 @@ namespace TOPLauncher
     private slots :
 
 
-    void on_btnSetting_clicked();
+    void on_btnSetting_toggled(bool checked);
 
     void on_comboBoxLanguage_currentIndexChanged(int index);
     void on_btnUseSystemLang_clicked();

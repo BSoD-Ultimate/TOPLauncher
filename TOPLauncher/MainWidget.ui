@@ -47,10 +47,12 @@
 
 QFrame#frameLogin {
   background-color: rgba(211, 211, 211, 128);
+  border-radius: 5px;
 }
 
 QFrame#frameBottom {
   background-color: rgba(211, 211, 211, 128);
+  border-radius: 5px;
 }</string>
   </property>
   <property name="locale">
@@ -393,7 +395,7 @@ QFrame#frameBottom {
        <number>0</number>
       </property>
       <item>
-       <widget class="QPushButton" name="btnSettings">
+       <widget class="QPushButton" name="btnLanguage">
         <property name="minimumSize">
          <size>
           <width>100</width>
@@ -401,7 +403,7 @@ QFrame#frameBottom {
          </size>
         </property>
         <property name="text">
-         <string>Settings...</string>
+         <string>Language...</string>
         </property>
        </widget>
       </item>

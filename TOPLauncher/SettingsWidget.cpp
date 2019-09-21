@@ -121,15 +121,23 @@ namespace TOPLauncher
         ui.setupUi(this);
         assert(m_pMainWindow);
 
-        //ui.btnSetting->setAttribute(Qt::WA_TransparentForMouseEvents, false);
-        //ui.settingsScrollArea->setAttribute(Qt::WA_TransparentForMouseEvents, false);
-
         LoadSettingsFromModel();
         m_bDlgInit = true;
     }
 
     SettingsWidget::~SettingsWidget()
     {
+    }
+
+    int SettingsWidget::GetScrollAreaLocationX() const
+    {
+        auto btnSettingGeometry = ui.btnSetting->geometry();
+        return btnSettingGeometry.width();
+    }
+
+    void SettingsWidget::SetSettingButtonState(bool showClosePrompt)
+    {
+        ui.btnSetting->setChecked(showClosePrompt);
     }
 
     void SettingsWidget::LoadSettingsFromModel()
@@ -193,7 +201,6 @@ namespace TOPLauncher
 
             int lineClearDelay = ui.sliderLineClearDelay->value();
 
-
             bool ret =
                 pAppModel->SetSensitivityValue(moveSensitivity, moveSpeed, softDropSpeed) &&
                 pAppModel->SetLineClearDelayValue(lineClearDelay);
@@ -232,8 +239,9 @@ namespace TOPLauncher
         pAppModel->SaveAppConfig();
     }
 
-    void SettingsWidget::on_btnSetting_clicked()
+    void SettingsWidget::on_btnSetting_toggled(bool checked)
     {
+        emit SettingButtonToggled(checked);
     }
 
     void SettingsWidget::on_comboBoxLanguage_currentIndexChanged(int index)
