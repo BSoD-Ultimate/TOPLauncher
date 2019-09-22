@@ -414,7 +414,7 @@ QFrame#frameBottom {
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
-  <include location="TOPLauncher.qrc"/>
+  <include location="Resources/TOPLauncher.qrc"/>
  </resources>
  <connections/>
 </ui>

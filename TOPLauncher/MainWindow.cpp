@@ -8,10 +8,9 @@
 #include "OverlayEffectWidget.h"
 
 #include "AppModel.h"
-
 #include "dbUser.h"
 
-
+#include <QResizeEvent> 
 
 namespace TOPLauncher
 {

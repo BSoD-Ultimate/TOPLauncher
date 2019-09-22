@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "LanguageItemModel.h"
 
-#include "AppModel.h"
+#include "LanguageModel.h"
 
 namespace TOPLauncher
 {
@@ -27,7 +27,8 @@ namespace TOPLauncher
 
     int LanguageItemModel::rowCount(const QModelIndex & parent) const
     {
-        return util::GetAvailableLanguages().size();
+        auto pLangModel = LanguageModel::GetInstance();
+        return pLangModel->GetAvailableLanguages().size();
     }
 
     int LanguageItemModel::columnCount(const QModelIndex & parent) const
@@ -37,11 +38,14 @@ namespace TOPLauncher
 
     QVariant LanguageItemModel::data(const QModelIndex & index, int role) const
     {
+        auto pLangModel = LanguageModel::GetInstance();
+        auto langList = pLangModel->GetAvailableLanguages();
+
         if (role == Qt::DisplayRole)
         {
-            if (index.row() < util::GetAvailableLanguages().size())
+            if (index.row() < langList.size())
             {
-                return QVariant(QString::fromStdWString(util::GetAvailableLanguages()[index.row()].second));
+                return QVariant(langList[index.row()]);
             }
             else
             {
@@ -50,9 +54,9 @@ namespace TOPLauncher
         }
         else if (role & Qt::UserRole)
         {
-            if (index.row() < util::GetAvailableLanguages().size())
+            if (index.row() < langList.size())
             {
-                return QVariant(QString::fromStdWString(util::GetAvailableLanguages()[index.row()].first));
+                return QVariant(pLangModel->GetTranslatorAt(index.row())->langShowName());
             }
             else
             {

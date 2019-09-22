@@ -4,6 +4,8 @@
 #include "AppModel.h"
 #include "LanguageItemModel.h"
 
+#include <QMessageBox>
+
 namespace TOPLauncher
 {
     DlgLanguage::DlgLanguage(QWidget *parent)
@@ -16,7 +18,7 @@ namespace TOPLauncher
         auto pAppModel = AppModel::GetInstance();
 
         ui.listLanguages->setCurrentIndex(
-            m_pLanguageItemModel->index(util::GetLanguageIndex(pAppModel->GetDisplayLanguage()), 0));
+            m_pLanguageItemModel->index(0,0));/*util::GetLanguageIndex(pAppModel->GetDisplayLanguage()), 0) */
 
     }
 
@@ -35,13 +37,10 @@ namespace TOPLauncher
 
     void DlgLanguage::on_btnUseSystemLang_clicked()
     {
-        std::wstring langId = util::GetSystemPreferredLanguage();
-        QString displayFormat = QObject::tr("Would you like to use your system language \"{}\" as the display language?");
+        QString langId = util::GetSystemLanguageName();
+        QString promptString = QObject::tr("Would you like to use your system language \"%1\" as the display language?").arg(langId);
 
-        std::wstring langShow = util::GetLanguageShowString(langId);
-        std::wstring tipString = util::wstring_format(displayFormat.toStdWString().c_str(), langShow);
-
-        if (QMessageBox::question(this, QObject::tr("Question"), QString::fromStdWString(tipString), QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes)
+        if (QMessageBox::question(this, QObject::tr("Question"), promptString, QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes)
         {
             auto pAppModel = AppModel::GetInstance();
             pAppModel->SetDisplayLanguage(langId);
@@ -63,7 +62,7 @@ namespace TOPLauncher
     {
         auto langId = ui.listLanguages->currentIndex().data(Qt::UserRole).toString();
         auto pAppModel = AppModel::GetInstance();
-        pAppModel->SetDisplayLanguage(langId.toStdWString());
+        pAppModel->SetDisplayLanguage(langId);
 
         QDialog::accept();
     }
@@ -71,7 +70,7 @@ namespace TOPLauncher
     void DlgLanguage::reject()
     {
         auto pAppModel = AppModel::GetInstance();
-        util::SetDisplayLanguage(pAppModel->GetDisplayLanguage());
+        //util::SetDisplayLanguage(pAppModel->GetDisplayLanguage());
 
         QDialog::accept();
     }
@@ -80,7 +79,7 @@ namespace TOPLauncher
     {
         auto langId = ui.listLanguages->currentIndex().data(Qt::UserRole).toString();
 
-        util::SetDisplayLanguage(langId.toStdWString());
+        //util::SetDisplayLanguage(langId.toStdWString());
     }
 }
 

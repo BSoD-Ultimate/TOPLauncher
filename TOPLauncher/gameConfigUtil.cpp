@@ -105,7 +105,7 @@ namespace TOPLauncher
                 auto pAppModel = AppModel::GetInstance();
                 filesystem::path archivePath = pAppModel->GetGameExecutablePath().parent_path() / filesystem::path(L"config") / L"SJE.JHH";
 
-                filesystem::path unpackPath = filesystem::path(GetTempDirectory()) / L"config";
+                filesystem::path unpackPath = filesystem::path(GetTempDirectory().toStdWString()) / L"config";
 
                 std::string internalFolderName;
                 if (!UnpackSJEJHHArchive(archivePath, unpackPath, internalFolderName))
@@ -130,7 +130,7 @@ namespace TOPLauncher
                 auto pAppModel = AppModel::GetInstance();
                 filesystem::path archivePath = pAppModel->GetGameExecutablePath().parent_path() / filesystem::path(L"config") / L"SJE.JHH";
 
-                filesystem::path unpackPath = filesystem::path(GetTempDirectory()) / L"config";
+                filesystem::path unpackPath = filesystem::path(GetTempDirectory().toStdWString()) / L"config";
 
                 std::string internalFolderName;
                 if (!UnpackSJEJHHArchive(archivePath, unpackPath, internalFolderName))
@@ -189,7 +189,7 @@ namespace TOPLauncher
                 auto pAppModel = AppModel::GetInstance();
                 filesystem::path archivePath = pAppModel->GetGameExecutablePath().parent_path() / filesystem::path(L"config") / L"SJE.JHH";
 
-                filesystem::path unpackPath = filesystem::path(GetTempDirectory()) / L"config";
+                filesystem::path unpackPath = filesystem::path(GetTempDirectory().toStdWString()) / L"config";
 
                 std::string internalFolderName;
                 if (!UnpackSJEJHHArchive(archivePath, unpackPath, internalFolderName))
@@ -211,7 +211,7 @@ namespace TOPLauncher
                 auto pAppModel = AppModel::GetInstance();
                 filesystem::path archivePath = pAppModel->GetGameExecutablePath().parent_path() / filesystem::path(L"config") / L"SJE.JHH";
 
-                filesystem::path unpackPath = filesystem::path(GetTempDirectory()) / L"config";
+                filesystem::path unpackPath = filesystem::path(GetTempDirectory().toStdWString()) / L"config";
 
                 std::string internalFolderName;
                 if (!UnpackSJEJHHArchive(archivePath, unpackPath, internalFolderName))

@@ -39,6 +39,8 @@ source_group(db FILES ${DB_SRC})
 set(MODEL_SRC
   AppModel.h 
   AppModel.cpp 
+  LanguageModel.h 
+  LanguageModel.cpp
 )
 source_group(model FILES ${MODEL_SRC})
 
@@ -67,8 +69,6 @@ set(UTIL_SRC
   utils.cpp 
   timeUtil.h 
   timeUtil.cpp 
-  guiUtil.h 
-  guiUtil.cpp 
   gameConfigUtil.h 
   gameConfigUtil.cpp 
 )
@@ -84,8 +84,9 @@ set(FORM_FILES_SRC
 source_group(Form_Files FILES ${FORM_FILES_SRC})
 
 set(RESOURCE_SRC
-  icon.ico 
-  TOPLauncher.qrc 
+  Resources/translations.json
+  Resources/icon.ico 
+  Resources/TOPLauncher.qrc 
   TOPLauncher.rc 
 )
 source_group(Resource_Files FILES ${RESOURCE_SRC})
@@ -93,7 +94,7 @@ source_group(Resource_Files FILES ${RESOURCE_SRC})
 # Qt5 moc uic rcc...
 qt5_wrap_cpp(COMPILED_MOC_FILES ${UI_HEADERS})
 qt5_wrap_ui(COMPILED_UI_FILES ${FORM_FILES_SRC})
-qt5_add_resources(COMPILED_RESOURCE_FILES TOPLauncher.qrc)
+qt5_add_resources(COMPILED_RESOURCE_FILES Resources/TOPLauncher.qrc)
 source_group(Generated_Files FILES ${COMPILED_MOC_FILES} ${COMPILED_UI_FILES} ${COMPILED_RESOURCE_FILES})
 
 #
@@ -137,7 +138,6 @@ set(QT5_LINK_LIBRARIES
 
 # third-party libraries link
 set(THIRD_PARTY_LINK_LIBRARIES
-  fmt
   SQLiteCpp
   inih 
   sqlite3

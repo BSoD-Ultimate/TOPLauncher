@@ -34,13 +34,13 @@
   <property name="styleSheet">
    <string notr="true">QWidget#centralwidget
 {
-    background: url(:/TOPLauncher/Resources/bg.png);
+    background: url(:/ui/bg.png);
 }</string>
   </property>
   <widget class="QWidget" name="centralwidget"/>
  </widget>
  <resources>
-  <include location="TOPLauncher.qrc"/>
+  <include location="Resources/TOPLauncher.qrc"/>
  </resources>
  <connections/>
 </ui>

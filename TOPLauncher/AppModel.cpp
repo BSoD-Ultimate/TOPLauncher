@@ -4,7 +4,6 @@
 #include "dbDef.h"
 #include "dbUser.h"
 
-#include "guiUtil.h"
 #include "gameConfigUtil.h"
 
 #include <SQLiteCpp/Database.h>
@@ -26,16 +25,10 @@ namespace TOPLauncher
     // db name 
     static const std::wstring userDBName = L"User.db";
 
-    // reserved server list
-    static const std::vector<ServerData> reservedServerList
-    {
-        { L"TOP Official Server", L"tetrisonline.pl", L"http://tetrisonline.pl/top/register.php" }
-    };
-
     struct AppConfig
     {
         // general
-        std::wstring displayLanguage;
+        QString displayLanguage;
         filesystem::path gameExecutablePath;
         filesystem::path gameDirectory;
 
@@ -44,10 +37,10 @@ namespace TOPLauncher
 
         AppConfig()
             : serverList({
-                std::make_shared<ServerData>(ServerData{ L"TOP Official Server", L"tetrisonline.pl", L"http://tetrisonline.pl/top/register.php" })
+                std::make_shared<ServerData>(ServerData{ "TOP Official Server", "tetrisonline.pl", "http://tetrisonline.pl/top/register.php" })
                 })
         {
-            displayLanguage = util::GetSystemPreferredLanguage();
+            displayLanguage = util::GetSystemLanguageName();
         }
 
         bool FromJSON(const std::string& json);
@@ -89,7 +82,7 @@ namespace TOPLauncher
             auto generalSection = doc["general"].GetObject();
             if (generalSection.HasMember("language") && generalSection["language"].IsString())
             {
-                displayLanguage = util::wstringFromUTF8(generalSection["language"].GetString());
+                displayLanguage = QString::fromStdString(generalSection["language"].GetString());
             }
             if (generalSection.HasMember("game_executable") && generalSection["game_executable"].IsString())
             {
@@ -111,15 +104,15 @@ namespace TOPLauncher
                     auto serverObject = serverArray[i].GetObject();
                     if (serverObject.HasMember("name") && serverObject["name"].IsString())
                     {
-                        newServerData->serverName = util::wstringFromUTF8(serverObject["name"].GetString());
+                        newServerData->serverName = QString::fromStdString(serverObject["name"].GetString());
                     }
                     if (serverObject.HasMember("address") && serverObject["address"].IsString())
                     {
-                        newServerData->serverAddress = util::wstringFromUTF8(serverObject["address"].GetString());
+                        newServerData->serverAddress = QString::fromStdString(serverObject["address"].GetString());
                     }
                     if (serverObject.HasMember("registerURL") && serverObject["registerURL"].IsString())
                     {
-                        newServerData->registerURL = util::wstringFromUTF8(serverObject["registerURL"].GetString());
+                        newServerData->registerURL = QString::fromStdString(serverObject["registerURL"].GetString());
                     }
 
                     serverList.emplace_back(newServerData);
@@ -141,10 +134,10 @@ namespace TOPLauncher
             rapidjson::Value generalSection;
             generalSection.SetObject();
 
-            auto displayLangUTF8 = util::wstringToUTF8(displayLanguage);
-            generalSection.AddMember("language", Value(displayLangUTF8.c_str(), displayLangUTF8.length(), doc.GetAllocator()), doc.GetAllocator());
+            auto displayLangUTF8 = displayLanguage.toUtf8();
+            generalSection.AddMember("language", Value(displayLangUTF8.constData(), displayLangUTF8.length(), doc.GetAllocator()), doc.GetAllocator());
 
-            auto gameExePathUTF8 = util::wstringToUTF8(gameExecutablePath.wstring());
+            auto gameExePathUTF8 = gameExecutablePath.u8string();
             generalSection.AddMember("game_executable", Value(gameExePathUTF8.c_str(), gameExePathUTF8.length(), doc.GetAllocator()), doc.GetAllocator());
 
             doc.AddMember("general", generalSection, doc.GetAllocator());
@@ -160,12 +153,12 @@ namespace TOPLauncher
                 rapidjson::Value serverObj;
                 serverObj.SetObject();
 
-                auto serverNameUTF8 = util::wstringToUTF8(serverData->serverName);
-                serverObj.AddMember("name", Value(serverNameUTF8.c_str(), serverNameUTF8.length(), doc.GetAllocator()), doc.GetAllocator());
-                auto serverAddrUTF8 = util::wstringToUTF8(serverData->serverAddress);
-                serverObj.AddMember("address", Value(serverAddrUTF8.c_str(), serverAddrUTF8.length(), doc.GetAllocator()), doc.GetAllocator());
-                auto registerURLUTF8 = util::wstringToUTF8(serverData->registerURL);
-                serverObj.AddMember("registerURL", Value(registerURLUTF8.c_str(), registerURLUTF8.length(), doc.GetAllocator()), doc.GetAllocator());
+                auto serverNameUTF8 = serverData->serverName.toUtf8();
+                serverObj.AddMember("name", Value(serverNameUTF8.constData(), serverNameUTF8.length(), doc.GetAllocator()), doc.GetAllocator());
+                auto serverAddrUTF8 = serverData->serverAddress.toUtf8();
+                serverObj.AddMember("address", Value(serverAddrUTF8.constData(), serverAddrUTF8.length(), doc.GetAllocator()), doc.GetAllocator());
+                auto registerURLUTF8 = serverData->registerURL.toUtf8();
+                serverObj.AddMember("registerURL", Value(registerURLUTF8.constData(), registerURLUTF8.length(), doc.GetAllocator()), doc.GetAllocator());
 
                 serverArray.PushBack(serverObj, doc.GetAllocator());
             }
@@ -183,6 +176,7 @@ namespace TOPLauncher
     AppModel::AppModel()
         : m_pAppConfig(new AppConfig())
     {
+        InitAppConfig();
     }
 
 
@@ -196,37 +190,51 @@ namespace TOPLauncher
         return instance;
     }
 
-    bool AppModel::InitAppConfig()
-    {
-        m_pUserDB = InitUserDB();
-
-        if (!m_pUserDB)
-        {
-            return false;
-        }
-
-        if (!LoadAppConfig())
-        {
-            // use defaults then save
-            SaveAppConfig();
-        }
-
-        return true;
-    }
-
-    bool AppModel::InitGameConfig()
+    bool AppModel::InitModelData(QString * outError)
     {
         try
         {
-            FindGameExecutablePath();
-            LoadSavedConfigFromGame();
-
+            InitDatabase();
+            InitGameConfig();
             return true;
         }
         catch (const std::runtime_error& e)
         {
+            if (outError)
+            {
+                *outError = QString::fromStdString(std::string(e.what()));
+            }
             return false;
         }
+
+    }
+
+    void AppModel::InitAppConfig()
+    {
+        if (!LoadAppConfigFromFile())
+        {
+            // use defaults then save
+            if (!SaveAppConfigToFile())
+            {
+                throw std::runtime_error("Unable to load the saved config, or saving default config to file failed.");
+            }
+        }
+    }
+
+    void AppModel::InitDatabase()
+    {
+        m_pUserDB = OpenUserDB();
+
+        if (!m_pUserDB)
+        {
+            throw std::runtime_error("Could not open the saved users database.");
+        }
+    }
+
+    void AppModel::InitGameConfig()
+    {
+        FindGameExecutablePath();
+        LoadSavedConfigFromGame();
     }
 
     std::shared_ptr<SQLite::Database> AppModel::GetUserDB()
@@ -234,12 +242,12 @@ namespace TOPLauncher
         assert(m_pUserDB);
         if (!m_pUserDB)
         {
-            throw SQLite::Exception("Attempt to open a invalid database handle");
+            throw SQLite::Exception("Attempt to open a invalid database handle.");
         }
         return m_pUserDB;
     }
 
-    bool AppModel::LoadAppConfig()
+    bool AppModel::LoadAppConfigFromFile()
     {
         std::wstring configFilePath = appConfigFileName;
         if (!filesystem::exists(configFilePath))
@@ -262,7 +270,7 @@ namespace TOPLauncher
         return m_pAppConfig->FromJSON(std::string(configBuf.get(), configSize));
     }
 
-    bool AppModel::SaveAppConfig()
+    bool AppModel::SaveAppConfigToFile()
     {
         std::wstring configFilePath = appConfigFileName;
 
@@ -280,29 +288,17 @@ namespace TOPLauncher
         return true;
     }
 
-    std::wstring AppModel::GetDisplayLanguage() const
+    QString AppModel::GetDisplayLanguage() const
     {
         return m_pAppConfig->displayLanguage;
     }
 
-    bool AppModel::SetDisplayLanguage(const std::wstring & newLanguage)
+    bool AppModel::SetDisplayLanguage(const QString& newLanguage)
     {
-        auto& availableLanguages = util::GetAvailableLanguages();
 
-        auto iter = std::find_if(availableLanguages.cbegin(), availableLanguages.cend(),
-            [&newLanguage](const std::pair<std::wstring, std::wstring>& lang)
-        {
-            return lang.first == newLanguage;
-        });
-
-        assert(iter != availableLanguages.cend());
-        if (iter == availableLanguages.cend())
-        {
-            return false;
-        }
+        // TODO newLanguage not found return false 
 
         m_pAppConfig->displayLanguage = newLanguage;
-        util::SetDisplayLanguage(m_pAppConfig->displayLanguage);
 
         return true;
     }
@@ -315,6 +311,7 @@ namespace TOPLauncher
     void AppModel::SetGameExecutablePath(const std::wstring& exePath)
     {
         auto oldPath = m_pAppConfig->gameExecutablePath;
+        
         m_pAppConfig->gameExecutablePath = exePath;
         m_pAppConfig->gameDirectory = filesystem::path(exePath).parent_path();
 
@@ -344,7 +341,7 @@ namespace TOPLauncher
         return true;
     }
 
-    bool AppModel::RemoveServer(const std::wstring& serverName)
+    bool AppModel::RemoveServer(const QString& serverName)
     {
         auto iter = std::find_if(m_pAppConfig->serverList.cbegin(), m_pAppConfig->serverList.cend(),
             [serverName](const std::shared_ptr<ServerData>& data)
@@ -364,7 +361,7 @@ namespace TOPLauncher
         }
     }
 
-    bool AppModel::ModifyServer(const std::wstring & serverName, const std::shared_ptr<ServerData> newServerData)
+    bool AppModel::ModifyServer(const QString& serverName, const std::shared_ptr<ServerData> newServerData)
     {
         auto iter = std::find_if(m_pAppConfig->serverList.begin(), m_pAppConfig->serverList.end(),
             [serverName](const std::shared_ptr<ServerData>& data)
@@ -383,7 +380,7 @@ namespace TOPLauncher
         }
     }
 
-    std::shared_ptr<ServerData> AppModel::GetServerData(const std::wstring & serverName)
+    std::shared_ptr<ServerData> AppModel::GetServerData(const QString& serverName)
     {
         auto iter = std::find_if(m_pAppConfig->serverList.cbegin(), m_pAppConfig->serverList.cend(),
             [serverName](const std::shared_ptr<ServerData>& data)
@@ -443,15 +440,15 @@ namespace TOPLauncher
         return ret;
     }
 
-    std::shared_ptr<SQLite::Database> AppModel::InitUserDB()
+    std::shared_ptr<SQLite::Database> AppModel::OpenUserDB()
     {
         try
         {
-            filesystem::path userDBPath = filesystem::path(util::GetWorkDirectory()) / userDBName;
-            auto pDB = std::make_shared<SQLite::Database>(util::wstringToUTF8(userDBPath.wstring()), SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE);
+            filesystem::path userDBPath = filesystem::path(util::GetWorkDirectory().toStdWString()) / userDBName;
+            auto pDB = std::make_shared<SQLite::Database>(userDBPath.u8string(), SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE);
             pDB->setBusyTimeout(5000);
 
-            pDB->exec(db::table_user::user::CreateTableSQL());
+            pDB->exec(db::table_user::user::CreateTableSQL().toUtf8().toStdString());
 
             return pDB;
         }
@@ -467,16 +464,10 @@ namespace TOPLauncher
     {
         if (m_pAppConfig->gameExecutablePath.empty())
         {
-            filesystem::path workDir = util::GetWorkDirectory();
+            filesystem::path workDir = util::GetWorkDirectory().toUtf8().toStdString();
             filesystem::path gameExePath = workDir / gameExecutableName;
 
             if (!filesystem::exists(gameExePath))
-            {
-                //std::string errorMsg = util::string_format("Could not find game executable \"{}\" in current working directory!",
-                //    util::wstringToUTF8(gameExecutableName));
-                //throw std::runtime_error(errorMsg);
-            }
-            else
             {
                 SetGameExecutablePath(gameExePath);
             }
@@ -492,8 +483,14 @@ namespace TOPLauncher
 
         m_pGameConfig.reset(new GameConfig());
 
-        util::game::ReadMoveSensitivityConfig(m_pGameConfig->moveSensitivity, m_pGameConfig->moveSpeed, m_pGameConfig->softDropSpeed);
-        util::game::ReadLineClearDelayConfig(m_pGameConfig->lineClearDelay);
+        bool readConfigRet =
+            util::game::ReadMoveSensitivityConfig(m_pGameConfig->moveSensitivity, m_pGameConfig->moveSpeed, m_pGameConfig->softDropSpeed) &&
+            util::game::ReadLineClearDelayConfig(m_pGameConfig->lineClearDelay);
+
+        if (!readConfigRet)
+        {
+            m_pGameConfig.reset();
+        }
     }
 }
 

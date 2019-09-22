@@ -9,6 +9,8 @@
 
 #include "dbUser.h"
 
+#include <QMessageBox>
+
 namespace TOPLauncher
 {
     Q_DECLARE_METATYPE(std::weak_ptr<ServerData>);
@@ -57,7 +59,7 @@ namespace TOPLauncher
                 {
                     auto pServerData = m_serverList[index.row()].lock();
 
-                    return QVariant(QString::fromStdWString(pServerData->serverName));
+                    return QVariant(pServerData->serverName);
                 }
                 else
                 {
@@ -71,7 +73,7 @@ namespace TOPLauncher
             return QVariant();
         }
 
-        int GetServerIndex(const std::wstring& serverName)
+        int GetServerIndex(const QString& serverName)
         {
             for (int i = 0; i < m_serverList.size(); i++)
             {
@@ -139,7 +141,7 @@ namespace TOPLauncher
         assert(pListWidget && pUserData);
 
         auto pNewItem = new QListWidgetItem();
-        pNewItem->setText(QString::fromStdWString(pUserData->username));
+        pNewItem->setText(pUserData->username);
         pNewItem->setData(Qt::UserRole, QVariant::fromValue(pUserData));
         pListWidget->addItem(pNewItem);
         pListWidget->setItemWidget(pNewItem, new LoginUserItem(pListWidget, *this, pUserData->username, pUserData->serverName));
@@ -160,25 +162,25 @@ namespace TOPLauncher
         InitData();
     }
 
-    void MainWidget::LoadLastLoginUser(const std::wstring& serverName)
+    void MainWidget::LoadLastLoginUser(const QString& serverName)
     {
         auto pLastLoginUser = db::LoadLastLoginUser(serverName);
 
         if (pLastLoginUser)
         {
-            int lastLoginUserIndex = ui.comboUsername->findText(QString::fromStdWString(pLastLoginUser->username));
+            int lastLoginUserIndex = ui.comboUsername->findText(pLastLoginUser->username);
             ui.comboUsername->setCurrentIndex(lastLoginUserIndex != -1 ? lastLoginUserIndex : 0);
 
-            ui.comboUsername->setCurrentText(QString::fromStdWString(pLastLoginUser->username));
+            ui.comboUsername->setCurrentText(pLastLoginUser->username);
             if (pLastLoginUser->savePassword)
             {
                 ui.chkRememberPasswd->setChecked(true);
-                ui.editPassword->setText(QString::fromStdWString(pLastLoginUser->password));
+                ui.editPassword->setText(pLastLoginUser->password);
             }
         }
     }
 
-    void MainWidget::ReloadServerData(const std::wstring& serverName)
+    void MainWidget::ReloadServerData(const QString& serverName)
     {
         ui.comboUsername->clear();
         ui.editPassword->setText("");
@@ -197,7 +199,7 @@ namespace TOPLauncher
         LoadLastLoginUser(serverName);
     }
 
-    void MainWidget::ReloadUserData(const std::wstring& username, const std::wstring& serverName)
+    void MainWidget::ReloadUserData(const QString& username, const QString& serverName)
     {
         // refill user profile
         auto pUserData = db::LoadLoginUser(username, serverName);
@@ -205,8 +207,8 @@ namespace TOPLauncher
 
         if (pUserData)
         {
-            ui.comboUsername->setCurrentText(QString::fromStdWString(pUserData->username));
-            ui.editPassword->setText(QString::fromStdWString(pUserData->password));
+            ui.comboUsername->setCurrentText(pUserData->username);
+            ui.editPassword->setText(pUserData->password);
             ui.chkRememberPasswd->setChecked(pUserData->savePassword);
         }
         else
@@ -250,8 +252,8 @@ namespace TOPLauncher
             return;
         }
 
-        std::wstring username = ui.comboUsername->currentText().toStdWString();
-        std::wstring password = ui.editPassword->text().toStdWString();
+        QString username = ui.comboUsername->currentText();
+        QString password = ui.editPassword->text();
 
         db::DBUserData userData;
         userData.username = username;
@@ -269,22 +271,23 @@ namespace TOPLauncher
 
         // start the game
         {
-            std::wstring serverAddress = serverData->serverAddress;
+            QString serverAddress = serverData->serverAddress;
 
-            std::wstring gamePath = pAppModel->GetGameExecutablePath();
+            QString gamePath = QString::fromStdString(pAppModel->GetGameExecutablePath().u8string());
 
-            std::wstring startupArgs = util::GetGameStartupArgs(serverAddress, username, password);
+            QString startupArgs = util::GetGameStartupArgs(serverAddress, username, password);
 
-            std::wstring startupArgFullString = util::wstring_format(L"\"{}\" {}", gamePath, startupArgs);
-            std::unique_ptr<wchar_t[]> startupArgBuf(new wchar_t[startupArgFullString.length() + 1]());
-            wcscpy_s(startupArgBuf.get(), startupArgFullString.length() + 1, startupArgFullString.c_str());
+            std::wstring startupArgFull = QString("\"%1\" %2").arg(gamePath, startupArgs).toStdWString();
+
+            std::unique_ptr<wchar_t[]> startupArgBuf(new wchar_t[startupArgFull.length() + 1]());
+            wcscpy_s(startupArgBuf.get(), startupArgFull.length() + 1, startupArgFull.c_str());
 
             STARTUPINFOW si = { 0 };
 
             PROCESS_INFORMATION pi = { 0 };
 
             BOOL startupSuccess = CreateProcessW(
-                gamePath.c_str(),
+                gamePath.toStdWString().c_str(),
                 startupArgBuf.get(),
                 NULL,
                 NULL,

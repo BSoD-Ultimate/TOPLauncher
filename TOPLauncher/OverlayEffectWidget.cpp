@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "OverlayEffectWidget.h"
+#include <QPainter>
 
 namespace TOPLauncher
 {

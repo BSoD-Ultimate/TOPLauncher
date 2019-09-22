@@ -25,9 +25,9 @@ namespace TOPLauncher
         MainWidget(QWidget *parent = Q_NULLPTR);
         ~MainWidget();
 
-        void LoadLastLoginUser(const std::wstring& serverName);
-        void ReloadServerData(const std::wstring& serverName);
-        void ReloadUserData(const std::wstring& username, const std::wstring& serverName);
+        void LoadLastLoginUser(const QString& serverName);
+        void ReloadServerData(const QString& serverName);
+        void ReloadUserData(const QString& username, const QString& serverName);
 
     private:
 

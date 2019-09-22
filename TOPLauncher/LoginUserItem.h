@@ -15,11 +15,11 @@ namespace TOPLauncher
         Q_OBJECT
 
     public:
-        LoginUserItem(QWidget *parent, MainWidget& pOwnerWindow, const std::wstring& username, const std::wstring& serverName);
+        LoginUserItem(QWidget *parent, MainWidget& pOwnerWindow, const QString& username, const QString& serverName);
         ~LoginUserItem();
 
-        std::wstring username() const;
-        std::wstring serverName() const;
+        QString username() const;
+        QString serverName() const;
 
     private slots:
         void on_btnRemoveUser_clicked();
@@ -29,8 +29,8 @@ namespace TOPLauncher
 
         MainWidget& m_ownerWindow;
 
-        std::wstring m_username;
-        std::wstring m_serverName;
+        QString m_username;
+        QString m_serverName;
     };
 
 }

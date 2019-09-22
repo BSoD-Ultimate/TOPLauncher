@@ -48,19 +48,19 @@
   border-bottom-left-radius: 5px;
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
-  image: url(:/TOPLauncher/Resources/setting-icon-normal.png);
+  image: url(:/ui/setting-icon-normal.png);
 }
 
 QPushButton#btnSetting:hover {
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
-  image: url(:/TOPLauncher/Resources/setting-icon-hover.png);
+  image: url(:/ui/setting-icon-hover.png);
 }
 
 QPushButton#btnSetting:checked {
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
-  image: url(:/TOPLauncher/Resources/forward-icon.png);
+  image: url(:/ui/forward-icon.png);
 }
 
 QScrollArea#settingsScrollArea { 
@@ -860,7 +860,7 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
   </layout>
  </widget>
  <resources>
-  <include location="TOPLauncher.qrc"/>
+  <include location="Resources/TOPLauncher.qrc"/>
  </resources>
  <connections/>
 </ui>

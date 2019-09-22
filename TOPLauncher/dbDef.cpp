@@ -7,19 +7,19 @@ namespace TOPLauncher
     {
         namespace table_user
         {
-            const std::string t_user = "t_user";
+            const QString t_user = "t_user";
 
             namespace user
             {
-                const std::string c_serverName = "c_server_name";
-                const std::string c_username = "c_username";
-                const std::string c_password = "c_password";
-                const std::string c_rememberPassword = "c_remember_password";
-                const std::string c_lastLoginTime = "c_last_login_time";
+                const QString c_serverName = "c_server_name";
+                const QString c_username = "c_username";
+                const QString c_password = "c_password";
+                const QString c_rememberPassword = "c_remember_password";
+                const QString c_lastLoginTime = "c_last_login_time";
 
-                std::string CreateTableSQL()
+                QString CreateTableSQL()
                 {
-                    static const std::string sql = "create table if not exists "
+                    static const QString sql = "create table if not exists "
                         + t_user + " ( "
                         + c_serverName + " nvarchar(200) not null, "
                         + c_username + " text not null, "

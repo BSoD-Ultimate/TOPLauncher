@@ -4,6 +4,8 @@
 
 #pragma once
 
+#include <QString>
+
 namespace SQLite
 {
     class Database;
@@ -16,9 +18,9 @@ namespace TOPLauncher
     {
         struct DBUserData
         {
-            std::wstring serverName;
-            std::wstring username;
-            std::wstring password;
+            QString serverName;
+            QString username;
+            QString password;
             bool savePassword;
             util::Time lastLoginTime;
 
@@ -28,17 +30,17 @@ namespace TOPLauncher
             std::unique_ptr<SQLite::Statement> GetUpdateStatement(SQLite::Database& db) const;
         };
 
-        bool LoadUsersFromServer(const std::wstring& serverName, std::vector<std::shared_ptr<DBUserData>>& userList);
+        bool LoadUsersFromServer(const QString& serverName, std::vector<std::shared_ptr<DBUserData>>& userList);
 
-        std::shared_ptr<DBUserData> LoadLoginUser(const std::wstring& username, const std::wstring& serverName);
-        std::shared_ptr<DBUserData> LoadLastLoginUser(const std::wstring& serverName = L"");
+        std::shared_ptr<DBUserData> LoadLoginUser(const QString& username, const QString& serverName);
+        std::shared_ptr<DBUserData> LoadLastLoginUser(const QString& serverName = "");
 
         bool SaveLoginUser(const DBUserData& userInfo);
         bool SaveLoginUser(std::vector<std::shared_ptr<DBUserData>>& userList);
 
-        bool RemoveLoginUser(const std::wstring& serverName, const std::wstring& username);
+        bool RemoveLoginUser(const QString& serverName, const QString& username);
 
-        bool RemoveAllUsersInServer(const std::wstring& serverName);
+        bool RemoveAllUsersInServer(const QString& serverName);
     }
 
 }

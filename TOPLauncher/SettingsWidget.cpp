@@ -4,7 +4,11 @@
 #include "MainWidget.h"
 
 #include "AppModel.h"
+#include "LanguageModel.h"
 #include "LanguageItemModel.h"
+
+#include <QMessageBox>
+#include <QFileDialog>
 
 namespace TOPLauncher
 {
@@ -58,7 +62,7 @@ namespace TOPLauncher
                     {
                         return QVariant();
                     }
-                    return QVariant(QString::fromStdWString(serverList[dataIndex]->serverName));
+                    return QVariant(serverList[dataIndex]->serverName);
                 }
                 else
                 {
@@ -121,6 +125,8 @@ namespace TOPLauncher
         ui.setupUi(this);
         assert(m_pMainWindow);
 
+        EnableGameSettings(false);
+
         LoadSettingsFromModel();
         m_bDlgInit = true;
     }
@@ -140,6 +146,12 @@ namespace TOPLauncher
         ui.btnSetting->setChecked(showClosePrompt);
     }
 
+    void SettingsWidget::EnableGameSettings(bool enable)
+    {
+        ui.groupServerSettings->setEnabled(enable);
+        ui.groupControlSettings->setEnabled(enable);
+    }
+
     void SettingsWidget::LoadSettingsFromModel()
     {
         LoadGeneralSettings();
@@ -152,7 +164,7 @@ namespace TOPLauncher
         auto pAppModel = AppModel::GetInstance();
 
         ui.comboBoxLanguage->setModel(m_pLanguageItemModel.get());
-        ui.comboBoxLanguage->setCurrentIndex(util::GetLanguageIndex(AppModel::GetInstance()->GetDisplayLanguage()));
+        //ui.comboBoxLanguage->setCurrentIndex(util::GetLanguageIndex(AppModel::GetInstance()->GetDisplayLanguage()));
         ui.editGameExecutablePath->setText(QString::fromStdWString(pAppModel->GetGameExecutablePath()));
     }
 
@@ -170,6 +182,7 @@ namespace TOPLauncher
 
         if (pAppModel->IsGameConfigAvailable())
         {
+            EnableGameSettings(true);
             int moveSensitivity = 0, moveSpeed = 0, softDropSpeed = 0;
             pAppModel->GetSensitivityValue(moveSensitivity, moveSpeed, softDropSpeed);
 
@@ -185,6 +198,10 @@ namespace TOPLauncher
             ui.spinBoxMoveSpeed->setValue(moveSpeed);
             ui.spinBoxSoftDropSpeed->setValue(softDropSpeed);
             ui.spinBoxLineClearDelay->setValue(lineClearDelay);
+        }
+        else
+        {
+            EnableGameSettings(false);
         }
 
     }
@@ -236,7 +253,7 @@ namespace TOPLauncher
     {
         auto pAppModel = AppModel::GetInstance();
 
-        pAppModel->SaveAppConfig();
+        pAppModel->SaveAppConfigToFile();
     }
 
     void SettingsWidget::on_btnSetting_toggled(bool checked)
@@ -248,27 +265,33 @@ namespace TOPLauncher
     {
         auto langId = ui.comboBoxLanguage->currentData(Qt::UserRole).toString();
         auto pAppModel = AppModel::GetInstance();
-        if (pAppModel->GetDisplayLanguage() != langId.toStdWString() && m_bDlgInit)
+        if (pAppModel->GetDisplayLanguage() != langId && m_bDlgInit)
         {
-            pAppModel->SetDisplayLanguage(langId.toStdWString());
+            pAppModel->SetDisplayLanguage(langId);
         }
     }
 
     void SettingsWidget::on_btnUseSystemLang_clicked()
     {
-        std::wstring langId = util::GetSystemPreferredLanguage();
-        QString displayFormat = QObject::tr("Would you like to use your system language \"{}\" as the display language?");
+        QString langId = util::GetSystemLanguageName();
+        QString displayFormat = QObject::tr("Would you like to use your system language \"%1\" as the display language?");
 
-        std::wstring langShow = util::GetLanguageShowString(langId);
-        std::wstring tipString = util::wstring_format(displayFormat.toStdWString().c_str(), langShow);
+        auto pLangModel = LanguageModel::GetInstance();
 
-        if (QMessageBox::question(this, QObject::tr("Question"), QString::fromStdWString(tipString), QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes)
+        UITranslator* pTranslator = nullptr;
+        int langIndex = 0;
+        bool translatorFound = pLangModel->FindTranslator(langId, &pTranslator, &langIndex);
+        assert(translatorFound && pTranslator);
+
+        QString langShow = pTranslator->langShowName();
+        QString promptText = displayFormat.arg(langShow);
+
+        if (QMessageBox::question(this, QObject::tr("Question"), promptText, QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes)
         {
             auto pAppModel = AppModel::GetInstance();
             if (pAppModel->SetDisplayLanguage(langId))
             {
-                ui.comboBoxLanguage->setCurrentIndex(
-                    util::GetLanguageIndex(pAppModel->GetDisplayLanguage()));
+                ui.comboBoxLanguage->setCurrentIndex(langIndex);
             }
         }
     }
@@ -308,9 +331,9 @@ namespace TOPLauncher
         {
             // normal server profile
             ui.btnRemoveServerProfile->setEnabled(true);
-            ui.editServerName->setText(QString::fromStdWString(serverData->serverName));
-            ui.editServerHost->setText(QString::fromStdWString(serverData->serverAddress));
-            ui.editRegisterURL->setText(QString::fromStdWString(serverData->registerURL));
+            ui.editServerName->setText(serverData->serverName);
+            ui.editServerHost->setText(serverData->serverAddress);
+            ui.editRegisterURL->setText(serverData->registerURL);
         }
 
     }
@@ -321,11 +344,11 @@ namespace TOPLauncher
         auto oldServerData = ui.serverList->currentIndex().data(Qt::UserRole).value<std::shared_ptr<ServerData>>();
 
         auto newServerData = std::make_shared<ServerData>();
-        newServerData->serverName = ui.editServerName->text().toStdWString();
-        newServerData->serverAddress = ui.editServerHost->text().toStdWString();
-        newServerData->registerURL = ui.editRegisterURL->text().toStdWString();
+        newServerData->serverName = ui.editServerName->text();
+        newServerData->serverAddress = ui.editServerHost->text();
+        newServerData->registerURL = ui.editRegisterURL->text();
 
-        if (newServerData->serverName.empty())
+        if (newServerData->serverName.isEmpty())
         {
             QMessageBox::critical(this, QObject::tr("Error"), QObject::tr("The field \"Server name\" should not empty."));
             return;
@@ -389,22 +412,21 @@ namespace TOPLauncher
         {
             std::shared_ptr<ServerData> pData = serverData[index - 1];
             assert(pData);
-            ui.editServerName->setText(QString::fromStdWString(pData->serverName));
-            ui.editServerHost->setText(QString::fromStdWString(pData->serverAddress));
-            ui.editRegisterURL->setText(QString::fromStdWString(pData->registerURL));
+            ui.editServerName->setText(pData->serverName);
+            ui.editServerHost->setText(pData->serverAddress);
+            ui.editRegisterURL->setText(pData->registerURL);
         }
     }
 
     void SettingsWidget::on_btnRemoveServerProfile_clicked()
     {
         auto pAppModel = AppModel::GetInstance();
-        std::wstring serverName = ui.serverList->currentIndex().data().toString().toStdWString();
+        QString serverName = ui.serverList->currentIndex().data().toString();
 
-        QString tipText = QObject::tr("Would you like to remove the server profile \"{}\" ?"
-            " This will remove all saved users who login to this server.");
+        QString tipText = QObject::tr("Would you like to remove the server profile \"%1\" ?"
+            " This will remove all saved users who login to this server.").arg(serverName);
 
-        std::wstring tipTextFormatted = util::wstring_format(tipText.toStdWString().c_str(), serverName);
-        if (QMessageBox::question(this, QObject::tr("Question"), QString::fromStdWString(tipTextFormatted), QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes)
+        if (QMessageBox::question(this, QObject::tr("Question"), tipText, QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes)
         {
             if (pAppModel->RemoveServer(serverName))
             {

@@ -20,15 +20,16 @@ namespace TOPLauncher
             return std::wstring(stringBuf.get());
         }
 
-        std::wstring GetWorkDirectory()
+        QString GetWorkDirectory()
         {
             size_t strLength = GetCurrentDirectoryW(0, NULL);
             std::unique_ptr<wchar_t[]> buf(new wchar_t[strLength]);
             GetCurrentDirectoryW(strLength, buf.get());
-            return std::wstring(buf.get(), strLength - 1);
+            std::string dirUTF8 = wstringToUTF8(std::wstring(buf.get(), strLength - 1));
+            return QString::fromUtf8(dirUTF8.c_str(), dirUTF8.length());
         }
 
-        std::wstring GetAppDirectory()
+        QString GetAppDirectory()
         {
             size_t bufLength = 150;
             std::unique_ptr<wchar_t[]> buf(new wchar_t[bufLength]);
@@ -47,7 +48,11 @@ namespace TOPLauncher
 
             filesystem::path appPath = buf.get();
 
-            return appPath.parent_path();
+            filesystem::path parentPath = appPath.parent_path();
+            auto parentPathUTF8 = parentPath.u8string();
+
+            return QString::fromUtf8(parentPathUTF8.c_str(), parentPathUTF8.length());
+
         }
 
         struct TempDirectory
@@ -83,7 +88,7 @@ namespace TOPLauncher
 
                 DWORD pid = GetCurrentProcessId();
 
-                tmpPath /= wstring_format(L"TOPLauncher_pid{}", pid);
+                tmpPath /= "TOPLauncher_pid" + std::to_string(pid);
 
                 return tmpPath;
             }
@@ -91,103 +96,31 @@ namespace TOPLauncher
             filesystem::path m_tmpDirPath;
         };
 
-        std::wstring GetTempDirectory()
+        QString GetTempDirectory()
         {
             static TempDirectory dir;
 
-            return dir.Get();
+            auto dirUTF8 = dir.Get().u8string();
+
+            return QString::fromUtf8(dirUTF8.c_str(), dirUTF8.length());
         }
 
-        std::wstring GetGameStartupArgs(const std::wstring& serverAddress, const std::wstring& username, const std::wstring& password)
+        QString GetGameStartupArgs(const QString& serverAddress, const QString& username, const QString& password)
         {
-            return wstring_format(L" enc ip={} id={} pw={}", serverAddress, username, password);
+            return QString(" enc ip=%1 id=%2 pw=%3").arg(serverAddress, username, password);
         }
 
-        const std::vector<std::pair<std::wstring, std::wstring>>& GetAvailableLanguages()
-        {
-            static const std::vector<std::pair<std::wstring, std::wstring>> availableLanguages
-            {
-                { L"en-US", L"English" },
-                { L"zh-CN", L"简体中文" },
-                { L"zh-TW", L"繁體中文" },
-                { L"ja-JP", L"日本語" },
-                { L"ko-KR", L"한국어" },
-            };
-
-            return availableLanguages;
-        }
-        std::wstring GetSystemPreferredLanguage()
+        QString GetSystemLanguageName()
         {
             LANGID langId = GetUserDefaultUILanguage();
-            if (LOBYTE(langId) == LANG_ENGLISH)
-            {
-                // English
-                return GetAvailableLanguages()[0].first;
-            }
-            else if (langId == 0x0804)
-            {
-                // simplified chinese
-                return GetAvailableLanguages()[1].first;
-            }
-            else if (langId == 0x0404 || langId == 0x0C04)
-            {
-                // traditional chinese
-                return GetAvailableLanguages()[2].first;
-            }
-            else if (langId == 0x0404 || langId == 0x0C04)
-            {
-                // japanese
-                return GetAvailableLanguages()[3].first;
-            }
-            else if (langId == 0x0412)
-            {
-                // korean
-                return GetAvailableLanguages()[4].first;
-            }
-            else
-            {
-                return GetAvailableLanguages()[0].first;
-            }
-        }
 
-        int GetLanguageIndex(const std::wstring & langId)
-        {
-            auto& availableLanguages = util::GetAvailableLanguages();
+            int nchars = GetLocaleInfoA(langId, LOCALE_SNAME, NULL, 0);
+            auto languageNameBuf = std::make_unique<char[]>(nchars);
+            GetLocaleInfoA(langId, LOCALE_SNAME, languageNameBuf.get(), nchars);
 
-            auto iter = std::find_if(availableLanguages.cbegin(), availableLanguages.cend(),
-                [&langId](const std::pair<std::wstring, std::wstring>& lang)
-            {
-                return lang.first == langId;
-            });
+            std::string languageName(languageNameBuf.get(), nchars - 1);
 
-            if (iter != availableLanguages.cend())
-            {
-                return iter - availableLanguages.cbegin();
-            }
-            else
-            {
-                return -1;
-            }
-        }
-
-        std::wstring GetLanguageShowString(const std::wstring & langId)
-        {
-            auto& availableLanguages = util::GetAvailableLanguages();
-
-            auto iter = std::find_if(availableLanguages.cbegin(), availableLanguages.cend(),
-                [&langId](const std::pair<std::wstring, std::wstring>& lang)
-            {
-                return lang.first == langId;
-            });
-
-            if (iter != availableLanguages.cend())
-            {
-                return iter->second;
-            }
-            else
-            {
-                return L"Unknown language";
-            }
+            return QString::fromStdString(languageName);
         }
 
     }

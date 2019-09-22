@@ -22,17 +22,17 @@
   <property name="styleSheet">
    <string notr="true">QPushButton#btnRemoveUser {
   border: none;
-  background-image: url(:/TOPLauncher/Resources/del-user-button-normal.png);
+  background-image: url(:/ui/del-user-button-normal.png);
 }
 
 QPushButton#btnRemoveUser:hover {
   border: none;
-  background-image: url(:/TOPLauncher/Resources/del-user-button-hover.png);
+  background-image: url(:/ui/del-user-button-hover.png);
 }
 
 QPushButton#btnRemoveUser:pressed {
   border: none;
-  background-image: url(:/TOPLauncher/Resources/del-user-button-pushed.png);
+  background-image: url(:/ui/del-user-button-pushed.png);
 }
 
 </string>
@@ -101,7 +101,7 @@ QPushButton#btnRemoveUser:pressed {
   </layout>
  </widget>
  <resources>
-  <include location="TOPLauncher.qrc"/>
+  <include location="Resources/TOPLauncher.qrc"/>
  </resources>
  <connections/>
 </ui>

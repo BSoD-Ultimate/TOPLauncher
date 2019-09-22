@@ -4,23 +4,25 @@
 
 #pragma once
 
+#include <QString>
+
 namespace TOPLauncher
 {
     namespace db
     {
         namespace table_user
         {
-            extern const std::string t_user;
+            extern const QString t_user;
 
             namespace user
             {
-                extern const std::string c_serverName;
-                extern const std::string c_username;
-                extern const std::string c_password;
-                extern const std::string c_rememberPassword;
-                extern const std::string c_lastLoginTime;
+                extern const QString c_serverName;
+                extern const QString c_username;
+                extern const QString c_password;
+                extern const QString c_rememberPassword;
+                extern const QString c_lastLoginTime;
 
-                std::string CreateTableSQL();
+                QString CreateTableSQL();
             }
 
         }

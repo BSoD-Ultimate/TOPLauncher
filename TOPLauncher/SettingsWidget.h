@@ -23,6 +23,7 @@ namespace TOPLauncher
     public:
         int GetScrollAreaLocationX() const;
         void SetSettingButtonState(bool showClosePrompt);
+        void EnableGameSettings(bool enable);
 
     signals:
         void ServerSettingsChanged();

@@ -19,13 +19,6 @@ set(QT5_ROOT_DIR "${Qt5_DIR}/../../../")
 set(QT5_BIN_DIR "${Qt5_DIR}/../../../bin")
 
 # subprojects
-set(FMT_DOC OFF CACHE BOOL "")
-set(FMT_INSTALL OFF CACHE BOOL "")
-set(FMT_PEDANTIC OFF CACHE BOOL "")
-set(FMT_TEST OFF CACHE BOOL "")
-set(FMT_USE_CPP14 ON CACHE BOOL "")
-add_subdirectory(external/fmt EXCLUDE_FROM_ALL)
-
 add_subdirectory(external/inih EXCLUDE_FROM_ALL)
 
 add_subdirectory(external/sqlite3 EXCLUDE_FROM_ALL)
