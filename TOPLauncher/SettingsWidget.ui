@@ -179,7 +179,7 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>0</y>
+        <y>-173</y>
         <width>555</width>
         <height>623</height>
        </rect>
@@ -862,5 +862,70 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
  <resources>
   <include location="Resources/TOPLauncher.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>spinBoxMoveSensitivity</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>sliderMoveSensitivity</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>541</x>
+     <y>243</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>367</x>
+     <y>235</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBoxMoveSpeed</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>sliderMoveSpeed</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>541</x>
+     <y>293</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>319</x>
+     <y>291</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBoxSoftDropSpeed</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>sliderSoftDropSpeed</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>538</x>
+     <y>342</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>348</x>
+     <y>334</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBoxLineClearDelay</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>sliderLineClearDelay</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>547</x>
+     <y>382</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>358</x>
+     <y>379</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

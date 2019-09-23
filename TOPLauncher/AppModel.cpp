@@ -1,10 +1,11 @@
 ﻿#include "stdafx.h"
 #include "AppModel.h"
-
+#include "LanguageModel.h"
 #include "dbDef.h"
 #include "dbUser.h"
-
 #include "gameConfigUtil.h"
+
+#include <QtWidgets/QApplication>
 
 #include <SQLiteCpp/Database.h>
 
@@ -295,12 +296,25 @@ namespace TOPLauncher
 
     bool AppModel::SetDisplayLanguage(const QString& newLanguage)
     {
+        auto pLangModel = LanguageModel::GetInstance();
 
-        // TODO newLanguage not found return false 
+        UITranslator* pTranslator = nullptr;
+        bool translationFound = pLangModel->FindTranslator(newLanguage, &pTranslator);
+        
+        if (!translationFound)
+        {
+            return false;
+        }
 
-        m_pAppConfig->displayLanguage = newLanguage;
-
-        return true;
+        if (qApp->installTranslator(pTranslator))
+        {
+            m_pAppConfig->displayLanguage = newLanguage;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     filesystem::path AppModel::GetGameExecutablePath() const
@@ -467,7 +481,7 @@ namespace TOPLauncher
             filesystem::path workDir = util::GetWorkDirectory().toUtf8().toStdString();
             filesystem::path gameExePath = workDir / gameExecutableName;
 
-            if (!filesystem::exists(gameExePath))
+            if (filesystem::exists(gameExePath))
             {
                 SetGameExecutablePath(gameExePath);
             }

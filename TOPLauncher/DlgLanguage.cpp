@@ -2,6 +2,7 @@
 #include "DlgLanguage.h"
 
 #include "AppModel.h"
+#include "LanguageModel.h"
 #include "LanguageItemModel.h"
 
 #include <QMessageBox>
@@ -38,16 +39,32 @@ namespace TOPLauncher
     void DlgLanguage::on_btnUseSystemLang_clicked()
     {
         QString langId = util::GetSystemLanguageName();
-        QString promptString = QObject::tr("Would you like to use your system language \"%1\" as the display language?").arg(langId);
+        auto pLangModel = LanguageModel::GetInstance();
 
-        if (QMessageBox::question(this, QObject::tr("Question"), promptString, QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes)
+        UITranslator* pTranslator = nullptr;
+        bool translatorFound = pLangModel->FindTranslator(langId, &pTranslator);
+
+        if (translatorFound)
         {
-            auto pAppModel = AppModel::GetInstance();
-            pAppModel->SetDisplayLanguage(langId);
+            assert(pTranslator);
+
+            QString langShow = pTranslator->langShowName();
+            QString displayFormat = QObject::tr("Would you like to use your system language \"%1\" as the display language?");
+            QString promptText = displayFormat.arg(langShow);
+            if (QMessageBox::question(this, QObject::tr("Question"), promptText, QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes)
+            {
+                auto pAppModel = AppModel::GetInstance();
+                pAppModel->SetDisplayLanguage(langId);
+            }
 
             close();
         }
-
+        else
+        {
+            QString displayFormat = QObject::tr("Could not find translations for your system language \"%1\".");
+            QString promptText = displayFormat.arg(langId);
+            QMessageBox::critical(this, QObject::tr("Error"), promptText);
+        }
     }
 
     void DlgLanguage::on_okButton_clicked()

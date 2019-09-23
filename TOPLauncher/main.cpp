@@ -32,8 +32,8 @@ static bool InitModelInstances(QString* errMsg)
 static bool InstallTranslation()
 {
     using namespace TOPLauncher;
-    auto pAppModel = AppModel::GetInstance();
     auto pLangModel = LanguageModel::GetInstance();
+    auto pAppModel = AppModel::GetInstance();
 
     auto langId = pAppModel->GetDisplayLanguage();
 
@@ -46,7 +46,7 @@ static bool InstallTranslation()
     }
     else
     {
-        return false;
+        return qApp->installTranslator(pLangModel->GetDefaultLanguageTranslator());
     }
 
 }

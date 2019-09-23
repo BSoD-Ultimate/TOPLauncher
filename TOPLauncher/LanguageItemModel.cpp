@@ -45,7 +45,7 @@ namespace TOPLauncher
         {
             if (index.row() < langList.size())
             {
-                return QVariant(langList[index.row()]);
+                return QVariant(pLangModel->GetTranslatorAt(index.row())->langShowName());
             }
             else
             {
@@ -56,7 +56,7 @@ namespace TOPLauncher
         {
             if (index.row() < langList.size())
             {
-                return QVariant(pLangModel->GetTranslatorAt(index.row())->langShowName());
+                return QVariant(langList[index.row()]);
             }
             else
             {

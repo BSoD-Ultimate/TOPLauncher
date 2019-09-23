@@ -29,7 +29,11 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>TOP(Tetris Online Poland) Launcher</string>
+   <string comment="main_window_title">TOP(Tetris Online Poland) Launcher</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="Resources/TOPLauncher.qrc">
+    <normaloff>:/icon.ico</normaloff>:/icon.ico</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">QWidget#centralwidget

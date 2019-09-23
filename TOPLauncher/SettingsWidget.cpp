@@ -274,26 +274,35 @@ namespace TOPLauncher
     void SettingsWidget::on_btnUseSystemLang_clicked()
     {
         QString langId = util::GetSystemLanguageName();
-        QString displayFormat = QObject::tr("Would you like to use your system language \"%1\" as the display language?");
-
         auto pLangModel = LanguageModel::GetInstance();
 
         UITranslator* pTranslator = nullptr;
         int langIndex = 0;
         bool translatorFound = pLangModel->FindTranslator(langId, &pTranslator, &langIndex);
-        assert(translatorFound && pTranslator);
 
-        QString langShow = pTranslator->langShowName();
-        QString promptText = displayFormat.arg(langShow);
-
-        if (QMessageBox::question(this, QObject::tr("Question"), promptText, QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes)
+        if (translatorFound)
         {
-            auto pAppModel = AppModel::GetInstance();
-            if (pAppModel->SetDisplayLanguage(langId))
+            assert(pTranslator);
+
+            QString langShow = pTranslator->langShowName();
+            QString displayFormat = QObject::tr("Would you like to use your system language \"%1\" as the display language?");
+            QString promptText = displayFormat.arg(langShow);
+            if (QMessageBox::question(this, QObject::tr("Question"), promptText, QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes)
             {
-                ui.comboBoxLanguage->setCurrentIndex(langIndex);
+                auto pAppModel = AppModel::GetInstance();
+                if (pAppModel->SetDisplayLanguage(langId))
+                {
+                    ui.comboBoxLanguage->setCurrentIndex(langIndex);
+                }
             }
         }
+        else
+        {
+            QString displayFormat = QObject::tr("Could not find translations for your system language \"%1\".");
+            QString promptText = displayFormat.arg(langId);
+            QMessageBox::critical(this, QObject::tr("Error"), promptText);
+        }
+
     }
 
     void SettingsWidget::on_btnBrowseGameExecutable_clicked()
