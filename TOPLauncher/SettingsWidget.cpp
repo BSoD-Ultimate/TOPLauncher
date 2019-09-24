@@ -320,7 +320,7 @@ namespace TOPLauncher
 
     void SettingsWidget::on_btnBrowseGameExecutable_clicked()
     {
-        QString gameExecutablePath = QFileDialog::getOpenFileName(this, QObject::tr("Find where game executable locates..."),
+        QString gameExecutablePath = QFileDialog::getOpenFileName(this, QObject::tr("Find where the game executable locates..."),
             QString(),
             QObject::tr("Game executable (tetris.exe)"), nullptr, 0);
         if (!gameExecutablePath.isEmpty())
