@@ -25,28 +25,12 @@ namespace TOPLauncher
 {
     struct TranslationData
     {
-        QString languageId;
-        QString languageShowName;
         std::unordered_map<QString, QString> uiTranslationMap;
         std::unordered_map<QString, std::unique_ptr<QString>> qObjectTranslationMap;
 
         static std::unique_ptr<TranslationData> TranslationDataFromJSONObject(const rapidjson::Value& v)
         {
             auto pTranslation = std::make_unique<TranslationData>();
-
-            if (v.HasMember("langid") && v["langid"].IsString())
-            {
-                pTranslation->languageId = QString::fromStdString(v["langid"].GetString());
-            }
-            if (v.HasMember("langShowName") && v["langShowName"].IsString())
-            {
-                pTranslation->languageShowName = QString::fromStdString(v["langShowName"].GetString());
-            }
-
-            if (pTranslation->languageId.isEmpty() || pTranslation->languageShowName.isEmpty())
-            {
-                return nullptr;
-            }
 
             if (v.HasMember("ui-translations") && v["ui-translations"].IsObject())
             {
@@ -87,8 +71,10 @@ namespace TOPLauncher
         }
     };
 
-    UITranslator::UITranslator(std::unique_ptr<TranslationData>&& translation)
-        : m_translationData(std::forward<std::unique_ptr<TranslationData>&&>(translation))
+    UITranslator::UITranslator(const QString& langId, const QString& langShow, std::unique_ptr<TranslationData>&& translation)
+        : m_languageId(langId)
+        , m_languageShowName(langShow)
+        , m_translationData(std::forward<std::unique_ptr<TranslationData>&&>(translation))
     {
     }
 
@@ -98,12 +84,17 @@ namespace TOPLauncher
 
     QString UITranslator::langId() const
     {
-        return m_translationData->languageId;
+        return m_languageId;
     }
 
     QString UITranslator::langShowName() const
     {
-        return m_translationData->languageShowName;
+        return m_languageShowName;
+    }
+
+    TranslationData * UITranslator::GetTranslationData() const
+    {
+        return m_translationData.get();
     }
 
     bool UITranslator::isEmpty() const
@@ -233,10 +224,28 @@ namespace TOPLauncher
                 const auto& translationObject = languagesArray[i];
                 if (translationObject.IsObject())
                 {
+                    QString langId;
+                    QString langShow;
+
+                    if (translationObject.HasMember("langid") && translationObject["langid"].IsString())
+                    {
+                        langId = QString::fromStdString(translationObject["langid"].GetString());
+                    }
+                    if (translationObject.HasMember("langShowName") && translationObject["langShowName"].IsString())
+                    {
+                        langShow = QString::fromStdString(translationObject["langShowName"].GetString());
+                    }
+
+                    if (langId.isEmpty() || langShow.isEmpty())
+                    {
+                        assert(false);
+                        continue;
+                    }
+
                     auto translationData = TranslationData::TranslationDataFromJSONObject(translationObject);
                     assert(translationData);
                     if (translationData)
-                        m_translatorContainer.emplace_back(std::make_unique<UITranslator>(std::move(translationData)));
+                        m_translatorContainer.emplace_back(std::make_unique<UITranslator>(langId, langShow, std::move(translationData)));
                 }
             }
         }

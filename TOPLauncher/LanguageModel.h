@@ -8,7 +8,7 @@ namespace TOPLauncher
     class UITranslator : public QTranslator
     {
     public:
-        UITranslator(std::unique_ptr<TranslationData>&& translation);
+        UITranslator(const QString& langId, const QString& langShow, std::unique_ptr<TranslationData>&& translation);
         ~UITranslator();
 
         UITranslator(const UITranslator&) = delete;
@@ -17,12 +17,16 @@ namespace TOPLauncher
         QString langId() const;
         QString langShowName() const;
 
+        TranslationData* GetTranslationData() const;
+
         // QTranslator
         bool isEmpty() const override;
         QString translate(const char *context, const char *sourceText,
             const char *disambiguation = Q_NULLPTR, int n = -1) const override;
 
     private:
+        const QString m_languageId;
+        const QString m_languageShowName;
         std::unique_ptr<TranslationData> m_translationData;
 
     };
