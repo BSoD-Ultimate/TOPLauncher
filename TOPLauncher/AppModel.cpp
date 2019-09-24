@@ -37,11 +37,11 @@ namespace TOPLauncher
         std::vector<std::shared_ptr<ServerData>> serverList;
 
         AppConfig()
-            : serverList({
+            : displayLanguage(util::GetSystemLanguageName())
+            , serverList({
                 std::make_shared<ServerData>(ServerData{ "TOP Official Server", "tetrisonline.pl", "http://tetrisonline.pl/top/register.php" })
                 })
         {
-            displayLanguage = util::GetSystemLanguageName();
         }
 
         bool FromJSON(const std::string& json);
@@ -178,7 +178,12 @@ namespace TOPLauncher
         : m_pAppConfig(new AppConfig())
     {
         InitAppConfig();
-        ApplyTranslator(m_pAppConfig->displayLanguage);
+
+        // Use English if language currently set is unavailable
+        if (!ApplyTranslator(m_pAppConfig->displayLanguage))
+        {
+            SetDisplayLanguage("en-US");
+        }
     }
 
 
