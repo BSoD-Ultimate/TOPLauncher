@@ -180,8 +180,8 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>671</width>
-        <height>762</height>
+        <width>555</width>
+        <height>629</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_9">
@@ -403,13 +403,13 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
               </property>
               <layout class="QHBoxLayout" name="horizontalLayout_6">
                <property name="leftMargin">
-                <number>0</number>
+                <number>9</number>
                </property>
                <property name="topMargin">
                 <number>0</number>
                </property>
                <property name="rightMargin">
-                <number>0</number>
+                <number>9</number>
                </property>
                <property name="bottomMargin">
                 <number>0</number>

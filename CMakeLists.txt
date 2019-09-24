@@ -21,6 +21,7 @@ set(QT5_BIN_DIR "${Qt5_DIR}/../../../bin")
 # subprojects
 add_subdirectory(external/inih EXCLUDE_FROM_ALL)
 
+set(SQLITE_BUILD_AS_DLL OFF CACHE BOOL "")
 add_subdirectory(external/sqlite3 EXCLUDE_FROM_ALL)
 
 set(SQLITECPP_RUN_CPPCHECK OFF CACHE BOOL "")
@@ -37,7 +38,6 @@ add_subdirectory(TOPLauncher)
 #
 
 set(INSTALL_FILE_LIST 
-  "$<TARGET_FILE:sqlite3>"
   "$<TARGET_FILE:TOPLauncher>"
   "${CMAKE_CURRENT_SOURCE_DIR}/external/SjeJhhUtil/SjeJhhUtil.dll"
 )
