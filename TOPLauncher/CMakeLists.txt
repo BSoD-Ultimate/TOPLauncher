@@ -121,7 +121,7 @@ add_executable(TOPLauncher WIN32
 #
 target_include_directories(TOPLauncher 
   PRIVATE 
-  "../external/SjeJhhUtil/include"
+  "../external/SjeJhhUtil/SjeJhhUtil/include"
   "../external/sqlite3"
   "../external/inih"
   "../external/inih/cpp"
