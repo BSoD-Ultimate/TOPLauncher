@@ -2,8 +2,7 @@ cmake_minimum_required(VERSION 3.8.1)
 
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMake;${CMAKE_MODULE_PATH}")
 
-# Qt5 properties
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
+option(TOPLAUNCHER_USE_STATIC_QT_LIB "use static build Qt library" OFF)
 
 # find Qt5 
 find_package(Qt5 
@@ -14,7 +13,8 @@ find_package(Qt5
 
 message("Qt5 library locates in ${Qt5_DIR}")
 
-set(QT5_ROOT_DIR "${Qt5_DIR}/../../../")
+set(QT5_ROOT_DIR "${Qt5_DIR}/../../..")
+set(QT5_LIB_DIR "${Qt5_DIR}/../..")
 set(QT5_BIN_DIR "${Qt5_DIR}/../../../bin")
 
 
@@ -121,11 +121,20 @@ add_executable(TOPLauncher WIN32
 #
 target_include_directories(TOPLauncher 
   PRIVATE 
+  ${CMAKE_CURRENT_SOURCE_DIR}
   "../external/SjeJhhUtil/SjeJhhUtil/include"
   "../external/sqlite3"
   "../external/inih"
   "../external/inih/cpp"
   "../external/rapidjson"
+)
+
+#
+# compile definitions & linker flags
+#
+
+target_compile_definitions(TOPLauncher 
+  PRIVATE 
 )
 
 #
@@ -137,6 +146,32 @@ set(QT5_LINK_LIBRARIES
   Qt5::Widgets 
   Qt5::Core 
 )
+
+if(TOPLAUNCHER_USE_STATIC_QT_LIB)
+  list(APPEND QT5_LINK_LIBRARIES
+    $<IF:$<CONFIG:Debug>,${QT5_LIB_DIR}/qtpcre2d.lib,${QT5_LIB_DIR}/qtpcre2.lib>
+    $<IF:$<CONFIG:Debug>,${QT5_LIB_DIR}/qtharfbuzzd.lib,${QT5_LIB_DIR}/qtharfbuzz.lib>
+    $<IF:$<CONFIG:Debug>,${QT5_LIB_DIR}/qtlibpngd.lib,${QT5_LIB_DIR}/qtlibpng.lib>
+    $<IF:$<CONFIG:Debug>,${QT5_LIB_DIR}/qtfreetyped.lib,${QT5_LIB_DIR}/qtfreetype.lib>
+    $<IF:$<CONFIG:Debug>,${QT5_LIB_DIR}/Qt5PrintSupportd.lib,${QT5_LIB_DIR}/Qt5PrintSupport.lib>
+    $<IF:$<CONFIG:Debug>,${QT5_LIB_DIR}/Qt5FbSupportd.lib,${QT5_LIB_DIR}/Qt5FbSupport.lib>
+    $<IF:$<CONFIG:Debug>,${QT5_LIB_DIR}/Qt5FontDatabaseSupportd.lib,${QT5_LIB_DIR}/Qt5FontDatabaseSupport.lib>
+    $<IF:$<CONFIG:Debug>,${QT5_LIB_DIR}/Qt5PlatformCompositorSupportd.lib,${QT5_LIB_DIR}/Qt5PlatformCompositorSupport.lib>
+    $<IF:$<CONFIG:Debug>,${QT5_LIB_DIR}/Qt5EventDispatcherSupportd.lib,${QT5_LIB_DIR}/Qt5EventDispatcherSupport.lib>
+    $<IF:$<CONFIG:Debug>,${QT5_LIB_DIR}/Qt5DeviceDiscoverySupportd.lib,${QT5_LIB_DIR}/Qt5DeviceDiscoverySupport.lib>
+    $<IF:$<CONFIG:Debug>,${QT5_LIB_DIR}/Qt5AccessibilitySupportd.lib,${QT5_LIB_DIR}/Qt5AccessibilitySupport.lib>
+    $<IF:$<CONFIG:Debug>,${QT5_LIB_DIR}/Qt5ThemeSupportd.lib,${QT5_LIB_DIR}/Qt5ThemeSupport.lib>
+    $<IF:$<CONFIG:Debug>,${QT5_ROOT_DIR}/plugins/platforms/qwindowsd.lib,${QT5_ROOT_DIR}/plugins/platforms/qwindows.lib>
+    $<IF:$<CONFIG:Debug>,${QT5_ROOT_DIR}/plugins/imageformats/qicod.lib,${QT5_ROOT_DIR}/plugins/imageformats/qico.lib>
+    UxTheme.lib 
+    ws2_32.lib 
+    Version.lib 
+    winmm.lib 
+    imm32.lib 
+    dwmapi.lib
+  )
+endif()
+
 
 # third-party libraries link
 set(THIRD_PARTY_LINK_LIBRARIES
@@ -150,8 +185,4 @@ target_link_libraries(TOPLauncher
   ${QT5_LINK_LIBRARIES}
   ${THIRD_PARTY_LINK_LIBRARIES}
 )
-
-#
-# compile definitions & linker flags
-#
 

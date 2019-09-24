@@ -8,6 +8,12 @@
 #include "AppModel.h"
 #include "LanguageModel.h"
 
+#ifdef QT_STATIC
+#include <QtPlugin>
+Q_IMPORT_PLUGIN(QWindowsIntegrationPlugin);
+Q_IMPORT_PLUGIN(QICOPlugin)
+#endif
+
 static bool InitModelInstances(QString* errMsg)
 {
     using namespace TOPLauncher;
