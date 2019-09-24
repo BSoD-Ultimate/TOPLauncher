@@ -31,6 +31,9 @@ set(SQLITE_ENABLE_COLUMN_METADATA ON CACHE BOOL "")
 set(SQLITECPP_SQLITE_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/external/sqlite3" CACHE STRING "")
 add_subdirectory(external/SQLiteCpp EXCLUDE_FROM_ALL)
 
+set(SJEJHHUTIL_BUILD_AS_DLL on CACHE BOOL "")
+add_subdirectory(external/SjeJhhUtil EXCLUDE_FROM_ALL)
+
 add_subdirectory(TOPLauncher)
 
 #

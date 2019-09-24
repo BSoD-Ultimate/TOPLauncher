@@ -121,7 +121,7 @@ add_executable(TOPLauncher WIN32
 #
 target_include_directories(TOPLauncher 
   PRIVATE 
-  "../external/SjeJhhUtil"
+  "../external/SjeJhhUtil/include"
   "../external/sqlite3"
   "../external/inih"
   "../external/inih/cpp"
@@ -140,10 +140,10 @@ set(QT5_LINK_LIBRARIES
 
 # third-party libraries link
 set(THIRD_PARTY_LINK_LIBRARIES
-  SQLiteCpp
   inih 
   sqlite3
-  "../external/SjeJhhUtil/SjeJhhUtil"
+  SQLiteCpp
+  SjeJhhUtil
 )
 
 target_link_libraries(TOPLauncher
