@@ -27,7 +27,8 @@ namespace TOPLauncher
     {
         QString languageId;
         QString languageShowName;
-        std::unordered_map<QString, QString> translationMap;
+        std::unordered_map<QString, QString> uiTranslationMap;
+        std::unordered_map<QString, std::unique_ptr<QString>> qObjectTranslationMap;
 
         static std::unique_ptr<TranslationData> TranslationDataFromJSONObject(const rapidjson::Value& v)
         {
@@ -47,9 +48,9 @@ namespace TOPLauncher
                 return nullptr;
             }
 
-            if (v.HasMember("translations") && v["translations"].IsObject())
+            if (v.HasMember("ui-translations") && v["ui-translations"].IsObject())
             {
-                auto translationObject = v["translations"].GetObject();
+                auto translationObject = v["ui-translations"].GetObject();
                 for (auto iter = translationObject.MemberBegin(); iter != translationObject.MemberEnd(); iter++)
                 {
                     QString translationKey;
@@ -60,10 +61,27 @@ namespace TOPLauncher
                     translationValue = QString::fromUtf8(iter->value.GetString(), iter->value.GetStringLength());
 
 
-                    pTranslation->translationMap[translationKey] = translationValue;
+                    pTranslation->uiTranslationMap[translationKey] = translationValue;
                 }
             }
 
+            if (v.HasMember("qobject-translations") && v["qobject-translations"].IsObject())
+            {
+                auto translationObject = v["qobject-translations"].GetObject();
+                for (auto iter = translationObject.MemberBegin(); iter != translationObject.MemberEnd(); iter++)
+                {
+                    QString translationKey;
+                    std::unique_ptr<QString> translationValue;
+
+                    translationKey = QString::fromUtf8(iter->name.GetString(), iter->name.GetStringLength());
+                    if (iter->value.IsString())
+                    {
+                        translationValue = std::make_unique<QString>(QString::fromUtf8(iter->value.GetString(), iter->value.GetStringLength()));
+                    }
+
+                    pTranslation->qObjectTranslationMap[translationKey] = std::move(translationValue);
+                }
+            }
 
             return pTranslation;
         }
@@ -88,14 +106,34 @@ namespace TOPLauncher
         return m_translationData->languageShowName;
     }
 
+    bool UITranslator::isEmpty() const
+    {
+        return (!m_translationData) ||
+            (m_translationData->uiTranslationMap.empty() && m_translationData->qObjectTranslationMap.empty());
+    }
+
     QString UITranslator::translate(const char * context, const char * sourceText, const char * disambiguation, int n) const
     {
-        const auto& translationMap = m_translationData->translationMap;
-        if (translationMap.find(QString(disambiguation)) != translationMap.cend())
+        if (context == std::string("QObject"))
         {
-            return translationMap.at(QString(disambiguation));
+            const auto& qObjectTranslationMap = m_translationData->qObjectTranslationMap;
+            if (qObjectTranslationMap.find(QString(sourceText)) != qObjectTranslationMap.cend())
+            {
+                const auto& pTranslation = qObjectTranslationMap.at(QString(sourceText));
+                return pTranslation ? *pTranslation : QString(sourceText);
+            }
+
+            return QString(sourceText);
         }
-        return QString(sourceText);
+        else
+        {
+            const auto& uiTranslationMap = m_translationData->uiTranslationMap;
+            if (uiTranslationMap.find(QString(disambiguation)) != uiTranslationMap.cend())
+            {
+                return uiTranslationMap.at(QString(disambiguation));
+            }
+            return QString(sourceText);
+        }
     }
 
     std::shared_ptr<LanguageModel> LanguageModel::GetInstance()

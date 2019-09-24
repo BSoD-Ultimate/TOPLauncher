@@ -178,6 +178,7 @@ namespace TOPLauncher
         : m_pAppConfig(new AppConfig())
     {
         InitAppConfig();
+        ApplyTranslator(m_pAppConfig->displayLanguage);
     }
 
 
@@ -238,6 +239,33 @@ namespace TOPLauncher
         LoadSavedConfigFromGame();
     }
 
+    bool AppModel::ApplyTranslator(const QString & newLanguage)
+    {
+        QString oldLanguage = m_pAppConfig->displayLanguage;
+        auto pLangModel = LanguageModel::GetInstance();
+
+        UITranslator* pOldTranslator = nullptr;
+        pLangModel->FindTranslator(oldLanguage, &pOldTranslator);
+
+        UITranslator* pNewTranslator = nullptr;
+        bool translationFound = pLangModel->FindTranslator(newLanguage, &pNewTranslator);
+
+        if (!translationFound)
+        {
+            return false;
+        }
+
+        if (qApp->installTranslator(pNewTranslator))
+        {
+            return true;
+        }
+        else
+        {
+            qApp->installTranslator(pOldTranslator);
+            return false;
+        }
+    }
+
     std::shared_ptr<SQLite::Database> AppModel::GetUserDB()
     {
         assert(m_pUserDB);
@@ -296,25 +324,15 @@ namespace TOPLauncher
 
     bool AppModel::SetDisplayLanguage(const QString& newLanguage)
     {
-        auto pLangModel = LanguageModel::GetInstance();
+        bool ret = ApplyTranslator(newLanguage);
 
-        UITranslator* pTranslator = nullptr;
-        bool translationFound = pLangModel->FindTranslator(newLanguage, &pTranslator);
-        
-        if (!translationFound)
-        {
-            return false;
-        }
-
-        if (qApp->installTranslator(pTranslator))
+        if (ret)
         {
             m_pAppConfig->displayLanguage = newLanguage;
-            return true;
+            SaveAppConfigToFile();
         }
-        else
-        {
-            return false;
-        }
+
+        return ret;
     }
 
     filesystem::path AppModel::GetGameExecutablePath() const
@@ -334,6 +352,8 @@ namespace TOPLauncher
             LoadSavedConfigFromGame();
         }
 
+        SaveAppConfigToFile();
+
     }
 
     filesystem::path AppModel::GetGameDirectory() const
@@ -351,6 +371,7 @@ namespace TOPLauncher
         }
 
         m_pAppConfig->serverList.push_back(serverData);
+        SaveAppConfigToFile();
 
         return true;
     }
@@ -367,6 +388,7 @@ namespace TOPLauncher
         {
             db::RemoveAllUsersInServer(serverName);
             iter = m_pAppConfig->serverList.erase(iter);
+            SaveAppConfigToFile();
             return true;
         }
         else
@@ -390,6 +412,7 @@ namespace TOPLauncher
         else
         {
             *iter = newServerData;
+            SaveAppConfigToFile();
             return true;
         }
     }

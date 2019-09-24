@@ -79,6 +79,8 @@ namespace TOPLauncher
         void InitDatabase();
         void InitGameConfig();
 
+        bool ApplyTranslator(const QString& newLanguage);
+
     private:
         std::shared_ptr<SQLite::Database> OpenUserDB();
 

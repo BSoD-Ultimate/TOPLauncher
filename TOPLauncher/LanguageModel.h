@@ -17,6 +17,8 @@ namespace TOPLauncher
         QString langId() const;
         QString langShowName() const;
 
+        // QTranslator
+        bool isEmpty() const override;
         QString translate(const char *context, const char *sourceText,
             const char *disambiguation = Q_NULLPTR, int n = -1) const override;
 

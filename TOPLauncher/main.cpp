@@ -29,28 +29,6 @@ static bool InitModelInstances(QString* errMsg)
 
 }
 
-static bool InstallTranslation()
-{
-    using namespace TOPLauncher;
-    auto pLangModel = LanguageModel::GetInstance();
-    auto pAppModel = AppModel::GetInstance();
-
-    auto langId = pAppModel->GetDisplayLanguage();
-
-    UITranslator* pTranslator = nullptr;
-    bool translationFound = pLangModel->FindTranslator(langId, &pTranslator);
-
-    if (translationFound)
-    {
-        return qApp->installTranslator(pTranslator);
-    }
-    else
-    {
-        return qApp->installTranslator(pLangModel->GetDefaultLanguageTranslator());
-    }
-
-}
-
 static bool InitUIConfig()
 {
     using namespace TOPLauncher;
@@ -59,8 +37,8 @@ static bool InitUIConfig()
     qApp->setStyle(QStyleFactory::create("fusion"));
     QFont uiFont(QString("Calibri"), 10, QFont::Normal);
     qApp->setFont(uiFont);
-    QFont::insertSubstitution(QString("Calibri"), QString("Microsoft YaHei"));
-    QFont::insertSubstitution(QString("Calibri"), QString("SimSun"));
+    QFont::insertSubstitution(QString("Calibri"), QString("STXihei"));
+    QFont::insertSubstitution(QString("Calibri"), QString("SimHei"));
 
     return true;
 }
@@ -77,7 +55,7 @@ int main(int argc, char *argv[])
     {
         // could not determine translation since initialization fails, English only.
         QString errorText = QString(
-            "A fatal error occurred during the initialization: \r\n"
+            "A fatal error occurred during the startup: \r\n"
             "%1 \r\n"
             "\r\n"
             "The program will now exit."
@@ -87,15 +65,12 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    // set translation
-    InstallTranslation();
-
     auto pAppModel = AppModel::GetInstance();
     // init app model data
     if (!pAppModel->InitModelData(&error))
     {
         QString errorText = QObject::tr(
-            "A fatal error has occurred: \r\n"
+            "A fatal error has occurred during the startup: \r\n"
             "%1 \r\n"
             "The program will now exit."
         ).arg(error);

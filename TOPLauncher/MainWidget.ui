@@ -139,7 +139,7 @@ QFrame#frameBottom {
                </size>
               </property>
               <property name="title">
-               <string>Login</string>
+               <string comment="mainwidget_group_login">Login</string>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_6">
                <property name="leftMargin">
@@ -179,7 +179,7 @@ QFrame#frameBottom {
                          <locale language="English" country="UnitedStates"/>
                         </property>
                         <property name="text">
-                         <string>Username:</string>
+                         <string comment="mainwidget_login_label_username">Username:</string>
                         </property>
                         <property name="alignment">
                          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -202,7 +202,7 @@ QFrame#frameBottom {
                          <locale language="English" country="UnitedStates"/>
                         </property>
                         <property name="text">
-                         <string>Password:</string>
+                         <string comment="mainwidget_login_label_password">Password:</string>
                         </property>
                         <property name="alignment">
                          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -248,7 +248,7 @@ QFrame#frameBottom {
                          <locale language="English" country="UnitedStates"/>
                         </property>
                         <property name="text">
-                         <string>Remember Password</string>
+                         <string comment="mainwidget_chk_rememberpwd">Remember Password</string>
                         </property>
                        </widget>
                       </item>
@@ -274,7 +274,7 @@ QFrame#frameBottom {
                      <locale language="English" country="UnitedStates"/>
                     </property>
                     <property name="text">
-                     <string>Start</string>
+                     <string comment="mainwidget_login_btn_start">Start</string>
                     </property>
                    </widget>
                   </item>
@@ -289,7 +289,7 @@ QFrame#frameBottom {
                     <locale language="English" country="UnitedStates"/>
                    </property>
                    <property name="text">
-                    <string>Register</string>
+                    <string comment="mainwidget_login_btn_register">Register</string>
                    </property>
                   </widget>
                  </item>
@@ -299,7 +299,7 @@ QFrame#frameBottom {
                     <locale language="English" country="UnitedStates"/>
                    </property>
                    <property name="text">
-                    <string>Forum</string>
+                    <string comment="mainwidget_login_btn_openforum">Forum</string>
                    </property>
                   </widget>
                  </item>
@@ -366,14 +366,14 @@ QFrame#frameBottom {
          </size>
         </property>
         <property name="text">
-         <string>Language...</string>
+         <string comment="mainwidget_btn_language">Language...</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QLabel" name="labelChooseServer">
         <property name="text">
-         <string>Select a server:</string>
+         <string comment="mainwidget_label_choose_server">Select a server:</string>
         </property>
        </widget>
       </item>
@@ -403,7 +403,7 @@ QFrame#frameBottom {
       <item>
        <widget class="QPushButton" name="btnExit">
         <property name="text">
-         <string>Quit</string>
+         <string comment="mainwidget_btn_exit">Quit</string>
         </property>
        </widget>
       </item>

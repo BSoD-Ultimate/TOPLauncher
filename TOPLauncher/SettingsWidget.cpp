@@ -162,9 +162,14 @@ namespace TOPLauncher
     void SettingsWidget::LoadGeneralSettings()
     {
         auto pAppModel = AppModel::GetInstance();
+        auto pLangModel = LanguageModel::GetInstance();
 
+        auto displayLang = pAppModel->GetDisplayLanguage();
+        int findIndex = -1;
+        pLangModel->FindTranslator(displayLang, nullptr, &findIndex);
+        
         ui.comboBoxLanguage->setModel(m_pLanguageItemModel.get());
-        //ui.comboBoxLanguage->setCurrentIndex(util::GetLanguageIndex(AppModel::GetInstance()->GetDisplayLanguage()));
+        ui.comboBoxLanguage->setCurrentIndex(findIndex);
         ui.editGameExecutablePath->setText(QString::fromStdWString(pAppModel->GetGameExecutablePath()));
     }
 
@@ -234,9 +239,17 @@ namespace TOPLauncher
     void SettingsWidget::changeEvent(QEvent* event)
     {
         QWidget::changeEvent(event);
+
         if (QEvent::LanguageChange == event->type())
         {
             ui.retranslateUi(this);
+
+            auto pAppModel = AppModel::GetInstance();
+            auto pLangModel = LanguageModel::GetInstance();
+            auto displayLang = pAppModel->GetDisplayLanguage();
+            int findIndex = -1;
+            pLangModel->FindTranslator(displayLang, nullptr, &findIndex);
+            ui.comboBoxLanguage->setCurrentIndex(findIndex);
         }
     }
 

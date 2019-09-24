@@ -55,9 +55,9 @@ namespace TOPLauncher
             {
                 auto pAppModel = AppModel::GetInstance();
                 pAppModel->SetDisplayLanguage(langId);
-            }
 
-            close();
+                close();
+            }
         }
         else
         {

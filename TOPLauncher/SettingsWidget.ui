@@ -194,7 +194,7 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
           </size>
          </property>
          <property name="title">
-          <string>General</string>
+          <string comment="settingwidget_group_general">General</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -212,7 +212,7 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
              </size>
             </property>
             <property name="text">
-             <string>Language:</string>
+             <string comment="settingwidget_general_label_language">Language:</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -246,7 +246,7 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
                </size>
               </property>
               <property name="text">
-               <string>Use System language</string>
+               <string comment="settingwidget_general_btn_usesystemlang">Use System language</string>
               </property>
              </widget>
             </item>
@@ -255,7 +255,7 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
           <item row="1" column="0">
            <widget class="QLabel" name="labelGameExecutablePath">
             <property name="text">
-             <string>Game Executable:</string>
+             <string comment="settingwidget_general_label_executable">Game Executable:</string>
             </property>
            </widget>
           </item>
@@ -267,7 +267,7 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
             <item>
              <widget class="QPushButton" name="btnBrowseGameExecutable">
               <property name="text">
-               <string>Browse...</string>
+               <string comment="settingwidget_general_btn_browse">Browse...</string>
               </property>
              </widget>
             </item>
@@ -291,7 +291,7 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
           </size>
          </property>
          <property name="title">
-          <string>Server Settings</string>
+          <string comment="settingwidget_group_serversettings">Server Settings</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -357,7 +357,7 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
                <item row="0" column="0">
                 <widget class="QLabel" name="labelServerName">
                  <property name="text">
-                  <string>Server name:</string>
+                  <string comment="settingwidget_serversettings_label_servername">Server name:</string>
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -370,7 +370,7 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
                <item row="1" column="0">
                 <widget class="QLabel" name="labelServerHost">
                  <property name="text">
-                  <string>Server host address:</string>
+                  <string comment="settingwidget_serversettings_label_serveraddr">Server host address:</string>
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -386,7 +386,7 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
                <item row="2" column="0">
                 <widget class="QLabel" name="labelRegisterURL">
                  <property name="text">
-                  <string>Registration URL:</string>
+                  <string comment="settingwidget_serversettings_label_regurl">Registration URL:</string>
                  </property>
                 </widget>
                </item>
@@ -417,21 +417,21 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
                <item>
                 <widget class="QPushButton" name="btnSaveServerProfile">
                  <property name="text">
-                  <string>Save changes</string>
+                  <string comment="settingwidget_serversettings_btn_save">Save changes</string>
                  </property>
                 </widget>
                </item>
                <item>
                 <widget class="QPushButton" name="btnCancelServerProfile">
                  <property name="text">
-                  <string>Cancel</string>
+                  <string comment="settingwidget_serversettings_btn_discard">Discard changes</string>
                  </property>
                 </widget>
                </item>
                <item>
                 <widget class="QPushButton" name="btnRemoveServerProfile">
                  <property name="text">
-                  <string>Remove</string>
+                  <string comment="settingwidget_serversettings_btn_remove">Remove</string>
                  </property>
                 </widget>
                </item>
@@ -472,7 +472,7 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
        <item>
         <widget class="QGroupBox" name="groupControlSettings">
          <property name="title">
-          <string>Game Control Settings</string>
+          <string comment="settingwidget_group_gamecontrol">Game Control Settings</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -481,7 +481,7 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
           <item>
            <widget class="QLabel" name="labelMoveSensitbity">
             <property name="text">
-             <string>Move left/right sensitivity (the less value, the more sensitive a piece moves)</string>
+             <string comment="settingwidget_gamecontrol_move_sensitivity_desc">Move left/right sensitivity (the less value, the more sensitive a piece moves)</string>
             </property>
            </widget>
           </item>
@@ -496,7 +496,7 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
                </size>
               </property>
               <property name="text">
-               <string>Obtuse</string>
+               <string comment="settingwidget_gamecontrol_move_sensitivity_high_value">Obtuse</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -537,7 +537,7 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
                </size>
               </property>
               <property name="text">
-               <string>Sensitive</string>
+               <string comment="settingwidget_gamecontrol_move_sensitivity_low_value">Sensitive</string>
               </property>
              </widget>
             </item>
@@ -562,7 +562,7 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
           <item>
            <widget class="QLabel" name="labelMoveSpeed">
             <property name="text">
-             <string>Move left/right speed (the less value, the faster when a piece moves)</string>
+             <string comment="settingwidget_gamecontrol_move_speed_desc">Move left/right speed (the less value, the faster when a piece moves)</string>
             </property>
            </widget>
           </item>
@@ -577,7 +577,7 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
                </size>
               </property>
               <property name="text">
-               <string>Slow</string>
+               <string comment="settingwidget_gamecontrol_move_speed_high_value">Slow</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -618,7 +618,7 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
                </size>
               </property>
               <property name="text">
-               <string>Fast</string>
+               <string comment="settingwidget_gamecontrol_move_speed_low_value">Fast</string>
               </property>
              </widget>
             </item>
@@ -643,7 +643,7 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
           <item>
            <widget class="QLabel" name="labelSoftDropSpeed">
             <property name="text">
-             <string>Soft-drop speed (the less value, the quicker when a piece moves downwards by player)</string>
+             <string comment="settingwidget_gamecontrol_soft_drop_speed_desc">Soft-drop speed (the less value, the quicker when a piece moves downwards by player)</string>
             </property>
            </widget>
           </item>
@@ -658,7 +658,7 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
                </size>
               </property>
               <property name="text">
-               <string>Slow</string>
+               <string comment="settingwidget_gamecontrol_drop_speed_high_value">Slow</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -699,7 +699,7 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
                </size>
               </property>
               <property name="text">
-               <string>Fast</string>
+               <string comment="settingwidget_gamecontrol_drop_speed_low_value">Fast</string>
               </property>
              </widget>
             </item>
@@ -724,7 +724,7 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
           <item>
            <widget class="QLabel" name="labelLineClearDelay">
             <property name="text">
-             <string>Line clear delay (the less value, the quicker next piece appears after lines were cleared)</string>
+             <string comment="settingwidget_gamecontrol_line_clear_delay_desc">Line clear delay (the less value, the quicker next piece appears after lines were cleared)</string>
             </property>
            </widget>
           </item>
@@ -739,7 +739,7 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
                </size>
               </property>
               <property name="text">
-               <string>Long</string>
+               <string comment="settingwidget_gamecontrol_line_clear_high_value">Long</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -783,7 +783,7 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
                </size>
               </property>
               <property name="text">
-               <string>Short</string>
+               <string comment="settingwidget_gamecontrol_line_clear_low_value">Short</string>
               </property>
              </widget>
             </item>
@@ -819,7 +819,7 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
                </sizepolicy>
               </property>
               <property name="text">
-               <string>Apply New Control Settings</string>
+               <string comment="settingwidget_gamecontrol_btn_apply">Apply New Control Settings</string>
               </property>
              </widget>
             </item>
@@ -844,7 +844,7 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
                </size>
               </property>
               <property name="text">
-               <string>Reset</string>
+               <string comment="settingwidget_gamecontrol_btn_reset">Reset</string>
               </property>
              </widget>
             </item>
