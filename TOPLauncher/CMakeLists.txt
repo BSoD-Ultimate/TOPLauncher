@@ -87,7 +87,7 @@ set(RESOURCE_SRC
   Resources/translations.json
   Resources/icon.ico 
   Resources/TOPLauncher.qrc 
-  Resources/high-dpi-unsupported.manifest
+  #Resources/high-dpi-unsupported.manifest
   TOPLauncher.rc 
 
 )

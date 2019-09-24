@@ -46,6 +46,7 @@ static bool InitUIConfig()
 int main(int argc, char *argv[])
 {
     using namespace TOPLauncher;
+    QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     QApplication a(argc, argv);
 

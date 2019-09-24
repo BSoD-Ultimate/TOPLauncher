@@ -25,7 +25,7 @@
   <property name="maximumSize">
    <size>
     <width>610</width>
-    <height>450</height>
+    <height>16777215</height>
    </size>
   </property>
   <property name="font">
@@ -179,9 +179,9 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>-173</y>
-        <width>555</width>
-        <height>623</height>
+        <y>0</y>
+        <width>671</width>
+        <height>762</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_9">
@@ -852,6 +852,19 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
           </item>
          </layout>
         </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_4">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
        </item>
       </layout>
      </widget>
