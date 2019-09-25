@@ -179,7 +179,7 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>0</y>
+        <y>-179</y>
         <width>555</width>
         <height>629</height>
        </rect>
@@ -550,7 +550,7 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
                </size>
               </property>
               <property name="minimum">
-               <number>0</number>
+               <number>1</number>
               </property>
               <property name="maximum">
                <number>1000</number>
@@ -631,7 +631,7 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
                </size>
               </property>
               <property name="minimum">
-               <number>0</number>
+               <number>1</number>
               </property>
               <property name="maximum">
                <number>1000</number>
@@ -712,7 +712,7 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
                </size>
               </property>
               <property name="minimum">
-               <number>0</number>
+               <number>1</number>
               </property>
               <property name="maximum">
                <number>1000</number>
@@ -796,13 +796,13 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
                </size>
               </property>
               <property name="minimum">
-               <number>0</number>
+               <number>1</number>
               </property>
               <property name="maximum">
                <number>1000</number>
               </property>
               <property name="value">
-               <number>0</number>
+               <number>1</number>
               </property>
              </widget>
             </item>

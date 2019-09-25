@@ -217,11 +217,11 @@ namespace TOPLauncher
 
         if (pAppModel->IsGameConfigAvailable())
         {
-            int moveSensitivity = ui.sliderMoveSensitivity->value();
-            int moveSpeed = ui.sliderMoveSpeed->value();
-            int softDropSpeed = ui.sliderSoftDropSpeed->value();
+            int moveSensitivity = ui.spinBoxMoveSensitivity->value();
+            int moveSpeed = ui.spinBoxMoveSpeed->value();
+            int softDropSpeed = ui.spinBoxSoftDropSpeed->value();
 
-            int lineClearDelay = ui.sliderLineClearDelay->value();
+            int lineClearDelay = ui.spinBoxLineClearDelay->value();
 
             bool ret =
                 pAppModel->SetSensitivityValue(moveSensitivity, moveSpeed, softDropSpeed) &&

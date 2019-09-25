@@ -42,7 +42,7 @@
         "settingwidget_gamecontrol_soft_drop_speed_desc": "Soft-drop speed (the less value, the quicker when a piece moves downwards by player)",
         "settingwidget_gamecontrol_drop_speed_high_value": "Slow",
         "settingwidget_gamecontrol_drop_speed_low_value": "Fast",
-        "settingwidget_gamecontrol_line_clear_delay_desc": "Line clear delay (the less value, the shorter the line=clear animation lasts)",
+        "settingwidget_gamecontrol_line_clear_delay_desc": "Line clear delay (the less value, the shorter the line-clear animation lasts)",
         "settingwidget_gamecontrol_line_clear_high_value": "Long",
         "settingwidget_gamecontrol_line_clear_low_value": "Short",
         "settingwidget_gamecontrol_btn_apply": "Apply New Control Settings",
