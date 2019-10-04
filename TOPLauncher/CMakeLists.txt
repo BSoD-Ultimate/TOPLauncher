@@ -154,32 +154,6 @@ set(QT5_LINK_LIBRARIES
   Qt5::Core 
 )
 
-if(TOPLAUNCHER_USE_STATIC_QT_LIB)
-  list(APPEND QT5_LINK_LIBRARIES
-    $<IF:$<CONFIG:Debug>,${QT5_LIB_DIR}/qtpcre2d.lib,${QT5_LIB_DIR}/qtpcre2.lib>
-    $<IF:$<CONFIG:Debug>,${QT5_LIB_DIR}/qtharfbuzzd.lib,${QT5_LIB_DIR}/qtharfbuzz.lib>
-    $<IF:$<CONFIG:Debug>,${QT5_LIB_DIR}/qtlibpngd.lib,${QT5_LIB_DIR}/qtlibpng.lib>
-    $<IF:$<CONFIG:Debug>,${QT5_LIB_DIR}/qtfreetyped.lib,${QT5_LIB_DIR}/qtfreetype.lib>
-    $<IF:$<CONFIG:Debug>,${QT5_LIB_DIR}/Qt5PrintSupportd.lib,${QT5_LIB_DIR}/Qt5PrintSupport.lib>
-    $<IF:$<CONFIG:Debug>,${QT5_LIB_DIR}/Qt5FbSupportd.lib,${QT5_LIB_DIR}/Qt5FbSupport.lib>
-    $<IF:$<CONFIG:Debug>,${QT5_LIB_DIR}/Qt5FontDatabaseSupportd.lib,${QT5_LIB_DIR}/Qt5FontDatabaseSupport.lib>
-    $<IF:$<CONFIG:Debug>,${QT5_LIB_DIR}/Qt5PlatformCompositorSupportd.lib,${QT5_LIB_DIR}/Qt5PlatformCompositorSupport.lib>
-    $<IF:$<CONFIG:Debug>,${QT5_LIB_DIR}/Qt5EventDispatcherSupportd.lib,${QT5_LIB_DIR}/Qt5EventDispatcherSupport.lib>
-    $<IF:$<CONFIG:Debug>,${QT5_LIB_DIR}/Qt5DeviceDiscoverySupportd.lib,${QT5_LIB_DIR}/Qt5DeviceDiscoverySupport.lib>
-    $<IF:$<CONFIG:Debug>,${QT5_LIB_DIR}/Qt5AccessibilitySupportd.lib,${QT5_LIB_DIR}/Qt5AccessibilitySupport.lib>
-    $<IF:$<CONFIG:Debug>,${QT5_LIB_DIR}/Qt5ThemeSupportd.lib,${QT5_LIB_DIR}/Qt5ThemeSupport.lib>
-    $<IF:$<CONFIG:Debug>,${QT5_ROOT_DIR}/plugins/platforms/qwindowsd.lib,${QT5_ROOT_DIR}/plugins/platforms/qwindows.lib>
-    $<IF:$<CONFIG:Debug>,${QT5_ROOT_DIR}/plugins/imageformats/qicod.lib,${QT5_ROOT_DIR}/plugins/imageformats/qico.lib>
-    UxTheme.lib 
-    ws2_32.lib 
-    Version.lib 
-    winmm.lib 
-    imm32.lib 
-    dwmapi.lib
-  )
-endif()
-
-
 # third-party libraries link
 set(THIRD_PARTY_LINK_LIBRARIES
   inih 
@@ -189,7 +163,54 @@ set(THIRD_PARTY_LINK_LIBRARIES
 )
 
 target_link_libraries(TOPLauncher
+  PRIVATE
   ${QT5_LINK_LIBRARIES}
   ${THIRD_PARTY_LINK_LIBRARIES}
 )
 
+if(TOPLAUNCHER_USE_STATIC_QT_LIB)
+  file(GLOB QT5_SUPPORT_LIBRARIES_DEBUG
+    ${QT5_LIB_DIR}/*Supportd.lib
+  )
+  file(GLOB QT5_SUPPORT_LIBRARIES_RELEASE
+    ${QT5_LIB_DIR}/*Support.lib
+  )
+  message(STATUS ${QT5_SUPPORT_LIBRARIES_DEBUG})
+
+  set(QT5_STATIC_LINK_LIBRARIES
+    debug ${QT5_LIB_DIR}/qtpcre2d.lib optimized ${QT5_LIB_DIR}/qtpcre2.lib
+    debug ${QT5_LIB_DIR}/qtharfbuzzd.lib optimized ${QT5_LIB_DIR}/qtharfbuzz.lib
+    debug ${QT5_LIB_DIR}/qtlibpngd.lib optimized ${QT5_LIB_DIR}/qtlibpng.lib
+    debug ${QT5_LIB_DIR}/qtfreetyped.lib optimized ${QT5_LIB_DIR}/qtfreetype.lib
+    debug ${QT5_ROOT_DIR}/plugins/platforms/qwindowsd.lib optimized ${QT5_ROOT_DIR}/plugins/platforms/qwindows.lib
+    debug ${QT5_ROOT_DIR}/plugins/imageformats/qicod.lib optimized ${QT5_ROOT_DIR}/plugins/imageformats/qico.lib
+	debug ${QT5_ROOT_DIR}/plugins/imageformats/qwbmpd.lib optimized ${QT5_ROOT_DIR}/plugins/imageformats/qwbmp.lib
+	debug ${QT5_ROOT_DIR}/plugins/imageformats/qjpegd.lib optimized ${QT5_ROOT_DIR}/plugins/imageformats/qjpeg.lib
+    UxTheme.lib 
+    ws2_32.lib 
+    Version.lib 
+    winmm.lib 
+    imm32.lib 
+    dwmapi.lib
+	wtsapi32.lib 
+	netapi32.lib 
+	userenv.lib
+  )
+
+  foreach(support_lib_debug IN LISTS QT5_SUPPORT_LIBRARIES_DEBUG)
+    list(APPEND QT5_STATIC_LINK_LIBRARIES
+	  debug ${support_lib_debug}
+	)
+  endforeach()
+
+  foreach(support_lib_release IN LISTS QT5_SUPPORT_LIBRARIES_RELEASE)
+    list(APPEND QT5_STATIC_LINK_LIBRARIES
+	  optimized ${support_lib_release}
+	)
+  endforeach()
+
+  target_link_libraries(TOPLauncher
+    PRIVATE
+    ${QT5_STATIC_LINK_LIBRARIES}
+  )
+endif()

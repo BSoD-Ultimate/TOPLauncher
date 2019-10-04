@@ -10,7 +10,9 @@
 
 #ifdef QT_STATIC
 #include <QtPlugin>
-Q_IMPORT_PLUGIN(QWindowsIntegrationPlugin);
+Q_IMPORT_PLUGIN(QWindowsIntegrationPlugin)
+Q_IMPORT_PLUGIN(QWbmpPlugin)
+Q_IMPORT_PLUGIN(QJpegPlugin)
 Q_IMPORT_PLUGIN(QICOPlugin)
 #endif
 
