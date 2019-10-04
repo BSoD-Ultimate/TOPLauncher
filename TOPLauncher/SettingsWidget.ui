@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>610</width>
-    <height>450</height>
+    <height>680</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -179,9 +179,9 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>-179</y>
-        <width>555</width>
-        <height>629</height>
+        <y>0</y>
+        <width>572</width>
+        <height>680</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_9">
@@ -724,7 +724,7 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
           <item>
            <widget class="QLabel" name="labelLineClearDelay">
             <property name="text">
-             <string comment="settingwidget_gamecontrol_line_clear_delay_desc">Line clear delay (the less value, the quicker next piece appears after lines were cleared)</string>
+             <string comment="settingwidget_gamecontrol_line_clear_delay_desc">Line clear delay (the shorter the line-clear animation lasts)</string>
             </property>
            </widget>
           </item>

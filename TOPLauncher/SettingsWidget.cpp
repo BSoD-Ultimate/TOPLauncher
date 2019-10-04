@@ -49,7 +49,7 @@ namespace TOPLauncher
             {
                 if (index.row() == 0)
                 {
-                    return QVariant(QObject::tr("New server..."));
+                    return QVariant(QObject::tr("New server profile..."));
                 }
                 else if(index.row() < pAppModel->GetServerData().size() + 1)
                 {

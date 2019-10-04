@@ -212,7 +212,11 @@ namespace TOPLauncher
         m_pMainWidget->setGeometry(QRect(10, 10, newSize.width() - 20, newSize.height() - 20));
         
         // overlay widget
-        m_pOverlayWidget->setGeometry(geometry());
+		QRect overlayArea = geometry();
+		overlayArea.setX(0);
+		overlayArea.setY(0);
+
+        m_pOverlayWidget->setGeometry(overlayArea);
 
         // setting widget
         auto settingWidgetGeometry = m_pSettingsWidget->geometry();

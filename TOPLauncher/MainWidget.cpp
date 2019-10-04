@@ -231,7 +231,7 @@ namespace TOPLauncher
         if (ui.comboUsername->currentText().isEmpty() ||
             ui.editPassword->text().isEmpty())
         {
-            QMessageBox::critical(this, tr("Error"), tr("Username & password input box should not empty."));
+            QMessageBox::critical(this, QObject::tr("Error"), QObject::tr("Username & password input box should not empty."));
             return;
         }
 
@@ -239,7 +239,7 @@ namespace TOPLauncher
         assert(!serverDataRef.expired());
         if (serverDataRef.expired())
         {
-            QMessageBox::critical(this, tr("Error"), tr("Invalid server."));
+            QMessageBox::critical(this, QObject::tr("Error"), QObject::tr("Invalid server profile."));
             return;
         }
 
@@ -248,7 +248,7 @@ namespace TOPLauncher
         // check game executable
         if (pAppModel->GetGameExecutablePath().empty())
         {
-            QMessageBox::critical(this, tr("Error"), tr("Could not find where the game executable locates."));
+            QMessageBox::critical(this, QObject::tr("Error"), QObject::tr("Could not find where the game executable locates. Startup failed."));
             return;
         }
 
@@ -316,7 +316,30 @@ namespace TOPLauncher
 
     void MainWidget::on_btnRegister_clicked()
     {
-        std::wstring registerURL = L"http://tetrisonline.pl/top/register.php";
+		// find registration URL
+		std::wstring registerURL;
+
+		auto pServerDataValue = ui.comboServer->currentData();
+
+		auto pServerDataRef = pServerDataValue.value<std::weak_ptr<ServerData>>();
+		assert(!pServerDataRef.expired());
+		if (!pServerDataRef.expired())
+		{
+			auto pServerData = pServerDataRef.lock();
+			auto& registerURLStr = pServerData->registerURL;
+			if (!registerURLStr.isEmpty())
+			{
+				registerURL = registerURLStr.toStdWString();
+			}
+		}
+		
+		if (registerURL.empty())
+		{
+			assert(false);
+			QMessageBox::information(this, QObject::tr("Error"), QObject::tr("Current server profile does not contain a registration URL."));
+			return;
+		}
+
         HWND windowHandle = HWND(this->window()->winId());
         ShellExecuteW(windowHandle, L"open", registerURL.c_str(), NULL, NULL, SW_SHOWNORMAL);
     }

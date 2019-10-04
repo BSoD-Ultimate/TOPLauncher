@@ -99,8 +99,7 @@ namespace TOPLauncher
 
     bool UITranslator::isEmpty() const
     {
-        return (!m_translationData) ||
-            (m_translationData->uiTranslationMap.empty() && m_translationData->qObjectTranslationMap.empty());
+        return !m_translationData;
     }
 
     QString UITranslator::translate(const char * context, const char * sourceText, const char * disambiguation, int n) const
