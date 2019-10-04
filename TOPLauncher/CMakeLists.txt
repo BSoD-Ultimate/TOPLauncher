@@ -137,6 +137,13 @@ target_compile_definitions(TOPLauncher
   PRIVATE 
 )
 
+if(MSVC AND MSVC_VERSION GREATER_EQUAL 1920)
+  target_compile_options(TOPLauncher
+    PRIVATE 
+      $<$<COMPILE_LANGUAGE:CXX>:/std:c++17>
+  )
+endif()
+
 #
 # link libraries 
 #
