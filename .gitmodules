@@ -1,3 +1,5 @@
 [submodule "external/SjeJhhUtil"]
 	path = external/SjeJhhUtil
 	url = https://github.com/BSoD-Ultimate/SjeJhhUtil.git
+	branch = master
+
