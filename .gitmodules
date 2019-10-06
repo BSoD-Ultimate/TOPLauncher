@@ -3,3 +3,7 @@
 	url = https://github.com/BSoD-Ultimate/SjeJhhUtil.git
 	branch = master
 
+[submodule "external/tinyxml2"]
+	path = external/tinyxml2
+	url = https://github.com/leethomason/tinyxml2.git
+	branch = master

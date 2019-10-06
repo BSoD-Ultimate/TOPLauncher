@@ -87,7 +87,6 @@ set(RESOURCE_SRC
   Resources/translations.json
   Resources/icon.ico 
   Resources/TOPLauncher.qrc 
-  #Resources/high-dpi-unsupported.manifest
   TOPLauncher.rc 
 
 )
@@ -214,3 +213,15 @@ if(TOPLAUNCHER_USE_STATIC_QT_LIB)
     ${QT5_STATIC_LINK_LIBRARIES}
   )
 endif()
+
+# pre-build & post-build commands
+
+# Qt5 create/update translations
+add_custom_command(
+  TARGET TOPLauncher
+  PRE_BUILD
+  COMMAND "${QT5_BIN_DIR}/lupdate" "${CMAKE_CURRENT_SOURCE_DIR}" "-locations" "none" "-no-ui-lines" "-target-language" "en_US" "-ts" "Resources/translations/en_US.ts"
+  COMMAND "${QT5_BIN_DIR}/lupdate" "${CMAKE_CURRENT_SOURCE_DIR}" "-locations" "none" "-no-ui-lines" "-target-language" "zh_CN" "-ts" "Resources/translations/zh_CN.ts"
+  COMMAND "${QT5_BIN_DIR}/lupdate" "${CMAKE_CURRENT_SOURCE_DIR}" "-locations" "none" "-no-ui-lines" "-target-language" "ja_JP" "-ts" "Resources/translations/ja_JP.ts"
+)
+

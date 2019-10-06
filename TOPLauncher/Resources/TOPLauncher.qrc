@@ -10,5 +10,8 @@
         <file>ui/setting-icon-hover.png</file>
         <file>ui/setting-icon-normal.png</file>
         <file>ui/setting-icon-pushed.png</file>
+        <file>translations/en_US.ts</file>
+        <file>translations/ja_JP.ts</file>
+        <file>translations/zh_CN.ts</file>
     </qresource>
 </RCC>
