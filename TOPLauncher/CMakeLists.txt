@@ -184,29 +184,29 @@ if(TOPLAUNCHER_USE_STATIC_QT_LIB)
     debug ${QT5_LIB_DIR}/qtfreetyped.lib optimized ${QT5_LIB_DIR}/qtfreetype.lib
     debug ${QT5_ROOT_DIR}/plugins/platforms/qwindowsd.lib optimized ${QT5_ROOT_DIR}/plugins/platforms/qwindows.lib
     debug ${QT5_ROOT_DIR}/plugins/imageformats/qicod.lib optimized ${QT5_ROOT_DIR}/plugins/imageformats/qico.lib
-	debug ${QT5_ROOT_DIR}/plugins/imageformats/qwbmpd.lib optimized ${QT5_ROOT_DIR}/plugins/imageformats/qwbmp.lib
-	debug ${QT5_ROOT_DIR}/plugins/imageformats/qjpegd.lib optimized ${QT5_ROOT_DIR}/plugins/imageformats/qjpeg.lib
+    debug ${QT5_ROOT_DIR}/plugins/imageformats/qwbmpd.lib optimized ${QT5_ROOT_DIR}/plugins/imageformats/qwbmp.lib
+    debug ${QT5_ROOT_DIR}/plugins/imageformats/qjpegd.lib optimized ${QT5_ROOT_DIR}/plugins/imageformats/qjpeg.lib
     UxTheme.lib 
     ws2_32.lib 
     Version.lib 
     winmm.lib 
     imm32.lib 
     dwmapi.lib
-	wtsapi32.lib 
-	netapi32.lib 
-	userenv.lib
+    wtsapi32.lib 
+    netapi32.lib 
+    userenv.lib
   )
 
   foreach(support_lib_debug IN LISTS QT5_SUPPORT_LIBRARIES_DEBUG)
     list(APPEND QT5_STATIC_LINK_LIBRARIES
-	  debug ${support_lib_debug}
-	)
+      debug ${support_lib_debug}
+    )
   endforeach()
 
   foreach(support_lib_release IN LISTS QT5_SUPPORT_LIBRARIES_RELEASE)
     list(APPEND QT5_STATIC_LINK_LIBRARIES
-	  optimized ${support_lib_release}
-	)
+      optimized ${support_lib_release}
+    )
   endforeach()
 
   target_link_libraries(TOPLauncher
