@@ -115,12 +115,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>A fatal error has occurred during the startup: 
-%1 
-The program will now exit.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Fatal Error</source>
         <translation type="unfinished"></translation>
     </message>
@@ -178,6 +172,12 @@ The program will now exit.</source>
     </message>
     <message>
         <source>Unable to apply new game control settings. </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A fatal error has occurred during the startup: 
+%1 
+The program will now exit.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

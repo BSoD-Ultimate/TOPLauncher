@@ -126,6 +126,7 @@ target_include_directories(TOPLauncher
   "../external/inih"
   "../external/inih/cpp"
   "../external/rapidjson"
+  "../external/tinyxml2"
 )
 
 #
@@ -159,6 +160,7 @@ set(THIRD_PARTY_LINK_LIBRARIES
   sqlite3
   SQLiteCpp
   SjeJhhUtil
+  tinyxml2
 )
 
 target_link_libraries(TOPLauncher
@@ -225,3 +227,11 @@ add_custom_command(
   COMMAND "${QT5_BIN_DIR}/lupdate" "${CMAKE_CURRENT_SOURCE_DIR}" "-locations" "none" "-no-ui-lines" "-target-language" "ja_JP" "-ts" "Resources/translations/ja_JP.ts"
 )
 
+# recover "vanished" translations
+add_custom_command(
+  TARGET TOPLauncher
+  PRE_BUILD
+  COMMAND "${QT5_BIN_DIR}/lconvert" "Resources/translations/en_US.ts" "-o" "Resources/translations/en_US.ts"
+  COMMAND "${QT5_BIN_DIR}/lconvert" "Resources/translations/zh_CN.ts" "-o" "Resources/translations/zh_CN.ts"
+  COMMAND "${QT5_BIN_DIR}/lconvert" "Resources/translations/ja_JP.ts" "-o" "Resources/translations/ja_JP.ts"
+)

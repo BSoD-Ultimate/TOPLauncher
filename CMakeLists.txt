@@ -18,6 +18,7 @@ message("Qt5 library locates in ${Qt5_DIR}")
 set(QT5_ROOT_DIR "${Qt5_DIR}/../../../")
 set(QT5_BIN_DIR "${Qt5_DIR}/../../../bin")
 
+
 # subprojects
 add_subdirectory(external/inih EXCLUDE_FROM_ALL)
 
@@ -33,6 +34,11 @@ add_subdirectory(external/SQLiteCpp EXCLUDE_FROM_ALL)
 
 set(SJEJHHUTIL_BUILD_AS_DLL OFF CACHE BOOL "")
 add_subdirectory(external/SjeJhhUtil EXCLUDE_FROM_ALL)
+
+set(BUILD_SHARED_LIBS OFF CACHE BOOL "")
+add_subdirectory(external/tinyxml2 EXCLUDE_FROM_ALL)
+set_target_properties(tinyxml2 PROPERTIES
+  COMPILE_DEFINITIONS "")
 
 add_subdirectory(TOPLauncher)
 
