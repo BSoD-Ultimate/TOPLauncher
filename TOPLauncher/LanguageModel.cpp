@@ -1,14 +1,13 @@
 #include "stdafx.h"
 #include "LanguageModel.h"
 
+#include <QDir>
 #include <QFile>
+#include <tinyxml2.h>
 
 #include <unordered_map>
 #include <algorithm>
 
-#include <rapidjson/rapidjson.h>
-#include <rapidjson/document.h>
-#include <rapidjson/encodings.h>
 
 namespace std 
 {
@@ -25,56 +24,95 @@ namespace TOPLauncher
 {
     struct TranslationData
     {
-        std::unordered_map<QString, QString> uiTranslationMap;
-        std::unordered_map<QString, std::unique_ptr<QString>> qObjectTranslationMap;
+		struct TranslationItem
+		{
+			QString sourceText;
+			QString disambiguation;
+			QString comment;
+			int index = 0;
+			QString translatedText;
+		};
+		using TranslationMap = std::unordered_map<QString, TranslationItem>;
 
-        static std::unique_ptr<TranslationData> TranslationDataFromJSONObject(const rapidjson::Value& v)
-        {
-            auto pTranslation = std::make_unique<TranslationData>();
+		QString langId;
+        std::unordered_map<QString, TranslationMap> translationMapData;
 
-            if (v.HasMember("ui-translations") && v["ui-translations"].IsObject())
-            {
-                auto translationObject = v["ui-translations"].GetObject();
-                for (auto iter = translationObject.MemberBegin(); iter != translationObject.MemberEnd(); iter++)
-                {
-                    QString translationKey;
-                    QString translationValue;
-
-                    translationKey = QString::fromUtf8(iter->name.GetString(), iter->name.GetStringLength());
-                    assert(iter->value.IsString());
-                    translationValue = QString::fromUtf8(iter->value.GetString(), iter->value.GetStringLength());
-
-
-                    pTranslation->uiTranslationMap[translationKey] = translationValue;
-                }
-            }
-
-            if (v.HasMember("qobject-translations") && v["qobject-translations"].IsObject())
-            {
-                auto translationObject = v["qobject-translations"].GetObject();
-                for (auto iter = translationObject.MemberBegin(); iter != translationObject.MemberEnd(); iter++)
-                {
-                    QString translationKey;
-                    std::unique_ptr<QString> translationValue;
-
-                    translationKey = QString::fromUtf8(iter->name.GetString(), iter->name.GetStringLength());
-                    if (iter->value.IsString())
-                    {
-                        translationValue = std::make_unique<QString>(QString::fromUtf8(iter->value.GetString(), iter->value.GetStringLength()));
-                    }
-
-                    pTranslation->qObjectTranslationMap[translationKey] = std::move(translationValue);
-                }
-            }
-
-            return pTranslation;
-        }
+		static std::unique_ptr<TranslationData> TranslationDataFromXMLData(const tinyxml2::XMLDocument& d);
     };
 
-    UITranslator::UITranslator(const QString& langId, const QString& langShow, std::unique_ptr<TranslationData>&& translation)
-        : m_languageId(langId)
-        , m_languageShowName(langShow)
-        , m_translationData(std::forward<std::unique_ptr<TranslationData>&&>(translation))
+	std::unique_ptr<TranslationData> TranslationData::TranslationDataFromXMLData(const tinyxml2::XMLDocument& d)
+	{
+		auto pTranslation = std::make_unique<TranslationData>();
+
+		const tinyxml2::XMLElement* pRoot = d.RootElement();
+
+		// get language ID
+		const char* langIdValue = pRoot->Attribute("language");
+		if (!langIdValue)
+		{
+			return nullptr;
+		}
+		QString langId = QString::fromUtf8(langIdValue);
+		langId.replace(QChar::fromLatin1('_'), QChar::fromLatin1('-'));
+		pTranslation->langId = langId;
+
+		// parse contexts
+		for (const tinyxml2::XMLElement* childContext = pRoot->FirstChildElement();
+			childContext; childContext = childContext->NextSiblingElement())
+		{
+			QString contextName;
+			TranslationMap translationMap;
+
+			const tinyxml2::XMLElement* contextNameElement = childContext->FirstChildElement();
+			if (contextNameElement->Name() != std::string("name"))
+			{
+				assert(false);
+				return nullptr;
+			}
+
+			contextName = QString::fromUtf8(contextNameElement->GetText());
+
+			// parse translations
+			for (const tinyxml2::XMLElement* translationItem = contextNameElement->NextSiblingElement();
+				translationItem; translationItem = translationItem->NextSiblingElement())
+			{
+				if (translationItem->Name() != std::string("message"))
+				{
+					assert(false);
+					return nullptr;
+				}
+
+				TranslationItem item;
+
+				for (const tinyxml2::XMLElement* trData = translationItem->FirstChildElement();
+					trData; trData = trData->NextSiblingElement())
+				{
+					if (trData->Name() == std::string("source") && trData->GetText())
+						item.sourceText = QString::fromUtf8(trData->GetText());
+					if (trData->Name() == std::string("comment") && trData->GetText())
+						item.disambiguation = QString::fromUtf8(trData->GetText());
+					if (trData->Name() == std::string("extracomment") && trData->GetText())
+						item.comment = QString::fromUtf8(trData->GetText());
+					if (trData->Name() == std::string("translation") && trData->GetText())
+					{
+						item.translatedText = QString::fromUtf8(trData->GetText());
+					}
+
+				}
+
+				translationMap[item.sourceText] = item;
+			}
+
+			pTranslation->translationMapData[contextName] = std::move(translationMap);
+
+		}
+
+
+		return pTranslation;
+	}
+
+    UITranslator::UITranslator(std::unique_ptr<TranslationData>&& translation)
+        : m_translationData(std::forward<std::unique_ptr<TranslationData>&&>(translation))
     {
     }
 
@@ -82,14 +120,25 @@ namespace TOPLauncher
     {
     }
 
-    QString UITranslator::langId() const
+    QString UITranslator::LangId() const
     {
-        return m_languageId;
+        return m_translationData ? m_translationData->langId : "";
     }
 
-    QString UITranslator::langShowName() const
+    QString UITranslator::LangShowName() const
     {
-        return m_languageShowName;
+		std::wstring langId = LangId().toStdWString();
+		
+		if (langId.empty())
+		{
+			return QString();
+		}
+
+		int nchars = GetLocaleInfoEx(langId.c_str(), LOCALE_SNATIVELANGUAGENAME, NULL, 0);
+		auto languageNameBuf = std::make_unique<wchar_t[]>(nchars);
+		GetLocaleInfoEx(langId.c_str(), LOCALE_SNATIVELANGUAGENAME, languageNameBuf.get(), nchars);
+
+		return QString::fromWCharArray(languageNameBuf.get(), nchars - 1);
     }
 
     TranslationData * UITranslator::GetTranslationData() const
@@ -104,26 +153,29 @@ namespace TOPLauncher
 
     QString UITranslator::translate(const char * context, const char * sourceText, const char * disambiguation, int n) const
     {
-        if (context == std::string("QObject"))
-        {
-            const auto& qObjectTranslationMap = m_translationData->qObjectTranslationMap;
-            if (qObjectTranslationMap.find(QString(sourceText)) != qObjectTranslationMap.cend())
-            {
-                const auto& pTranslation = qObjectTranslationMap.at(QString(sourceText));
-                return pTranslation ? *pTranslation : QString(sourceText);
-            }
+		if (!m_translationData)
+		{
+			return QString(sourceText);
+		}
 
-            return QString(sourceText);
-        }
-        else
-        {
-            const auto& uiTranslationMap = m_translationData->uiTranslationMap;
-            if (uiTranslationMap.find(QString(disambiguation)) != uiTranslationMap.cend())
-            {
-                return uiTranslationMap.at(QString(disambiguation));
-            }
-            return QString(sourceText);
-        }
+		try
+		{
+			auto translationMap = m_translationData->translationMapData.at(QString::fromUtf8(context));
+			const auto& translationData = translationMap.at(QString::fromUtf8(sourceText));
+			if (!translationData.translatedText.isEmpty())
+			{
+				return translationData.translatedText;
+			}
+			else
+			{
+				return QString(sourceText);
+			}
+		}
+		catch (const std::out_of_range&)
+		{
+			return QString(sourceText);
+		}
+
     }
 
     std::shared_ptr<LanguageModel> LanguageModel::GetInstance()
@@ -159,7 +211,7 @@ namespace TOPLauncher
         std::vector<QString> languages;
         for (const auto& translator : m_translatorContainer)
         {
-            languages.push_back(translator->langId());
+            languages.push_back(translator->LangId());
         }
         return languages;
     }
@@ -174,7 +226,7 @@ namespace TOPLauncher
         auto iter = std::find_if(m_translatorContainer.cbegin(), m_translatorContainer.cend(),
             [&langId](const auto& item)
         {
-            return item->langId() == langId;
+            return item->LangId() == langId;
         });
 
         if (iter != m_translatorContainer.cend())
@@ -189,71 +241,43 @@ namespace TOPLauncher
 
     void LanguageModel::LoadTranslationData()
     {
-        QByteArray translationContent;
+		static const QString translationFilePrefix = ":/translations/";
+		// Open translations folder
+		QDir directory(translationFilePrefix);
 
-        // load translation from resource
-        {
-            QFile translationFile(":/translations.json");
-            translationFile.open(QIODevice::ReadOnly);
+		QStringList translationsList = directory.entryList();
 
-            translationContent = translationFile.readAll();
+		// load translations
+		for (const QString& translationFilename : translationsList)
+		{
+			QByteArray translationFileContent;
+			{
+				QString translationFilePath = translationFilePrefix + translationFilename;
+				QFile translationFile(translationFilePath);
+				translationFile.open(QIODevice::ReadOnly);
+				translationFileContent = translationFile.readAll();
+				translationFile.close();
+			}
 
-            translationFile.close();
-        }
+			tinyxml2::XMLDocument d;
+			if (d.Parse(translationFileContent) != tinyxml2::XML_SUCCESS)
+			{
+				assert(false);
+				throw std::runtime_error("Translation data has semantic issues.");
+			}
 
-        rapidjson::Document translationJSON;
-        if (translationJSON.Parse(translationContent.constData(), translationContent.length()).HasParseError())
-        {
-            assert(false);
-            throw std::runtime_error("Translation data has semantic issues.");
-        }
+			auto translationData = TranslationData::TranslationDataFromXMLData(d);
+			assert(translationData);
+			if (translationData)
+				m_translatorContainer.emplace_back(std::make_unique<UITranslator>(std::move(translationData)));
 
-        assert(translationJSON.IsObject());
-
-        if (translationJSON.HasMember("default") && translationJSON["default"].IsString())
-        {
-            m_defaultLanguage = QString::fromStdString(translationJSON["default"].GetString());
-        }
-
-        if (translationJSON.HasMember("languages") && translationJSON["languages"].IsArray())
-        {
-            auto languagesArray = translationJSON["languages"].GetArray();
-            for (int i = 0; i < languagesArray.Size(); i++)
-            {
-                const auto& translationObject = languagesArray[i];
-                if (translationObject.IsObject())
-                {
-                    QString langId;
-                    QString langShow;
-
-                    if (translationObject.HasMember("langid") && translationObject["langid"].IsString())
-                    {
-                        langId = QString::fromStdString(translationObject["langid"].GetString());
-                    }
-                    if (translationObject.HasMember("langShowName") && translationObject["langShowName"].IsString())
-                    {
-                        langShow = QString::fromStdString(translationObject["langShowName"].GetString());
-                    }
-
-                    if (langId.isEmpty() || langShow.isEmpty())
-                    {
-                        assert(false);
-                        continue;
-                    }
-
-                    auto translationData = TranslationData::TranslationDataFromJSONObject(translationObject);
-                    assert(translationData);
-                    if (translationData)
-                        m_translatorContainer.emplace_back(std::make_unique<UITranslator>(langId, langShow, std::move(translationData)));
-                }
-            }
-        }
+		}
 
         // check if default language is available
         auto iter = std::find_if(m_translatorContainer.cbegin(), m_translatorContainer.cend(),
             [this](const auto& item)
         {
-            return item->langId() == m_defaultLanguage;
+            return item->LangId() == m_defaultLanguage;
         });
 
         if (iter == m_translatorContainer.cend())

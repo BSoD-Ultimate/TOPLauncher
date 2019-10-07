@@ -98,6 +98,14 @@ qt5_wrap_ui(COMPILED_UI_FILES ${FORM_FILES_SRC})
 qt5_add_resources(COMPILED_RESOURCE_FILES Resources/TOPLauncher.qrc)
 source_group(Generated_Files FILES ${COMPILED_MOC_FILES} ${COMPILED_UI_FILES} ${COMPILED_RESOURCE_FILES})
 
+# translations
+set(TRANSLATIONS_SRC
+  Resources/translations/en_US.ts 
+  Resources/translations/zh_CN.ts 
+  Resources/translations/ja_JP.ts 
+)
+source_group(Translation_Files FILES ${TRANSLATIONS_SRC})
+
 #
 # target name 
 #
@@ -110,6 +118,7 @@ add_executable(TOPLauncher WIN32
   ${UTIL_SRC}
   ${FORM_FILES_SRC}
   ${RESOURCE_SRC}
+  ${TRANSLATIONS_SRC}
   ${COMPILED_MOC_FILES}
   ${COMPILED_UI_FILES}
   ${COMPILED_RESOURCE_FILES}

@@ -112,15 +112,13 @@ namespace TOPLauncher
 
         QString GetSystemLanguageName()
         {
-            LANGID langId = GetUserDefaultUILanguage();
+            int nchars = GetLocaleInfoEx(LOCALE_NAME_USER_DEFAULT, LOCALE_SNAME, NULL, 0);
+            auto languageNameBuf = std::make_unique<wchar_t[]>(nchars);
+			GetLocaleInfoEx(LOCALE_NAME_USER_DEFAULT, LOCALE_SNAME, languageNameBuf.get(), nchars);
 
-            int nchars = GetLocaleInfoA(langId, LOCALE_SNAME, NULL, 0);
-            auto languageNameBuf = std::make_unique<char[]>(nchars);
-            GetLocaleInfoA(langId, LOCALE_SNAME, languageNameBuf.get(), nchars);
+            std::wstring languageName(languageNameBuf.get(), nchars - 1);
 
-            std::string languageName(languageNameBuf.get(), nchars - 1);
-
-            return QString::fromStdString(languageName);
+            return QString::fromStdWString(languageName);
         }
 
     }

@@ -11,6 +11,7 @@
     <message>
         <source>Use System language</source>
         <comment>dlglanguage_btn_use_system_lang</comment>
+        <extracomment>use system language.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>

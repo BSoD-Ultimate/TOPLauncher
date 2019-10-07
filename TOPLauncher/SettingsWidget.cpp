@@ -297,7 +297,7 @@ namespace TOPLauncher
         {
             assert(pTranslator);
 
-            QString langShow = pTranslator->langShowName();
+            QString langShow = pTranslator->LangShowName();
             QString displayFormat = QObject::tr("Would you like to use your system language \"%1\" as the display language?");
             QString promptText = displayFormat.arg(langShow);
             if (QMessageBox::question(this, QObject::tr("Question"), promptText, QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes)

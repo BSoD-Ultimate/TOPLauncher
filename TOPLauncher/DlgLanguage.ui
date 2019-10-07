@@ -70,7 +70,7 @@
      <item>
       <widget class="QPushButton" name="btnUseSystemLang">
        <property name="text">
-        <string comment="dlglanguage_btn_use_system_lang">Use System language</string>
+        <string comment="dlglanguage_btn_use_system_lang" extracomment="use system language.">Use System language</string>
        </property>
       </widget>
      </item>
