@@ -30,6 +30,8 @@ namespace TOPLauncher
         void SettingButtonToggled(bool showClosePrompt);
 
     private:
+		void InitUI();
+
         void LoadSettingsFromModel();
 
         void LoadGeneralSettings();
@@ -46,7 +48,6 @@ namespace TOPLauncher
 
     private slots :
 
-
     void on_btnSetting_toggled(bool checked);
 
     void on_comboBoxLanguage_currentIndexChanged(int index);
@@ -61,14 +62,20 @@ namespace TOPLauncher
     void on_btnApplyControlSettings_clicked();
     void on_btnResetControlSettings_clicked();
 
+    void on_btnUnpackArchive_clicked();
+    void on_btnPackArchive_clicked();
+
     // spinbox changed
     void on_sliderMoveSensitivity_valueChanged(int value);
     void on_sliderMoveSpeed_valueChanged(int value);
     void on_sliderSoftDropSpeed_valueChanged(int value);
     void on_sliderLineClearDelay_valueChanged(int value);
 
+    
+
     private:
         Ui::SettingsWidget ui;
+		QButtonGroup m_nextPiecesGroup;
 
         TOPLauncherMainWindow* m_pMainWindow;
 

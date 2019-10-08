@@ -1,6 +1,6 @@
 #pragma once
 
-#include <QWidget>
+#include <QDialog>
 #include "ui_DlgLanguage.h"
 
 #include <memory>

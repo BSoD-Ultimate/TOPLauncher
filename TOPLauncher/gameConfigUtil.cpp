@@ -6,13 +6,16 @@
 #include "SjeJhhUtil.h"
 #include "INIReader.h"
 
+#include <algorithm>
+#include <utility>
+
 namespace TOPLauncher
 {
     namespace util
     {
         namespace game
         {
-            static bool UnpackSJEJHHArchive(const std::wstring& filePath, const std::wstring& extractDir, std::string& internalFolderName)
+            bool UnpackSJEJHHArchive(const std::wstring& filePath, const std::wstring& extractDir, std::string& internalFolderName, ArchiveProcessCallback callback)
             {
                 filesystem::path archivePath = filePath;
 
@@ -36,6 +39,11 @@ namespace TOPLauncher
                 {
                     sjejhh_unpack_file_info curFileInfo = { 0 };
                     sjejhh_unpack_get_current_file_info(pArchive, &curFileInfo);
+
+                    if (callback)
+                    {
+                        callback(std::wstring(curFileInfo.filename, curFileInfo.filenameLength), curFileInfo.fileLength, i, gi.fileCount);
+                    }
 
                     filesystem::path extractFileName = extractDir;
                     extractFileName /= std::wstring(curFileInfo.filename, curFileInfo.filenameLength);
@@ -75,11 +83,14 @@ namespace TOPLauncher
                 return true;
             }
 
-            static bool PackSJEJHHArchive(const std::wstring& packDir, const std::wstring& saveFilePath, const std::string& internalFolderName)
+            bool PackSJEJHHArchive(const std::wstring& packDir, const std::wstring& saveFilePath, const std::string& internalFolderName, ArchiveProcessCallback callback)
             {
                 std::error_code code;
 
                 filesystem::directory_iterator dirIter(packDir, code);
+
+                int fileCount = std::distance(filesystem::begin(filesystem::directory_iterator(packDir)),
+                    filesystem::end(filesystem::directory_iterator(packDir)));
 
                 sjejhh_pack_context* pPackContext = sjejhh_pack_create_file(internalFolderName.c_str(), saveFilePath.c_str());
 

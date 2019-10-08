@@ -48,6 +48,9 @@ set(UI_HEADERS
   MainWindow.h 
   LoginUserItem.h 
   DlgLanguage.h 
+  DlgProgress.h 
+  DlgSJEJHHPack.h 
+  DlgSJEJHHUnpack.h 
   MainWidget.h 
   SettingsWidget.h 
   LanguageItemModel.h 
@@ -57,6 +60,9 @@ set(UI_SRC
   MainWindow.cpp 
   LoginUserItem.cpp 
   DlgLanguage.cpp 
+  DlgProgress.cpp  
+  DlgSJEJHHPack.cpp  
+  DlgSJEJHHUnpack.cpp  
   MainWidget.cpp
   SettingsWidget.cpp 
   LanguageItemModel.cpp 
@@ -80,6 +86,9 @@ set(FORM_FILES_SRC
   SettingsWidget.ui 
   LoginUserItem.ui 
   DlgLanguage.ui 
+  DlgSJEJHHUnpack.ui 
+  DlgSJEJHHPack.ui 
+  DlgProgress.ui 
 )
 source_group(Form_Files FILES ${FORM_FILES_SRC})
 

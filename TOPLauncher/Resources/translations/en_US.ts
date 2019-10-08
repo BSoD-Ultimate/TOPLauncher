@@ -26,6 +26,75 @@
     </message>
 </context>
 <context>
+    <name>DlgProgress</name>
+    <message>
+        <source>Progress</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Progress Description</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DlgSJEJHHPack</name>
+    <message>
+        <source>Pack &quot;SJE.JHH&quot; Archive...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Folder to pack the &quot;SJE.JHH&quot; Archive:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Virtual folder name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Path To Save the &quot;SJE.JHH&quot; Archive:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do Pack</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DlgSJEJHHUnpack</name>
+    <message>
+        <source>Unpack &quot;SJE.JHH&quot; Archive...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&quot;SJE.JHH&quot; Archive&apos;s path:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Path to extract:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do Unpack</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>LoginUserItem</name>
     <message>
         <source>Form</source>
@@ -321,6 +390,74 @@ The program will now exit.</source>
     <message>
         <source>Reset</source>
         <comment>settingwidget_gamecontrol_btn_reset</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>How many next pieces will be shown during the game:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>6</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset to TOJ&apos;s default profile</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Modding</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&quot;SJE.JHH&quot; Archive Packing/Unpacking</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Information of the last archive unpacked by the launcher:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Archive Path:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Virtual Folder Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unpacking...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Packing...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#800000;&quot;&gt;Caution: Modifying archives within the client incorrectly could lead the client unable to startup.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Extracted Folder:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -2,6 +2,9 @@
 #include "SettingsWidget.h"
 #include "MainWindow.h"
 #include "MainWidget.h"
+#include "DlgSJEJHHUnpack.h"
+#include "DlgSJEJHHPack.h"
+
 
 #include "AppModel.h"
 #include "LanguageModel.h"
@@ -125,6 +128,8 @@ namespace TOPLauncher
         ui.setupUi(this);
         assert(m_pMainWindow);
 
+		InitUI();
+
         EnableGameSettings(false);
 
         LoadSettingsFromModel();
@@ -152,7 +157,17 @@ namespace TOPLauncher
         ui.groupControlSettings->setEnabled(enable);
     }
 
-    void SettingsWidget::LoadSettingsFromModel()
+	void SettingsWidget::InitUI()
+	{
+		m_nextPiecesGroup.addButton(ui.radioNextPieceCount1);
+		m_nextPiecesGroup.addButton(ui.radioNextPieceCount2);
+		m_nextPiecesGroup.addButton(ui.radioNextPieceCount3);
+		m_nextPiecesGroup.addButton(ui.radioNextPieceCount4);
+		m_nextPiecesGroup.addButton(ui.radioNextPieceCount5);
+		m_nextPiecesGroup.addButton(ui.radioNextPieceCount6);
+	}
+
+	void SettingsWidget::LoadSettingsFromModel()
     {
         LoadGeneralSettings();
         LoadServerListSettings();
@@ -488,6 +503,19 @@ namespace TOPLauncher
     {
         LoadGameControlSettings();
 
+    }
+
+    void SettingsWidget::on_btnUnpackArchive_clicked()
+    {
+        DlgSJEJHHUnpack unpackDlg;
+
+        unpackDlg.exec();
+    }
+
+    void SettingsWidget::on_btnPackArchive_clicked()
+    {
+        DlgSJEJHHPack packDlg;
+        packDlg.exec();
     }
 
     void SettingsWidget::on_sliderMoveSensitivity_valueChanged(int value)

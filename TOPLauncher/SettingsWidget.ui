@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>610</width>
-    <height>680</height>
+    <height>1017</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -181,7 +181,7 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
         <x>0</x>
         <y>0</y>
         <width>572</width>
-        <height>680</height>
+        <height>1017</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_9">
@@ -471,6 +471,12 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
        </item>
        <item>
         <widget class="QGroupBox" name="groupControlSettings">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
          <property name="title">
           <string comment="settingwidget_group_gamecontrol">Game Control Settings</string>
          </property>
@@ -809,20 +815,107 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
            </layout>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_7">
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>How many next pieces will be shown during the game:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_3">
             <item>
-             <widget class="QPushButton" name="btnApplyControlSettings">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
+             <widget class="QRadioButton" name="radioNextPieceCount1">
               <property name="text">
-               <string comment="settingwidget_gamecontrol_btn_apply">Apply New Control Settings</string>
+               <string>1</string>
+              </property>
+              <property name="autoExclusive">
+               <bool>false</bool>
               </property>
              </widget>
             </item>
+            <item>
+             <widget class="QRadioButton" name="radioNextPieceCount2">
+              <property name="text">
+               <string>2</string>
+              </property>
+              <property name="autoExclusive">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="radioNextPieceCount3">
+              <property name="text">
+               <string>3</string>
+              </property>
+              <property name="autoExclusive">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="radioNextPieceCount4">
+              <property name="text">
+               <string>4</string>
+              </property>
+              <property name="autoExclusive">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="radioNextPieceCount5">
+              <property name="text">
+               <string>5</string>
+              </property>
+              <property name="autoExclusive">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="radioNextPieceCount6">
+              <property name="text">
+               <string>6</string>
+              </property>
+              <property name="autoExclusive">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Minimum</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>200</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btnApplyControlSettings">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string comment="settingwidget_gamecontrol_btn_apply">Apply New Control Settings</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_4">
             <item>
              <widget class="QPushButton" name="btnResetControlSettings">
               <property name="sizePolicy">
@@ -833,13 +926,13 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
               </property>
               <property name="minimumSize">
                <size>
-                <width>0</width>
+                <width>150</width>
                 <height>0</height>
                </size>
               </property>
               <property name="maximumSize">
                <size>
-                <width>120</width>
+                <width>16777215</width>
                 <height>16777215</height>
                </size>
               </property>
@@ -848,7 +941,180 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
               </property>
              </widget>
             </item>
+            <item>
+             <widget class="QPushButton" name="btnResetDefault">
+              <property name="minimumSize">
+               <size>
+                <width>200</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>200</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Reset to TOJ's default profile</string>
+              </property>
+             </widget>
+            </item>
            </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupModding">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="title">
+          <string>Modding</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <item>
+           <widget class="QGroupBox" name="groupArchiveModifing">
+            <property name="title">
+             <string>&quot;SJE.JHH&quot; Archive Packing/Unpacking</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_4">
+             <item>
+              <widget class="QLabel" name="label_2">
+               <property name="text">
+                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#800000;&quot;&gt;Caution: Modifying archives within the client incorrectly could lead the client unable to startup.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               </property>
+               <property name="wordWrap">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_3">
+               <property name="text">
+                <string>Information of the last archive unpacked by the launcher:</string>
+               </property>
+               <property name="wordWrap">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="Line" name="line">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <layout class="QFormLayout" name="formLayout_3">
+               <item row="0" column="0">
+                <widget class="QLabel" name="label_4">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>Archive Path:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QLineEdit" name="editArchivePath">
+                 <property name="frame">
+                  <bool>false</bool>
+                 </property>
+                 <property name="readOnly">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QLabel" name="label_5">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>Virtual Folder Name:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QLineEdit" name="editArchiveFolderName">
+                 <property name="frame">
+                  <bool>false</bool>
+                 </property>
+                 <property name="readOnly">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0">
+                <widget class="QLabel" name="label_6">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>Extracted Folder:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1">
+                <widget class="QLineEdit" name="editExtractPath">
+                 <property name="frame">
+                  <bool>false</bool>
+                 </property>
+                 <property name="readOnly">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_5">
+               <item>
+                <widget class="QPushButton" name="btnUnpackArchive">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>50</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>Unpacking...</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="btnPackArchive">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>50</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>Packing...</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
           </item>
          </layout>
         </widget>
@@ -883,12 +1149,12 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>541</x>
-     <y>243</y>
+     <x>589</x>
+     <y>402</y>
     </hint>
     <hint type="destinationlabel">
-     <x>367</x>
-     <y>235</y>
+     <x>461</x>
+     <y>400</y>
     </hint>
    </hints>
   </connection>
@@ -899,12 +1165,12 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>541</x>
-     <y>293</y>
+     <x>589</x>
+     <y>450</y>
     </hint>
     <hint type="destinationlabel">
-     <x>319</x>
-     <y>291</y>
+     <x>413</x>
+     <y>448</y>
     </hint>
    </hints>
   </connection>
@@ -915,12 +1181,12 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>538</x>
-     <y>342</y>
+     <x>589</x>
+     <y>498</y>
     </hint>
     <hint type="destinationlabel">
-     <x>348</x>
-     <y>334</y>
+     <x>442</x>
+     <y>496</y>
     </hint>
    </hints>
   </connection>
@@ -931,12 +1197,12 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>547</x>
-     <y>382</y>
+     <x>589</x>
+     <y>563</y>
     </hint>
     <hint type="destinationlabel">
-     <x>358</x>
-     <y>379</y>
+     <x>452</x>
+     <y>563</y>
     </hint>
    </hints>
   </connection>
