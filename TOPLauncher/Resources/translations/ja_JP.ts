@@ -6,87 +6,87 @@
     <message>
         <source>Switch Language...</source>
         <comment>dlglanguage_window_title</comment>
-        <translation type="unfinished"></translation>
+        <translation>言語を切り替える...</translation>
     </message>
     <message>
         <source>Use System language</source>
         <comment>dlglanguage_btn_use_system_lang</comment>
         <extracomment>use system language.</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>システム言語に変更</translation>
     </message>
     <message>
         <source>OK</source>
         <comment>btn_ok</comment>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Cancel</source>
         <comment>btn_cancel</comment>
-        <translation type="unfinished"></translation>
+        <translation>キャンセル</translation>
     </message>
 </context>
 <context>
     <name>LoginUserItem</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
     <name>MainWidget</name>
     <message>
         <source>TOPLauncher</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Login</source>
         <comment>mainwidget_group_login</comment>
-        <translation type="unfinished"></translation>
+        <translation>ログイン</translation>
     </message>
     <message>
         <source>Username:</source>
         <comment>mainwidget_login_label_username</comment>
-        <translation type="unfinished"></translation>
+        <translation>ユーザ名：</translation>
     </message>
     <message>
         <source>Password:</source>
         <comment>mainwidget_login_label_password</comment>
-        <translation type="unfinished"></translation>
+        <translation>パスワード：</translation>
     </message>
     <message>
         <source>Remember Password</source>
         <comment>mainwidget_chk_rememberpwd</comment>
-        <translation type="unfinished"></translation>
+        <translation>パスワードを保存する</translation>
     </message>
     <message>
         <source>Start</source>
         <comment>mainwidget_login_btn_start</comment>
-        <translation type="unfinished"></translation>
+        <translation>起動</translation>
     </message>
     <message>
         <source>Register</source>
         <comment>mainwidget_login_btn_register</comment>
-        <translation type="unfinished"></translation>
+        <translation>登録</translation>
     </message>
     <message>
         <source>Forum</source>
         <comment>mainwidget_login_btn_openforum</comment>
-        <translation type="unfinished"></translation>
+        <translation>コミュニティ</translation>
     </message>
     <message>
         <source>Language...</source>
         <comment>mainwidget_btn_language</comment>
-        <translation type="unfinished"></translation>
+        <translation>言語...</translation>
     </message>
     <message>
         <source>Select a server:</source>
         <comment>mainwidget_label_choose_server</comment>
-        <translation type="unfinished"></translation>
+        <translation>サーバ：</translation>
     </message>
     <message>
         <source>Quit</source>
         <comment>mainwidget_btn_exit</comment>
-        <translation type="unfinished"></translation>
+        <translation>終了</translation>
     </message>
 </context>
 <context>
@@ -137,7 +137,7 @@
     </message>
     <message>
         <source>New server profile...</source>
-        <translation type="unfinished"></translation>
+        <translation>新規作成...</translation>
     </message>
     <message>
         <source>Find where the game executable locates...</source>
@@ -186,142 +186,142 @@ The program will now exit.</source>
     <name>SettingsWidget</name>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>General</source>
         <comment>settingwidget_group_general</comment>
-        <translation type="unfinished"></translation>
+        <translation>通用</translation>
     </message>
     <message>
         <source>Language:</source>
         <comment>settingwidget_general_label_language</comment>
-        <translation type="unfinished"></translation>
+        <translation>言語：</translation>
     </message>
     <message>
         <source>Use System language</source>
         <comment>settingwidget_general_btn_usesystemlang</comment>
-        <translation type="unfinished"></translation>
+        <translation>システム言語に変更</translation>
     </message>
     <message>
         <source>Game Executable:</source>
         <comment>settingwidget_general_label_executable</comment>
-        <translation type="unfinished"></translation>
+        <translation>ローカルフェイル：</translation>
     </message>
     <message>
         <source>Browse...</source>
         <comment>settingwidget_general_btn_browse</comment>
-        <translation type="unfinished"></translation>
+        <translation>閲覧...</translation>
     </message>
     <message>
         <source>Server Settings</source>
         <comment>settingwidget_group_serversettings</comment>
-        <translation type="unfinished"></translation>
+        <translation>サーバ設定</translation>
     </message>
     <message>
         <source>Server name:</source>
         <comment>settingwidget_serversettings_label_servername</comment>
-        <translation type="unfinished"></translation>
+        <translation>サーバ名：</translation>
     </message>
     <message>
         <source>Server host address:</source>
         <comment>settingwidget_serversettings_label_serveraddr</comment>
-        <translation type="unfinished"></translation>
+        <translation>サーバ：</translation>
     </message>
     <message>
         <source>Registration URL:</source>
         <comment>settingwidget_serversettings_label_regurl</comment>
-        <translation type="unfinished"></translation>
+        <translation>アカウント作成URL：</translation>
     </message>
     <message>
         <source>Save changes</source>
         <comment>settingwidget_serversettings_btn_save</comment>
-        <translation type="unfinished"></translation>
+        <translation>適用</translation>
     </message>
     <message>
         <source>Discard changes</source>
         <comment>settingwidget_serversettings_btn_discard</comment>
-        <translation type="unfinished"></translation>
+        <translation>キャンセル</translation>
     </message>
     <message>
         <source>Remove</source>
         <comment>settingwidget_serversettings_btn_remove</comment>
-        <translation type="unfinished"></translation>
+        <translation>削除</translation>
     </message>
     <message>
         <source>Game Control Settings</source>
         <comment>settingwidget_group_gamecontrol</comment>
-        <translation type="unfinished"></translation>
+        <translation>ゲーム設定</translation>
     </message>
     <message>
         <source>Move left/right sensitivity (the less value, the more sensitive a piece moves)</source>
         <comment>settingwidget_gamecontrol_move_sensitivity_desc</comment>
-        <translation type="unfinished"></translation>
+        <translation>横移動感度（数値が小さいほど、ミノ横移動の反応は速くなります）</translation>
     </message>
     <message>
         <source>Obtuse</source>
         <comment>settingwidget_gamecontrol_move_sensitivity_high_value</comment>
-        <translation type="unfinished"></translation>
+        <translation>低い</translation>
     </message>
     <message>
         <source>Sensitive</source>
         <comment>settingwidget_gamecontrol_move_sensitivity_low_value</comment>
-        <translation type="unfinished"></translation>
+        <translation>高い</translation>
     </message>
     <message>
         <source>Move left/right speed (the less value, the faster when a piece moves)</source>
         <comment>settingwidget_gamecontrol_move_speed_desc</comment>
-        <translation type="unfinished"></translation>
+        <translation>横移動速度（数値が小さいほど、ミノ横移動のスピードは速くなります）</translation>
     </message>
     <message>
         <source>Slow</source>
         <comment>settingwidget_gamecontrol_move_speed_high_value</comment>
-        <translation type="unfinished"></translation>
+        <translation>遅い</translation>
     </message>
     <message>
         <source>Fast</source>
         <comment>settingwidget_gamecontrol_move_speed_low_value</comment>
-        <translation type="unfinished"></translation>
+        <translation>速い</translation>
     </message>
     <message>
         <source>Soft-drop speed (the less value, the quicker when a piece moves downwards by player)</source>
         <comment>settingwidget_gamecontrol_soft_drop_speed_desc</comment>
-        <translation type="unfinished"></translation>
+        <translation>ソフトドロップ速度（数値が小さいほど、ソフトドロップのスピードは速くなります）</translation>
     </message>
     <message>
         <source>Slow</source>
         <comment>settingwidget_gamecontrol_drop_speed_high_value</comment>
-        <translation type="unfinished"></translation>
+        <translation>遅い</translation>
     </message>
     <message>
         <source>Fast</source>
         <comment>settingwidget_gamecontrol_drop_speed_low_value</comment>
-        <translation type="unfinished"></translation>
+        <translation>速い</translation>
     </message>
     <message>
         <source>Line clear delay (the shorter the line-clear animation lasts)</source>
         <comment>settingwidget_gamecontrol_line_clear_delay_desc</comment>
-        <translation type="unfinished"></translation>
+        <translation>ライン消去のディレイ（ライン消去の演出時間）</translation>
     </message>
     <message>
         <source>Long</source>
         <comment>settingwidget_gamecontrol_line_clear_high_value</comment>
-        <translation type="unfinished"></translation>
+        <translation>長い</translation>
     </message>
     <message>
         <source>Short</source>
         <comment>settingwidget_gamecontrol_line_clear_low_value</comment>
-        <translation type="unfinished"></translation>
+        <translation>短い</translation>
     </message>
     <message>
         <source>Apply New Control Settings</source>
         <comment>settingwidget_gamecontrol_btn_apply</comment>
-        <translation type="unfinished"></translation>
+        <translation>新しい設定を適用する</translation>
     </message>
     <message>
         <source>Reset</source>
         <comment>settingwidget_gamecontrol_btn_reset</comment>
-        <translation type="unfinished"></translation>
+        <translation>初期設定に戻す</translation>
     </message>
 </context>
 <context>
@@ -329,7 +329,7 @@ The program will now exit.</source>
     <message>
         <source>TOP(Tetris Online Poland) Launcher</source>
         <comment>main_window_title</comment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 </TS>

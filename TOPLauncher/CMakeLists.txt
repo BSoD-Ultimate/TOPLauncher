@@ -84,7 +84,6 @@ set(FORM_FILES_SRC
 source_group(Form_Files FILES ${FORM_FILES_SRC})
 
 set(RESOURCE_SRC
-  Resources/translations.json
   Resources/icon.ico 
   Resources/TOPLauncher.qrc 
   TOPLauncher.rc 
