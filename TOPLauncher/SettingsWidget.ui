@@ -817,7 +817,7 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
           <item>
            <widget class="QLabel" name="label">
             <property name="text">
-             <string>How many next pieces will be shown during the game:</string>
+             <string>Quantity of pieces showing in the &quot;next&quot; panel:</string>
             </property>
            </widget>
           </item>
@@ -943,6 +943,9 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
             </item>
             <item>
              <widget class="QPushButton" name="btnResetDefault">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
               <property name="minimumSize">
                <size>
                 <width>200</width>

@@ -245,7 +245,129 @@ namespace TOPLauncher
 
                 return true;
             }
-        }
+            bool ReadGameConfig(GameConfig& out)
+            {
+                // unpack SJE.JHH archive
+                auto pAppModel = AppModel::GetInstance();
+                filesystem::path archivePath = pAppModel->GetGameExecutablePath().parent_path() / filesystem::path(L"config") / L"SJE.JHH";
+
+                filesystem::path unpackPath = filesystem::path(GetTempDirectory().toStdWString()) / L"config";
+
+                std::string internalFolderName;
+                if (!UnpackSJEJHHArchive(archivePath, unpackPath, internalFolderName))
+                {
+                    return false;
+                }
+
+                filesystem::path configIniPath = unpackPath / L"config_jpn.ini";
+
+                INIReader reader(configIniPath.string());
+
+                out.moveSensitivity = reader.GetInteger("CHARACTER_A", "MoveDelay", 45);
+                out.moveSpeed = reader.GetInteger("CHARACTER_A", "MoveInterval", 15);
+                out.softDropSpeed = reader.GetInteger("CHARACTER_A", "SoftDropDelay", 10);
+
+                out.lineClearDelay = reader.GetInteger("CHARACTER_A", "MinoGravity", 50);
+
+                out.nextPiecesCount = reader.GetInteger("CHARACTER_A", "NextBlockCount", 6);
+
+                return true;
+            }
+            bool WriteGameConfig(const GameConfig& config)
+            {
+                // unpack SJE.JHH archive
+                auto pAppModel = AppModel::GetInstance();
+                filesystem::path archivePath = pAppModel->GetGameExecutablePath().parent_path() / filesystem::path(L"config") / L"SJE.JHH";
+                filesystem::path unpackPath = filesystem::path(GetTempDirectory().toStdWString()) / L"config";
+
+                std::string internalFolderName;
+                if (!UnpackSJEJHHArchive(archivePath, unpackPath, internalFolderName))
+                {
+                    return false;
+                }
+
+                filesystem::path configIniPath = unpackPath / L"config_jpn.ini";
+
+                INIReader reader(configIniPath.string());
+
+                {
+                    std::string strMoveSensitivity = std::to_string(config.moveSensitivity);
+                    std::string strMoveSpeed = std::to_string(config.moveSpeed);
+                    std::string strMoveSoftDropSpeed = std::to_string(config.softDropSpeed);
+
+                    reader.Set("CHARACTER_A", "MoveDelay", strMoveSensitivity);
+                    reader.Set("CHARACTER_A", "MoveInterval", strMoveSpeed);
+                    reader.Set("CHARACTER_A", "SoftDropDelay", strMoveSoftDropSpeed);
+                    reader.Set("CHARACTER_A", "SoftDropInterval", strMoveSoftDropSpeed);
+
+                    reader.Set("UPGRADE_LRSPEED_LV1", "MoveDelay", strMoveSensitivity);
+                    reader.Set("UPGRADE_LRSPEED_LV1", "MoveInterval", strMoveSpeed);
+                    reader.Set("UPGRADE_LRSPEED_LV2", "MoveDelay", strMoveSensitivity);
+                    reader.Set("UPGRADE_LRSPEED_LV2", "MoveInterval", strMoveSpeed);
+                    reader.Set("UPGRADE_LRSPEED_LV3", "MoveDelay", strMoveSensitivity);
+                    reader.Set("UPGRADE_LRSPEED_LV3", "MoveInterval", strMoveSpeed);
+                    reader.Set("UPGRADE_LRSPEED_LV4", "MoveDelay", strMoveSensitivity);
+                    reader.Set("UPGRADE_LRSPEED_LV4", "MoveInterval", strMoveSpeed);
+                    reader.Set("UPGRADE_LRSPEED_LV5", "MoveDelay", strMoveSensitivity);
+                    reader.Set("UPGRADE_LRSPEED_LV5", "MoveInterval", strMoveSpeed);
+
+                    reader.Set("UPGRADE_SOFTDROPSPEED_LV1", "SoftDropDelay", strMoveSoftDropSpeed);
+                    reader.Set("UPGRADE_SOFTDROPSPEED_LV1", "SoftDropInterval", strMoveSoftDropSpeed);
+                    reader.Set("UPGRADE_SOFTDROPSPEED_LV2", "SoftDropDelay", strMoveSoftDropSpeed);
+                    reader.Set("UPGRADE_SOFTDROPSPEED_LV2", "SoftDropInterval", strMoveSoftDropSpeed);
+                    reader.Set("UPGRADE_SOFTDROPSPEED_LV3", "SoftDropDelay", strMoveSoftDropSpeed);
+                    reader.Set("UPGRADE_SOFTDROPSPEED_LV3", "SoftDropInterval", strMoveSoftDropSpeed);
+                    reader.Set("UPGRADE_SOFTDROPSPEED_LV4", "SoftDropDelay", strMoveSoftDropSpeed);
+                    reader.Set("UPGRADE_SOFTDROPSPEED_LV4", "SoftDropInterval", strMoveSoftDropSpeed);
+                    reader.Set("UPGRADE_SOFTDROPSPEED_LV5", "SoftDropDelay", strMoveSoftDropSpeed);
+                    reader.Set("UPGRADE_SOFTDROPSPEED_LV5", "SoftDropInterval", strMoveSoftDropSpeed);
+                }
+
+                {
+                    std::string strlineClearDelay = std::to_string(config.lineClearDelay);
+
+                    reader.Set("CHARACTER_A", "MinoGravity", strlineClearDelay);
+
+                    reader.Set("UPGRADE_LINECLEARSPEED_LV1", "MinoGravity", strlineClearDelay);
+                    reader.Set("UPGRADE_LINECLEARSPEED_LV2", "MinoGravity", strlineClearDelay);
+                    reader.Set("UPGRADE_LINECLEARSPEED_LV3", "MinoGravity", strlineClearDelay);
+                    reader.Set("UPGRADE_LINECLEARSPEED_LV4", "MinoGravity", strlineClearDelay);
+                    reader.Set("UPGRADE_LINECLEARSPEED_LV5", "MinoGravity", strlineClearDelay);
+                }
+
+                {
+                    std::string strNextPiecesCount = std::to_string(config.nextPiecesCount);
+
+                    reader.Set("DEFAULT_CHARACTER", "NextBlockCount", strNextPiecesCount);
+                    reader.Set("CHARACTER_A", "NextBlockCount", strNextPiecesCount);
+                    reader.Set("CHARACTER_B", "NextBlockCount", strNextPiecesCount);
+                    reader.Set("CHARACTER_C", "NextBlockCount", strNextPiecesCount);
+                    reader.Set("CHARACTER_D", "NextBlockCount", strNextPiecesCount);
+
+
+                    reader.Set("UPGRADE_NEXT_LV1", "NextBlockCount", strNextPiecesCount);
+                    reader.Set("UPGRADE_NEXT_LV2", "NextBlockCount", strNextPiecesCount);
+                    reader.Set("UPGRADE_NEXT_LV3", "NextBlockCount", strNextPiecesCount);
+                    reader.Set("UPGRADE_NEXT_LV4", "NextBlockCount", strNextPiecesCount);
+                    reader.Set("UPGRADE_NEXT_LV5", "NextBlockCount", strNextPiecesCount);
+                }
+
+                reader.WriteINIFile(configIniPath.string());
+
+                // pack the archive again
+                filesystem::path newArchivePath = archivePath;
+                newArchivePath += "-";
+                if (!PackSJEJHHArchive(unpackPath, newArchivePath, internalFolderName))
+                {
+                    return false;
+                }
+
+                filesystem::copy(newArchivePath, archivePath, filesystem::copy_options::overwrite_existing);
+                filesystem::remove(newArchivePath);
+
+                return true;
+            }
+}
 
     }
 }

@@ -7,6 +7,7 @@
 
 
 #include "AppModel.h"
+#include "gameConfigUtil.h"
 #include "LanguageModel.h"
 #include "LanguageItemModel.h"
 
@@ -160,11 +161,17 @@ namespace TOPLauncher
     void SettingsWidget::InitUI()
     {
         m_nextPiecesGroup.addButton(ui.radioNextPieceCount1);
+        m_nextPiecesGroup.setId(ui.radioNextPieceCount1, 1);
         m_nextPiecesGroup.addButton(ui.radioNextPieceCount2);
+        m_nextPiecesGroup.setId(ui.radioNextPieceCount2, 2);
         m_nextPiecesGroup.addButton(ui.radioNextPieceCount3);
+        m_nextPiecesGroup.setId(ui.radioNextPieceCount3, 3);
         m_nextPiecesGroup.addButton(ui.radioNextPieceCount4);
+        m_nextPiecesGroup.setId(ui.radioNextPieceCount4, 4);
         m_nextPiecesGroup.addButton(ui.radioNextPieceCount5);
+        m_nextPiecesGroup.setId(ui.radioNextPieceCount5, 5);
         m_nextPiecesGroup.addButton(ui.radioNextPieceCount6);
+        m_nextPiecesGroup.setId(ui.radioNextPieceCount6, 6);
     }
 
     void SettingsWidget::LoadSettingsFromModel()
@@ -203,21 +210,42 @@ namespace TOPLauncher
         if (pAppModel->IsGameConfigAvailable())
         {
             EnableGameSettings(true);
-            int moveSensitivity = 0, moveSpeed = 0, softDropSpeed = 0;
-            pAppModel->GetSensitivityValue(moveSensitivity, moveSpeed, softDropSpeed);
 
-            int lineClearDelay = 0;
-            pAppModel->GetLineClearDelayValue(lineClearDelay);
+            const auto& gameConfig = pAppModel->GetGameConfig();
 
-            ui.sliderMoveSensitivity->setValue(moveSensitivity);
-            ui.sliderMoveSpeed->setValue(moveSpeed);
-            ui.sliderSoftDropSpeed->setValue(softDropSpeed);
-            ui.sliderLineClearDelay->setValue(lineClearDelay);
+            ui.sliderMoveSensitivity->setValue(gameConfig.moveSensitivity);
+            ui.sliderMoveSpeed->setValue(gameConfig.moveSpeed);
+            ui.sliderSoftDropSpeed->setValue(gameConfig.softDropSpeed);
+            ui.sliderLineClearDelay->setValue(gameConfig.lineClearDelay);
 
-            ui.spinBoxMoveSensitivity->setValue(moveSensitivity);
-            ui.spinBoxMoveSpeed->setValue(moveSpeed);
-            ui.spinBoxSoftDropSpeed->setValue(softDropSpeed);
-            ui.spinBoxLineClearDelay->setValue(lineClearDelay);
+            ui.spinBoxMoveSensitivity->setValue(gameConfig.moveSensitivity);
+            ui.spinBoxMoveSpeed->setValue(gameConfig.moveSpeed);
+            ui.spinBoxSoftDropSpeed->setValue(gameConfig.softDropSpeed);
+            ui.spinBoxLineClearDelay->setValue(gameConfig.lineClearDelay);
+
+            switch (gameConfig.nextPiecesCount)
+            {
+            case 1:
+                ui.radioNextPieceCount1->setChecked(true);
+                break;
+            case 2:
+                ui.radioNextPieceCount2->setChecked(true);
+                break;
+            case 3:
+                ui.radioNextPieceCount3->setChecked(true);
+                break;
+            case 4:
+                ui.radioNextPieceCount4->setChecked(true);
+                break;
+            case 5:
+                ui.radioNextPieceCount5->setChecked(true);
+                break;
+            case 6:
+                ui.radioNextPieceCount6->setChecked(true);
+                break;
+            default:
+                break;
+            }
         }
         else
         {
@@ -232,15 +260,19 @@ namespace TOPLauncher
 
         if (pAppModel->IsGameConfigAvailable())
         {
-            int moveSensitivity = ui.spinBoxMoveSensitivity->value();
-            int moveSpeed = ui.spinBoxMoveSpeed->value();
-            int softDropSpeed = ui.spinBoxSoftDropSpeed->value();
+            auto newGameConfig = pAppModel->GetGameConfig();
 
-            int lineClearDelay = ui.spinBoxLineClearDelay->value();
+            newGameConfig.moveSensitivity = ui.spinBoxMoveSensitivity->value();
+            newGameConfig.moveSpeed = ui.spinBoxMoveSpeed->value();
+            newGameConfig.softDropSpeed = ui.spinBoxSoftDropSpeed->value();
 
-            bool ret =
-                pAppModel->SetSensitivityValue(moveSensitivity, moveSpeed, softDropSpeed) &&
-                pAppModel->SetLineClearDelayValue(lineClearDelay);
+            newGameConfig.lineClearDelay = ui.spinBoxLineClearDelay->value();
+
+            
+            int checkedId = m_nextPiecesGroup.checkedId();
+            newGameConfig.nextPiecesCount = checkedId;
+
+            bool ret = pAppModel->ApplyGameConfig(newGameConfig);
 
             return ret;
         }

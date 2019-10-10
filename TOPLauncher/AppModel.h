@@ -21,7 +21,14 @@ namespace TOPLauncher
     };
 
     struct AppConfig;
-    struct GameConfig;
+    namespace util
+    {
+        namespace game
+        {
+            struct GameConfig;
+        }
+    }
+
 
     class AppModel
     {
@@ -67,11 +74,8 @@ namespace TOPLauncher
         */
         bool IsGameConfigAvailable() const;
 
-        void GetSensitivityValue(int& moveSensitivity, int& moveSpeed, int& dropSpeed);
-        bool SetSensitivityValue(int moveSensitivity, int moveSpeed, int dropSpeed);
-
-        void GetLineClearDelayValue(int& lineClearDelay);
-        bool SetLineClearDelayValue(int lineClearDelay);
+        const util::game::GameConfig& GetGameConfig() const;
+        bool ApplyGameConfig(const util::game::GameConfig& newConfig);
 
     private:
 
@@ -96,7 +100,7 @@ namespace TOPLauncher
         std::shared_ptr<SQLite::Database> m_pUserDB;
 
         std::unique_ptr<AppConfig> m_pAppConfig;
-        std::unique_ptr<GameConfig> m_pGameConfig;
+        std::unique_ptr<util::game::GameConfig> m_pGameConfig;
     };
 
 }

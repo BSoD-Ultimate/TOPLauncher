@@ -47,10 +47,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Path To Save the &quot;SJE.JHH&quot; Archive:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Do Pack</source>
         <translation type="unfinished"></translation>
     </message>
@@ -64,6 +60,10 @@
     </message>
     <message>
         <source>Internal folder name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Path to Save the &quot;SJE.JHH&quot; Archive:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -329,10 +329,6 @@ The program will now exit.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>How many next pieces will be shown during the game:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -394,6 +390,10 @@ The program will now exit.</source>
     </message>
     <message>
         <source>Pack...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Quantity of pieces showing in the &quot;next&quot; panel:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

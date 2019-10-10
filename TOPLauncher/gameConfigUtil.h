@@ -11,12 +11,31 @@ namespace TOPLauncher
     {
         namespace game
         {
-            // keypress sensitivity
-            bool ReadMoveSensitivityConfig(int& moveSensitivity, int& moveSpeed, int& softDropSpeed);
-            bool WriteMoveSensitivityConfig(int moveSensitivity, int moveSpeed, int softDropSpeed);
+            struct GameConfig
+            {
+                // set tetrominos' handling characteristics
+                int32_t moveSensitivity;
+                int32_t moveSpeed;
+                int32_t softDropSpeed;
 
-            bool ReadLineClearDelayConfig(int& lineClearDelay);
-            bool WriteLineClearDelayConfig(int lineClearDelay);
+                // set line-clear delay time
+                int32_t lineClearDelay;
+
+                int nextPiecesCount;
+
+                GameConfig()
+                    : moveSensitivity(45)
+                    , moveSpeed(15)
+                    , softDropSpeed(10)
+                    , lineClearDelay(0)
+                    , nextPiecesCount(6)
+                {
+                }
+            };
+
+            // gameConfig reading/writing
+            bool ReadGameConfig(GameConfig& out);
+            bool WriteGameConfig(const GameConfig& config);
         }
     }
 }

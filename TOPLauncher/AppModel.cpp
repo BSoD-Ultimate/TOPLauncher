@@ -50,25 +50,6 @@ namespace TOPLauncher
 
     };
 
-    struct GameConfig
-    {
-        // set tetrominos' handling characteristics
-        int32_t moveSensitivity;
-        int32_t moveSpeed;
-        int32_t softDropSpeed;
-
-        // set line-clear delay time
-        int32_t lineClearDelay;
-
-        GameConfig()
-            : moveSensitivity(45)
-            , moveSpeed(15)
-            , softDropSpeed(10)
-            , lineClearDelay(0)
-        {
-        }
-    };
-
     bool AppConfig::FromJSON(const std::string & json)
     {
         using namespace rapidjson;
@@ -446,37 +427,17 @@ namespace TOPLauncher
         return m_pGameConfig.operator bool();
     }
 
-    void AppModel::GetSensitivityValue(int & moveSensitivity, int & moveSpeed, int & dropSpeed)
+    const util::game::GameConfig& AppModel::GetGameConfig() const
     {
-        moveSensitivity = m_pGameConfig->moveSensitivity;
-        moveSpeed = m_pGameConfig->moveSpeed;
-        dropSpeed = m_pGameConfig->softDropSpeed;
+        return *m_pGameConfig;
     }
 
-    bool AppModel::SetSensitivityValue(int moveSensitivity, int moveSpeed, int dropSpeed)
+    bool AppModel::ApplyGameConfig(const util::game::GameConfig& newConfig)
     {
-        bool ret = util::game::WriteMoveSensitivityConfig(moveSensitivity, moveSpeed, dropSpeed);
+        bool ret = util::game::WriteGameConfig(newConfig);
         if (ret)
         {
-            m_pGameConfig->moveSensitivity = moveSensitivity;
-            m_pGameConfig->moveSpeed = moveSpeed;
-            m_pGameConfig->softDropSpeed = dropSpeed;
-        }
-
-        return ret;
-    }
-
-    void AppModel::GetLineClearDelayValue(int & lineClearDelay)
-    {
-        lineClearDelay = m_pGameConfig->lineClearDelay;
-    }
-
-    bool AppModel::SetLineClearDelayValue(int lineClearDelay)
-    {
-        bool ret = util::game::WriteLineClearDelayConfig(lineClearDelay);
-        if (ret)
-        {
-            m_pGameConfig->lineClearDelay = lineClearDelay;
+            *m_pGameConfig = newConfig;
         }
 
         return ret;
@@ -523,11 +484,9 @@ namespace TOPLauncher
             return;
         }
 
-        m_pGameConfig.reset(new GameConfig());
+        m_pGameConfig.reset(new util::game::GameConfig());
 
-        bool readConfigRet =
-            util::game::ReadMoveSensitivityConfig(m_pGameConfig->moveSensitivity, m_pGameConfig->moveSpeed, m_pGameConfig->softDropSpeed) &&
-            util::game::ReadLineClearDelayConfig(m_pGameConfig->lineClearDelay);
+        bool readConfigRet = util::game::ReadGameConfig(*m_pGameConfig);
 
         if (!readConfigRet)
         {
