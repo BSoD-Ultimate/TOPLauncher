@@ -1047,7 +1047,7 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
                   </size>
                  </property>
                  <property name="text">
-                  <string>Virtual Folder Name:</string>
+                  <string>Internal Folder Name:</string>
                  </property>
                 </widget>
                </item>

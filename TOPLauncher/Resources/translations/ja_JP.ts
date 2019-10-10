@@ -373,10 +373,6 @@ The program will now exit.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Virtual Folder Name:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Extracted Folder:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -394,6 +390,10 @@ The program will now exit.</source>
     </message>
     <message>
         <source>Quantity of pieces showing in the &quot;next&quot; panel:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Internal Folder Name:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -441,10 +441,6 @@ The program will now exit.</source>
 <context>
     <name>TOPLauncher::DlgSJEJHHPack</name>
     <message>
-        <source>Select the directory where extracted files will be stored...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Set the archive&apos;s name which is going to be saved...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -462,6 +458,10 @@ The program will now exit.</source>
     </message>
     <message>
         <source>Successfully packed the archive &quot;%1&quot;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select the directory whose files will be packed...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -117,7 +117,7 @@ namespace TOPLauncher
     {
         QString curExtractDir = ui.editPackingFolder->text();
         QString packDir = QFileDialog::getExistingDirectory(this,
-            tr("Select the directory where extracted files will be stored..."),
+            tr("Select the directory whose files will be packed..."),
             curExtractDir);
 
         if (!packDir.isEmpty())

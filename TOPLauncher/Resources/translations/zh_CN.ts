@@ -29,69 +29,69 @@
     <name>DlgProgress</name>
     <message>
         <source>Progress</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Progress Description</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
     <name>DlgSJEJHHPack</name>
     <message>
         <source>Folder to pack the &quot;SJE.JHH&quot; Archive:</source>
-        <translation type="unfinished"></translation>
+        <translation>存放要打包文件的目录：</translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Do Pack</source>
-        <translation type="unfinished"></translation>
+        <translation>开始打包</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">取消</translation>
+        <translation>取消</translation>
     </message>
     <message>
         <source>&quot;SJE.JHH&quot; Archive Packing</source>
-        <translation type="unfinished"></translation>
+        <translation>打包&quot;SJE.JHH&quot;文件</translation>
     </message>
     <message>
         <source>Internal folder name:</source>
-        <translation type="unfinished"></translation>
+        <translation>内嵌的目录名称：</translation>
     </message>
     <message>
         <source>Path to Save the &quot;SJE.JHH&quot; Archive:</source>
-        <translation type="unfinished"></translation>
+        <translation>保存&quot;SJE.JHH&quot;文件的位置：</translation>
     </message>
 </context>
 <context>
     <name>DlgSJEJHHUnpack</name>
     <message>
         <source>&quot;SJE.JHH&quot; Archive&apos;s path:</source>
-        <translation type="unfinished"></translation>
+        <translation>&quot;SJE.JHH&quot;文件位置：</translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Path to extract:</source>
-        <translation type="unfinished"></translation>
+        <translation>解包目录：</translation>
     </message>
     <message>
         <source>Do Unpack</source>
-        <translation type="unfinished"></translation>
+        <translation>开始解包</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">取消</translation>
+        <translation>取消</translation>
     </message>
     <message>
         <source>&quot;SJE.JHH&quot; Archive Unpacking</source>
-        <translation type="unfinished"></translation>
+        <translation>解包&quot;SJE.JHH&quot;文件</translation>
     </message>
 </context>
 <context>
@@ -396,243 +396,247 @@ The program will now exit.</source>
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>2</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>3</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>4</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>5</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>6</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Reset to TOJ&apos;s default profile</source>
-        <translation type="unfinished"></translation>
+        <translation>重置至TOJ客户端默认设置</translation>
     </message>
     <message>
         <source>Modding</source>
-        <translation type="unfinished"></translation>
+        <translation>客户端修改</translation>
     </message>
     <message>
         <source>&quot;SJE.JHH&quot; Archive Packing/Unpacking</source>
-        <translation type="unfinished"></translation>
+        <translation>&quot;SJE.JHH&quot;文件打包/解包</translation>
     </message>
     <message>
         <source>Information of the last archive unpacked by the launcher:</source>
-        <translation type="unfinished"></translation>
+        <translation>最后一个解包的文件的信息：</translation>
     </message>
     <message>
         <source>Archive Path:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Virtual Folder Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>文件目录：</translation>
     </message>
     <message>
         <source>Extracted Folder:</source>
-        <translation type="unfinished"></translation>
+        <translation>解包目录：</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#800000;&quot;&gt;Caution: Modifying archives within the client incorrectly could damage the client.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#800000;&quot;&gt;注意：不正确地修改&quot;SJE.JHH&quot;文件可能会损坏客户端。&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Unpack...</source>
-        <translation type="unfinished"></translation>
+        <translation>解包...</translation>
     </message>
     <message>
         <source>Pack...</source>
-        <translation type="unfinished"></translation>
+        <translation>打包...</translation>
     </message>
     <message>
         <source>Quantity of pieces showing in the &quot;next&quot; panel:</source>
-        <translation type="unfinished"></translation>
+        <translation>&quot;next&quot;栏显示的方块数量：</translation>
+    </message>
+    <message>
+        <source>Internal Folder Name:</source>
+        <translation>内嵌的目录名称：</translation>
     </message>
 </context>
 <context>
     <name>TOPLauncher::ArchivePackThread</name>
     <message>
         <source>Packing file &quot;%1&quot; ...</source>
-        <translation type="unfinished"></translation>
+        <translation>正在打包文件&quot;%1&quot;...</translation>
     </message>
     <message>
         <source>Packing Memory data...</source>
-        <translation type="unfinished"></translation>
+        <translation>正在打包内存数据...</translation>
     </message>
 </context>
 <context>
     <name>TOPLauncher::ArchiveUnpackThread</name>
     <message>
         <source>Open the archive failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>打开&quot;SJE.JHH&quot;文件失败。</translation>
     </message>
     <message>
         <source>Unpacking file &quot;%1&quot; ...</source>
-        <translation type="unfinished"></translation>
+        <translation>正在解包文件&quot;%1&quot;...</translation>
     </message>
 </context>
 <context>
     <name>TOPLauncher::DlgLanguage</name>
     <message>
         <source>Would you like to use your system language &quot;%1&quot; as the display language?</source>
-        <translation type="unfinished">要把当前的系统显示语言&quot;%1&quot;设为显示语言吗？</translation>
+        <translation>要把当前的系统显示语言&quot;%1&quot;设为显示语言吗？</translation>
     </message>
     <message>
         <source>Question</source>
-        <translation type="unfinished">问题</translation>
+        <translation>问题</translation>
     </message>
     <message>
         <source>Could not find translations for your system language &quot;%1&quot;.</source>
-        <translation type="unfinished">找不到当前系统语言&quot;%1&quot;对应的翻译。</translation>
+        <translation>找不到当前系统语言&quot;%1&quot;对应的翻译。</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">错误</translation>
+        <translation>错误</translation>
     </message>
 </context>
 <context>
     <name>TOPLauncher::DlgSJEJHHPack</name>
     <message>
         <source>Select the directory where extracted files will be stored...</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">选择解包出来的文件存放的目录...</translation>
     </message>
     <message>
         <source>Set the archive&apos;s name which is going to be saved...</source>
-        <translation type="unfinished"></translation>
+        <translation>指定要保存的文件的名称...</translation>
     </message>
     <message>
         <source>&quot;SJE.JHH&quot; Archive (SJE.JHH)</source>
-        <translation type="unfinished"></translation>
+        <translation>&quot;SJE.JHH&quot; 文件 (SJE.JHH)</translation>
     </message>
     <message>
         <source>Packing the archive...</source>
-        <translation type="unfinished"></translation>
+        <translation>正在打包&quot;SJE.JHH&quot; 文件...</translation>
     </message>
     <message>
         <source>Info</source>
-        <translation type="unfinished">提示</translation>
+        <translation>提示</translation>
     </message>
     <message>
         <source>Successfully packed the archive &quot;%1&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>文件&quot;%1&quot;打包成功。</translation>
+    </message>
+    <message>
+        <source>Select the directory whose files will be packed...</source>
+        <translation>选择要打包的文件存放的目录...</translation>
     </message>
 </context>
 <context>
     <name>TOPLauncher::DlgSJEJHHUnpack</name>
     <message>
         <source>Select an archive to extract...</source>
-        <translation type="unfinished"></translation>
+        <translation>选择要解包的文件...</translation>
     </message>
     <message>
         <source>&quot;SJE.JHH&quot; Archive (SJE.JHH)</source>
-        <translation type="unfinished"></translation>
+        <translation>&quot;SJE.JHH&quot; 文件 (SJE.JHH)</translation>
     </message>
     <message>
         <source>Select the directory where extracted files will be stored...</source>
-        <translation type="unfinished"></translation>
+        <translation>选择解包出来的文件存放的目录...</translation>
     </message>
     <message>
         <source>Unpacking the archive...</source>
-        <translation type="unfinished"></translation>
+        <translation>正在解包&quot;SJE.JHH&quot; 文件...</translation>
     </message>
 </context>
 <context>
     <name>TOPLauncher::LoginUserItem</name>
     <message>
         <source>Would you like to remove the user &quot;%1&quot; who logins to server &quot;%2&quot;? </source>
-        <translation type="unfinished">要删除登录到服务器&quot;%2&quot;的用户&quot;%1&quot;吗？ </translation>
+        <translation>要删除登录到服务器&quot;%2&quot;的用户&quot;%1&quot;吗？ </translation>
     </message>
     <message>
         <source>Caution</source>
-        <translation type="unfinished">注意</translation>
+        <translation>注意</translation>
     </message>
 </context>
 <context>
     <name>TOPLauncher::MainWidget</name>
     <message>
         <source>Error</source>
-        <translation type="unfinished">错误</translation>
+        <translation>错误</translation>
     </message>
     <message>
         <source>Username &amp; password input box should not empty.</source>
-        <translation type="unfinished">&quot;用户名&quot;和&quot;密码&quot;栏不能为空。</translation>
+        <translation>&quot;用户名&quot;和&quot;密码&quot;栏不能为空。</translation>
     </message>
     <message>
         <source>Invalid server profile.</source>
-        <translation type="unfinished">无效的服务器配置。</translation>
+        <translation>无效的服务器配置。</translation>
     </message>
 </context>
 <context>
     <name>TOPLauncher::SettingsWidget</name>
     <message>
         <source>Would you like to use your system language &quot;%1&quot; as the display language?</source>
-        <translation type="unfinished">要把当前的系统显示语言&quot;%1&quot;设为显示语言吗？</translation>
+        <translation>要把当前的系统显示语言&quot;%1&quot;设为显示语言吗？</translation>
     </message>
     <message>
         <source>Question</source>
-        <translation type="unfinished">问题</translation>
+        <translation>问题</translation>
     </message>
     <message>
         <source>Could not find translations for your system language &quot;%1&quot;.</source>
-        <translation type="unfinished">找不到当前系统语言&quot;%1&quot;对应的翻译。</translation>
+        <translation>找不到当前系统语言&quot;%1&quot;对应的翻译。</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">错误</translation>
+        <translation>错误</translation>
     </message>
     <message>
         <source>Find where the game executable locates...</source>
-        <translation type="unfinished">指定TO-P游戏客户端程序的位置...</translation>
+        <translation>指定TO-P游戏客户端程序的位置...</translation>
     </message>
     <message>
         <source>Game executable (tetris.exe)</source>
-        <translation type="unfinished">TO-P游戏客户端(tetris.exe)</translation>
+        <translation>TO-P游戏客户端(tetris.exe)</translation>
     </message>
     <message>
         <source>The field &quot;Server name&quot; should not empty.</source>
-        <translation type="unfinished">&quot;服务器名称&quot;一栏不能为空。</translation>
+        <translation>&quot;服务器名称&quot;一栏不能为空。</translation>
     </message>
     <message>
         <source>Server name must be unique.</source>
-        <translation type="unfinished">服务器名称必须唯一。</translation>
+        <translation>服务器名称必须唯一。</translation>
     </message>
     <message>
         <source>Would you like to remove the server profile &quot;%1&quot; ? This will remove all saved users who login to this server.</source>
-        <translation type="unfinished">要删除服务器设置&quot;%1&quot;吗？所有已保存的登录到该服务器的用户都将会被移除。</translation>
+        <translation>要删除服务器设置&quot;%1&quot;吗？所有已保存的登录到该服务器的用户都将会被移除。</translation>
     </message>
     <message>
         <source>Caution</source>
-        <translation type="unfinished">注意</translation>
+        <translation>注意</translation>
     </message>
     <message>
         <source>Would you like to apply the new game control settings? </source>
-        <translation type="unfinished">要应用新的游戏控制设置吗？ </translation>
+        <translation>要应用新的游戏控制设置吗？ </translation>
     </message>
     <message>
         <source>Info</source>
-        <translation type="unfinished">提示</translation>
+        <translation>提示</translation>
     </message>
     <message>
         <source>Successfully applied new game control settings. </source>
-        <translation type="unfinished">成功应用了新的游戏控制设置。 </translation>
+        <translation>成功应用了新的游戏控制设置。 </translation>
     </message>
     <message>
         <source>Unable to apply new game control settings. </source>
-        <translation type="unfinished">应用新的游戏控制设置失败。 </translation>
+        <translation>应用新的游戏控制设置失败。 </translation>
     </message>
 </context>
 <context>
