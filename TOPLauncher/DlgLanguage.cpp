@@ -49,9 +49,9 @@ namespace TOPLauncher
             assert(pTranslator);
 
             QString langShow = pTranslator->LangShowName();
-            QString displayFormat = QObject::tr("Would you like to use your system language \"%1\" as the display language?");
+            QString displayFormat = tr("Would you like to use your system language \"%1\" as the display language?");
             QString promptText = displayFormat.arg(langShow);
-            if (QMessageBox::question(this, QObject::tr("Question"), promptText, QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes)
+            if (QMessageBox::question(this, tr("Question"), promptText, QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes)
             {
                 auto pAppModel = AppModel::GetInstance();
                 pAppModel->SetDisplayLanguage(langId);
@@ -61,9 +61,9 @@ namespace TOPLauncher
         }
         else
         {
-            QString displayFormat = QObject::tr("Could not find translations for your system language \"%1\".");
+            QString displayFormat = tr("Could not find translations for your system language \"%1\".");
             QString promptText = displayFormat.arg(langId);
-            QMessageBox::critical(this, QObject::tr("Error"), promptText);
+            QMessageBox::critical(this, tr("Error"), promptText);
         }
     }
 

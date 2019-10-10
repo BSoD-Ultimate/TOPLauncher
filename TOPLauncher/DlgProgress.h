@@ -13,7 +13,7 @@ namespace TOPLauncher
         Q_OBJECT
 
     public:
-		DlgProgress(QWidget *parent = Q_NULLPTR);
+		DlgProgress(QWidget *parent = Q_NULLPTR, const QString& title = "");
         ~DlgProgress();
 
     public slots:
@@ -22,6 +22,8 @@ namespace TOPLauncher
 		void UpdateProgressValue(int value);
     private:
         Ui::DlgProgress ui;
+
+        QString m_progressTitle;
 
     };
 

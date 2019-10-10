@@ -39,19 +39,11 @@
 <context>
     <name>DlgSJEJHHPack</name>
     <message>
-        <source>Pack &quot;SJE.JHH&quot; Archive...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Folder to pack the &quot;SJE.JHH&quot; Archive:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Virtual folder name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -66,13 +58,17 @@
         <source>Cancel</source>
         <translation type="unfinished">取消</translation>
     </message>
+    <message>
+        <source>&quot;SJE.JHH&quot; Archive Packing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Internal folder name:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DlgSJEJHHUnpack</name>
-    <message>
-        <source>Unpack &quot;SJE.JHH&quot; Archive...</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>&quot;SJE.JHH&quot; Archive&apos;s path:</source>
         <translation type="unfinished"></translation>
@@ -92,6 +88,10 @@
     <message>
         <source>Cancel</source>
         <translation type="unfinished">取消</translation>
+    </message>
+    <message>
+        <source>&quot;SJE.JHH&quot; Archive Unpacking</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -162,15 +162,15 @@
     <name>QObject</name>
     <message>
         <source>Would you like to use your system language &quot;%1&quot; as the display language?</source>
-        <translation>要把当前的系统显示语言\&quot;%1\&quot;设为显示语言吗？</translation>
+        <translation type="vanished">要把当前的系统显示语言\&quot;%1\&quot;设为显示语言吗？</translation>
     </message>
     <message>
         <source>Question</source>
-        <translation>问题</translation>
+        <translation type="vanished">问题</translation>
     </message>
     <message>
         <source>Could not find translations for your system language &quot;%1&quot;.</source>
-        <translation>找不到当前系统语言\&quot;%1\&quot;对应的翻译。</translation>
+        <translation type="vanished">找不到当前系统语言\&quot;%1\&quot;对应的翻译。</translation>
     </message>
     <message>
         <source>Error</source>
@@ -178,11 +178,11 @@
     </message>
     <message>
         <source>Would you like to remove the user &quot;%1&quot; who logins to server &quot;%2&quot;? </source>
-        <translation>要删除登录到服务器&quot;%2&quot;的用户&quot;%1&quot;吗？ </translation>
+        <translation type="vanished">要删除登录到服务器&quot;%2&quot;的用户&quot;%1&quot;吗？ </translation>
     </message>
     <message>
         <source>Caution</source>
-        <translation>注意</translation>
+        <translation type="vanished">注意</translation>
     </message>
     <message>
         <source>Fatal Error</source>
@@ -190,11 +190,11 @@
     </message>
     <message>
         <source>Username &amp; password input box should not empty.</source>
-        <translation>&quot;用户名&quot;和&quot;密码&quot;栏不能为空。</translation>
+        <translation type="vanished">&quot;用户名&quot;和&quot;密码&quot;栏不能为空。</translation>
     </message>
     <message>
         <source>Invalid server profile.</source>
-        <translation>无效的服务器配置。</translation>
+        <translation type="vanished">无效的服务器配置。</translation>
     </message>
     <message>
         <source>Could not find where the game executable locates. Startup failed.</source>
@@ -210,39 +210,39 @@
     </message>
     <message>
         <source>Find where the game executable locates...</source>
-        <translation>指定TO-P游戏客户端程序的位置...</translation>
+        <translation type="vanished">指定TO-P游戏客户端程序的位置...</translation>
     </message>
     <message>
         <source>Game executable (tetris.exe)</source>
-        <translation>TO-P游戏客户端(tetris.exe)</translation>
+        <translation type="vanished">TO-P游戏客户端(tetris.exe)</translation>
     </message>
     <message>
         <source>The field &quot;Server name&quot; should not empty.</source>
-        <translation>&quot;服务器名称&quot;一栏不能为空。</translation>
+        <translation type="vanished">&quot;服务器名称&quot;一栏不能为空。</translation>
     </message>
     <message>
         <source>Server name must be unique.</source>
-        <translation>服务器名称必须唯一。</translation>
+        <translation type="vanished">服务器名称必须唯一。</translation>
     </message>
     <message>
         <source>Would you like to remove the server profile &quot;%1&quot; ? This will remove all saved users who login to this server.</source>
-        <translation>要删除服务器设置&quot;%1&quot;吗？所有已保存的登录到该服务器的用户都将会被移除。</translation>
+        <translation type="vanished">要删除服务器设置&quot;%1&quot;吗？所有已保存的登录到该服务器的用户都将会被移除。</translation>
     </message>
     <message>
         <source>Would you like to apply the new game control settings? </source>
-        <translation>要应用新的游戏控制设置吗？ </translation>
+        <translation type="vanished">要应用新的游戏控制设置吗？ </translation>
     </message>
     <message>
         <source>Info</source>
-        <translation>提示</translation>
+        <translation type="vanished">提示</translation>
     </message>
     <message>
         <source>Successfully applied new game control settings. </source>
-        <translation>成功应用了新的游戏控制设置。 </translation>
+        <translation type="vanished">成功应用了新的游戏控制设置。 </translation>
     </message>
     <message>
         <source>Unable to apply new game control settings. </source>
-        <translation>应用新的游戏控制设置失败。 </translation>
+        <translation type="vanished">应用新的游戏控制设置失败。 </translation>
     </message>
     <message>
         <source>A fatal error has occurred during the startup: 
@@ -447,20 +447,192 @@ The program will now exit.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unpacking...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Packing...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#800000;&quot;&gt;Caution: Modifying archives within the client incorrectly could lead the client unable to startup.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Extracted Folder:</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#800000;&quot;&gt;Caution: Modifying archives within the client incorrectly could damage the client.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unpack...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pack...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TOPLauncher::ArchivePackThread</name>
+    <message>
+        <source>Packing file &quot;%1&quot; ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Packing Memory data...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TOPLauncher::ArchiveUnpackThread</name>
+    <message>
+        <source>Open the archive failed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unpacking file &quot;%1&quot; ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TOPLauncher::DlgLanguage</name>
+    <message>
+        <source>Would you like to use your system language &quot;%1&quot; as the display language?</source>
+        <translation type="unfinished">要把当前的系统显示语言&quot;%1&quot;设为显示语言吗？</translation>
+    </message>
+    <message>
+        <source>Question</source>
+        <translation type="unfinished">问题</translation>
+    </message>
+    <message>
+        <source>Could not find translations for your system language &quot;%1&quot;.</source>
+        <translation type="unfinished">找不到当前系统语言&quot;%1&quot;对应的翻译。</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">错误</translation>
+    </message>
+</context>
+<context>
+    <name>TOPLauncher::DlgSJEJHHPack</name>
+    <message>
+        <source>Select the directory where extracted files will be stored...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set the archive&apos;s name which is going to be saved...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&quot;SJE.JHH&quot; Archive (SJE.JHH)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Packing the archive...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Info</source>
+        <translation type="unfinished">提示</translation>
+    </message>
+    <message>
+        <source>Successfully packed the archive &quot;%1&quot;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TOPLauncher::DlgSJEJHHUnpack</name>
+    <message>
+        <source>Select an archive to extract...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&quot;SJE.JHH&quot; Archive (SJE.JHH)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select the directory where extracted files will be stored...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unpacking the archive...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TOPLauncher::LoginUserItem</name>
+    <message>
+        <source>Would you like to remove the user &quot;%1&quot; who logins to server &quot;%2&quot;? </source>
+        <translation type="unfinished">要删除登录到服务器&quot;%2&quot;的用户&quot;%1&quot;吗？ </translation>
+    </message>
+    <message>
+        <source>Caution</source>
+        <translation type="unfinished">注意</translation>
+    </message>
+</context>
+<context>
+    <name>TOPLauncher::MainWidget</name>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">错误</translation>
+    </message>
+    <message>
+        <source>Username &amp; password input box should not empty.</source>
+        <translation type="unfinished">&quot;用户名&quot;和&quot;密码&quot;栏不能为空。</translation>
+    </message>
+    <message>
+        <source>Invalid server profile.</source>
+        <translation type="unfinished">无效的服务器配置。</translation>
+    </message>
+</context>
+<context>
+    <name>TOPLauncher::SettingsWidget</name>
+    <message>
+        <source>Would you like to use your system language &quot;%1&quot; as the display language?</source>
+        <translation type="unfinished">要把当前的系统显示语言&quot;%1&quot;设为显示语言吗？</translation>
+    </message>
+    <message>
+        <source>Question</source>
+        <translation type="unfinished">问题</translation>
+    </message>
+    <message>
+        <source>Could not find translations for your system language &quot;%1&quot;.</source>
+        <translation type="unfinished">找不到当前系统语言&quot;%1&quot;对应的翻译。</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">错误</translation>
+    </message>
+    <message>
+        <source>Find where the game executable locates...</source>
+        <translation type="unfinished">指定TO-P游戏客户端程序的位置...</translation>
+    </message>
+    <message>
+        <source>Game executable (tetris.exe)</source>
+        <translation type="unfinished">TO-P游戏客户端(tetris.exe)</translation>
+    </message>
+    <message>
+        <source>The field &quot;Server name&quot; should not empty.</source>
+        <translation type="unfinished">&quot;服务器名称&quot;一栏不能为空。</translation>
+    </message>
+    <message>
+        <source>Server name must be unique.</source>
+        <translation type="unfinished">服务器名称必须唯一。</translation>
+    </message>
+    <message>
+        <source>Would you like to remove the server profile &quot;%1&quot; ? This will remove all saved users who login to this server.</source>
+        <translation type="unfinished">要删除服务器设置&quot;%1&quot;吗？所有已保存的登录到该服务器的用户都将会被移除。</translation>
+    </message>
+    <message>
+        <source>Caution</source>
+        <translation type="unfinished">注意</translation>
+    </message>
+    <message>
+        <source>Would you like to apply the new game control settings? </source>
+        <translation type="unfinished">要应用新的游戏控制设置吗？ </translation>
+    </message>
+    <message>
+        <source>Info</source>
+        <translation type="unfinished">提示</translation>
+    </message>
+    <message>
+        <source>Successfully applied new game control settings. </source>
+        <translation type="unfinished">成功应用了新的游戏控制设置。 </translation>
+    </message>
+    <message>
+        <source>Unable to apply new game control settings. </source>
+        <translation type="unfinished">应用新的游戏控制设置失败。 </translation>
     </message>
 </context>
 <context>

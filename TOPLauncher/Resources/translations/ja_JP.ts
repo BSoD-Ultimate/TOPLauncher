@@ -39,19 +39,11 @@
 <context>
     <name>DlgSJEJHHPack</name>
     <message>
-        <source>Pack &quot;SJE.JHH&quot; Archive...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Folder to pack the &quot;SJE.JHH&quot; Archive:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Virtual folder name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -66,13 +58,17 @@
         <source>Cancel</source>
         <translation type="unfinished">キャンセル</translation>
     </message>
+    <message>
+        <source>&quot;SJE.JHH&quot; Archive Packing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Internal folder name:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DlgSJEJHHUnpack</name>
-    <message>
-        <source>Unpack &quot;SJE.JHH&quot; Archive...</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>&quot;SJE.JHH&quot; Archive&apos;s path:</source>
         <translation type="unfinished"></translation>
@@ -92,6 +88,10 @@
     <message>
         <source>Cancel</source>
         <translation type="unfinished">キャンセル</translation>
+    </message>
+    <message>
+        <source>&quot;SJE.JHH&quot; Archive Unpacking</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -161,39 +161,11 @@
 <context>
     <name>QObject</name>
     <message>
-        <source>Would you like to use your system language &quot;%1&quot; as the display language?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Question</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Could not find translations for your system language &quot;%1&quot;.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Would you like to remove the user &quot;%1&quot; who logins to server &quot;%2&quot;? </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Caution</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Fatal Error</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Username &amp; password input box should not empty.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Invalid server profile.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -207,42 +179,6 @@
     <message>
         <source>New server profile...</source>
         <translation>新規作成...</translation>
-    </message>
-    <message>
-        <source>Find where the game executable locates...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Game executable (tetris.exe)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The field &quot;Server name&quot; should not empty.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Server name must be unique.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Would you like to remove the server profile &quot;%1&quot; ? This will remove all saved users who login to this server.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Would you like to apply the new game control settings? </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Info</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Successfully applied new game control settings. </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unable to apply new game control settings. </source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>A fatal error has occurred during the startup: 
@@ -445,19 +381,191 @@ The program will now exit.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unpacking...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Packing...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#800000;&quot;&gt;Caution: Modifying archives within the client incorrectly could lead the client unable to startup.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Extracted Folder:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#800000;&quot;&gt;Caution: Modifying archives within the client incorrectly could damage the client.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unpack...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pack...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TOPLauncher::ArchivePackThread</name>
+    <message>
+        <source>Packing file &quot;%1&quot; ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Packing Memory data...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TOPLauncher::ArchiveUnpackThread</name>
+    <message>
+        <source>Open the archive failed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unpacking file &quot;%1&quot; ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TOPLauncher::DlgLanguage</name>
+    <message>
+        <source>Would you like to use your system language &quot;%1&quot; as the display language?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Question</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not find translations for your system language &quot;%1&quot;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TOPLauncher::DlgSJEJHHPack</name>
+    <message>
+        <source>Select the directory where extracted files will be stored...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set the archive&apos;s name which is going to be saved...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&quot;SJE.JHH&quot; Archive (SJE.JHH)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Packing the archive...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Successfully packed the archive &quot;%1&quot;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TOPLauncher::DlgSJEJHHUnpack</name>
+    <message>
+        <source>Select an archive to extract...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&quot;SJE.JHH&quot; Archive (SJE.JHH)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select the directory where extracted files will be stored...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unpacking the archive...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TOPLauncher::LoginUserItem</name>
+    <message>
+        <source>Would you like to remove the user &quot;%1&quot; who logins to server &quot;%2&quot;? </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Caution</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TOPLauncher::MainWidget</name>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Username &amp; password input box should not empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid server profile.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TOPLauncher::SettingsWidget</name>
+    <message>
+        <source>Would you like to use your system language &quot;%1&quot; as the display language?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Question</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not find translations for your system language &quot;%1&quot;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Find where the game executable locates...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Game executable (tetris.exe)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The field &quot;Server name&quot; should not empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Server name must be unique.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Would you like to remove the server profile &quot;%1&quot; ? This will remove all saved users who login to this server.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Caution</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Would you like to apply the new game control settings? </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Successfully applied new game control settings. </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to apply new game control settings. </source>
         <translation type="unfinished"></translation>
     </message>
 </context>

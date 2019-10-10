@@ -15,7 +15,7 @@ namespace TOPLauncher
     {
         namespace game
         {
-            bool UnpackSJEJHHArchive(const std::wstring& filePath, const std::wstring& extractDir, std::string& internalFolderName, ArchiveProcessCallback callback)
+            static bool UnpackSJEJHHArchive(const std::wstring& filePath, const std::wstring& extractDir, std::string& internalFolderName)
             {
                 filesystem::path archivePath = filePath;
 
@@ -39,11 +39,6 @@ namespace TOPLauncher
                 {
                     sjejhh_unpack_file_info curFileInfo = { 0 };
                     sjejhh_unpack_get_current_file_info(pArchive, &curFileInfo);
-
-                    if (callback)
-                    {
-                        callback(std::wstring(curFileInfo.filename, curFileInfo.filenameLength), curFileInfo.fileLength, i, gi.fileCount);
-                    }
 
                     filesystem::path extractFileName = extractDir;
                     extractFileName /= std::wstring(curFileInfo.filename, curFileInfo.filenameLength);
@@ -83,14 +78,10 @@ namespace TOPLauncher
                 return true;
             }
 
-            bool PackSJEJHHArchive(const std::wstring& packDir, const std::wstring& saveFilePath, const std::string& internalFolderName, ArchiveProcessCallback callback)
+            static bool PackSJEJHHArchive(const std::wstring& packDir, const std::wstring& saveFilePath, const std::string& internalFolderName)
             {
                 std::error_code code;
-
                 filesystem::directory_iterator dirIter(packDir, code);
-
-                int fileCount = std::distance(filesystem::begin(filesystem::directory_iterator(packDir)),
-                    filesystem::end(filesystem::directory_iterator(packDir)));
 
                 sjejhh_pack_context* pPackContext = sjejhh_pack_create_file(internalFolderName.c_str(), saveFilePath.c_str());
 
@@ -101,7 +92,7 @@ namespace TOPLauncher
                     dirIter++;
                 }
 
-                bool ret = sjejhh_pack_do_pack(pPackContext) == SJEJHH_PACK_OK;
+                bool ret = sjejhh_pack_do_pack(pPackContext, nullptr, nullptr) == SJEJHH_PACK_OK;
 
                 sjejhh_pack_close(pPackContext);
 

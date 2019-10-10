@@ -231,7 +231,7 @@ namespace TOPLauncher
         if (ui.comboUsername->currentText().isEmpty() ||
             ui.editPassword->text().isEmpty())
         {
-            QMessageBox::critical(this, QObject::tr("Error"), QObject::tr("Username & password input box should not empty."));
+            QMessageBox::critical(this, tr("Error"), tr("Username & password input box should not empty."));
             return;
         }
 
@@ -239,7 +239,7 @@ namespace TOPLauncher
         assert(!serverDataRef.expired());
         if (serverDataRef.expired())
         {
-            QMessageBox::critical(this, QObject::tr("Error"), QObject::tr("Invalid server profile."));
+            QMessageBox::critical(this, tr("Error"), tr("Invalid server profile."));
             return;
         }
 

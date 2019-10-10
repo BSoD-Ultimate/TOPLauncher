@@ -23,7 +23,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Unpack &quot;SJE.JHH&quot; Archive...</string>
+   <string>&quot;SJE.JHH&quot; Archive Unpacking</string>
   </property>
   <layout class="QFormLayout" name="formLayout">
    <item row="0" column="0">
@@ -36,7 +36,7 @@
    <item row="0" column="1">
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QLineEdit" name="lineEdit"/>
+      <widget class="QLineEdit" name="editArchivePath"/>
      </item>
      <item>
       <widget class="QPushButton" name="btnBrowseArchive">
@@ -63,7 +63,7 @@
    <item row="1" column="1">
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
-      <widget class="QLineEdit" name="lineEdit_2"/>
+      <widget class="QLineEdit" name="editExtractPath"/>
      </item>
      <item>
       <widget class="QPushButton" name="btnExtractFolder">

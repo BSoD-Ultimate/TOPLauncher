@@ -27,26 +27,26 @@ namespace TOPLauncher
 
         }
 
-        QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const override
+        QModelIndex index(int row, int column, const QModelIndex& parent = QModelIndex()) const override
         {
             return createIndex(row, column, nullptr);
         }
-        QModelIndex parent(const QModelIndex &child) const override
+        QModelIndex parent(const QModelIndex& child) const override
         {
             return QModelIndex();
         }
 
-        int rowCount(const QModelIndex &parent = QModelIndex()) const override
+        int rowCount(const QModelIndex& parent = QModelIndex()) const override
         {
             auto serverList = pAppModel->GetServerData();
             return serverList.size() + 1;
         }
-        int columnCount(const QModelIndex &parent = QModelIndex()) const override
+        int columnCount(const QModelIndex& parent = QModelIndex()) const override
         {
             return 1;
         }
 
-        QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override
+        QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override
         {
             if (role == Qt::DisplayRole)
             {
@@ -54,7 +54,7 @@ namespace TOPLauncher
                 {
                     return QVariant(QObject::tr("New server profile..."));
                 }
-                else if(index.row() < pAppModel->GetServerData().size() + 1)
+                else if (index.row() < pAppModel->GetServerData().size() + 1)
                 {
                     int dataIndex = index.row() - 1;
 
@@ -95,7 +95,7 @@ namespace TOPLauncher
             return QVariant();
         }
 
-        bool insertRows(int row, int count, const QModelIndex &parent = QModelIndex()) override
+        bool insertRows(int row, int count, const QModelIndex& parent = QModelIndex()) override
         {
             beginInsertRows(parent, row, row + count);
 
@@ -103,7 +103,7 @@ namespace TOPLauncher
             return true;
         }
 
-        bool removeRows(int row, int count, const QModelIndex &parent = QModelIndex()) override
+        bool removeRows(int row, int count, const QModelIndex& parent = QModelIndex()) override
         {
             beginRemoveRows(parent, row, row + count);
             endRemoveRows();
@@ -128,7 +128,7 @@ namespace TOPLauncher
         ui.setupUi(this);
         assert(m_pMainWindow);
 
-		InitUI();
+        InitUI();
 
         EnableGameSettings(false);
 
@@ -157,17 +157,17 @@ namespace TOPLauncher
         ui.groupControlSettings->setEnabled(enable);
     }
 
-	void SettingsWidget::InitUI()
-	{
-		m_nextPiecesGroup.addButton(ui.radioNextPieceCount1);
-		m_nextPiecesGroup.addButton(ui.radioNextPieceCount2);
-		m_nextPiecesGroup.addButton(ui.radioNextPieceCount3);
-		m_nextPiecesGroup.addButton(ui.radioNextPieceCount4);
-		m_nextPiecesGroup.addButton(ui.radioNextPieceCount5);
-		m_nextPiecesGroup.addButton(ui.radioNextPieceCount6);
-	}
+    void SettingsWidget::InitUI()
+    {
+        m_nextPiecesGroup.addButton(ui.radioNextPieceCount1);
+        m_nextPiecesGroup.addButton(ui.radioNextPieceCount2);
+        m_nextPiecesGroup.addButton(ui.radioNextPieceCount3);
+        m_nextPiecesGroup.addButton(ui.radioNextPieceCount4);
+        m_nextPiecesGroup.addButton(ui.radioNextPieceCount5);
+        m_nextPiecesGroup.addButton(ui.radioNextPieceCount6);
+    }
 
-	void SettingsWidget::LoadSettingsFromModel()
+    void SettingsWidget::LoadSettingsFromModel()
     {
         LoadGeneralSettings();
         LoadServerListSettings();
@@ -182,7 +182,7 @@ namespace TOPLauncher
         auto displayLang = pAppModel->GetDisplayLanguage();
         int findIndex = -1;
         pLangModel->FindTranslator(displayLang, nullptr, &findIndex);
-        
+
         ui.comboBoxLanguage->setModel(m_pLanguageItemModel.get());
         ui.comboBoxLanguage->setCurrentIndex(findIndex);
         ui.editGameExecutablePath->setText(QString::fromStdWString(pAppModel->GetGameExecutablePath()));
@@ -268,7 +268,7 @@ namespace TOPLauncher
         }
     }
 
-    void SettingsWidget::resizeEvent(QResizeEvent * e)
+    void SettingsWidget::resizeEvent(QResizeEvent* e)
     {
         QWidget::resizeEvent(e);
         QRegion reg(frameGeometry());
@@ -313,9 +313,9 @@ namespace TOPLauncher
             assert(pTranslator);
 
             QString langShow = pTranslator->LangShowName();
-            QString displayFormat = QObject::tr("Would you like to use your system language \"%1\" as the display language?");
+            QString displayFormat = tr("Would you like to use your system language \"%1\" as the display language?");
             QString promptText = displayFormat.arg(langShow);
-            if (QMessageBox::question(this, QObject::tr("Question"), promptText, QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes)
+            if (QMessageBox::question(this, tr("Question"), promptText, QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes)
             {
                 auto pAppModel = AppModel::GetInstance();
                 if (pAppModel->SetDisplayLanguage(langId))
@@ -326,18 +326,18 @@ namespace TOPLauncher
         }
         else
         {
-            QString displayFormat = QObject::tr("Could not find translations for your system language \"%1\".");
+            QString displayFormat = tr("Could not find translations for your system language \"%1\".");
             QString promptText = displayFormat.arg(langId);
-            QMessageBox::critical(this, QObject::tr("Error"), promptText);
+            QMessageBox::critical(this, tr("Error"), promptText);
         }
 
     }
 
     void SettingsWidget::on_btnBrowseGameExecutable_clicked()
     {
-        QString gameExecutablePath = QFileDialog::getOpenFileName(this, QObject::tr("Find where the game executable locates..."),
+        QString gameExecutablePath = QFileDialog::getOpenFileName(this, tr("Find where the game executable locates..."),
             QString(),
-            QObject::tr("Game executable (tetris.exe)"), nullptr, 0);
+            tr("Game executable (tetris.exe)"), nullptr, 0);
         if (!gameExecutablePath.isEmpty())
         {
             auto pAppModel = AppModel::GetInstance();
@@ -354,7 +354,7 @@ namespace TOPLauncher
     {
         auto pAppModel = AppModel::GetInstance();
         auto serverData = ui.serverList->currentIndex().data(Qt::UserRole).value<std::shared_ptr<ServerData>>();
-        
+
 
         if (!serverData)
         {
@@ -387,7 +387,7 @@ namespace TOPLauncher
 
         if (newServerData->serverName.isEmpty())
         {
-            QMessageBox::critical(this, QObject::tr("Error"), QObject::tr("The field \"Server name\" should not empty."));
+            QMessageBox::critical(this, tr("Error"), tr("The field \"Server name\" should not empty."));
             return;
         }
 
@@ -404,7 +404,7 @@ namespace TOPLauncher
             }
             else
             {
-                QMessageBox::critical(this, QObject::tr("Error"), QObject::tr("Server name must be unique."));
+                QMessageBox::critical(this, tr("Error"), tr("Server name must be unique."));
                 return;
             }
         }
@@ -415,7 +415,7 @@ namespace TOPLauncher
             // check name conflict
             if (pAppModel->GetServerData(newServerData->serverName))
             {
-                QMessageBox::critical(this, QObject::tr("Error"), QObject::tr("Server name must be unique."));
+                QMessageBox::critical(this, tr("Error"), tr("Server name must be unique."));
                 return;
             }
 
@@ -429,7 +429,7 @@ namespace TOPLauncher
         {
             m_pMainWindow->GetMainWidget()->on_serverSettingsChanged();
         }
-        
+
     }
 
     void SettingsWidget::on_btnCancelServerProfile_clicked()
@@ -460,10 +460,10 @@ namespace TOPLauncher
         auto pAppModel = AppModel::GetInstance();
         QString serverName = ui.serverList->currentIndex().data().toString();
 
-        QString tipText = QObject::tr("Would you like to remove the server profile \"%1\" ?"
+        QString promptText = tr("Would you like to remove the server profile \"%1\" ?"
             " This will remove all saved users who login to this server.").arg(serverName);
 
-        if (QMessageBox::question(this, QObject::tr("Question"), tipText, QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes)
+        if (QMessageBox::question(this, tr("Question"), promptText, QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes)
         {
             if (pAppModel->RemoveServer(serverName))
             {
@@ -480,7 +480,7 @@ namespace TOPLauncher
 
     void SettingsWidget::on_btnApplyControlSettings_clicked()
     {
-        if (QMessageBox::question(this, QObject::tr("Caution"), QObject::tr("Would you like to apply the new game control settings? "),
+        if (QMessageBox::question(this, tr("Caution"), tr("Would you like to apply the new game control settings? "),
             QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes)
         {
 
@@ -488,11 +488,11 @@ namespace TOPLauncher
 
             if (ret)
             {
-                QMessageBox::information(this, QObject::tr("Info"), QObject::tr("Successfully applied new game control settings. "), QMessageBox::Ok);
+                QMessageBox::information(this, tr("Info"), tr("Successfully applied new game control settings. "), QMessageBox::Ok);
             }
             else
             {
-                QMessageBox::critical(this, QObject::tr("Error"), QObject::tr("Unable to apply new game control settings. "), QMessageBox::Ok);
+                QMessageBox::critical(this, tr("Error"), tr("Unable to apply new game control settings. "), QMessageBox::Ok);
             }
 
         }
@@ -509,12 +509,24 @@ namespace TOPLauncher
     {
         DlgSJEJHHUnpack unpackDlg;
 
+        connect(&unpackDlg, &DlgSJEJHHUnpack::ArchiveUnpackFinished,
+            [this](QString archivePath, QString extractPath, QString internalFolderName) {
+                ui.editArchivePath->setText(archivePath);
+                ui.editArchiveFolderName->setText(internalFolderName);
+                ui.editExtractPath->setText(extractPath);
+            });
+
         unpackDlg.exec();
     }
 
     void SettingsWidget::on_btnPackArchive_clicked()
     {
         DlgSJEJHHPack packDlg;
+
+        packDlg.setPackFolder(ui.editExtractPath->text());
+        packDlg.setInternalFolderName(ui.editArchiveFolderName->text());
+        packDlg.setArchiveFilePath(ui.editArchivePath->text());
+
         packDlg.exec();
     }
 

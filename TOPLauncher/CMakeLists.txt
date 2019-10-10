@@ -56,13 +56,17 @@ set(UI_HEADERS
   LanguageItemModel.h 
   OverlayEffectWidget.h
 )
+qt5_generate_moc(DlgSJEJHHUnpack.cpp DlgSJEJHHUnpack.moc)
+qt5_generate_moc(DlgSJEJHHPack.cpp DlgSJEJHHPack.moc)
 set(UI_SRC
   MainWindow.cpp 
   LoginUserItem.cpp 
   DlgLanguage.cpp 
   DlgProgress.cpp  
-  DlgSJEJHHPack.cpp  
+  DlgSJEJHHPack.cpp 
+  DlgSJEJHHPack.moc 
   DlgSJEJHHUnpack.cpp  
+  DlgSJEJHHUnpack.moc
   MainWidget.cpp
   SettingsWidget.cpp 
   LanguageItemModel.cpp 

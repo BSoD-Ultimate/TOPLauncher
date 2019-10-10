@@ -102,7 +102,8 @@ namespace TOPLauncher
 
             auto dirUTF8 = dir.Get().u8string();
 
-            return QString::fromUtf8(dirUTF8.c_str(), dirUTF8.length());
+            QString tmpPath = QString::fromStdString(dirUTF8);
+            return tmpPath;
         }
 
         QString GetGameStartupArgs(const QString& serverAddress, const QString& username, const QString& password)

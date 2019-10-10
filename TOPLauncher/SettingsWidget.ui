@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>610</width>
-    <height>1017</height>
+    <height>1072</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -181,7 +181,7 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
         <x>0</x>
         <y>0</y>
         <width>572</width>
-        <height>1017</height>
+        <height>1072</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_9">
@@ -986,7 +986,7 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
              <item>
               <widget class="QLabel" name="label_2">
                <property name="text">
-                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#800000;&quot;&gt;Caution: Modifying archives within the client incorrectly could lead the client unable to startup.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#800000;&quot;&gt;Caution: Modifying archives within the client incorrectly could damage the client.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                </property>
                <property name="wordWrap">
                 <bool>true</bool>
@@ -1094,7 +1094,7 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
                   </size>
                  </property>
                  <property name="text">
-                  <string>Unpacking...</string>
+                  <string>Unpack...</string>
                  </property>
                 </widget>
                </item>
@@ -1107,7 +1107,7 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
                   </size>
                  </property>
                  <property name="text">
-                  <string>Packing...</string>
+                  <string>Pack...</string>
                  </property>
                 </widget>
                </item>
