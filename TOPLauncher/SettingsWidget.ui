@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>630</width>
-    <height>1072</height>
+    <height>1068</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -181,7 +181,7 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
         <x>0</x>
         <y>0</y>
         <width>592</width>
-        <height>1072</height>
+        <height>1068</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_9">
@@ -802,7 +802,7 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
                </size>
               </property>
               <property name="minimum">
-               <number>1</number>
+               <number>0</number>
               </property>
               <property name="maximum">
                <number>1000</number>
@@ -902,20 +902,20 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
            </layout>
           </item>
           <item>
-           <widget class="QPushButton" name="btnApplyControlSettings">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text">
-             <string comment="settingwidget_gamecontrol_btn_apply">Apply New Control Settings</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_4">
+           <layout class="QHBoxLayout" name="horizontalLayout_7">
+            <item>
+             <widget class="QPushButton" name="btnApplyControlSettings">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string comment="settingwidget_gamecontrol_btn_apply">Apply New Control Settings</string>
+              </property>
+             </widget>
+            </item>
             <item>
              <widget class="QPushButton" name="btnResetControlSettings">
               <property name="sizePolicy">
@@ -932,7 +932,7 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
               </property>
               <property name="maximumSize">
                <size>
-                <width>16777215</width>
+                <width>150</width>
                 <height>16777215</height>
                </size>
               </property>
@@ -941,25 +941,42 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
               </property>
              </widget>
             </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_4">
             <item>
-             <widget class="QPushButton" name="btnResetDefault">
+             <widget class="QPushButton" name="btnResetTOPDefault">
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Reset to TOP's store default</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="btnResetTOJDefault">
               <property name="enabled">
-               <bool>false</bool>
+               <bool>true</bool>
               </property>
               <property name="minimumSize">
                <size>
-                <width>200</width>
+                <width>0</width>
                 <height>0</height>
                </size>
               </property>
               <property name="maximumSize">
                <size>
-                <width>200</width>
+                <width>16777215</width>
                 <height>16777215</height>
                </size>
               </property>
               <property name="text">
-               <string>Reset to TOJ's default profile</string>
+               <string>Reset to TOJ's store default</string>
               </property>
              </widget>
             </item>
@@ -1127,10 +1144,13 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Expanding</enum>
+         </property>
          <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
-           <height>40</height>
+           <height>1</height>
           </size>
          </property>
         </spacer>

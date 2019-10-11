@@ -21,13 +21,28 @@ namespace TOPLauncher
     };
 
     struct AppConfig;
-    namespace util
+
+    struct GameConfig
     {
-        namespace game
+        // set tetrominos' handling characteristics
+        int32_t moveSensitivity;
+        int32_t moveSpeed;
+        int32_t softDropSpeed;
+
+        // set line-clear delay time
+        int32_t lineClearDelay;
+
+        int nextPiecesCount;
+
+        GameConfig()
+            : moveSensitivity(45)
+            , moveSpeed(15)
+            , softDropSpeed(10)
+            , lineClearDelay(0)
+            , nextPiecesCount(6)
         {
-            struct GameConfig;
         }
-    }
+    };
 
 
     class AppModel
@@ -74,8 +89,10 @@ namespace TOPLauncher
         */
         bool IsGameConfigAvailable() const;
 
-        const util::game::GameConfig& GetGameConfig() const;
-        bool ApplyGameConfig(const util::game::GameConfig& newConfig);
+        const GameConfig& GetGameConfig() const;
+        bool ApplyGameConfig(const GameConfig& newConfig);
+        bool ApplyGameConfigTOPDefault();
+        bool ApplyGameConfigTOJDefualt();
 
     private:
 
@@ -100,7 +117,7 @@ namespace TOPLauncher
         std::shared_ptr<SQLite::Database> m_pUserDB;
 
         std::unique_ptr<AppConfig> m_pAppConfig;
-        std::unique_ptr<util::game::GameConfig> m_pGameConfig;
+        std::unique_ptr<GameConfig> m_pGameConfig;
     };
 
 }

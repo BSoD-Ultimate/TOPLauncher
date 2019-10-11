@@ -427,17 +427,39 @@ namespace TOPLauncher
         return m_pGameConfig.operator bool();
     }
 
-    const util::game::GameConfig& AppModel::GetGameConfig() const
+    const GameConfig& AppModel::GetGameConfig() const
     {
         return *m_pGameConfig;
     }
 
-    bool AppModel::ApplyGameConfig(const util::game::GameConfig& newConfig)
+    bool AppModel::ApplyGameConfig(const GameConfig& newConfig)
     {
         bool ret = util::game::WriteGameConfig(newConfig);
         if (ret)
         {
             *m_pGameConfig = newConfig;
+        }
+
+        return ret;
+    }
+
+    bool AppModel::ApplyGameConfigTOPDefault()
+    {
+        bool ret = util::game::WriteTOPDefaultConfig();
+        if (ret)
+        {
+            LoadSavedConfigFromGame();
+        }
+
+        return ret;
+    }
+
+    bool AppModel::ApplyGameConfigTOJDefualt()
+    {
+        bool ret = util::game::WriteTOJDefaultConfig();
+        if (ret)
+        {
+            LoadSavedConfigFromGame();
         }
 
         return ret;
@@ -484,7 +506,7 @@ namespace TOPLauncher
             return;
         }
 
-        m_pGameConfig.reset(new util::game::GameConfig());
+        m_pGameConfig.reset(new GameConfig());
 
         bool readConfigRet = util::game::ReadGameConfig(*m_pGameConfig);
 

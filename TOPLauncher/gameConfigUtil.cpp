@@ -99,114 +99,6 @@ namespace TOPLauncher
                 return ret;
             }
 
-
-
-            bool ReadMoveSensitivityConfig(int& moveSensitivity, int& moveSpeed, int& softDropSpeed)
-            {
-                // unpack SJE.JHH archive
-                auto pAppModel = AppModel::GetInstance();
-                filesystem::path archivePath = pAppModel->GetGameExecutablePath().parent_path() / filesystem::path(L"config") / L"SJE.JHH";
-
-                filesystem::path unpackPath = filesystem::path(GetTempDirectory().toStdWString()) / L"config";
-
-                std::string internalFolderName;
-                if (!UnpackSJEJHHArchive(archivePath, unpackPath, internalFolderName))
-                {
-                    return false;
-                }
-
-                filesystem::path configIniPath = unpackPath / L"config_jpn.ini";
-
-                INIReader reader(configIniPath.string());
-
-                moveSensitivity = reader.GetInteger("CHARACTER_A", "MoveDelay", 45);
-                moveSpeed = reader.GetInteger("CHARACTER_A", "MoveInterval", 15);
-                softDropSpeed = reader.GetInteger("CHARACTER_A", "SoftDropDelay", 10);
-
-                return true;
-            }
-
-            bool WriteMoveSensitivityConfig(int moveSensitivity, int moveSpeed, int softDropSpeed)
-            {
-                // unpack SJE.JHH archive
-                auto pAppModel = AppModel::GetInstance();
-                filesystem::path archivePath = pAppModel->GetGameExecutablePath().parent_path() / filesystem::path(L"config") / L"SJE.JHH";
-
-                filesystem::path unpackPath = filesystem::path(GetTempDirectory().toStdWString()) / L"config";
-
-                std::string internalFolderName;
-                if (!UnpackSJEJHHArchive(archivePath, unpackPath, internalFolderName))
-                {
-                    return false;
-                }
-
-                filesystem::path configIniPath = unpackPath / L"config_jpn.ini";
-
-                INIReader reader(configIniPath.string());
-
-                std::string strMoveSensitivity = std::to_string(moveSensitivity);
-                std::string strMoveSpeed = std::to_string(moveSpeed);
-                std::string strMoveSoftDropSpeed = std::to_string(softDropSpeed);
-
-                reader.Set("CHARACTER_A", "MoveDelay", strMoveSensitivity);
-                reader.Set("CHARACTER_A", "MoveInterval", strMoveSpeed);
-                reader.Set("CHARACTER_A", "SoftDropDelay", strMoveSoftDropSpeed);
-                reader.Set("CHARACTER_A", "SoftDropInterval", strMoveSoftDropSpeed);
-
-                reader.Set("UPGRADE_LRSPEED_LV1", "MoveDelay", strMoveSensitivity);
-                reader.Set("UPGRADE_LRSPEED_LV1", "MoveInterval", strMoveSpeed);
-                reader.Set("UPGRADE_LRSPEED_LV2", "MoveDelay", strMoveSensitivity);
-                reader.Set("UPGRADE_LRSPEED_LV2", "MoveInterval", strMoveSpeed);
-                reader.Set("UPGRADE_LRSPEED_LV3", "MoveDelay", strMoveSensitivity);
-                reader.Set("UPGRADE_LRSPEED_LV3", "MoveInterval", strMoveSpeed);
-                reader.Set("UPGRADE_LRSPEED_LV4", "MoveDelay", strMoveSensitivity);
-                reader.Set("UPGRADE_LRSPEED_LV4", "MoveInterval", strMoveSpeed);
-                reader.Set("UPGRADE_LRSPEED_LV5", "MoveDelay", strMoveSensitivity);
-                reader.Set("UPGRADE_LRSPEED_LV5", "MoveInterval", strMoveSpeed);
-
-                reader.Set("UPGRADE_SOFTDROPSPEED_LV1", "SoftDropDelay", strMoveSoftDropSpeed);
-                reader.Set("UPGRADE_SOFTDROPSPEED_LV1", "SoftDropInterval", strMoveSoftDropSpeed);
-                reader.Set("UPGRADE_SOFTDROPSPEED_LV2", "SoftDropDelay", strMoveSoftDropSpeed);
-                reader.Set("UPGRADE_SOFTDROPSPEED_LV2", "SoftDropInterval", strMoveSoftDropSpeed);
-                reader.Set("UPGRADE_SOFTDROPSPEED_LV3", "SoftDropDelay", strMoveSoftDropSpeed);
-                reader.Set("UPGRADE_SOFTDROPSPEED_LV3", "SoftDropInterval", strMoveSoftDropSpeed);
-                reader.Set("UPGRADE_SOFTDROPSPEED_LV4", "SoftDropDelay", strMoveSoftDropSpeed);
-                reader.Set("UPGRADE_SOFTDROPSPEED_LV4", "SoftDropInterval", strMoveSoftDropSpeed);
-                reader.Set("UPGRADE_SOFTDROPSPEED_LV5", "SoftDropDelay", strMoveSoftDropSpeed);
-                reader.Set("UPGRADE_SOFTDROPSPEED_LV5", "SoftDropInterval", strMoveSoftDropSpeed);
-
-                reader.WriteINIFile(configIniPath.string());
-
-                // pack the archive again
-                if (!PackSJEJHHArchive(unpackPath, archivePath, internalFolderName))
-                {
-                    return false;
-                }
-
-                return true;
-            }
-            bool ReadLineClearDelayConfig(int & lineClearDelay)
-            {
-                // unpack SJE.JHH archive
-                auto pAppModel = AppModel::GetInstance();
-                filesystem::path archivePath = pAppModel->GetGameExecutablePath().parent_path() / filesystem::path(L"config") / L"SJE.JHH";
-
-                filesystem::path unpackPath = filesystem::path(GetTempDirectory().toStdWString()) / L"config";
-
-                std::string internalFolderName;
-                if (!UnpackSJEJHHArchive(archivePath, unpackPath, internalFolderName))
-                {
-                    return false;
-                }
-
-                filesystem::path configIniPath = unpackPath / L"config_jpn.ini";
-
-                INIReader reader(configIniPath.string());
-
-                lineClearDelay = reader.GetInteger("CHARACTER_A", "MinoGravity", 50);
-
-                return true;
-            }
             bool WriteLineClearDelayConfig(int lineClearDelay)
             {
                 // unpack SJE.JHH archive
@@ -338,7 +230,6 @@ namespace TOPLauncher
                 {
                     std::string strNextPiecesCount = std::to_string(config.nextPiecesCount);
 
-                    reader.Set("DEFAULT_CHARACTER", "NextBlockCount", strNextPiecesCount);
                     reader.Set("CHARACTER_A", "NextBlockCount", strNextPiecesCount);
                     reader.Set("CHARACTER_B", "NextBlockCount", strNextPiecesCount);
                     reader.Set("CHARACTER_C", "NextBlockCount", strNextPiecesCount);
@@ -350,6 +241,166 @@ namespace TOPLauncher
                     reader.Set("UPGRADE_NEXT_LV3", "NextBlockCount", strNextPiecesCount);
                     reader.Set("UPGRADE_NEXT_LV4", "NextBlockCount", strNextPiecesCount);
                     reader.Set("UPGRADE_NEXT_LV5", "NextBlockCount", strNextPiecesCount);
+                }
+
+                reader.WriteINIFile(configIniPath.string());
+
+                // pack the archive again
+                filesystem::path newArchivePath = archivePath;
+                newArchivePath += "-";
+                if (!PackSJEJHHArchive(unpackPath, newArchivePath, internalFolderName))
+                {
+                    return false;
+                }
+
+                filesystem::copy(newArchivePath, archivePath, filesystem::copy_options::overwrite_existing);
+                filesystem::remove(newArchivePath);
+
+                return true;
+            }
+            bool WriteTOPDefaultConfig()
+            {
+                // unpack SJE.JHH archive
+                auto pAppModel = AppModel::GetInstance();
+                filesystem::path archivePath = pAppModel->GetGameExecutablePath().parent_path() / filesystem::path(L"config") / L"SJE.JHH";
+                filesystem::path unpackPath = filesystem::path(GetTempDirectory().toStdWString()) / L"config";
+
+                std::string internalFolderName;
+                if (!UnpackSJEJHHArchive(archivePath, unpackPath, internalFolderName))
+                {
+                    return false;
+                }
+
+                filesystem::path configIniPath = unpackPath / L"config_jpn.ini";
+
+                INIReader reader(configIniPath.string());
+
+                {
+                    reader.Set("CHARACTER_A", "MoveDelay", "190");
+                    reader.Set("CHARACTER_A", "MoveInterval", "95");
+                    reader.Set("CHARACTER_A", "SoftDropDelay", "40");
+                    reader.Set("CHARACTER_A", "SoftDropInterval", "40");
+                    reader.Set("CHARACTER_A", "MinoGravity", "90");
+
+                    reader.Set("DEFAULT_CHARACTER", "NextBlockCount", "6");
+                    reader.Set("CHARACTER_A", "NextBlockCount", "1");
+                    reader.Set("CHARACTER_B", "NextBlockCount", "6");
+                    reader.Set("CHARACTER_C", "NextBlockCount", "3");
+                    reader.Set("CHARACTER_D", "NextBlockCount", "6");
+
+                    reader.Set("UPGRADE_LRSPEED_LV1", "MoveDelay", "180");
+                    reader.Set("UPGRADE_LRSPEED_LV1", "MoveInterval", "50");
+                    reader.Set("UPGRADE_LRSPEED_LV2", "MoveDelay", "165");
+                    reader.Set("UPGRADE_LRSPEED_LV2", "MoveInterval", "30");
+                    reader.Set("UPGRADE_LRSPEED_LV3", "MoveDelay", "130");
+                    reader.Set("UPGRADE_LRSPEED_LV3", "MoveInterval", "30");
+                    reader.Set("UPGRADE_LRSPEED_LV4", "MoveDelay", "130");
+                    reader.Set("UPGRADE_LRSPEED_LV4", "MoveInterval", "15");
+                    reader.Set("UPGRADE_LRSPEED_LV5", "MoveDelay", "100");
+                    reader.Set("UPGRADE_LRSPEED_LV5", "MoveInterval", "15");
+
+                    reader.Set("UPGRADE_SOFTDROPSPEED_LV1", "SoftDropDelay", "35");
+                    reader.Set("UPGRADE_SOFTDROPSPEED_LV1", "SoftDropInterval", "35");
+                    reader.Set("UPGRADE_SOFTDROPSPEED_LV2", "SoftDropDelay", "30");
+                    reader.Set("UPGRADE_SOFTDROPSPEED_LV2", "SoftDropInterval", "30");
+                    reader.Set("UPGRADE_SOFTDROPSPEED_LV3", "SoftDropDelay", "25");
+                    reader.Set("UPGRADE_SOFTDROPSPEED_LV3", "SoftDropInterval", "25");
+                    reader.Set("UPGRADE_SOFTDROPSPEED_LV4", "SoftDropDelay", "15");
+                    reader.Set("UPGRADE_SOFTDROPSPEED_LV4", "SoftDropInterval", "15");
+                    reader.Set("UPGRADE_SOFTDROPSPEED_LV5", "SoftDropDelay", "10");
+                    reader.Set("UPGRADE_SOFTDROPSPEED_LV5", "SoftDropInterval", "10");
+
+                    reader.Set("UPGRADE_LINECLEARSPEED_LV1", "MinoGravity", "80");
+                    reader.Set("UPGRADE_LINECLEARSPEED_LV2", "MinoGravity", "75");
+                    reader.Set("UPGRADE_LINECLEARSPEED_LV3", "MinoGravity", "70");
+                    reader.Set("UPGRADE_LINECLEARSPEED_LV4", "MinoGravity", "60");
+                    reader.Set("UPGRADE_LINECLEARSPEED_LV5", "MinoGravity", "50");
+
+                    reader.Set("UPGRADE_NEXT_LV1", "NextBlockCount", "2");
+                    reader.Set("UPGRADE_NEXT_LV2", "NextBlockCount", "3");
+                    reader.Set("UPGRADE_NEXT_LV3", "NextBlockCount", "4");
+                    reader.Set("UPGRADE_NEXT_LV4", "NextBlockCount", "5");
+                    reader.Set("UPGRADE_NEXT_LV5", "NextBlockCount", "6");
+                }
+
+                reader.WriteINIFile(configIniPath.string());
+
+                // pack the archive again
+                filesystem::path newArchivePath = archivePath;
+                newArchivePath += "-";
+                if (!PackSJEJHHArchive(unpackPath, newArchivePath, internalFolderName))
+                {
+                    return false;
+                }
+
+                filesystem::copy(newArchivePath, archivePath, filesystem::copy_options::overwrite_existing);
+                filesystem::remove(newArchivePath);
+
+                return true;
+            }
+            bool WriteTOJDefaultConfig()
+            {
+                // unpack SJE.JHH archive
+                auto pAppModel = AppModel::GetInstance();
+                filesystem::path archivePath = pAppModel->GetGameExecutablePath().parent_path() / filesystem::path(L"config") / L"SJE.JHH";
+                filesystem::path unpackPath = filesystem::path(GetTempDirectory().toStdWString()) / L"config";
+
+                std::string internalFolderName;
+                if (!UnpackSJEJHHArchive(archivePath, unpackPath, internalFolderName))
+                {
+                    return false;
+                }
+
+                filesystem::path configIniPath = unpackPath / L"config_jpn.ini";
+
+                INIReader reader(configIniPath.string());
+
+                {
+                    reader.Set("CHARACTER_A", "MoveDelay", "190");
+                    reader.Set("CHARACTER_A", "MoveInterval", "95");
+                    reader.Set("CHARACTER_A", "SoftDropDelay", "40");
+                    reader.Set("CHARACTER_A", "SoftDropInterval", "40");
+                    reader.Set("CHARACTER_A", "MinoGravity", "90");
+
+                    reader.Set("DEFAULT_CHARACTER", "NextBlockCount", "6");
+                    reader.Set("CHARACTER_A", "NextBlockCount", "1");
+                    reader.Set("CHARACTER_B", "NextBlockCount", "6");
+                    reader.Set("CHARACTER_C", "NextBlockCount", "3");
+                    reader.Set("CHARACTER_D", "NextBlockCount", "6");
+
+                    reader.Set("UPGRADE_LRSPEED_LV1", "MoveDelay", "180");
+                    reader.Set("UPGRADE_LRSPEED_LV1", "MoveInterval", "90");
+                    reader.Set("UPGRADE_LRSPEED_LV2", "MoveDelay", "160");
+                    reader.Set("UPGRADE_LRSPEED_LV2", "MoveInterval", "80");
+                    reader.Set("UPGRADE_LRSPEED_LV3", "MoveDelay", "140");
+                    reader.Set("UPGRADE_LRSPEED_LV3", "MoveInterval", "70");
+                    reader.Set("UPGRADE_LRSPEED_LV4", "MoveDelay", "110");
+                    reader.Set("UPGRADE_LRSPEED_LV4", "MoveInterval", "55");
+                    reader.Set("UPGRADE_LRSPEED_LV5", "MoveDelay", "80");
+                    reader.Set("UPGRADE_LRSPEED_LV5", "MoveInterval", "40");
+
+                    reader.Set("UPGRADE_SOFTDROPSPEED_LV1", "SoftDropDelay", "35");
+                    reader.Set("UPGRADE_SOFTDROPSPEED_LV1", "SoftDropInterval", "35");
+                    reader.Set("UPGRADE_SOFTDROPSPEED_LV2", "SoftDropDelay", "30");
+                    reader.Set("UPGRADE_SOFTDROPSPEED_LV2", "SoftDropInterval", "30");
+                    reader.Set("UPGRADE_SOFTDROPSPEED_LV3", "SoftDropDelay", "25");
+                    reader.Set("UPGRADE_SOFTDROPSPEED_LV3", "SoftDropInterval", "25");
+                    reader.Set("UPGRADE_SOFTDROPSPEED_LV4", "SoftDropDelay", "15");
+                    reader.Set("UPGRADE_SOFTDROPSPEED_LV4", "SoftDropInterval", "15");
+                    reader.Set("UPGRADE_SOFTDROPSPEED_LV5", "SoftDropDelay", "10");
+                    reader.Set("UPGRADE_SOFTDROPSPEED_LV5", "SoftDropInterval", "10");
+
+                    reader.Set("UPGRADE_LINECLEARSPEED_LV1", "MinoGravity", "80");
+                    reader.Set("UPGRADE_LINECLEARSPEED_LV2", "MinoGravity", "75");
+                    reader.Set("UPGRADE_LINECLEARSPEED_LV3", "MinoGravity", "70");
+                    reader.Set("UPGRADE_LINECLEARSPEED_LV4", "MinoGravity", "60");
+                    reader.Set("UPGRADE_LINECLEARSPEED_LV5", "MinoGravity", "50");
+
+                    reader.Set("UPGRADE_NEXT_LV1", "NextBlockCount", "2");
+                    reader.Set("UPGRADE_NEXT_LV2", "NextBlockCount", "3");
+                    reader.Set("UPGRADE_NEXT_LV3", "NextBlockCount", "4");
+                    reader.Set("UPGRADE_NEXT_LV4", "NextBlockCount", "5");
+                    reader.Set("UPGRADE_NEXT_LV5", "NextBlockCount", "6");
                 }
 
                 reader.WriteINIFile(configIniPath.string());

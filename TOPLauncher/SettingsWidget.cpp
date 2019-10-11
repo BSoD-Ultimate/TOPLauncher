@@ -7,7 +7,6 @@
 
 
 #include "AppModel.h"
-#include "gameConfigUtil.h"
 #include "LanguageModel.h"
 #include "LanguageItemModel.h"
 
@@ -369,7 +368,7 @@ namespace TOPLauncher
     {
         QString gameExecutablePath = QFileDialog::getOpenFileName(this, tr("Find where the game executable locates..."),
             QString(),
-            tr("Game executable (tetris.exe)"), nullptr, 0);
+            tr("Game executable (tetris.exe);;Any executable (*.exe)"), nullptr, 0);
         if (!gameExecutablePath.isEmpty())
         {
             auto pAppModel = AppModel::GetInstance();
@@ -534,7 +533,48 @@ namespace TOPLauncher
     void SettingsWidget::on_btnResetControlSettings_clicked()
     {
         LoadGameControlSettings();
+    }
 
+    void SettingsWidget::on_btnResetTOPDefault_clicked()
+    {
+        if (QMessageBox::question(this, tr("Caution"), tr("Reset the game control settings to TOP's store default?"),
+            QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes)
+        {
+            auto pAppModel = AppModel::GetInstance();
+
+            bool ret = pAppModel->ApplyGameConfigTOPDefault();
+
+            if (ret)
+            {
+                QMessageBox::information(this, tr("Info"), tr("Successfully applied new game control settings. "), QMessageBox::Ok);
+                LoadGameControlSettings();
+            }
+            else
+            {
+                QMessageBox::critical(this, tr("Error"), tr("Unable to apply new game control settings. "), QMessageBox::Ok);
+            }
+        }
+    }
+
+    void SettingsWidget::on_btnResetTOJDefault_clicked()
+    {
+        if (QMessageBox::question(this, tr("Caution"), tr("Reset the game control settings to TOJ's store default?"),
+            QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes)
+        {
+            auto pAppModel = AppModel::GetInstance();
+
+            bool ret = pAppModel->ApplyGameConfigTOJDefualt();
+
+            if (ret)
+            {
+                QMessageBox::information(this, tr("Info"), tr("Successfully applied new game control settings. "), QMessageBox::Ok);
+                LoadGameControlSettings();
+            }
+            else
+            {
+                QMessageBox::critical(this, tr("Error"), tr("Unable to apply new game control settings. "), QMessageBox::Ok);
+            }
+        }
     }
 
     void SettingsWidget::on_btnUnpackArchive_clicked()

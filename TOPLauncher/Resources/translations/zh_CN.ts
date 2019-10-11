@@ -420,7 +420,7 @@ The program will now exit.</source>
     </message>
     <message>
         <source>Reset to TOJ&apos;s default profile</source>
-        <translation>重置至TOJ客户端默认设置</translation>
+        <translation type="vanished">重置至TOJ客户端默认设置</translation>
     </message>
     <message>
         <source>Modding</source>
@@ -465,6 +465,14 @@ The program will now exit.</source>
     <message>
         <source>Quantity of pieces showing in the &quot;next&quot; panel</source>
         <translation>&quot;next&quot;栏显示的方块数量</translation>
+    </message>
+    <message>
+        <source>Reset to TOP&apos;s store default</source>
+        <translation>重置至TOP商店默认设置</translation>
+    </message>
+    <message>
+        <source>Reset to TOJ&apos;s store default</source>
+        <translation>重置至TOJ商店默认设置</translation>
     </message>
 </context>
 <context>
@@ -648,7 +656,7 @@ The program will now exit.</source>
     </message>
     <message>
         <source>Game executable (tetris.exe)</source>
-        <translation>TO-P游戏客户端(tetris.exe)</translation>
+        <translation type="vanished">TO-P游戏客户端(tetris.exe)</translation>
     </message>
     <message>
         <source>The field &quot;Server name&quot; should not empty.</source>
@@ -681,6 +689,18 @@ The program will now exit.</source>
     <message>
         <source>Unable to apply new game control settings. </source>
         <translation>应用新的游戏控制设置失败。 </translation>
+    </message>
+    <message>
+        <source>Reset the game control settings to TOP&apos;s store default?</source>
+        <translation>要把设置重置至TOP商店的默认设置吗？</translation>
+    </message>
+    <message>
+        <source>Reset the game control settings to TOJ&apos;s store default?</source>
+        <translation>要把设置重置至TOJ商店的默认设置吗？</translation>
+    </message>
+    <message>
+        <source>Game executable (tetris.exe);;Any executable (*.exe)</source>
+        <translation>TO-P游戏客户端 (tetris.exe);;任意程序 (*.exe)</translation>
     </message>
 </context>
 <context>

@@ -61,6 +61,8 @@ namespace TOPLauncher
 
     void on_btnApplyControlSettings_clicked();
     void on_btnResetControlSettings_clicked();
+    void on_btnResetTOPDefault_clicked();
+    void on_btnResetTOJDefault_clicked();
 
     void on_btnUnpackArchive_clicked();
     void on_btnPackArchive_clicked();

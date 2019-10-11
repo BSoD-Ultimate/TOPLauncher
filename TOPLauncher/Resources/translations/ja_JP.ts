@@ -353,10 +353,6 @@ The program will now exit.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Reset to TOJ&apos;s default profile</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Modding</source>
         <translation type="unfinished"></translation>
     </message>
@@ -394,6 +390,14 @@ The program will now exit.</source>
     </message>
     <message>
         <source>Quantity of pieces showing in the &quot;next&quot; panel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset to TOP&apos;s store default</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset to TOJ&apos;s store default</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -569,10 +573,6 @@ The program will now exit.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Game executable (tetris.exe)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>The field &quot;Server name&quot; should not empty.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -602,6 +602,18 @@ The program will now exit.</source>
     </message>
     <message>
         <source>Unable to apply new game control settings. </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset the game control settings to TOP&apos;s store default?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset the game control settings to TOJ&apos;s store default?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Game executable (tetris.exe);;Any executable (*.exe)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
