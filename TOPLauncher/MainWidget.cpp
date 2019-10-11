@@ -10,6 +10,7 @@
 #include "dbUser.h"
 
 #include <QMessageBox>
+#include <QKeyEvent>
 
 namespace TOPLauncher
 {
@@ -104,6 +105,8 @@ namespace TOPLauncher
         ui.comboUsername->setModel(m_pComboUserPopupList->model());
         ui.comboUsername->setView(m_pComboUserPopupList);
 
+        ui.btnLogin->setFocus();
+
         InitData();
     }
 
@@ -155,6 +158,17 @@ namespace TOPLauncher
         {
             ui.retranslateUi(this);
         }
+    }
+
+    void MainWidget::keyPressEvent(QKeyEvent* e)
+    {
+        auto keyCode = e->key();
+        if (keyCode == Qt::Key_Enter || keyCode == Qt::Key_Return)
+        {
+            on_btnLogin_clicked();
+        }
+
+        QWidget::keyPressEvent(e);
     }
 
     void MainWidget::on_serverSettingsChanged()

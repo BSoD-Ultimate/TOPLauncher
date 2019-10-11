@@ -33,7 +33,8 @@ namespace TOPLauncher
 
         void InitData();
         void InsertLoginUserItem(QListWidget* pListWidget, const std::shared_ptr<db::DBUserData> pUserData);
-        void changeEvent(QEvent* event) override;
+        void changeEvent(QEvent* e) override;
+        void keyPressEvent(QKeyEvent* e) override;
 
     public slots:
         void on_serverSettingsChanged();
