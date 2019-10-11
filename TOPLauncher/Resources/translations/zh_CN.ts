@@ -176,40 +176,12 @@
 <context>
     <name>QObject</name>
     <message>
-        <source>Would you like to use your system language &quot;%1&quot; as the display language?</source>
-        <translation type="vanished">要把当前的系统显示语言\&quot;%1\&quot;设为显示语言吗？</translation>
-    </message>
-    <message>
-        <source>Question</source>
-        <translation type="vanished">问题</translation>
-    </message>
-    <message>
-        <source>Could not find translations for your system language &quot;%1&quot;.</source>
-        <translation type="vanished">找不到当前系统语言\&quot;%1\&quot;对应的翻译。</translation>
-    </message>
-    <message>
         <source>Error</source>
         <translation>错误</translation>
     </message>
     <message>
-        <source>Would you like to remove the user &quot;%1&quot; who logins to server &quot;%2&quot;? </source>
-        <translation type="vanished">要删除登录到服务器&quot;%2&quot;的用户&quot;%1&quot;吗？ </translation>
-    </message>
-    <message>
-        <source>Caution</source>
-        <translation type="vanished">注意</translation>
-    </message>
-    <message>
         <source>Fatal Error</source>
         <translation>严重错误</translation>
-    </message>
-    <message>
-        <source>Username &amp; password input box should not empty.</source>
-        <translation type="vanished">&quot;用户名&quot;和&quot;密码&quot;栏不能为空。</translation>
-    </message>
-    <message>
-        <source>Invalid server profile.</source>
-        <translation type="vanished">无效的服务器配置。</translation>
     </message>
     <message>
         <source>Could not find where the game executable locates. Startup failed.</source>
@@ -224,46 +196,10 @@
         <translation>新建服务器设置...</translation>
     </message>
     <message>
-        <source>Find where the game executable locates...</source>
-        <translation type="vanished">指定TO-P游戏客户端程序的位置...</translation>
-    </message>
-    <message>
-        <source>Game executable (tetris.exe)</source>
-        <translation type="vanished">TO-P游戏客户端(tetris.exe)</translation>
-    </message>
-    <message>
-        <source>The field &quot;Server name&quot; should not empty.</source>
-        <translation type="vanished">&quot;服务器名称&quot;一栏不能为空。</translation>
-    </message>
-    <message>
-        <source>Server name must be unique.</source>
-        <translation type="vanished">服务器名称必须唯一。</translation>
-    </message>
-    <message>
-        <source>Would you like to remove the server profile &quot;%1&quot; ? This will remove all saved users who login to this server.</source>
-        <translation type="vanished">要删除服务器设置&quot;%1&quot;吗？所有已保存的登录到该服务器的用户都将会被移除。</translation>
-    </message>
-    <message>
-        <source>Would you like to apply the new game control settings? </source>
-        <translation type="vanished">要应用新的游戏控制设置吗？ </translation>
-    </message>
-    <message>
-        <source>Info</source>
-        <translation type="vanished">提示</translation>
-    </message>
-    <message>
-        <source>Successfully applied new game control settings. </source>
-        <translation type="vanished">成功应用了新的游戏控制设置。 </translation>
-    </message>
-    <message>
-        <source>Unable to apply new game control settings. </source>
-        <translation type="vanished">应用新的游戏控制设置失败。 </translation>
-    </message>
-    <message>
         <source>A fatal error has occurred during the startup: 
 %1 
 The program will now exit.</source>
-        <translation type="vanished">程序启动时发生了严重错误：
+        <translation>程序启动时发生了严重错误：
 %1 
 程序即将退出。</translation>
     </message>
@@ -434,10 +370,6 @@ The program will now exit.</source>
         <translation></translation>
     </message>
     <message>
-        <source>Reset to TOJ&apos;s default profile</source>
-        <translation type="vanished">重置至TOJ客户端默认设置</translation>
-    </message>
-    <message>
         <source>Modding</source>
         <translation>客户端修改</translation>
     </message>
@@ -470,10 +402,6 @@ The program will now exit.</source>
         <translation>打包...</translation>
     </message>
     <message>
-        <source>Quantity of pieces showing in the &quot;next&quot; panel:</source>
-        <translation type="vanished">&quot;next&quot;栏显示的方块数量：</translation>
-    </message>
-    <message>
         <source>Internal Folder Name:</source>
         <translation>文件内嵌的目录名：</translation>
     </message>
@@ -482,16 +410,8 @@ The program will now exit.</source>
         <translation>&quot;next&quot;栏显示的方块数量</translation>
     </message>
     <message>
-        <source>Reset to TOP&apos;s store default</source>
-        <translation type="vanished">重置至TOP商店默认设置</translation>
-    </message>
-    <message>
-        <source>Reset to TOJ&apos;s store default</source>
-        <translation type="vanished">重置至TOJ商店默认设置</translation>
-    </message>
-    <message>
         <source>Reset to TOP&apos;s shop default</source>
-        <translation>重置至TOJ客户端默认设置</translation>
+        <translation>重置至TOP客户端默认设置</translation>
     </message>
     <message>
         <source>Reset to TOJ&apos;s shop default</source>
@@ -511,10 +431,6 @@ The program will now exit.</source>
 </context>
 <context>
     <name>TOPLauncher::ArchiveUnpackThread</name>
-    <message>
-        <source>Open the archive failed.</source>
-        <translation type="vanished">打开&quot;SJE.JHH&quot;文件失败。</translation>
-    </message>
     <message>
         <source>Unpacking file &quot;%1&quot; ...</source>
         <translation>正在解包文件&quot;%1&quot;...</translation>
@@ -541,10 +457,6 @@ The program will now exit.</source>
 </context>
 <context>
     <name>TOPLauncher::DlgSJEJHHPack</name>
-    <message>
-        <source>Select the directory where extracted files will be stored...</source>
-        <translation type="vanished">选择解包出来的文件存放的目录...</translation>
-    </message>
     <message>
         <source>Set the archive&apos;s name which is going to be saved...</source>
         <translation>指定要保存的文件的名称...</translation>
@@ -676,10 +588,6 @@ The program will now exit.</source>
     <message>
         <source>Find where the game executable locates...</source>
         <translation>指定TO-P游戏客户端程序的位置...</translation>
-    </message>
-    <message>
-        <source>Game executable (tetris.exe)</source>
-        <translation type="vanished">TO-P游戏客户端(tetris.exe)</translation>
     </message>
     <message>
         <source>The field &quot;Server name&quot; should not empty.</source>
