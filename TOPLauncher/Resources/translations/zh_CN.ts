@@ -48,7 +48,7 @@
     </message>
     <message>
         <source>Do Pack</source>
-        <translation>开始打包</translation>
+        <translation>打包</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -60,7 +60,7 @@
     </message>
     <message>
         <source>Internal folder name:</source>
-        <translation>内嵌的目录名称：</translation>
+        <translation>文件内嵌的目录名：</translation>
     </message>
     <message>
         <source>Path to Save the &quot;SJE.JHH&quot; Archive:</source>
@@ -71,7 +71,7 @@
     <name>DlgSJEJHHUnpack</name>
     <message>
         <source>&quot;SJE.JHH&quot; Archive&apos;s path:</source>
-        <translation>&quot;SJE.JHH&quot;文件位置：</translation>
+        <translation>&quot;SJE.JHH&quot;文件路径：</translation>
     </message>
     <message>
         <source>...</source>
@@ -83,7 +83,7 @@
     </message>
     <message>
         <source>Do Unpack</source>
-        <translation>开始解包</translation>
+        <translation>解包</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -436,11 +436,11 @@ The program will now exit.</source>
     </message>
     <message>
         <source>Archive Path:</source>
-        <translation>文件目录：</translation>
+        <translation>&quot;SJE.JHH&quot;文件路径：</translation>
     </message>
     <message>
         <source>Extracted Folder:</source>
-        <translation>解包目录：</translation>
+        <translation>解包文件所在目录：</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#800000;&quot;&gt;Caution: Modifying archives within the client incorrectly could damage the client.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -456,11 +456,15 @@ The program will now exit.</source>
     </message>
     <message>
         <source>Quantity of pieces showing in the &quot;next&quot; panel:</source>
-        <translation>&quot;next&quot;栏显示的方块数量：</translation>
+        <translation type="vanished">&quot;next&quot;栏显示的方块数量：</translation>
     </message>
     <message>
         <source>Internal Folder Name:</source>
-        <translation>内嵌的目录名称：</translation>
+        <translation>文件内嵌的目录名：</translation>
+    </message>
+    <message>
+        <source>Quantity of pieces showing in the &quot;next&quot; panel</source>
+        <translation>&quot;next&quot;栏显示的方块数量</translation>
     </message>
 </context>
 <context>
@@ -478,7 +482,7 @@ The program will now exit.</source>
     <name>TOPLauncher::ArchiveUnpackThread</name>
     <message>
         <source>Open the archive failed.</source>
-        <translation>打开&quot;SJE.JHH&quot;文件失败。</translation>
+        <translation type="vanished">打开&quot;SJE.JHH&quot;文件失败。</translation>
     </message>
     <message>
         <source>Unpacking file &quot;%1&quot; ...</source>
@@ -534,6 +538,26 @@ The program will now exit.</source>
         <source>Select the directory whose files will be packed...</source>
         <translation>选择要打包的文件存放的目录...</translation>
     </message>
+    <message>
+        <source>Must specify a folder.</source>
+        <translation>需要指定要打包的目录。</translation>
+    </message>
+    <message>
+        <source>An internal folder name is required.</source>
+        <translation>打包&quot;SJE.JHH&quot; 文件需要在文件内部设定一个目录名。</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation>错误</translation>
+    </message>
+    <message>
+        <source>Packaging procedure failed.</source>
+        <translation>打包失败。</translation>
+    </message>
+    <message>
+        <source>Must specify a path to save the file.</source>
+        <translation>需要指定要保存&quot;SJE.JHH&quot;文件的路径。</translation>
+    </message>
 </context>
 <context>
     <name>TOPLauncher::DlgSJEJHHUnpack</name>
@@ -552,6 +576,26 @@ The program will now exit.</source>
     <message>
         <source>Unpacking the archive...</source>
         <translation>正在解包&quot;SJE.JHH&quot; 文件...</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation>错误</translation>
+    </message>
+    <message>
+        <source>Open the archive &quot;%1&quot; failed.</source>
+        <translation>打开&quot;%1&quot;失败。</translation>
+    </message>
+    <message>
+        <source>Info</source>
+        <translation>提示</translation>
+    </message>
+    <message>
+        <source>Must specify a folder to store extracted files.</source>
+        <translation>需要指定解包出来的文件存放的目录。</translation>
+    </message>
+    <message>
+        <source>Must specify an archive file.</source>
+        <translation>需要指定要解包的文件名。</translation>
     </message>
 </context>
 <context>

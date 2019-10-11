@@ -817,7 +817,7 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
           <item>
            <widget class="QLabel" name="label">
             <property name="text">
-             <string>Quantity of pieces showing in the &quot;next&quot; panel:</string>
+             <string>Quantity of pieces showing in the &quot;next&quot; panel</string>
             </property>
            </widget>
           </item>

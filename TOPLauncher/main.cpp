@@ -45,7 +45,7 @@ static bool InitUIConfig()
     qApp->setStyle(QStyleFactory::create("fusion"));
     QFont uiFont(QString("Calibri"), 10, QFont::Normal);
     qApp->setFont(uiFont);
-    QFont::insertSubstitution(QString("Calibri"), QString("SimHei"));
+    QFont::insertSubstitution(QString("Calibri"), QString("SimSun"));
     QFont::insertSubstitution(QString("Calibri"), QString("Meiryo"));
     return true;
 }

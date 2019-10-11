@@ -20,7 +20,19 @@ namespace TOPLauncher
             : m_packPath(packFolder)
             , m_internalFolderName(internalFolderName)
             , m_archivePath(archivePath)
+            , m_retValue(0)
         {
+        }
+
+        bool GetPackResult(int& retValue)
+        {
+            if (isRunning())
+            {
+                return false;
+            }
+
+            retValue = m_retValue;
+            return true;
         }
 
     signals:
@@ -77,7 +89,7 @@ namespace TOPLauncher
                 dirIter++;
             }
 
-            sjejhh_pack_do_pack(packContext.get(), PackCallback, this);
+            m_retValue = sjejhh_pack_do_pack(packContext.get(), PackCallback, this);
 
         }
 
@@ -85,6 +97,8 @@ namespace TOPLauncher
         QString m_archivePath;
         QString m_packPath;
         QString m_internalFolderName;
+
+        int m_retValue;
     };
 
 
@@ -145,6 +159,22 @@ namespace TOPLauncher
         QString internalFolderName = ui.editInternalFolderName->text();
         QString archivePath = ui.editArchivePath->text();
 
+        if (packPath.isEmpty())
+        {
+            QMessageBox::information(this, tr("Info"), tr("Must specify a folder."));
+            return;
+        }
+        if (internalFolderName.isEmpty())
+        {
+            QMessageBox::information(this, tr("Info"), tr("An internal folder name is required."));
+            return;
+        }
+        if (archivePath.isEmpty())
+        {
+            QMessageBox::information(this, tr("Info"), tr("Must specify a path to save the file."));
+            return;
+        }
+
         DlgProgress progressDlg(this, tr("Packing the archive..."));
 
         ArchivePackThread t(packPath, internalFolderName, archivePath);
@@ -156,7 +186,17 @@ namespace TOPLauncher
         t.start();
         progressDlg.exec();
 
-        QMessageBox::information(this, tr("Info"), tr("Successfully packed the archive \"%1\".").arg(archivePath));
+        int packRet = 0;
+        t.GetPackResult(packRet);
+        if (packRet == SJEJHH_PACK_OK)
+        {
+            QMessageBox::information(this, tr("Info"), tr("Successfully packed the archive \"%1\".").arg(archivePath));
+        }
+        else
+        {
+            QMessageBox::critical(this, tr("Error"), tr("Packaging procedure failed.").arg(archivePath));
+        }
+
 
         QDialog::accept();
     }

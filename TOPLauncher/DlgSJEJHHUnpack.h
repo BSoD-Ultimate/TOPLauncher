@@ -3,8 +3,11 @@
 #include <QDialog>
 #include "ui_DlgSJEJHHUnpack.h"
 
+struct sjejhh_unpack_context;
+
 namespace TOPLauncher
 {
+
     class DlgSJEJHHUnpack : public QDialog
     {
         Q_OBJECT
@@ -25,6 +28,7 @@ namespace TOPLauncher
     private:
         Ui::DlgSJEJHHUnpack ui;
 
+        std::shared_ptr<sjejhh_unpack_context> m_archive;
     };
 
 }

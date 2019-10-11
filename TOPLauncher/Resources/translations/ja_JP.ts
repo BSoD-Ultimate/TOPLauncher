@@ -389,11 +389,11 @@ The program will now exit.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Quantity of pieces showing in the &quot;next&quot; panel:</source>
+        <source>Internal Folder Name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Internal Folder Name:</source>
+        <source>Quantity of pieces showing in the &quot;next&quot; panel</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -410,10 +410,6 @@ The program will now exit.</source>
 </context>
 <context>
     <name>TOPLauncher::ArchiveUnpackThread</name>
-    <message>
-        <source>Open the archive failed.</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Unpacking file &quot;%1&quot; ...</source>
         <translation type="unfinished"></translation>
@@ -464,6 +460,26 @@ The program will now exit.</source>
         <source>Select the directory whose files will be packed...</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Must specify a folder.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>An internal folder name is required.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Packaging procedure failed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Must specify a path to save the file.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TOPLauncher::DlgSJEJHHUnpack</name>
@@ -481,6 +497,26 @@ The program will now exit.</source>
     </message>
     <message>
         <source>Unpacking the archive...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open the archive &quot;%1&quot; failed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Must specify a folder to store extracted files.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Must specify an archive file.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
