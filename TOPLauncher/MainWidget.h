@@ -46,6 +46,7 @@ namespace TOPLauncher
         void on_btnLanguage_clicked();
         void on_btnRegister_clicked();
         void on_btnOpenForum_clicked();
+        void on_btnAbout_clicked();
 
         void on_comboServer_currentIndexChanged(int index);
         void on_comboUsername_currentIndexChanged(int index);

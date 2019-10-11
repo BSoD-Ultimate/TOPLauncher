@@ -47,6 +47,7 @@ source_group(model FILES ${MODEL_SRC})
 set(UI_HEADERS
   MainWindow.h 
   LoginUserItem.h 
+  DlgAbout.h  
   DlgLanguage.h 
   DlgProgress.h 
   DlgSJEJHHPack.h 
@@ -56,23 +57,26 @@ set(UI_HEADERS
   LanguageItemModel.h 
   OverlayEffectWidget.h
 )
-qt5_generate_moc(DlgSJEJHHUnpack.cpp DlgSJEJHHUnpack.moc)
-qt5_generate_moc(DlgSJEJHHPack.cpp DlgSJEJHHPack.moc)
 set(UI_SRC
   MainWindow.cpp 
   LoginUserItem.cpp 
+  DlgAbout.cpp 
   DlgLanguage.cpp 
   DlgProgress.cpp  
   DlgSJEJHHPack.cpp 
-  DlgSJEJHHPack.moc 
   DlgSJEJHHUnpack.cpp  
-  DlgSJEJHHUnpack.moc
   MainWidget.cpp
   SettingsWidget.cpp 
   LanguageItemModel.cpp 
   OverlayEffectWidget.cpp
 )
-source_group(ui FILES ${UI_HEADERS} ${UI_SRC})
+qt5_generate_moc(DlgSJEJHHUnpack.cpp DlgSJEJHHUnpack.moc)
+qt5_generate_moc(DlgSJEJHHPack.cpp DlgSJEJHHPack.moc)
+set(UI_MOC_SRC
+  DlgSJEJHHPack.moc 
+  DlgSJEJHHUnpack.moc 
+)
+source_group(ui FILES ${UI_HEADERS} ${UI_SRC} ${UI_MOC_SRC})
 
 set(UTIL_SRC
   utils.h 
@@ -89,6 +93,7 @@ set(FORM_FILES_SRC
   MainWidget.ui 
   SettingsWidget.ui 
   LoginUserItem.ui 
+  DlgAbout.ui 
   DlgLanguage.ui 
   DlgSJEJHHUnpack.ui 
   DlgSJEJHHPack.ui 
@@ -127,6 +132,7 @@ add_executable(TOPLauncher WIN32
   ${MODEL_SRC}
   ${UI_HEADERS}
   ${UI_SRC}
+  ${UI_MOC_SRC}
   ${UTIL_SRC}
   ${FORM_FILES_SRC}
   ${RESOURCE_SRC}

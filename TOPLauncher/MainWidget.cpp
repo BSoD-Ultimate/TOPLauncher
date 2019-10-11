@@ -3,6 +3,7 @@
 #include "LoginUserItem.h"
 
 #include "DlgLanguage.h"
+#include "DlgAbout.h"
 #include "SettingsWidget.h"
 
 #include "AppModel.h"
@@ -364,6 +365,12 @@ namespace TOPLauncher
         // http://tetrisonline.pl/forum/
         HWND windowHandle = HWND(this->window()->winId());
         ShellExecuteW(windowHandle, L"open", L"http://tetrisonline.pl/forum/", NULL, NULL, SW_SHOWNORMAL);
+    }
+
+    void MainWidget::on_btnAbout_clicked()
+    {
+        DlgAbout aboutDlg;
+        aboutDlg.exec();
     }
 
     void MainWidget::on_comboServer_currentIndexChanged(int index)

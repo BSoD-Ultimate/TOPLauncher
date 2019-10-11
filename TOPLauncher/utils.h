@@ -28,6 +28,8 @@ namespace TOPLauncher
 
         QString GetSystemLanguageName();
 
+        void GetCurrentExeVersion(int& value1, int& value2, int& value3, int& value4);
+
     }
 
 }

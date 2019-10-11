@@ -122,6 +122,42 @@ namespace TOPLauncher
             return QString::fromStdWString(languageName);
         }
 
+        void GetCurrentExeVersion(__out int& value1, __out int& value2, __out int& value3, __out int& value4)
+        {
+            value1 = value2 = value3 = value4 = 0;
+
+            size_t bufSize = MAX_PATH;
+            std::unique_ptr<wchar_t[]> exeFilePathBuf(new wchar_t[bufSize]());
+            int error = 0;
+            do
+            {
+                GetModuleFileNameW(NULL, exeFilePathBuf.get(), bufSize);
+                int error = GetLastError();
+                if (error == ERROR_INSUFFICIENT_BUFFER)
+                {
+                    bufSize += MAX_PATH;
+                    exeFilePathBuf.reset(new wchar_t[bufSize]());
+                }
+            } while (error == ERROR_INSUFFICIENT_BUFFER);
+
+            DWORD fileVersionBufSize = GetFileVersionInfoSizeW(exeFilePathBuf.get(), NULL);
+            std::unique_ptr<unsigned char[]> versionBuf(new unsigned char[fileVersionBufSize]());
+            GetFileVersionInfoW(exeFilePathBuf.get(), NULL, fileVersionBufSize, versionBuf.get());
+            VS_FIXEDFILEINFO* pFileInfo = NULL;
+            UINT fileInfoLen = 0;
+            BOOL bRet = VerQueryValueW(versionBuf.get(), L"\\", reinterpret_cast<LPVOID*>(&pFileInfo), &fileInfoLen);
+            std::unique_ptr<unsigned short[]> verInfo(new unsigned short[4]());
+            verInfo[0] = HIWORD(pFileInfo->dwFileVersionMS);
+            verInfo[1] = LOWORD(pFileInfo->dwFileVersionMS);
+            verInfo[2] = HIWORD(pFileInfo->dwFileVersionLS);
+            verInfo[3] = LOWORD(pFileInfo->dwFileVersionLS);
+
+            value1 = verInfo[0];
+            value2 = verInfo[1];
+            value3 = verInfo[2];
+            value4 = verInfo[3];
+        }
+
     }
 
 }

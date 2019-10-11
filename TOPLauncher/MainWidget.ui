@@ -70,6 +70,18 @@ QFrame#frameBottom {
    <item>
     <widget class="QWidget" name="widget" native="true">
      <layout class="QHBoxLayout" name="horizontalLayout_5">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
       <item>
        <widget class="QWidget" name="widget_5" native="true"/>
       </item>
@@ -352,6 +364,13 @@ QFrame#frameBottom {
                    </property>
                    <property name="text">
                     <string comment="mainwidget_login_btn_openforum">Forum</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="btnAbout">
+                   <property name="text">
+                    <string>About...</string>
                    </property>
                   </widget>
                  </item>
