@@ -84,8 +84,11 @@ namespace TOPLauncher
 
             while (dirIter != filesystem::end(dirIter))
             {
-                std::wstring file = dirIter->path();
-                sjejhh_pack_add_file(packContext.get(), file.c_str());
+                auto file = dirIter->path();
+                if (filesystem::is_regular_file(file))
+                {
+                    sjejhh_pack_add_file(packContext.get(), file.c_str());
+                }
                 dirIter++;
             }
 
