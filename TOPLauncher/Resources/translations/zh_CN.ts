@@ -468,11 +468,19 @@ The program will now exit.</source>
     </message>
     <message>
         <source>Reset to TOP&apos;s store default</source>
-        <translation>重置至TOP商店默认设置</translation>
+        <translation type="vanished">重置至TOP商店默认设置</translation>
     </message>
     <message>
         <source>Reset to TOJ&apos;s store default</source>
-        <translation>重置至TOJ商店默认设置</translation>
+        <translation type="vanished">重置至TOJ商店默认设置</translation>
+    </message>
+    <message>
+        <source>Reset to TOP&apos;s shop default</source>
+        <translation>重置至TOJ客户端默认设置</translation>
+    </message>
+    <message>
+        <source>Reset to TOJ&apos;s shop default</source>
+        <translation>重置至TOJ客户端默认设置</translation>
     </message>
 </context>
 <context>

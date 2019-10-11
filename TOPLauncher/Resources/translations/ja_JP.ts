@@ -393,11 +393,11 @@ The program will now exit.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Reset to TOP&apos;s store default</source>
+        <source>Reset to TOP&apos;s shop default</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Reset to TOJ&apos;s store default</source>
+        <source>Reset to TOJ&apos;s shop default</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

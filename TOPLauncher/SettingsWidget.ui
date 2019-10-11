@@ -954,7 +954,7 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
                </size>
               </property>
               <property name="text">
-               <string>Reset to TOP's store default</string>
+               <string>Reset to TOP's shop default</string>
               </property>
              </widget>
             </item>
@@ -976,7 +976,7 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
                </size>
               </property>
               <property name="text">
-               <string>Reset to TOJ's store default</string>
+               <string>Reset to TOJ's shop default</string>
               </property>
              </widget>
             </item>
