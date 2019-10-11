@@ -25,6 +25,10 @@
   <property name="windowTitle">
    <string>&quot;SJE.JHH&quot; Archive Unpacking</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="Resources/TOPLauncher.qrc">
+    <normaloff>:/icon.ico</normaloff>:/icon.ico</iconset>
+  </property>
   <layout class="QFormLayout" name="formLayout">
    <item row="0" column="0">
     <widget class="QLabel" name="label">
@@ -128,7 +132,9 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="Resources/TOPLauncher.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>okButton</sender>
