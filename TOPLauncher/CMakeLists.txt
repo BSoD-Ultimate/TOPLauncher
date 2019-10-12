@@ -25,6 +25,7 @@ set(MAIN_SRC
   stdafx.h 
   stdafx.cpp 
   main.cpp 
+  static_plugins.cpp 
 )
 source_group(main FILES ${MAIN_SRC})
 

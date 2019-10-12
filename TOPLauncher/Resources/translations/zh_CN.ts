@@ -199,7 +199,7 @@
         <source>A fatal error has occurred during the startup: 
 %1 
 The program will now exit.</source>
-        <translation>程序启动时发生了严重错误：
+        <translation type="vanished">程序启动时发生了严重错误：
 %1 
 程序即将退出。</translation>
     </message>
