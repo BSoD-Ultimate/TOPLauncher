@@ -193,6 +193,7 @@ set(THIRD_PARTY_LINK_LIBRARIES
 
 target_link_libraries(TOPLauncher
   PRIVATE
+  Version.lib 
   ${QT5_LINK_LIBRARIES}
   ${THIRD_PARTY_LINK_LIBRARIES}
 )
@@ -204,7 +205,6 @@ if(TOPLAUNCHER_USE_STATIC_QT_LIB)
   file(GLOB QT5_SUPPORT_LIBRARIES_RELEASE
     ${QT5_LIB_DIR}/*Support.lib
   )
-  message(STATUS ${QT5_SUPPORT_LIBRARIES_DEBUG})
 
   set(QT5_STATIC_LINK_LIBRARIES
     debug ${QT5_LIB_DIR}/qtpcre2d.lib optimized ${QT5_LIB_DIR}/qtpcre2.lib
@@ -217,7 +217,6 @@ if(TOPLAUNCHER_USE_STATIC_QT_LIB)
     debug ${QT5_ROOT_DIR}/plugins/imageformats/qjpegd.lib optimized ${QT5_ROOT_DIR}/plugins/imageformats/qjpeg.lib
     UxTheme.lib 
     ws2_32.lib 
-    Version.lib 
     winmm.lib 
     imm32.lib 
     dwmapi.lib
