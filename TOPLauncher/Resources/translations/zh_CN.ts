@@ -622,16 +622,16 @@ The program will now exit.</source>
         <translation>应用新的游戏控制设置失败。 </translation>
     </message>
     <message>
-        <source>Reset the game control settings to TOP&apos;s store default?</source>
+        <source>Game executable (tetris.exe);;Any executable (*.exe)</source>
+        <translation>TO-P游戏客户端 (tetris.exe);;任意程序 (*.exe)</translation>
+    </message>
+    <message>
+        <source>Reset the game control settings to TOP&apos;s shop default?</source>
         <translation>要把设置重置至TOP商店的默认设置吗？</translation>
     </message>
     <message>
-        <source>Reset the game control settings to TOJ&apos;s store default?</source>
+        <source>Reset the game control settings to TOJ&apos;s shop default?</source>
         <translation>要把设置重置至TOJ商店的默认设置吗？</translation>
-    </message>
-    <message>
-        <source>Game executable (tetris.exe);;Any executable (*.exe)</source>
-        <translation>TO-P游戏客户端 (tetris.exe);;任意程序 (*.exe)</translation>
     </message>
 </context>
 <context>

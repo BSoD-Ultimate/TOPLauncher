@@ -537,7 +537,7 @@ namespace TOPLauncher
 
     void SettingsWidget::on_btnResetTOPDefault_clicked()
     {
-        if (QMessageBox::question(this, tr("Caution"), tr("Reset the game control settings to TOP's store default?"),
+        if (QMessageBox::question(this, tr("Caution"), tr("Reset the game control settings to TOP's shop default?"),
             QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes)
         {
             auto pAppModel = AppModel::GetInstance();
@@ -558,7 +558,7 @@ namespace TOPLauncher
 
     void SettingsWidget::on_btnResetTOJDefault_clicked()
     {
-        if (QMessageBox::question(this, tr("Caution"), tr("Reset the game control settings to TOJ's store default?"),
+        if (QMessageBox::question(this, tr("Caution"), tr("Reset the game control settings to TOJ's shop default?"),
             QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes)
         {
             auto pAppModel = AppModel::GetInstance();

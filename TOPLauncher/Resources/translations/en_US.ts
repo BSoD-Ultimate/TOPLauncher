@@ -620,15 +620,15 @@ The program will now exit.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Reset the game control settings to TOP&apos;s store default?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Reset the game control settings to TOJ&apos;s store default?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Game executable (tetris.exe);;Any executable (*.exe)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset the game control settings to TOP&apos;s shop default?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset the game control settings to TOJ&apos;s shop default?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
