@@ -5,7 +5,7 @@
     <name>DlgAbout</name>
     <message>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>关于</translation>
     </message>
     <message>
         <source>OK</source>
@@ -416,6 +416,10 @@ The program will now exit.</source>
     <message>
         <source>Reset to TOJ&apos;s shop default</source>
         <translation>重置至TOJ客户端默认设置</translation>
+    </message>
+    <message>
+        <source>Open extracted folder</source>
+        <translation>打开解包目录</translation>
     </message>
 </context>
 <context>

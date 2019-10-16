@@ -415,6 +415,10 @@ The program will now exit.</source>
         <source>Reset to TOJ&apos;s shop default</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Open extracted folder</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TOPLauncher::ArchivePackThread</name>

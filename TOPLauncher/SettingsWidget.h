@@ -66,6 +66,7 @@ namespace TOPLauncher
 
     void on_btnUnpackArchive_clicked();
     void on_btnPackArchive_clicked();
+    void on_btnOpenExtractedFolder_clicked();
 
     // spinbox changed
     void on_sliderMoveSensitivity_valueChanged(int value);

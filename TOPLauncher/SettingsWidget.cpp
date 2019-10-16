@@ -602,6 +602,15 @@ namespace TOPLauncher
         packDlg.exec();
     }
 
+    void SettingsWidget::on_btnOpenExtractedFolder_clicked()
+    {
+        QString extractPath = ui.editExtractPath->text();
+
+        extractPath.replace(QChar('/'), QChar('\\'));
+        std::wstring cmd = L"\"" + extractPath.toStdWString() + L"\"";
+        ShellExecuteW(NULL, L"open", L"explorer.exe", cmd.c_str(), NULL, SW_SHOW);
+    }
+
     void SettingsWidget::on_sliderMoveSensitivity_valueChanged(int value)
     {
         int minimum = ui.sliderMoveSensitivity->minimum();
