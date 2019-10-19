@@ -38,7 +38,9 @@
   <property name="styleSheet">
    <string notr="true">QWidget#centralwidget
 {
-    background: url(:/ui/bg.png);
+    background: white url(:/ui/bg.png);
+    background-position: center center;
+    background-repeat: no-repeat;
 }</string>
   </property>
   <widget class="QWidget" name="centralwidget"/>
