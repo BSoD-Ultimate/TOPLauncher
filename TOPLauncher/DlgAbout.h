@@ -7,7 +7,6 @@
 
 namespace TOPLauncher
 {
-
     class DlgAbout : public QDialog
     {
         Q_OBJECT
@@ -18,7 +17,6 @@ namespace TOPLauncher
 
     private:
         void InitVersionString();
-
     private:
         Ui::DlgAbout ui;
 

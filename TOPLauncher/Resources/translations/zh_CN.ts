@@ -11,6 +11,10 @@
         <source>OK</source>
         <translation>确定</translation>
     </message>
+    <message>
+        <source>qrc:/about.html</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DlgLanguage</name>

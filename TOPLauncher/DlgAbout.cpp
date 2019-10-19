@@ -12,6 +12,7 @@ namespace TOPLauncher
 
     DlgAbout::~DlgAbout()
     {
+        
     }
 
     void DlgAbout::InitVersionString()
