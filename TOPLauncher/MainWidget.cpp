@@ -369,7 +369,7 @@ namespace TOPLauncher
 
     void MainWidget::on_btnAbout_clicked()
     {
-        DlgAbout aboutDlg;
+        DlgAbout aboutDlg(this);
         aboutDlg.exec();
     }
 
