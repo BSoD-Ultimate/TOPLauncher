@@ -579,7 +579,7 @@ namespace TOPLauncher
 
     void SettingsWidget::on_btnUnpackArchive_clicked()
     {
-        DlgSJEJHHUnpack unpackDlg;
+        DlgSJEJHHUnpack unpackDlg(this);
 
         connect(&unpackDlg, &DlgSJEJHHUnpack::ArchiveUnpackFinished,
             [this](QString archivePath, QString extractPath, QString internalFolderName) {
@@ -593,7 +593,7 @@ namespace TOPLauncher
 
     void SettingsWidget::on_btnPackArchive_clicked()
     {
-        DlgSJEJHHPack packDlg;
+        DlgSJEJHHPack packDlg(this);
 
         packDlg.setPackFolder(ui.editExtractPath->text());
         packDlg.setInternalFolderName(ui.editArchiveFolderName->text());
