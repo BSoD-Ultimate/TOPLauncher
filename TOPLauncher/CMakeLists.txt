@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 3.8.1)
 
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMake;${CMAKE_MODULE_PATH}")
 
-option(TOPLAUNCHER_USE_STATIC_QT_LIB "use static build Qt library" OFF)
 
 # find Qt5 
 find_package(Qt5 
@@ -202,7 +201,7 @@ target_link_libraries(TOPLauncher
   ${THIRD_PARTY_LINK_LIBRARIES}
 )
 
-if(TOPLAUNCHER_USE_STATIC_QT_LIB)
+if(TOPLauncher_USE_STATIC_QT_LIB)
   file(GLOB QT5_SUPPORT_LIBRARIES_DEBUG
     ${QT5_LIB_DIR}/*Supportd.lib
   )

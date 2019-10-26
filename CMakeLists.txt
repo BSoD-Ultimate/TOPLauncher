@@ -5,6 +5,9 @@ cmake_policy(SET CMP0087 NEW)
 
 project(TOPLauncher)
 
+# configurations
+set(TOPLauncher_INSTALL_DEBUG_SYMBOLS ON CACHE BOOL "Install debug symbols.")
+set(TOPLauncher_USE_STATIC_QT_LIB OFF CACHE BOOL "Use static build of Qt library.")
 
 # find Qt5 
 find_package(Qt5 
@@ -49,6 +52,12 @@ add_subdirectory(TOPLauncher)
 set(INSTALL_FILE_LIST 
   "$<TARGET_FILE:TOPLauncher>"
 )
+
+if(TOPLauncher_INSTALL_DEBUG_SYMBOLS)
+list(APPEND INSTALL_FILE_LIST
+  "$<TARGET_PDB_FILE:TOPLauncher>"
+)
+endif()
 
 install(
     FILES
