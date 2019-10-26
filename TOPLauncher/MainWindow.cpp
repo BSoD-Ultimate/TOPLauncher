@@ -235,7 +235,7 @@ namespace TOPLauncher
             bool imageSetSuccess = false;
             while (!imageSetSuccess)
             {
-                int randomIndex = rand() % (imageFiles.size() - 1);
+                int randomIndex = rand() % imageFiles.size();
                 imageSetSuccess = ui.centralwidget->setShowImage(imageFiles[randomIndex]);
                 if (!imageSetSuccess)
                 {
