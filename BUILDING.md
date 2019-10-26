@@ -23,7 +23,7 @@ The following configure procedure assumes Visual Studio 2017 is installed on you
   - By default, the Qt installer does not provide static library binaries. Only the shared library version is available. You have to build the static library version manually. If you wish to use the static library version of Qt as binaries in the releases do, you could build the static library version of Qt using instructions provided by this blog post: <https://retifrav.github.io/blog/2018/02/17/build-qt-statically/>
   - To use the Qt static library, add the following command in CMake options sections (before the ".") so that the linker could link additional libraries that statically link Qt library requires.
     ```
-    -D "TOPLAUNCHER_USE_STATIC_QT_LIB=ON"
+    -D "TOPLauncher_USE_STATIC_QT_LIB=ON"
     ```
 
 - CMake will automatically generate Visual Studio Solutions, which will be used in building.
