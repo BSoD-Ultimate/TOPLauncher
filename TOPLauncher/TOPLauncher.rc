@@ -15,7 +15,7 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// 中文(简体，中国) resources
+// Chinese (Simplified, PRC) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
 LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
@@ -45,12 +45,12 @@ END
 
 #endif    // APSTUDIO_INVOKED
 
-#endif    // 中文(简体，中国) resources
+#endif    // Chinese (Simplified, PRC) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
 /////////////////////////////////////////////////////////////////////////////
-// 英语(美国) resources
+// English (United States) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
 LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
@@ -61,8 +61,8 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,2,0,0
- PRODUCTVERSION 1,2,0,0
+ FILEVERSION 1,2,1,0
+ PRODUCTVERSION 1,2,1,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -78,12 +78,12 @@ BEGIN
         BLOCK "040904b0"
         BEGIN
             VALUE "FileDescription", "Tetris Online Poland Client Launcher"
-            VALUE "FileVersion", "1.2.0.0"
+            VALUE "FileVersion", "1.2.1.0"
             VALUE "InternalName", "TOPLauncher.exe"
             VALUE "LegalCopyright", "Copyright (C) 2019"
             VALUE "OriginalFilename", "TOPLauncher.exe"
             VALUE "ProductName", "TOPLauncher"
-            VALUE "ProductVersion", "1.2.0.0"
+            VALUE "ProductVersion", "1.2.1.0"
         END
     END
     BLOCK "VarFileInfo"
@@ -102,7 +102,7 @@ END
 // remains consistent on all systems.
 IDI_ICON1               ICON                    "Resources/icon.ico"
 
-#endif    // 英语(美国) resources
+#endif    // English (United States) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
