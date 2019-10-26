@@ -2,6 +2,7 @@
 #include "DlgSJEJHHUnpack.h"
 
 #include "AppModel.h"
+#include "Environment.h"
 #include "DlgProgress.h"
 
 #include "SjeJhhUtil.h"
@@ -168,7 +169,8 @@ namespace TOPLauncher
 
             // assign extract directory
             QString extractPath;
-            QString tempPath = util::GetTempDirectory();
+            auto pEnv = Environment::GetInstance();
+            QString tempPath = pEnv->GetAppTempDirectory();
             tempPath.replace(QChar('\\'), QChar('/'));
             extractPath = QString("%1/extracted_%2").arg(tempPath, internalFolderName);
 

@@ -35,6 +35,8 @@ namespace TOPLauncher
         void ShowSettingPanel();
         void HideSettingPanel();
 
+        void SetRandomBackgroundImage();
+
     private:
         // QWidget 
         void resizeEvent(QResizeEvent *event) override;

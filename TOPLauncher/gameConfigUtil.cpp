@@ -2,6 +2,7 @@
 #include "gameConfigUtil.h"
 
 #include "AppModel.h"
+#include "Environment.h"
 
 #include "SjeJhhUtil.h"
 #include "INIReader.h"
@@ -99,51 +100,14 @@ namespace TOPLauncher
                 return ret;
             }
 
-            bool WriteLineClearDelayConfig(int lineClearDelay)
-            {
-                // unpack SJE.JHH archive
-                auto pAppModel = AppModel::GetInstance();
-                filesystem::path archivePath = pAppModel->GetGameExecutablePath().parent_path() / filesystem::path(L"config") / L"SJE.JHH";
-
-                filesystem::path unpackPath = filesystem::path(GetTempDirectory().toStdWString()) / L"config";
-
-                std::string internalFolderName;
-                if (!UnpackSJEJHHArchive(archivePath, unpackPath, internalFolderName))
-                {
-                    return false;
-                }
-
-                filesystem::path configIniPath = unpackPath / L"config_jpn.ini";
-
-                INIReader reader(configIniPath.string());
-
-                std::string strlineClearDelay = std::to_string(lineClearDelay);
-
-                reader.Set("CHARACTER_A", "MinoGravity", strlineClearDelay);
-
-                reader.Set("UPGRADE_LINECLEARSPEED_LV1", "MinoGravity", strlineClearDelay);
-                reader.Set("UPGRADE_LINECLEARSPEED_LV2", "MinoGravity", strlineClearDelay);
-                reader.Set("UPGRADE_LINECLEARSPEED_LV3", "MinoGravity", strlineClearDelay);
-                reader.Set("UPGRADE_LINECLEARSPEED_LV4", "MinoGravity", strlineClearDelay);
-                reader.Set("UPGRADE_LINECLEARSPEED_LV5", "MinoGravity", strlineClearDelay);
-
-                reader.WriteINIFile(configIniPath.string());
-
-                // pack the archive again
-                if (!PackSJEJHHArchive(unpackPath, archivePath, internalFolderName))
-                {
-                    return false;
-                }
-
-                return true;
-            }
             bool ReadGameConfig(GameConfig& out)
             {
                 // unpack SJE.JHH archive
                 auto pAppModel = AppModel::GetInstance();
                 filesystem::path archivePath = pAppModel->GetGameExecutablePath().parent_path() / filesystem::path(L"config") / L"SJE.JHH";
 
-                filesystem::path unpackPath = filesystem::path(GetTempDirectory().toStdWString()) / L"config";
+                auto pEnv = Environment::GetInstance();
+                filesystem::path unpackPath = filesystem::path(pEnv->GetAppTempDirectory().toStdWString()) / L"config";
 
                 std::string internalFolderName;
                 if (!UnpackSJEJHHArchive(archivePath, unpackPath, internalFolderName))
@@ -170,7 +134,8 @@ namespace TOPLauncher
                 // unpack SJE.JHH archive
                 auto pAppModel = AppModel::GetInstance();
                 filesystem::path archivePath = pAppModel->GetGameExecutablePath().parent_path() / filesystem::path(L"config") / L"SJE.JHH";
-                filesystem::path unpackPath = filesystem::path(GetTempDirectory().toStdWString()) / L"config";
+                auto pEnv = Environment::GetInstance();
+                filesystem::path unpackPath = filesystem::path(pEnv->GetAppTempDirectory().toStdWString()) / L"config";
 
                 std::string internalFolderName;
                 if (!UnpackSJEJHHArchive(archivePath, unpackPath, internalFolderName))
@@ -263,7 +228,8 @@ namespace TOPLauncher
                 // unpack SJE.JHH archive
                 auto pAppModel = AppModel::GetInstance();
                 filesystem::path archivePath = pAppModel->GetGameExecutablePath().parent_path() / filesystem::path(L"config") / L"SJE.JHH";
-                filesystem::path unpackPath = filesystem::path(GetTempDirectory().toStdWString()) / L"config";
+                auto pEnv = Environment::GetInstance();
+                filesystem::path unpackPath = filesystem::path(pEnv->GetAppTempDirectory().toStdWString()) / L"config";
 
                 std::string internalFolderName;
                 if (!UnpackSJEJHHArchive(archivePath, unpackPath, internalFolderName))
@@ -343,7 +309,8 @@ namespace TOPLauncher
                 // unpack SJE.JHH archive
                 auto pAppModel = AppModel::GetInstance();
                 filesystem::path archivePath = pAppModel->GetGameExecutablePath().parent_path() / filesystem::path(L"config") / L"SJE.JHH";
-                filesystem::path unpackPath = filesystem::path(GetTempDirectory().toStdWString()) / L"config";
+                auto pEnv = Environment::GetInstance();
+                filesystem::path unpackPath = filesystem::path(pEnv->GetAppTempDirectory().toStdWString()) / L"config";
 
                 std::string internalFolderName;
                 if (!UnpackSJEJHHArchive(archivePath, unpackPath, internalFolderName))

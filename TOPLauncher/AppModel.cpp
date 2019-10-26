@@ -1,6 +1,7 @@
 ﻿#include "stdafx.h"
 #include "AppModel.h"
 #include "LanguageModel.h"
+#include "Environment.h"
 #include "dbDef.h"
 #include "dbUser.h"
 #include "gameConfigUtil.h"
@@ -467,9 +468,10 @@ namespace TOPLauncher
 
     std::shared_ptr<SQLite::Database> AppModel::OpenUserDB()
     {
+        auto pEnv = Environment::GetInstance();
         try
         {
-            filesystem::path userDBPath = filesystem::path(util::GetWorkDirectory().toStdWString()) / userDBName;
+            filesystem::path userDBPath = filesystem::path(pEnv->GetWorkingDirectory().toStdWString()) / userDBName;
             auto pDB = std::make_shared<SQLite::Database>(userDBPath.u8string(), SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE);
             pDB->setBusyTimeout(5000);
 
@@ -487,9 +489,10 @@ namespace TOPLauncher
 
     void AppModel::FindGameExecutablePath()
     {
+        auto pEnv = Environment::GetInstance();
         if (m_pAppConfig->gameExecutablePath.empty())
         {
-            filesystem::path workDir = util::GetWorkDirectory().toUtf8().toStdString();
+            filesystem::path workDir = pEnv->GetWorkingDirectory().toStdWString();
             filesystem::path gameExePath = workDir / gameExecutableName;
 
             if (filesystem::exists(gameExePath))

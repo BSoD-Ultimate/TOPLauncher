@@ -36,15 +36,23 @@
     <normaloff>:/icon.ico</normaloff>:/icon.ico</iconset>
   </property>
   <property name="styleSheet">
-   <string notr="true">QWidget#centralwidget
+   <string notr="true">#centralwidget
 {
     background: white url(:/ui/bg.png);
     background-position: center center;
     background-repeat: no-repeat;
 }</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
+  <widget class="TOPLauncher::MainWindowBackground" name="centralwidget"/>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>TOPLauncher::MainWindowBackground</class>
+   <extends>QWidget</extends>
+   <header>MainWindowBackground.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="Resources/TOPLauncher.qrc"/>
  </resources>

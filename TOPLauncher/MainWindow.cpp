@@ -8,6 +8,7 @@
 #include "OverlayEffectWidget.h"
 
 #include "AppModel.h"
+#include "Environment.h"
 #include "dbUser.h"
 
 #include <QResizeEvent> 
@@ -25,7 +26,7 @@ namespace TOPLauncher
     {
         ui.setupUi(this);
         InitUI();
-
+        SetRandomBackgroundImage();
     }
 
     TOPLauncherMainWindow::~TOPLauncherMainWindow()
@@ -203,6 +204,47 @@ namespace TOPLauncher
         });
 
         m_pSettingWidgetAnimation->start(QAbstractAnimation::DeleteWhenStopped);
+
+    }
+    void TOPLauncherMainWindow::SetRandomBackgroundImage()
+    {
+        auto pEnv = Environment::GetInstance();
+        auto backgroundDir = pEnv->GetBackgroundPicDirectory();
+
+        // set a background image randomly from the background directory
+        if (filesystem::exists(backgroundDir.toStdWString()))
+        {
+            std::vector<filesystem::path> imageFiles;
+
+            filesystem::directory_iterator dirIter(backgroundDir.toStdWString());
+
+            while (dirIter != filesystem::end(dirIter))
+            {
+                auto file = dirIter->path();
+                auto extension = file.extension();
+                if ( (extension == ".bmp" ||
+                    extension == ".jpg" ||
+                    extension == ".jpeg" || 
+                    extension == ".png") && filesystem::is_regular_file(file))
+                {
+                    imageFiles.emplace_back(file);
+                }
+                dirIter++;
+            }
+
+            bool imageSetSuccess = false;
+            while (!imageSetSuccess)
+            {
+                int randomIndex = rand() % (imageFiles.size() - 1);
+                imageSetSuccess = ui.centralwidget->setShowImage(imageFiles[randomIndex]);
+                if (!imageSetSuccess)
+                {
+                    imageFiles.erase(imageFiles.cbegin() + randomIndex);
+                }
+            }
+
+
+        }
 
     }
     void TOPLauncherMainWindow::resizeEvent(QResizeEvent * e)

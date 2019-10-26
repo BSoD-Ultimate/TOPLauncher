@@ -7,6 +7,7 @@
 
 #include "AppModel.h"
 #include "LanguageModel.h"
+#include "Environment.h"
 
 static bool InitModelInstances(QString* errMsg)
 {
@@ -16,6 +17,7 @@ static bool InitModelInstances(QString* errMsg)
     {
         auto pAppModel = AppModel::GetInstance();
         auto pLangModel = LanguageModel::GetInstance();
+        auto pEnv = Environment::GetInstance();
         return true;
     }
     catch (const std::runtime_error& e)
@@ -48,6 +50,8 @@ int main(int argc, char *argv[])
     QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     QApplication a(argc, argv);
+
+    srand(time(NULL));
 
     // init models
     QString error;

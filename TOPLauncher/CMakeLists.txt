@@ -42,11 +42,14 @@ set(MODEL_SRC
   AppModel.cpp 
   LanguageModel.h 
   LanguageModel.cpp
+  Environment.h 
+  Environment.cpp 
 )
 source_group(model FILES ${MODEL_SRC})
 
 set(UI_HEADERS
   MainWindow.h 
+  MainWindowBackground.h 
   LoginUserItem.h 
   DlgAbout.h  
   DlgLanguage.h 
@@ -59,7 +62,8 @@ set(UI_HEADERS
   OverlayEffectWidget.h
 )
 set(UI_SRC
-  MainWindow.cpp 
+  MainWindow.cpp  
+  MainWindowBackground.cpp 
   LoginUserItem.cpp 
   DlgAbout.cpp 
   DlgLanguage.cpp 
