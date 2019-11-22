@@ -824,6 +824,16 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_3">
             <item>
+             <widget class="QRadioButton" name="radioNextPieceCount0">
+              <property name="text">
+               <string>0</string>
+              </property>
+              <property name="autoExclusive">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
              <widget class="QRadioButton" name="radioNextPieceCount1">
               <property name="text">
                <string>1</string>
@@ -1151,6 +1161,9 @@ QScrollArea#settingsScrollArea &gt; QWidget &gt; QScrollBar { background: palett
           </item>
          </layout>
         </widget>
+       </item>
+       <item>
+        <widget class="QWidget" name="widget_2" native="true"/>
        </item>
        <item>
         <spacer name="verticalSpacer_4">

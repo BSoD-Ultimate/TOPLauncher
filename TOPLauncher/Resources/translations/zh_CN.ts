@@ -425,6 +425,10 @@ The program will now exit.</source>
         <source>Open extracted folder</source>
         <translation>打开解包目录</translation>
     </message>
+    <message>
+        <source>0</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TOPLauncher::ArchivePackThread</name>

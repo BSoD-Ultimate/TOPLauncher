@@ -159,6 +159,8 @@ namespace TOPLauncher
 
     void SettingsWidget::InitUI()
     {
+        m_nextPiecesGroup.addButton(ui.radioNextPieceCount0);
+        m_nextPiecesGroup.setId(ui.radioNextPieceCount0, 0);
         m_nextPiecesGroup.addButton(ui.radioNextPieceCount1);
         m_nextPiecesGroup.setId(ui.radioNextPieceCount1, 1);
         m_nextPiecesGroup.addButton(ui.radioNextPieceCount2);
@@ -224,6 +226,9 @@ namespace TOPLauncher
 
             switch (gameConfig.nextPiecesCount)
             {
+            case 0:
+                ui.radioNextPieceCount0->setChecked(true);
+                break;
             case 1:
                 ui.radioNextPieceCount1->setChecked(true);
                 break;
