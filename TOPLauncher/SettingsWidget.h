@@ -4,6 +4,7 @@
 #pragma once
 
 #include <QtWidgets/QDialog>
+#include <QButtonGroup>
 #include "ui_SettingsWidget.h"
 
 namespace TOPLauncher
